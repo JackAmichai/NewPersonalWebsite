@@ -595,6 +595,63 @@ const initSlider = () => {
 initSlider();
 
 // ==================== 
+// CONTACT FORM
+// ====================
+
+const contactForm = document.getElementById('contact-form');
+const contactStatus = document.getElementById('contact-status');
+
+if (contactForm && contactStatus) {
+    contactForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        
+        const formData = new FormData(contactForm);
+        const name = formData.get('name')?.trim();
+        const email = formData.get('email')?.trim();
+        const message = formData.get('message')?.trim();
+        
+        // Validation
+        if (!name || !email || !message) {
+            contactStatus.textContent = '❌ Please fill in all fields.';
+            contactStatus.style.color = '#ff6b6b';
+            return;
+        }
+        
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            contactStatus.textContent = '❌ Please enter a valid email address.';
+            contactStatus.style.color = '#ff6b6b';
+            return;
+        }
+        
+        // Open mailto with form data
+        const subject = `Portfolio Contact from ${encodeURIComponent(name)}`;
+        const body = encodeURIComponent(`${message}\n\n---\nFrom: ${name}\nEmail: ${email}`);
+        const mailtoLink = `mailto:jackamichai@gmail.com?subject=${subject}&body=${body}`;
+        
+        window.location.href = mailtoLink;
+        
+        contactStatus.textContent = '✅ Opening email client...';
+        contactStatus.style.color = 'white';
+        
+        // Reset form after short delay
+        setTimeout(() => {
+            contactForm.reset();
+            contactStatus.textContent = '';
+        }, 3000);
+    });
+    
+    // Clear status on input
+    const formInputs = contactForm.querySelectorAll('input, textarea');
+    formInputs.forEach(input => {
+        input.addEventListener('input', () => {
+            contactStatus.textContent = '';
+        });
+    });
+}
+
+// ==================== 
 // ENHANCEMENT: KEYBOARD NAVIGATION
 // ====================
 
