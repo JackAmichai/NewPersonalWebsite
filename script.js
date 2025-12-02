@@ -668,3 +668,77 @@ document.addEventListener('keydown', (e) => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 });
+
+// ==================== 
+// SKILLS PROFICIENCY BAR ANIMATION
+// ====================
+
+const animateSkillBars = () => {
+    const skillBars = document.querySelectorAll('.skill-bar-fill');
+    
+    const skillObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const level = entry.target.getAttribute('data-level');
+                entry.target.style.width = level + '%';
+                skillObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    skillBars.forEach(bar => {
+        skillObserver.observe(bar);
+    });
+};
+
+// Initialize skill bar animations
+animateSkillBars();
+
+// ==================== 
+// IMPACT DASHBOARD COUNTER ANIMATION
+// ====================
+
+const animateImpactNumbers = () => {
+    const impactNumbers = document.querySelectorAll('.impact-number');
+    
+    const animateCounter = (element, target) => {
+        const duration = 2000;
+        const increment = target / (duration / 16);
+        let current = 0;
+        
+        const updateCounter = () => {
+            current += increment;
+            if (current < target) {
+                element.textContent = Math.ceil(current) + (element.textContent.includes('%') ? '%' : '+');
+                requestAnimationFrame(updateCounter);
+            } else {
+                element.textContent = target + (element.textContent.includes('%') ? '%' : '+');
+            }
+        };
+        
+        updateCounter();
+    };
+    
+    const impactObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const target = entry.target.getAttribute('data-target');
+                
+                if (target && target !== 'profitable') {
+                    animateCounter(entry.target, parseInt(target));
+                } else if (target === 'profitable') {
+                    entry.target.textContent = '💰 Profitable';
+                }
+                
+                impactObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    impactNumbers.forEach(number => {
+        impactObserver.observe(number);
+    });
+};
+
+// Initialize impact counter animations
+animateImpactNumbers();
