@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Preview - Jack Amichai</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0F172A;
+            color: #F8F8F8;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #3B82F6;
+        }
+        
+        h2 {
+            font-size: 1.75rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: #3B82F6;
+            border-bottom: 2px solid #3B82F6;
+            padding-bottom: 0.5rem;
+        }
+        
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .status-card {
+            background: #1E293B;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #3B82F6;
+        }
+        
+        .status-card h3 {
+            color: #3B82F6;
+            margin-bottom: 0.5rem;
+        }
+        
+        .status-card.complete {
+            border-left-color: #10B981;
+        }
+        
+        .status-card.complete h3 {
+            color: #10B981;
+        }
+        
+        .status-card.warning {
+            border-left-color: #F59E0B;
+        }
+        
+        .status-card.warning h3 {
+            color: #F59E0B;
+        }
+        
+        .checklist {
+            list-style: none;
+            margin: 1rem 0;
+        }
+        
+        .checklist li {
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 4px;
+        }
+        
+        .checklist li:before {
+            content: "✓ ";
+            color: #10B981;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+        
+        .warning-box {
+            background: rgba(245, 158, 11, 0.1);
+            border: 2px solid #F59E0B;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .warning-box h3 {
+            color: #F59E0B;
+            margin-bottom: 1rem;
+        }
+        
+        .code-block {
+            background: #000;
+            color: #10B981;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: #3B82F6;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin: 0.5rem 0.5rem 0.5rem 0;
+            transition: background 0.3s;
+        }
+        
+        .btn:hover {
+            background: #2563EB;
+        }
+        
+        .file-tree {
+            background: #1E293B;
+            padding: 1rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            margin: 1rem 0;
+        }
+        
+        .file-tree div {
+            padding: 0.25rem 0;
+        }
+        
+        .indent-1 { padding-left: 1.5rem; }
+        .indent-2 { padding-left: 3rem; }
+        
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid #3B82F6;
+            color: #94A3B8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Portfolio Setup Complete!</h1>
+        <p style="font-size: 1.25rem; color: #94A3B8; margin-bottom: 2rem;">
+            Your professional portfolio is ready to customize and deploy.
+        </p>
+
+        <div class="status-grid">
+            <div class="status-card complete">
+                <h3>✓ Core Files Ready</h3>
+                <p>All essential HTML, CSS, and JavaScript files have been created and are ready to use.</p>
+            </div>
+            
+            <div class="status-card complete">
+                <h3>✓ Responsive Design</h3>
+                <p>Bento box grid layout adapts beautifully from mobile to desktop.</p>
+            </div>
+            
+            <div class="status-card complete">
+                <h3>✓ Documentation</h3>
+                <p>Comprehensive guides for deployment, customization, and images included.</p>
+            </div>
+            
+            <div class="status-card warning">
+                <h3>⚠ Images Needed</h3>
+                <p>Add your photos to the images/ folder. See IMAGE-GUIDE.md for details.</p>
+            </div>
+            
+            <div class="status-card warning">
+                <h3>⚠ Personalization</h3>
+                <p>Update index.html with your specific details. See CONTENT-TEMPLATE.md.</p>
+            </div>
+            
+            <div class="status-card">
+                <h3>📤 Ready to Deploy</h3>
+                <p>Follow DEPLOY.md to push to GitHub Pages in 10 minutes.</p>
+            </div>
+        </div>
+
+        <h2>📁 Your Portfolio Structure</h2>
+        <div class="file-tree">
+            <div>portfolio/</div>
+            <div class="indent-1">├── index.html <span style="color: #10B981;">← Main portfolio page</span></div>
+            <div class="indent-1">├── styles.css <span style="color: #10B981;">← Complete styling</span></div>
+            <div class="indent-1">├── script.js <span style="color: #10B981;">← Interactive features</span></div>
+            <div class="indent-1">├── README.md <span style="color: #10B981;">← Project overview</span></div>
+            <div class="indent-1">├── DEPLOY.md <span style="color: #10B981;">← Deployment guide</span></div>
+            <div class="indent-1">├── IMAGE-GUIDE.md <span style="color: #10B981;">← Photo instructions</span></div>
+            <div class="indent-1">├── CONTENT-TEMPLATE.md <span style="color: #10B981;">← Customization template</span></div>
+            <div class="indent-1">├── images/ <span style="color: #F59E0B;">← Add your photos here</span></div>
+            <div class="indent-2">├── hero-photo.jpg</div>
+            <div class="indent-2">├── nvidia-project.jpg</div>
+            <div class="indent-2">├── books-violin.jpg</div>
+            <div class="indent-2">├── deloitte-logo.svg</div>
+            <div class="indent-2">└── university-logo.svg</div>
+            <div class="indent-1">└── icons/ <span style="color: #F59E0B;">← Add skill icons here</span></div>
+            <div class="indent-2">├── sap.svg</div>
+            <div class="indent-2">├── ai.svg</div>
+            <div class="indent-2">├── aws.svg</div>
+            <div class="indent-2">└── ...</div>
+        </div>
+
+        <h2>🎯 Next Steps</h2>
+        <ul class="checklist">
+            <li>Read CONTENT-TEMPLATE.md to fill in your personal details</li>
+            <li>Add your photos to images/ folder (see IMAGE-GUIDE.md)</li>
+            <li>Download skill icons to icons/ folder</li>
+            <li>Update index.html with your information</li>
+            <li>Test locally using a local server</li>
+            <li>Deploy to GitHub Pages (see DEPLOY.md)</li>
+        </ul>
+
+        <h2>🧪 Test Your Portfolio Locally</h2>
+        <p>Run one of these commands in PowerShell from your portfolio folder:</p>
+        
+        <div class="code-block">
+# Option 1: Python (if installed)<br>
+python -m http.server 8000<br>
+<br>
+# Option 2: VS Code Live Server<br>
+# Install "Live Server" extension<br>
+# Right-click index.html → "Open with Live Server"
+        </div>
+        
+        <p>Then visit: <strong style="color: #3B82F6;">http://localhost:8000</strong></p>
+
+        <div class="warning-box">
+            <h3>⚠️ Before You View index.html</h3>
+            <p>The portfolio expects images to be in the images/ folder. You have two options:</p>
+            <ol style="margin-left: 1.5rem; margin-top: 1rem;">
+                <li><strong>Add real images now</strong> - Follow IMAGE-GUIDE.md</li>
+                <li><strong>Use placeholders temporarily</strong> - Update image src attributes in index.html to use:
+                    <div class="code-block" style="margin-top: 0.5rem;">
+https://via.placeholder.com/1920x1280/1E293B/3B82F6?text=Your+Photo
+                    </div>
+                </li>
+            </ol>
+        </div>
+
+        <h2>📚 Documentation Files</h2>
+        <div>
+            <a href="README.md" class="btn">📖 README - Project Overview</a>
+            <a href="DEPLOY.md" class="btn">🚀 DEPLOY - GitHub Pages Guide</a>
+            <a href="IMAGE-GUIDE.md" class="btn">📸 IMAGE-GUIDE - Photo Instructions</a>
+            <a href="CONTENT-TEMPLATE.md" class="btn">📝 CONTENT-TEMPLATE - Customization</a>
+        </div>
+
+        <h2>✨ What Makes This Portfolio Special</h2>
+        <div class="status-grid">
+            <div class="status-card">
+                <h3>Modern Design</h3>
+                <p>Bento box grid system following 2024/2025 design trends with professional dark theme.</p>
+            </div>
+            
+            <div class="status-card">
+                <h3>Performance Optimized</h3>
+                <p>Vanilla JavaScript, CSS Grid, optimized for 95+ Lighthouse score and < 2s load time.</p>
+            </div>
+            
+            <div class="status-card">
+                <h3>Recruiter-Focused</h3>
+                <p>Clear value propositions, scannable skills, prominent CTAs, mobile-first responsive.</p>
+            </div>
+            
+            <div class="status-card">
+                <h3>Shows Personality</h3>
+                <p>Books, violin, philosophy—demonstrates you're a human, not just a resume.</p>
+            </div>
+            
+            <div class="status-card">
+                <h3>Fully Documented</h3>
+                <p>Every aspect explained with guides, templates, and troubleshooting.</p>
+            </div>
+            
+            <div class="status-card">
+                <h3>Easy to Maintain</h3>
+                <p>Clean code, clear structure, simple updates via git push.</p>
+            </div>
+        </div>
+
+        <h2>🎨 Free Resources for Icons & Images</h2>
+        <div style="background: #1E293B; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+            <h3 style="color: #3B82F6; margin-bottom: 1rem;">Skill Icons (SVG)</h3>
+            <ul style="margin-left: 1.5rem;">
+                <li><a href="https://simpleicons.org/" target="_blank" style="color: #3B82F6;">Simple Icons</a> - Brand logos (SAP, AWS, Python, etc.)</li>
+                <li><a href="https://icon-sets.iconify.design/" target="_blank" style="color: #3B82F6;">Iconify</a> - 200,000+ icons</li>
+                <li><a href="https://remixicon.com/" target="_blank" style="color: #3B82F6;">Remix Icon</a> - Clean modern icons</li>
+            </ul>
+            
+            <h3 style="color: #3B82F6; margin-top: 1.5rem; margin-bottom: 1rem;">Image Optimization</h3>
+            <ul style="margin-left: 1.5rem;">
+                <li><a href="https://squoosh.app/" target="_blank" style="color: #3B82F6;">Squoosh</a> - Image compression & format conversion</li>
+                <li><a href="https://tinypng.com/" target="_blank" style="color: #3B82F6;">TinyPNG</a> - PNG/JPEG optimization</li>
+                <li><a href="https://www.remove.bg/" target="_blank" style="color: #3B82F6;">Remove.bg</a> - Background removal</li>
+            </ul>
+            
+            <h3 style="color: #3B82F6; margin-top: 1.5rem; margin-bottom: 1rem;">Stock Photos (if needed)</h3>
+            <ul style="margin-left: 1.5rem;">
+                <li><a href="https://unsplash.com/" target="_blank" style="color: #3B82F6;">Unsplash</a> - Free high-res photos</li>
+                <li><a href="https://www.pexels.com/" target="_blank" style="color: #3B82F6;">Pexels</a> - Free stock images</li>
+            </ul>
+        </div>
+
+        <h2>🏆 Success Criteria</h2>
+        <p>Your portfolio is ready to launch when:</p>
+        <ul class="checklist">
+            <li>All personal information is updated in index.html</li>
+            <li>Real images are in place (or acceptable placeholders)</li>
+            <li>Contact links (email, LinkedIn, GitHub) are correct</li>
+            <li>Site loads without errors locally</li>
+            <li>Responsive design tested on mobile size</li>
+            <li>All navigation links work properly</li>
+            <li>Lighthouse score is 90+ (run after deployment)</li>
+        </ul>
+
+        <div style="background: linear-gradient(135deg, #3B82F6, #2563EB); padding: 2rem; border-radius: 12px; margin: 3rem 0; text-align: center;">
+            <h2 style="color: white; border: none; margin: 0 0 1rem 0;">🎉 You're Ready to Build Your Future!</h2>
+            <p style="color: rgba(255,255,255,0.9); font-size: 1.125rem; margin-bottom: 1.5rem;">
+                This portfolio will help you stand out to recruiters, showcase your technical skills,<br>
+                and demonstrate your unique personality and values.
+            </p>
+            <a href="index.html" class="btn" style="background: white; color: #3B82F6; font-weight: 600; font-size: 1.125rem;">
+                View Your Portfolio →
+            </a>
+        </div>
+
+        <footer>
+            <p><strong>Portfolio Built for Jack Amichai</strong></p>
+            <p>December 2025</p>
+            <p style="margin-top: 1rem; color: #3B82F6; font-weight: 600;">Integrity • Curiosity • Precision</p>
+        </footer>
+    </div>
+</body>
+</html>
