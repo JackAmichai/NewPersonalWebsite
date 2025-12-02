@@ -188,7 +188,8 @@ img {
     background: var(--bg-secondary);
     border-radius: var(--radius-md);
     padding: var(--spacing-lg);
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
     position: relative;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: 1px solid rgba(255, 255, 255, 0.05);
@@ -198,6 +199,25 @@ img {
     transform: translateY(-8px);
     box-shadow: var(--shadow-hover);
     border-color: rgba(59, 130, 246, 0.2);
+}
+
+/* Custom Scrollbar for Modules */
+.module::-webkit-scrollbar {
+    width: 8px;
+}
+
+.module::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+.module::-webkit-scrollbar-thumb {
+    background: rgba(59, 130, 246, 0.3);
+    border-radius: 4px;
+}
+
+.module::-webkit-scrollbar-thumb:hover {
+    background: rgba(59, 130, 246, 0.5);
 }
 
 /* ==================== */
