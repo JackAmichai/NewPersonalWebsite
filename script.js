@@ -294,3 +294,217 @@ if ('PerformanceObserver' in window) {
 console.log('%c👋 Hi there!', 'font-size: 20px; font-weight: bold; color: #3B82F6;');
 console.log('%cInterested in how this was built? Check out the code on GitHub!', 'font-size: 14px; color: #94A3B8;');
 console.log('%chttps://github.com/jack-amichai', 'font-size: 14px; color: #3B82F6;');
+
+// ==================== 
+// ENHANCEMENT: DARK MODE TOGGLE
+// ====================
+
+const themeToggle = document.querySelector('.theme-toggle');
+const body = document.body;
+
+// Check for saved theme preference or default to dark mode
+const savedTheme = localStorage.getItem('theme') || 'dark';
+body.classList.toggle('light-mode', savedTheme === 'light');
+
+themeToggle?.addEventListener('click', () => {
+    body.classList.toggle('light-mode');
+    const currentTheme = body.classList.contains('light-mode') ? 'light' : 'dark';
+    localStorage.setItem('theme', currentTheme);
+});
+
+// ==================== 
+// ENHANCEMENT: READING PROGRESS BAR
+// ====================
+
+const progressBar = document.querySelector('.reading-progress');
+
+function updateProgressBar() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = (scrollTop / docHeight) * 100;
+    if (progressBar) {
+        progressBar.style.width = `${progress}%`;
+    }
+}
+
+window.addEventListener('scroll', updateProgressBar);
+window.addEventListener('resize', updateProgressBar);
+
+// ==================== 
+// ENHANCEMENT: BACK TO TOP BUTTON
+// ====================
+
+const backToTopBtn = document.querySelector('.back-to-top');
+
+function toggleBackToTop() {
+    if (window.scrollY > 300) {
+        backToTopBtn?.classList.add('visible');
+    } else {
+        backToTopBtn?.classList.remove('visible');
+    }
+}
+
+window.addEventListener('scroll', toggleBackToTop);
+
+backToTopBtn?.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+
+// ==================== 
+// ENHANCEMENT: STATISTICS COUNTER ANIMATION
+// ====================
+
+const statNumbers = document.querySelectorAll('.stat-number');
+
+function animateCounter(element) {
+    const target = parseInt(element.getAttribute('data-target'));
+    const duration = 2000; // 2 seconds
+    const increment = target / (duration / 16); // 60fps
+    let current = 0;
+
+    const updateCounter = () => {
+        current += increment;
+        if (current < target) {
+            element.textContent = Math.floor(current) + '+';
+            requestAnimationFrame(updateCounter);
+        } else {
+            element.textContent = target + '+';
+        }
+    };
+
+    updateCounter();
+}
+
+// Trigger counter animation when hero module is visible
+const heroStatsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            statNumbers.forEach(stat => animateCounter(stat));
+            heroStatsObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.5 });
+
+const heroStatsModule = document.querySelector('.hero-module');
+if (heroStatsModule) {
+    heroStatsObserver.observe(heroStatsModule);
+}
+
+// ==================== 
+// ENHANCEMENT: COPY EMAIL TO CLIPBOARD
+// ====================
+
+const copyEmailBtn = document.querySelector('.copy-email-btn');
+const emailLink = document.querySelector('a[href^="mailto:"]');
+
+copyEmailBtn?.addEventListener('click', async () => {
+    const email = emailLink?.textContent || 'jackyamichai@gmail.com';
+    
+    try {
+        await navigator.clipboard.writeText(email);
+        copyEmailBtn.classList.add('copied');
+        
+        setTimeout(() => {
+            copyEmailBtn.classList.remove('copied');
+        }, 2000);
+    } catch (err) {
+        console.error('Failed to copy email:', err);
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = email;
+        document.body.appendChild(textArea);
+        textArea.select();
+        try {
+            document.execCommand('copy');
+            copyEmailBtn.classList.add('copied');
+            setTimeout(() => copyEmailBtn.classList.remove('copied'), 2000);
+        } catch (err2) {
+            console.error('Fallback copy failed:', err2);
+        }
+        document.body.removeChild(textArea);
+    }
+});
+
+// ==================== 
+// ENHANCEMENT: LAZY LOADING IMAGES
+// ====================
+
+const imageObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const img = entry.target;
+            img.classList.add('loaded');
+            imageObserver.unobserve(img);
+        }
+    });
+});
+
+document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+    imageObserver.observe(img);
+});
+
+// ==================== 
+// ENHANCEMENT: SHARE FUNCTIONALITY
+// ====================
+
+const shareBtn = document.querySelector('.share-btn');
+
+shareBtn?.addEventListener('click', async () => {
+    if (navigator.share) {
+        try {
+            await navigator.share({
+                title: 'Jack Amichai - Product Manager & Business Analyst',
+                text: 'Check out my portfolio!',
+                url: window.location.href
+            });
+        } catch (err) {
+            console.log('Share cancelled or failed:', err);
+        }
+    } else {
+        // Fallback: copy URL to clipboard
+        try {
+            await navigator.clipboard.writeText(window.location.href);
+            alert('Link copied to clipboard!');
+        } catch (err) {
+            console.error('Failed to copy URL:', err);
+        }
+    }
+});
+
+// ==================== 
+// ENHANCEMENT: SMOOTH SCROLL FOR ALL ANCHOR LINKS
+// ====================
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+// ==================== 
+// ENHANCEMENT: KEYBOARD NAVIGATION
+// ====================
+
+// Enable keyboard shortcuts
+document.addEventListener('keydown', (e) => {
+    // Ctrl/Cmd + D: Toggle dark mode
+    if ((e.ctrlKey || e.metaKey) && e.key === 'd') {
+        e.preventDefault();
+        themeToggle?.click();
+    }
+    
+    // Escape: Scroll to top
+    if (e.key === 'Escape') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+});
