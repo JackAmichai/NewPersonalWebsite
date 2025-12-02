@@ -401,7 +401,7 @@ const copyEmailBtn = document.querySelector('.copy-email-btn');
 const emailLink = document.querySelector('a[href^="mailto:"]');
 
 copyEmailBtn?.addEventListener('click', async () => {
-    const email = emailLink?.textContent || 'jackyamichai@gmail.com';
+    const email = emailLink?.textContent || 'jackamichai@gmail.com';
     
     try {
         await navigator.clipboard.writeText(email);

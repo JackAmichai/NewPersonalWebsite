@@ -54,7 +54,7 @@
 ### 💼 Personal Branding
 - ✅ Real bio: "Hi, I'm Jack (Yaron Amichai)"
 - ✅ Professional hero photo
-- ✅ Real email: jackyamichai@gmail.com
+- ✅ Real email: jackamichai@gmail.com
 - ✅ Copy email button with animation
 - ✅ LinkedIn profile link
 - ✅ GitHub profile link
@@ -198,7 +198,7 @@ Refer to `ENHANCEMENTS.md` for the remaining 25 features:
 
 **Created by:** GitHub Copilot  
 **For:** Jack Amichai  
-**Contact:** jackyamichai@gmail.com  
+**Contact:** jackamichai@gmail.com  
 **GitHub:** https://github.com/JackAmichai  
 **LinkedIn:** https://linkedin.com/in/jack-amichai-1157181a4
 
