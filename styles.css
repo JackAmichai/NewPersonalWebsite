@@ -254,15 +254,21 @@ img {
     grid-row: 5 / 7;
 }
 
+/* Recommendations Module */
+.recommendations-module {
+    grid-column: 1 / 5;
+    grid-row: 7 / 8;
+}
+
 /* Philosophy Module - Bottom Left */
 .philosophy-module {
-    grid-column: 1 / 6;
+    grid-column: 5 / 7;
     grid-row: 7 / 8;
 }
 
 /* CTA Module - Bottom Right Large */
 .cta-module {
-    grid-column: 6 / 13;
+    grid-column: 7 / 13;
     grid-row: 7 / 8;
     background: linear-gradient(135deg, var(--accent-primary), #2563EB);
     color: white;
@@ -874,6 +880,45 @@ img {
 }
 
 /* ==================== */
+/* RECOMMENDATIONS MODULE */
+/* ==================== */
+
+.recommendations-module {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.recommendation-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.recommendation-item {
+    padding: var(--spacing-md);
+    background: rgba(255, 255, 255, 0.03);
+    border-left: 3px solid var(--accent-primary);
+    border-radius: var(--radius-sm);
+    margin: 0;
+}
+
+.recommendation-text {
+    font-size: 0.9375rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    font-style: italic;
+    margin: 0 0 var(--spacing-sm) 0;
+}
+
+.recommendation-author {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin: 0;
+}
+
+/* ==================== */
 /* PHILOSOPHY MODULE */
 /* ==================== */
 
@@ -923,6 +968,29 @@ img {
     font-size: var(--size-body);
     color: rgba(255, 255, 255, 0.9);
     max-width: 600px;
+    line-height: 1.7;
+}
+
+.cta-subtitle strong {
+    color: white;
+    font-weight: 700;
+}
+
+.cta-highlights {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    margin: var(--spacing-md) 0;
+}
+
+.cta-highlight-item {
+    font-size: 0.875rem;
+    color: white;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
 }
 
 .contact-links {
