@@ -302,8 +302,8 @@ console.log('%chttps://github.com/jack-amichai', 'font-size: 14px; color: #3B82F
 const themeToggle = document.querySelector('.theme-toggle');
 const body = document.body;
 
-// Check for saved theme preference or default to dark mode
-const savedTheme = localStorage.getItem('theme') || 'dark';
+// Check for saved theme preference or default to LIGHT mode (white background)
+const savedTheme = localStorage.getItem('theme') || 'light';
 body.classList.toggle('light-mode', savedTheme === 'light');
 
 themeToggle?.addEventListener('click', () => {

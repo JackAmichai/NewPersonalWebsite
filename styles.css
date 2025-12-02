@@ -1102,6 +1102,11 @@ img {
     transform: rotate(180deg);
 }
 
+.theme-toggle:focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+}
+
 .moon-icon {
     display: none;
 }
@@ -1181,6 +1186,11 @@ body.light-mode .module {
     box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
 }
 
+.back-to-top:focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+}
+
 /* ==================== */
 /* ENHANCEMENT: HERO STATS */
 /* ==================== */
@@ -1249,6 +1259,11 @@ body.light-mode .module {
     transform: scale(1.1);
 }
 
+.copy-email-btn:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 2px;
+}
+
 .copy-email-btn.copied::after {
     content: 'Copied!';
     position: absolute;
@@ -1275,6 +1290,7 @@ body.light-mode .module {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    transition: all 0.3s ease;
 }
 
 .social-link svg {
@@ -1283,6 +1299,12 @@ body.light-mode .module {
 
 .social-link:hover svg {
     transform: scale(1.2);
+}
+
+.social-link:focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+    border-radius: 4px;
 }
 
 /* ==================== */
