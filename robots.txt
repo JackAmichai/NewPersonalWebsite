@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://jackamichai.github.io/NewPersonalWebsite/sitemap.xml
+
+# Disallow old website folder
+Disallow: /old-website/
+
+# Crawl delay (optional, adjust if needed)
+Crawl-delay: 1
