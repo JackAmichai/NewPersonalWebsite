@@ -492,6 +492,109 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // ==================== 
+// IMAGE SLIDER
+// ====================
+
+const initSlider = () => {
+    const sliderContainer = document.querySelector('.slider-container');
+    const slides = document.querySelectorAll('.slide');
+    const prevBtn = document.querySelector('.slider-prev');
+    const nextBtn = document.querySelector('.slider-next');
+    const dotsContainer = document.querySelector('.slider-dots');
+    
+    if (!sliderContainer || slides.length === 0) return;
+    
+    let currentSlide = 0;
+    let slideInterval;
+    
+    // Create dots
+    slides.forEach((_, index) => {
+        const dot = document.createElement('button');
+        dot.classList.add('slider-dot');
+        dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
+        if (index === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => goToSlide(index));
+        dotsContainer.appendChild(dot);
+    });
+    
+    const dots = document.querySelectorAll('.slider-dot');
+    
+    // Show specific slide
+    const showSlide = (index) => {
+        slides.forEach(slide => slide.classList.remove('active'));
+        dots.forEach(dot => dot.classList.remove('active'));
+        
+        slides[index].classList.add('active');
+        dots[index].classList.add('active');
+        currentSlide = index;
+    };
+    
+    // Go to specific slide
+    const goToSlide = (index) => {
+        showSlide(index);
+        resetAutoAdvance();
+    };
+    
+    // Next slide
+    const nextSlide = () => {
+        const next = (currentSlide + 1) % slides.length;
+        showSlide(next);
+    };
+    
+    // Previous slide
+    const prevSlide = () => {
+        const prev = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(prev);
+    };
+    
+    // Auto advance
+    const startAutoAdvance = () => {
+        slideInterval = setInterval(nextSlide, 4000);
+    };
+    
+    const stopAutoAdvance = () => {
+        clearInterval(slideInterval);
+    };
+    
+    const resetAutoAdvance = () => {
+        stopAutoAdvance();
+        startAutoAdvance();
+    };
+    
+    // Event listeners
+    prevBtn.addEventListener('click', () => {
+        prevSlide();
+        resetAutoAdvance();
+    });
+    
+    nextBtn.addEventListener('click', () => {
+        nextSlide();
+        resetAutoAdvance();
+    });
+    
+    // Pause on hover
+    sliderContainer.addEventListener('mouseenter', stopAutoAdvance);
+    sliderContainer.addEventListener('mouseleave', startAutoAdvance);
+    
+    // Keyboard navigation for slider
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+            prevSlide();
+            resetAutoAdvance();
+        } else if (e.key === 'ArrowRight') {
+            nextSlide();
+            resetAutoAdvance();
+        }
+    });
+    
+    // Start auto-advance
+    startAutoAdvance();
+};
+
+// Initialize slider
+initSlider();
+
+// ==================== 
 // ENHANCEMENT: KEYBOARD NAVIGATION
 // ====================
 
