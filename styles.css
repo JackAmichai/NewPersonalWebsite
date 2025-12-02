@@ -1726,6 +1726,18 @@ img {
     font-weight: 600;
 }
 
+.footer-updated {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+.footer-updated span {
+    color: var(--accent-primary);
+    font-weight: 600;
+}
+
 /* ==================== */
 /* RESPONSIVE DESIGN */
 /* ==================== */

@@ -602,7 +602,7 @@ const contactForm = document.getElementById('contact-form');
 const contactStatus = document.getElementById('contact-status');
 
 if (contactForm && contactStatus) {
-    contactForm.addEventListener('submit', (event) => {
+    contactForm.addEventListener('submit', async (event) => {
         event.preventDefault();
         
         const formData = new FormData(contactForm);
@@ -625,21 +625,39 @@ if (contactForm && contactStatus) {
             return;
         }
         
-        // Open mailto with form data
-        const subject = `Portfolio Contact from ${encodeURIComponent(name)}`;
-        const body = encodeURIComponent(`${message}\n\n---\nFrom: ${name}\nEmail: ${email}`);
-        const mailtoLink = `mailto:jackamichai@gmail.com?subject=${subject}&body=${body}`;
-        
-        window.location.href = mailtoLink;
-        
-        contactStatus.textContent = '✅ Opening email client...';
+        // Show loading state
+        contactStatus.textContent = '⏳ Sending message...';
         contactStatus.style.color = 'white';
         
-        // Reset form after short delay
-        setTimeout(() => {
-            contactForm.reset();
-            contactStatus.textContent = '';
-        }, 3000);
+        try {
+            // Send to API endpoint
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name, email, message })
+            });
+            
+            const data = await response.json();
+            
+            if (response.ok) {
+                contactStatus.textContent = '✅ ' + (data.message || 'Message sent successfully!');
+                contactStatus.style.color = '#10b981';
+                
+                // Reset form after success
+                setTimeout(() => {
+                    contactForm.reset();
+                    contactStatus.textContent = '';
+                }, 3000);
+            } else {
+                throw new Error(data.error || 'Failed to send message');
+            }
+        } catch (error) {
+            console.error('Contact form error:', error);
+            contactStatus.textContent = '❌ Failed to send. Please email directly: jackamichai@gmail.com';
+            contactStatus.style.color = '#ff6b6b';
+        }
     });
     
     // Clear status on input
@@ -693,6 +711,58 @@ const animateSkillBars = () => {
 
 // Initialize skill bar animations
 animateSkillBars();
+
+// ==================== 
+// ANALYTICS TRACKING
+// ====================
+
+// Track page view on load
+const trackPageView = () => {
+    try {
+        fetch('/api/analytics', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                page: window.location.pathname,
+                event: 'pageview'
+            })
+        }).catch(err => console.log('Analytics tracking failed:', err));
+    } catch (error) {
+        // Silently fail - don't break the site
+    }
+};
+
+// Track CTA clicks
+const trackCTAClicks = () => {
+    const ctaButtons = document.querySelectorAll('.btn-hero-primary, .btn-hero-secondary, .btn-linkedin, .btn-email-cta, .btn-whatsapp');
+    
+    ctaButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            try {
+                const ctaName = button.textContent.trim();
+                fetch('/api/analytics', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        page: window.location.pathname,
+                        event: 'cta_click',
+                        cta: ctaName
+                    })
+                }).catch(err => console.log('CTA tracking failed:', err));
+            } catch (error) {
+                // Silently fail
+            }
+        });
+    });
+};
+
+// Initialize analytics
+trackPageView();
+trackCTAClicks();
 
 // ==================== 
 // IMPACT DASHBOARD COUNTER ANIMATION

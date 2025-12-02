@@ -1,0 +1,26 @@
+{
+  "name": "jack-amichai-portfolio",
+  "version": "2.0.0",
+  "description": "Jack Amichai's professional portfolio with dynamic features",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vercel dev",
+    "deploy": "vercel --prod"
+  },
+  "keywords": [
+    "portfolio",
+    "business-analyst",
+    "product-manager",
+    "sap-successfactors",
+    "deloitte"
+  ],
+  "author": "Jack (Yaron) Amichai",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JackAmichai/NewPersonalWebsite.git"
+  },
+  "devDependencies": {
+    "vercel": "^33.0.0"
+  }
+}
