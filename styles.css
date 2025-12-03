@@ -156,19 +156,26 @@ section {
     display: flex;
     align-items: center;
     padding-top: 100px;
+    position: relative;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('images/hero-background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
 .hero-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 60px;
     align-items: center;
+    max-width: 800px;
 }
 
 /* Hero Photo */
 .hero-photo {
     position: relative;
     order: 2;
+    display: none; /* Hidden since we have background image */
 }
 
 .hero-image {
@@ -213,35 +220,42 @@ section {
 /* Hero Content */
 .hero-content {
     order: 1;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    z-index: 1;
+    position: relative;
 }
 
 .hero-greeting {
     font-family: var(--font-mono);
     font-size: 18px;
-    color: var(--accent);
+    color: #66b3ff;
     margin-bottom: 20px;
     font-weight: 600;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
 }
 
 .hero-name {
     font-size: clamp(32px, 6vw, 56px);
     font-weight: 800;
-    color: var(--text-primary);
+    color: white;
     line-height: 1.2;
     margin-bottom: 15px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
 }
 
 .hero-title {
     font-size: clamp(16px, 3vw, 20px);
     font-weight: 600;
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.95);
     line-height: 1.4;
     margin-bottom: 25px;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
 }
 
 .hero-description {
     font-size: 16px;
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.9);
     margin-bottom: 35px;
     line-height: 1.8;
 }
