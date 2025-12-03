@@ -1,11 +1,14 @@
 User-agent: *
 Allow: /
 
-# Sitemap location
+# Sitemap locations
+Sitemap: https://new-personal-website-topaz.vercel.app/sitemap.xml
 Sitemap: https://jackamichai.github.io/NewPersonalWebsite/sitemap.xml
 
-# Disallow old website folder
+# Disallow old website folder and development files
 Disallow: /old-website/
+Disallow: /api/
+Disallow: /.git/
 
-# Crawl delay (optional, adjust if needed)
+# Crawl delay
 Crawl-delay: 1
