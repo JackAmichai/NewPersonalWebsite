@@ -1540,3 +1540,454 @@ html {
         width: 100%;
     }
 }
+
+/* ==================== */
+/* ENHANCED FEATURES CSS */
+/* ==================== */
+
+/* 1. SCROLL PROGRESS BAR */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), #00d4ff);
+    width: 0%;
+    z-index: 10000;
+    transition: width 0.2s ease;
+}
+
+/* 2. DARK MODE VARIABLES */
+[data-theme="dark"] {
+    --bg-primary: #0a192f;
+    --bg-secondary: #112240;
+    --bg-tertiary: #1d3557;
+    --text-primary: #ccd6f6;
+    --text-secondary: #8892b0;
+    --text-muted: #606a86;
+    --border: #233554;
+    --shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.9);
+}
+
+/* 3. MOBILE MENU TOGGLE */
+.mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+}
+
+.mobile-menu-toggle span {
+    width: 25px;
+    height: 2px;
+    background: var(--accent);
+    transition: var(--transition);
+}
+
+.mobile-menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.mobile-menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+}
+
+@media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: flex;
+    }
+    
+    .nav-menu {
+        position: fixed;
+        top: 70px;
+        right: -100%;
+        width: 70%;
+        max-width: 300px;
+        background: var(--bg-secondary);
+        flex-direction: column;
+        padding: 30px;
+        border-radius: 10px 0 0 10px;
+        box-shadow: var(--shadow);
+        transition: right 0.3s ease;
+        z-index: 1000;
+    }
+    
+    .nav-menu.active {
+        right: 0;
+    }
+    
+    .nav-menu li {
+        margin: 15px 0;
+    }
+}
+
+/* 4. THEME TOGGLE BUTTON */
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.theme-toggle {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.theme-toggle:hover {
+    background: var(--accent-light);
+    border-color: var(--accent);
+    transform: rotate(15deg);
+}
+
+.theme-icon {
+    font-size: 20px;
+}
+
+/* 5. SOCIAL SHARE BUTTONS */
+.social-share {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+}
+
+.share-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.share-btn {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+    color: var(--text-secondary);
+}
+
+.share-btn:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--white);
+    transform: translateY(-3px);
+}
+
+/* 6. PROJECT FILTERS */
+.project-filters {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.filter-btn {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    color: var(--text-secondary);
+}
+
+.filter-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.filter-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--white);
+}
+
+/* 7. SKILLS PROGRESS BARS */
+.skill-bar-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.skill-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.skill-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.skill-bar {
+    width: 100%;
+    height: 8px;
+    background: var(--bg-tertiary);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.skill-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), #00d4ff);
+    width: 0%;
+    transition: width 1.5s ease-out;
+    border-radius: 10px;
+}
+
+/* 8. BACK TO TOP BUTTON */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: var(--accent);
+    color: var(--white);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow);
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+    z-index: 1000;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px -15px rgba(0, 102, 204, 0.8);
+}
+
+/* 9. PAGE LOADER */
+.page-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-primary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    z-index: 10000;
+    transition: opacity 0.5s ease;
+}
+
+.page-loader.fade-out {
+    opacity: 0;
+}
+
+.loader-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid var(--bg-tertiary);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.page-loader p {
+    font-size: 14px;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+/* 10. TOAST NOTIFICATIONS */
+.toast {
+    position: fixed;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    padding: 15px 30px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    font-size: 14px;
+    font-weight: 500;
+    z-index: 10000;
+    transition: bottom 0.3s ease;
+    border: 1px solid var(--border);
+    max-width: 400px;
+    text-align: center;
+}
+
+.toast.show {
+    bottom: 30px;
+}
+
+/* 11. VISITOR COUNTER */
+.visitor-counter {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-top: 10px;
+}
+
+#visitorCount {
+    font-weight: 700;
+    color: var(--accent);
+}
+
+/* 12. TYPING ANIMATION */
+.typing-text {
+    display: inline-block;
+    border-right: 2px solid var(--accent);
+    animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { border-color: transparent; }
+    50% { border-color: var(--accent); }
+}
+
+/* 13. ENHANCED ANIMATIONS */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* 14. PRINT STYLES */
+@media print {
+    .navbar,
+    .back-to-top,
+    .scroll-progress,
+    .theme-toggle,
+    .mobile-menu-toggle,
+    .social-share,
+    .contact-form-wrapper,
+    .contact-cta,
+    footer {
+        display: none !important;
+    }
+    
+    body {
+        background: white;
+        color: black;
+    }
+    
+    section {
+        page-break-inside: avoid;
+    }
+    
+    h1, h2, h3 {
+        page-break-after: avoid;
+    }
+}
+
+/* 15. ACCESSIBILITY ENHANCEMENTS */
+.skip-to-main {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--accent);
+    color: white;
+    padding: 8px;
+    text-decoration: none;
+    z-index: 10000;
+}
+
+.skip-to-main:focus {
+    top: 0;
+}
+
+/* Focus visible for keyboard navigation */
+*:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    :root {
+        --accent: #0052ff;
+        --text-primary: #000000;
+        --border: #000000;
+    }
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* 16. RESPONSIVE ENHANCEMENTS */
+@media (max-width: 480px) {
+    .social-share {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .back-to-top {
+        width: 45px;
+        height: 45px;
+        bottom: 20px;
+        right: 20px;
+    }
+    
+    .project-filters {
+        gap: 10px;
+    }
+    
+    .filter-btn {
+        padding: 8px 15px;
+        font-size: 13px;
+    }
+}
