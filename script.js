@@ -17,7 +17,41 @@ window.addEventListener('load', () => {
 });
 
 // ========================================
-// 2. SMOOTH SCROLLING
+// 2. HERO PHOTO ROTATION
+// ========================================
+(function() {
+    const heroImage = document.querySelector('.hero-image');
+    if (!heroImage) return;
+    
+    const photos = [
+        'images/me.jpeg',
+        'images/hero-bg-1.jpg',
+        'images/hero-bg-2.jpg',
+        'images/hero-bg-3.jpg',
+        'images/hero-bg-4.jpg'
+    ];
+    
+    let currentIndex = 0;
+    
+    function rotatePhoto() {
+        currentIndex = (currentIndex + 1) % photos.length;
+        heroImage.style.opacity = '0';
+        
+        setTimeout(() => {
+            heroImage.src = photos[currentIndex];
+            heroImage.style.opacity = '1';
+        }, 500);
+    }
+    
+    // Add transition style
+    heroImage.style.transition = 'opacity 0.5s ease-in-out';
+    
+    // Rotate every 6 seconds
+    setInterval(rotatePhoto, 6000);
+})();
+
+// ========================================
+// 3. SMOOTH SCROLLING
 // ========================================
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -39,7 +73,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // ========================================
-// 3. SCROLL PROGRESS BAR
+// 4. SCROLL PROGRESS BAR
 // ========================================
 function updateScrollProgress() {
     const scrollProgress = document.getElementById('scrollProgress');
@@ -73,7 +107,7 @@ window.addEventListener('scroll', () => {
 });
 
 // ========================================
-// 5. MOBILE MENU TOGGLE
+// 7. MOBILE MENU TOGGLE
 // ========================================
 const mobileMenuToggle = document.getElementById('mobileMenuToggle');
 const navMenu = document.getElementById('navMenu');
