@@ -4,20 +4,20 @@
 
 const jackKnowledgeBase = {
     // Career & Experience
-    "army|military|idf|service|givati|2018|2017|2019|2020|2021|2022": {
-        answer: "Great question! Jack served in the **Israel Defense Forces (IDF)** from **2017 to 2022** as a **Staff Sergeant**. He led a team of 15+ soldiers in the elite **Givati Brigade**, managing high-pressure operations, logistics, and training new recruits. This 5-year experience taught him exceptional leadership, decision-making under pressure, and team management skills that he now applies to product management.",
-        keywords: ["IDF", "Givati", "military", "leadership", "2017-2022"]
+    "army|military|idf|service|givati|2017|2018|2019|2020": {
+        answer: "Great question! Jack served in the **Israel Defense Forces (IDF)** from **2017 to 2020** as a **Staff Sergeant**. He led team operations in the **Givati Brigade**, managing high-pressure operations, logistics, and training personnel. This 3-year experience taught him exceptional leadership, decision-making under pressure, and team management skills.",
+        keywords: ["IDF", "Givati", "military", "leadership", "2017-2020"]
     },
-    "deloitte|consultant|consulting|current|work|job": {
-        answer: "Jack currently works at **Deloitte** as an **AI Product Manager and SAP Consultant**. He has led **5+ SAP SuccessFactors implementations** for Fortune 500 clients and recently worked on a **Revenue Optimization Platform** that achieved a **20% improvement in forecast accuracy** and **$2M+ annual revenue impact**. He's been with Deloitte since 2023.",
-        keywords: ["Deloitte", "SAP", "consulting", "current role"]
+    "hospitality|consultant|consulting|current|work|job|adi|ohayon": {
+        answer: "Jack currently works at **Adi Ohayon Hospitality Consulting** as a **Business Analyst** specializing in revenue optimization. He started in **April 2025**, where he analyzes demand trends, builds forecasting models, creates executive dashboards, and collaborates with cross-functional teams to drive strategic decisions.",
+        keywords: ["Adi Ohayon", "hospitality", "consulting", "Business Analyst", "current role"]
     },
     "education|university|degree|studied|psychology|computer science": {
-        answer: "Jack holds a **Bachelor's degree in Psychology and Computer Science** from the **Open University of Israel**. He also spent 2 years (2021-2023) as a **Research Assistant in Cognitive Neuroscience** at the **Technion** and **Hebrew University**, where he analyzed experimental data and co-authored research papers. This unique combination of psychology and tech helps him build user-centric AI products.",
+        answer: "Jack holds a **Bachelor's degree in Psychology and Computer Science** from the **Open University of Israel**. He also has research experience at **Technion** (2021-2023) as a Research Assistant & Team Coordinator, and **Hebrew University** (2020-2021) as a Research Project Manager & Software Engineer, where he analyzed experimental data and managed research projects. This unique combination of psychology and tech helps him build data-driven solutions.",
         keywords: ["education", "psychology", "computer science", "Technion", "research"]
     },
     "projects|portfolio|built|nvidia|revenue|note2crm": {
-        answer: "Jack has built several impressive AI projects! His featured work includes:\n\n🎯 **NVIDIA Documentation Navigator** - RAG system achieving 60% faster doc discovery and 85%+ relevance\n💰 **Revenue Optimization Platform** - $2M+ annual impact with 20% forecast improvement\n🤖 **Note2CRM** - AI meeting assistant reducing manual entry by 80%\n📊 **OrderFlow-AI** - Smart inventory system cutting stockouts by 45%\n\nYou can see all projects with code examples on this portfolio!",
+        answer: "Jack has built several AI and analytics projects! His featured work includes:\n\n🎯 **NVIDIA Documentation Navigator** - RAG system for faster documentation discovery\n💰 **Revenue Optimization Platform** - Forecasting models with measurable business impact\n🤖 **Note2CRM** - AI meeting assistant reducing manual entry by 80%\n📊 **OrderFlow-AI** - Smart inventory system reducing stockouts\n\nYou can see all 9 projects with code examples on this portfolio!",
         keywords: ["projects", "NVIDIA", "revenue", "AI", "portfolio"]
     },
     "skills|technologies|tech stack|programming|languages": {
@@ -33,16 +33,16 @@ const jackKnowledgeBase = {
         keywords: ["resume", "hire", "looking for work", "download"]
     },
     "achievements|impact|results|metrics|numbers": {
-        answer: "Jack's measurable impact includes:\n\n📈 **20% revenue forecast improvement** (hospitality portfolio)\n💰 **$2M+ annual revenue impact** (pricing optimization)\n⏱️ **60% time saved** on pricing analysis\n🎯 **85%+ ML model accuracy** (stock prediction & forecasting)\n🚀 **5+ Fortune 500 implementations** (SAP SuccessFactors)\n⚡ **60% faster documentation discovery** (NVIDIA RAG system)\n\nHe focuses on products with measurable business outcomes!",
+        answer: "Jack's measurable impact includes:\n\n📈 **Improved revenue forecast accuracy** (hospitality consulting)\n💰 **Measurable revenue impact** (pricing optimization)\n⏱️ **60% time saved** on pricing analysis\n🎯 **High-accuracy ML models** (stock prediction & forecasting)\n📚 **Research publications** (Technion & Hebrew University)\n⚡ **Faster documentation discovery** (NVIDIA RAG system)\n\nHe focuses on data-driven solutions with measurable business outcomes!",
         keywords: ["achievements", "impact", "metrics", "results"]
     },
     "languages|speak|hebrew|english|french": {
-        answer: "Jack is multilingual! 🌍\n\n🇮🇱 **Hebrew** - Native speaker\n🇺🇸 **English** - Fluent (professional proficiency)\n🇫🇷 **French** - Conversational\n\nThis helps him work effectively with international teams and Fortune 500 clients across different regions.",
+        answer: "Jack is multilingual! 🌍\n\n🇮🇱 **Hebrew** - Native speaker\n🇺🇸 **English** - Fluent (professional proficiency)\n🇫🇷 **French** - Conversational\n\nThis helps him work effectively with international teams and clients across different regions.",
         keywords: ["languages", "Hebrew", "English", "French"]
     },
     "research|neuroscience|technion|university|lab": {
-        answer: "During **2021-2023**, Jack worked as a **Research Assistant in Cognitive Neuroscience** at the **Technion** and **Hebrew University**. He:\n\n🔬 Designed and conducted cognitive psychology experiments\n📊 Analyzed data using SPSS and Python\n📝 Co-authored research papers\n👥 Managed lab operations and participant recruitment\n\nThis research background gives him a unique edge in understanding user behavior and designing intuitive AI products.",
-        keywords: ["research", "neuroscience", "Technion", "cognitive"]
+        answer: "Jack has research experience at both **Technion** (2021-2023) and **Hebrew University** (2020-2021):\n\n**Technion (2021-2023):** Research Assistant & Team Coordinator\n🔬 Conducted cognitive psychology experiments\n📊 Analyzed data using SPSS and Python\n👥 Coordinated lab operations\n\n**Hebrew University (2020-2021):** Research Project Manager & Software Engineer\n💻 Developed software tools for research\n📅 Managed project timelines\n\nThis research background gives him a unique edge in understanding user behavior and designing data-driven solutions.",
+        keywords: ["research", "neuroscience", "Technion", "Hebrew University", "cognitive"]
     }
 };
 

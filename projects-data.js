@@ -17,12 +17,12 @@ const projectsData = [
             "Added intelligent filters for framework, API version, and code examples",
             "Designed conversational UI for follow-up questions and context retention"
         ],
-        outcome: "60% faster documentation discovery and 85%+ relevance in user testing (n≈25).",
+        outcome: "Significantly faster documentation discovery with high relevance in user testing.",
         metrics: [
             "⚡ <strong>60% faster</strong> documentation discovery",
-            "🎯 <strong>85%+ relevance</strong> in user testing (n=25)",
+            "🎯 <strong>High relevance</strong> in user testing",
             "🔗 <strong>Cross-framework</strong> insights (CUDA + Triton)",
-            "👥 <strong>150+ developers</strong> beta tested"
+            "👥 <strong>Developer community</strong> beta tested"
         ],
         techStack: ["Python", "RAG", "Vector DB (Pinecone)", "LangChain", "OpenAI API", "NLP"],
         techDetails: "Implemented semantic search using embeddings (OpenAI text-embedding-ada-002), stored in Pinecone vector database. Built retrieval pipeline with LangChain for context-aware responses. Designed chunking strategy for optimal document retrieval. Added metadata filtering for version-specific results.",
@@ -44,12 +44,12 @@ const projectsData = [
             "Designed <strong>Power BI dashboards</strong> showing real-time pricing recommendations",
             "Created <strong>scenario planning tools</strong> for event-driven demand spikes"
         ],
-        outcome: "20% improvement in forecast accuracy, $2M+ annual revenue impact across portfolio, 60% time saved on pricing analysis, weekly usage by C-suite for rate decisions.",
+        outcome: "Improved forecast accuracy, measurable revenue impact across portfolio, significant time saved on pricing analysis, weekly usage by leadership for rate decisions.",
         metrics: [
-            "📈 <strong>20% improvement</strong> in forecast accuracy",
-            "💰 <strong>$2M+ annual revenue</strong> impact across portfolio",
+            "📈 <strong>Improved accuracy</strong> in revenue forecasts",
+            "💰 <strong>Measurable revenue</strong> impact across portfolio",
             "⏱️ <strong>60% time saved</strong> on pricing analysis",
-            "📊 <strong>Weekly usage</strong> by C-suite for rate decisions"
+            "📊 <strong>Weekly usage</strong> by leadership for rate decisions"
         ],
         techStack: ["Excel", "Power BI", "SQL", "Python", "Revenue Analytics", "Forecasting"],
         techDetails: "Built time-series forecasting models using historical booking patterns. Implemented web scraping automation for competitor rate monitoring. Created interactive Power BI dashboards with drill-down capabilities. Integrated multiple data sources (PMS, market data, events calendar) for holistic view.",
@@ -211,18 +211,18 @@ const projectsData = [
         role: "Solution Architect & Implementation Lead",
         featured: false,
         problem: "Enterprise clients need custom HR workflows that standard SAP SuccessFactors doesn't provide out-of-the-box.",
-        solution: "Led 5+ enterprise implementations building custom extensions on SAP BTP with 95%+ client satisfaction.",
+        solution: "Developed understanding of SAP BTP and SuccessFactors through hands-on learning and implementation exposure.",
         approach: [
-            "Designed custom approval workflows using SAP BTP Cloud Foundry",
-            "Built integration middleware connecting SuccessFactors to legacy systems",
-            "Created automated data migration tools",
-            "Established governance and best practices documentation"
+            "Studied custom approval workflows using SAP BTP Cloud Foundry",
+            "Learned integration patterns connecting SuccessFactors to legacy systems",
+            "Explored automated data migration approaches",
+            "Reviewed governance and best practices documentation"
         ],
-        outcome: "5+ successful Fortune 500 implementations with 95%+ client satisfaction scores.",
+        outcome: "Gained practical knowledge of enterprise HR system implementations and SAP BTP architecture.",
         metrics: [
-            "🏢 <strong>5+ implementations</strong>",
-            "⭐ <strong>95%+ satisfaction</strong>",
-            "🔧 <strong>Custom extensions</strong> on SAP BTP"
+            "🏛️ <strong>Enterprise exposure</strong>",
+            "📚 <strong>SAP BTP knowledge</strong>",
+            "🔧 <strong>Custom extensions</strong> understanding"
         ],
         techStack: ["SAP BTP", "SAP SuccessFactors", "JavaScript", "OData", "Cloud Foundry", "Integration"],
         techDetails: "Built custom SAP UI5 applications deployed on BTP. Implemented OData services for data access. Created integration flows using SAP Cloud Integration. Designed multi-tenant architecture for scalability. Established CI/CD pipelines for extension deployments.",
