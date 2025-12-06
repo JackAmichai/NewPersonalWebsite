@@ -9,6 +9,7 @@ const projectsData = [
         title: "NVIDIA Documentation Navigator",
         role: "Product Lead & Technical Builder",
         featured: true,
+        image: "images/hero-bg-1.jpg",
         problem: "NVIDIA engineers and developers waste 2-3 hours daily searching across fragmented documentation for CUDA, Triton, TensorRT, and NeMo. Critical information is buried in PDFs, GitHub repos, and separate doc sites, causing project delays and frustration.",
         solution: "Built a retrieval-augmented generation (RAG) system with vector database for semantic search. Implemented cross-document reasoning to synthesize insights from CUDA + Triton simultaneously. Added intelligent filters for framework, API version, and code examples. Designed conversational UI for follow-up questions and context retention.",
         approach: [
@@ -36,6 +37,7 @@ const projectsData = [
         title: "Revenue Optimization Platform",
         role: "Business Analyst & Product Strategist",
         featured: true,
+        image: "images/hero-bg-2.jpg",
         problem: "Multi-property hotel portfolio struggling with manual pricing decisions based on outdated competitor analysis. Revenue managers spending 10+ hours weekly on spreadsheets, missing dynamic market opportunities.",
         solution: "Built demand forecasting models using 3+ years historical data (occupancy, ADR, RevPAR). Automated competitor pricing scraping with daily updates. Designed Power BI dashboards showing real-time pricing recommendations. Created scenario planning tools for event-driven demand spikes.",
         approach: [
@@ -60,6 +62,7 @@ const projectsData = [
         title: "Note2CRM",
         role: "AI Product Developer",
         featured: false,
+        image: "images/hero-bg-3.jpg",
         problem: "Sales teams spend hours manually entering meeting notes into CRM systems, leading to incomplete records and lost follow-up opportunities.",
         solution: "AI-powered meeting assistant that automatically captures, structures, and syncs meeting notes to CRM systems with intelligent field mapping.",
         approach: [
@@ -85,6 +88,7 @@ const projectsData = [
         title: "OrderFlow-AI",
         role: "AI Product Developer",
         featured: false,
+        image: "images/hero-bg-4.jpg",
         problem: "Inventory managers struggle with unpredictable demand patterns, leading to frequent stockouts or overstock situations.",
         solution: "Smart order management system using ML to predict demand patterns and optimize inventory levels automatically.",
         approach: [
@@ -110,6 +114,7 @@ const projectsData = [
         title: "SafyWeb",
         role: "Security Product Developer",
         featured: false,
+        image: "images/hero-bg-1.jpg",
         problem: "Small businesses lack affordable, easy-to-use web security tools to protect against common vulnerabilities.",
         solution: "Web security platform that scans for vulnerabilities and provides actionable remediation guidance with OWASP compliance.",
         approach: [
@@ -135,6 +140,7 @@ const projectsData = [
         title: "ArtiBus",
         role: "AI Product Developer",
         featured: false,
+        image: "images/hero-bg-2.jpg",
         problem: "Public transport users struggle with complex route planning, especially during service disruptions or schedule changes.",
         solution: "AI-powered public transport assistant with intelligent route optimization and real-time disruption alerts.",
         approach: [
@@ -160,6 +166,7 @@ const projectsData = [
         title: "Stock Price Prediction Model",
         role: "ML Engineer",
         featured: false,
+        image: "images/hero-bg-3.jpg",
         problem: "Investors need reliable tools to analyze stock price trends and make data-driven decisions.",
         solution: "Machine learning model achieving 85%+ accuracy using RandomForestRegressor with 15+ engineered features from historical market data.",
         approach: [
@@ -185,6 +192,7 @@ const projectsData = [
         title: "E-commerce Recommendation Engine",
         role: "ML Product Developer",
         featured: false,
+        image: "images/hero-bg-4.jpg",
         problem: "Online shoppers are overwhelmed by product choices, leading to decision paralysis and abandoned carts.",
         solution: "Personalized product recommendation system increasing conversion rates by 25% through collaborative filtering and behavioral analysis.",
         approach: [
@@ -210,6 +218,7 @@ const projectsData = [
         title: "SAP SuccessFactors Custom Extensions",
         role: "Solution Architect & Implementation Lead",
         featured: false,
+        image: "images/hero-bg-1.jpg",
         problem: "Enterprise clients need custom HR workflows that standard SAP SuccessFactors doesn't provide out-of-the-box.",
         solution: "Developed understanding of SAP BTP and SuccessFactors through hands-on learning and implementation exposure.",
         approach: [
