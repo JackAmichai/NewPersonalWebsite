@@ -496,6 +496,11 @@ function renderProject(project, view = 'business') {
     if (project.featured) {
         return `
             <div class="project-card ${featuredClass}case-study" data-project-id="${project.id}">
+                ${project.image ? `
+                <div class="project-image">
+                    <img src="${project.image}" alt="${project.title}">
+                </div>
+                ` : ''}
                 <div class="project-content">
                     <div class="project-header">
                         <h3>${project.title}</h3>
@@ -504,24 +509,24 @@ function renderProject(project, view = 'business') {
                     </div>
                     
                     <div class="case-study-section">
-                        <h4 class="case-label">🔴 Problem</h4>
+                        <h4 class="case-label">Problem</h4>
                         <p>${project.problem}</p>
                     </div>
                     
                     <div class="case-study-section">
-                        <h4 class="case-label">👤 My Role</h4>
+                        <h4 class="case-label">My Role</h4>
                         <p><strong>${project.role}</strong></p>
                     </div>
                     
                     <div class="case-study-section">
-                        <h4 class="case-label">⚙️ Approach</h4>
+                        <h4 class="case-label">Approach</h4>
                         <ul class="case-list">
                             ${project.approach.map(item => `<li>${item}</li>`).join('')}
                         </ul>
                     </div>
                     
                     <div class="case-study-section">
-                        <h4 class="case-label">🎯 Outcome</h4>
+                        <h4 class="case-label">Outcome</h4>
                         <div class="project-highlights">
                             ${project.metrics.map(metric => `<div class="highlight">${metric}</div>`).join('')}
                         </div>
@@ -529,14 +534,14 @@ function renderProject(project, view = 'business') {
                     
                     ${isTechnical && project.techDetails ? `
                         <div class="case-study-section technical-details">
-                            <h4 class="case-label">🔧 Technical Implementation</h4>
+                            <h4 class="case-label">Technical Implementation</h4>
                             <p>${project.techDetails}</p>
                         </div>
                     ` : ''}
                     
                     ${project.evidence ? `
                         <div class="case-study-section">
-                            <h4 class="case-label">📊 Evidence</h4>
+                            <h4 class="case-label">Evidence</h4>
                             <p>${project.evidence}</p>
                         </div>
                     ` : ''}
@@ -552,6 +557,11 @@ function renderProject(project, view = 'business') {
     // For non-featured projects, show compact format
     return `
         <div class="project-card" data-project-id="${project.id}">
+             ${project.image ? `
+                <div class="project-image">
+                    <img src="${project.image}" alt="${project.title}">
+                </div>
+                ` : ''}
             <div class="project-content">
                 <div class="project-header">
                     <h3>${project.title}</h3>

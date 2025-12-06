@@ -17,7 +17,7 @@ const jackKnowledgeBase = {
         keywords: ["education", "psychology", "computer science", "Technion", "research"]
     },
     "projects|portfolio|built|nvidia|revenue|note2crm": {
-        answer: "Jack has built several AI and analytics projects! His featured work includes:\n\n🎯 **NVIDIA Documentation Navigator** - RAG system for faster documentation discovery\n💰 **Revenue Optimization Platform** - Forecasting models with measurable business impact\n🤖 **Note2CRM** - AI meeting assistant reducing manual entry by 80%\n📊 **OrderFlow-AI** - Smart inventory system reducing stockouts\n\nYou can see all 9 projects with code examples on this portfolio!",
+        answer: "Jack has built several AI and analytics projects! His featured work includes:\n\n**NVIDIA Documentation Navigator** - RAG system for faster documentation discovery\n**Revenue Optimization Platform** - Forecasting models with measurable business impact\n**Note2CRM** - AI meeting assistant reducing manual entry by 80%\n**OrderFlow-AI** - Smart inventory system reducing stockouts\n\nYou can see all 9 projects with code examples on this portfolio!",
         keywords: ["projects", "NVIDIA", "revenue", "AI", "portfolio"]
     },
     "skills|technologies|tech stack|programming|languages": {
@@ -25,23 +25,23 @@ const jackKnowledgeBase = {
         keywords: ["skills", "Python", "AI", "SAP", "tech stack"]
     },
     "contact|email|reach|linkedin|phone|schedule|call": {
-        answer: "You can reach Jack through:\n\n📧 **Email:** jackamichai@gmail.com\n💼 **LinkedIn:** linkedin.com/in/jackamichai\n📅 **Schedule a Call:** calendly.com/jackamichai\n🐙 **GitHub:** github.com/JackAmichai\n\nHe's actively seeking **Product Manager** and **Business Analyst** roles and would love to connect!",
+        answer: "You can reach Jack through:\n\n**Email:** jackamichai@gmail.com\n**LinkedIn:** linkedin.com/in/jackamichai\n**Schedule a Call:** calendly.com/jackamichai\n**GitHub:** github.com/JackAmichai\n\nHe's actively seeking **Product Manager** and **Business Analyst** roles and would love to connect!",
         keywords: ["contact", "email", "LinkedIn", "schedule"]
     },
     "resume|cv|download|hire|looking": {
-        answer: "Jack is actively seeking **Product Manager or Business Analyst roles**! You can download his materials:\n\n📄 **Resume** - Complete work history and skills\n📊 **One-Pager** - Quick overview with key metrics\n📚 **Case Studies** - Detailed project breakdowns\n\nAll downloads are available in the 'Resources for Recruiters' section below. He's looking for roles where he can leverage his AI expertise and consulting experience!",
+        answer: "Jack is actively seeking **Product Manager or Business Analyst roles**! You can download his materials:\n\n**Resume** - Complete work history and skills\n**One-Pager** - Quick overview with key metrics\n**Case Studies** - Detailed project breakdowns\n\nAll downloads are available in the 'Resources for Recruiters' section below. He's looking for roles where he can leverage his AI expertise and consulting experience!",
         keywords: ["resume", "hire", "looking for work", "download"]
     },
     "achievements|impact|results|metrics|numbers": {
-        answer: "Jack's measurable impact includes:\n\n📈 **Improved revenue forecast accuracy** (hospitality consulting)\n💰 **Measurable revenue impact** (pricing optimization)\n⏱️ **60% time saved** on pricing analysis\n🎯 **High-accuracy ML models** (stock prediction & forecasting)\n📚 **Research publications** (Technion & Hebrew University)\n⚡ **Faster documentation discovery** (NVIDIA RAG system)\n\nHe focuses on data-driven solutions with measurable business outcomes!",
+        answer: "Jack's measurable impact includes:\n\n**Improved revenue forecast accuracy** (hospitality consulting)\n**Measurable revenue impact** (pricing optimization)\n**60% time saved** on pricing analysis\n**High-accuracy ML models** (stock prediction & forecasting)\n**Research publications** (Technion & Hebrew University)\n**Faster documentation discovery** (NVIDIA RAG system)\n\nHe focuses on data-driven solutions with measurable business outcomes!",
         keywords: ["achievements", "impact", "metrics", "results"]
     },
     "languages|speak|hebrew|english|french": {
-        answer: "Jack is multilingual! 🌍\n\n🇮🇱 **Hebrew** - Native speaker\n🇺🇸 **English** - Fluent (professional proficiency)\n🇫🇷 **French** - Conversational\n\nThis helps him work effectively with international teams and clients across different regions.",
+        answer: "Jack is multilingual!\n\n**Hebrew** - Native speaker\n**English** - Fluent (professional proficiency)\n**French** - Conversational\n\nThis helps him work effectively with international teams and clients across different regions.",
         keywords: ["languages", "Hebrew", "English", "French"]
     },
     "research|neuroscience|technion|university|lab": {
-        answer: "Jack has research experience at both **Technion** (2021-2023) and **Hebrew University** (2020-2021):\n\n**Technion (2021-2023):** Research Assistant & Team Coordinator\n🔬 Conducted cognitive psychology experiments\n📊 Analyzed data using SPSS and Python\n👥 Coordinated lab operations\n\n**Hebrew University (2020-2021):** Research Project Manager & Software Engineer\n💻 Developed software tools for research\n📅 Managed project timelines\n\nThis research background gives him a unique edge in understanding user behavior and designing data-driven solutions.",
+        answer: "Jack has research experience at both **Technion** (2021-2023) and **Hebrew University** (2020-2021):\n\n**Technion (2021-2023):** Research Assistant & Team Coordinator\nConducted cognitive psychology experiments\nAnalyzed data using SPSS and Python\nCoordinated lab operations\n\n**Hebrew University (2020-2021):** Research Project Manager & Software Engineer\nDeveloped software tools for research\nManaged project timelines\n\nThis research background gives him a unique edge in understanding user behavior and designing data-driven solutions.",
         keywords: ["research", "neuroscience", "Technion", "Hebrew University", "cognitive"]
     }
 };
@@ -228,7 +228,7 @@ class CloudChatbot {
         }
         
         // Default response if no match
-        return "That's a great question! I don't have specific information about that, but I recommend:\n\n📧 **Emailing Jack directly:** jackamichai@gmail.com\n💼 **Connecting on LinkedIn:** linkedin.com/in/jackamichai\n📅 **Scheduling a call:** calendly.com/jackamichai\n\nYou can also browse his portfolio sections above to learn more about his experience and projects!";
+        return "That's a great question! I don't have specific information about that, but I recommend:\n\n**Emailing Jack directly:** jackamichai@gmail.com\n**Connecting on LinkedIn:** linkedin.com/in/jackamichai\n**Scheduling a call:** calendly.com/jackamichai\n\nYou can also browse his portfolio sections above to learn more about his experience and projects!";
     }
 
     addMessage(text, sender) {
@@ -255,8 +255,7 @@ class CloudChatbot {
         // Convert markdown-style formatting to HTML
         return text
             .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-            .replace(/\n/g, '<br>')
-            .replace(/🎯|💰|🤖|📊|📧|💼|📅|🐙|📄|📚|📈|⏱️|🚀|⚡|🔬|📝|👥|🌍|🇮🇱|🇺🇸|🇫🇷/g, '<span class="emoji">$&</span>');
+            .replace(/\n/g, '<br>');
     }
 
     escapeHtml(text) {
