@@ -1052,8 +1052,15 @@ section {
 }
 
 .project-image {
+    height: 200px;
     overflow: hidden;
     position: relative;
+}
+
+/* Featured project image adjustment */
+.project-card.featured .project-image {
+    height: 100%;
+    min-height: 400px;
 }
 
 .project-image img {

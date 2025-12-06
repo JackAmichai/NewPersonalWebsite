@@ -492,10 +492,18 @@ function renderProject(project, view = 'business') {
         </div>
     ` : '';
     
+    // Image HTML
+    const imageHtml = project.image ? `
+        <div class="project-image">
+            <img src="${project.image}" alt="${project.title}" loading="lazy">
+        </div>
+    ` : '';
+
     // For featured projects, show full case study format
     if (project.featured) {
         return `
             <div class="project-card ${featuredClass}case-study" data-project-id="${project.id}">
+                ${imageHtml}
                 <div class="project-content">
                     <div class="project-header">
                         <h3>${project.title}</h3>
@@ -552,6 +560,7 @@ function renderProject(project, view = 'business') {
     // For non-featured projects, show compact format
     return `
         <div class="project-card" data-project-id="${project.id}">
+            ${imageHtml}
             <div class="project-content">
                 <div class="project-header">
                     <h3>${project.title}</h3>
