@@ -10,27 +10,75 @@ const projectsData = [
         role: "Product Lead & Technical Builder",
         featured: true,
         image: "images/hero-bg-1.jpg",
-        problem: "NVIDIA engineers and developers waste 2-3 hours daily searching across fragmented documentation for CUDA, Triton, TensorRT, and NeMo. Critical information is buried in PDFs, GitHub repos, and separate doc sites, causing project delays and frustration.",
-        solution: "Built a retrieval-augmented generation (RAG) system with vector database for semantic search. Implemented cross-document reasoning to synthesize insights from CUDA + Triton simultaneously. Added intelligent filters for framework, API version, and code examples. Designed conversational UI for follow-up questions and context retention.",
+        video: "videos/nvidia_demo.mp4",
+        problem: "NVIDIA engineers and developers waste 2-3 hours daily searching across fragmented documentation for CUDA, Triton, TensorRT, and NeMo.",
+        solution: "A retrieval-augmented generation (RAG) system with semantic search that synthesizes insights from multiple documentation sources. Features intelligent filtering and conversational UI for complex technical queries.",
         approach: [
-            "Built <strong>retrieval-augmented generation (RAG)</strong> system with vector database for semantic search",
-            "Implemented <strong>cross-document reasoning</strong> to synthesize insights from CUDA + Triton simultaneously",
+            "Built <strong>retrieval-augmented generation (RAG)</strong> system with vector database",
+            "Implemented <strong>cross-document reasoning</strong> to synthesize insights",
             "Added intelligent filters for framework, API version, and code examples",
-            "Designed conversational UI for follow-up questions and context retention"
+            "Designed conversational UI for follow-up questions"
         ],
         outcome: "Significantly faster documentation discovery with high relevance in user testing.",
         metrics: [
             "⚡ <strong>60% faster</strong> documentation discovery",
             "🎯 <strong>High relevance</strong> in user testing",
-            "🔗 <strong>Cross-framework</strong> insights (CUDA + Triton)",
+            "🔗 <strong>Cross-framework</strong> insights",
             "👥 <strong>Developer community</strong> beta tested"
         ],
         techStack: ["Python", "RAG", "Vector DB (Pinecone)", "LangChain", "OpenAI API", "NLP"],
-        techDetails: "Implemented semantic search using embeddings (OpenAI text-embedding-ada-002), stored in Pinecone vector database. Built retrieval pipeline with LangChain for context-aware responses. Designed chunking strategy for optimal document retrieval. Added metadata filtering for version-specific results.",
+        techDetails: "Implemented semantic search using embeddings (OpenAI text-embedding-ada-002), stored in Pinecone vector database. Built retrieval pipeline with LangChain.",
         links: {
             github: "https://github.com/JackAmichai/Nvidia-doc-agentic-ai"
         },
         evidence: "GitHub Repository | User testing data available upon request"
+    },
+    {
+        id: "scholar-2-6",
+        title: "Scholar2.6",
+        role: "Full Stack Developer",
+        featured: true, // Promoted to featured based on recency
+        image: "images/hero-bg-2.jpg",
+        video: "videos/scholar_demo.mp4",
+        problem: "Academic researchers struggle to manage and organize vast amounts of literature efficiently.",
+        solution: "A modern academic search and organization tool built with TypeScript. Streamlines the research process with intuitive library management and citation tools.",
+        approach: [
+            "Designed a clean, focus-oriented user interface for research",
+            "Implemented efficient citation management algorithms",
+            "Built a responsive frontend using TypeScript for type safety"
+        ],
+        outcome: "Improved research workflow efficiency and citation accuracy.",
+        metrics: [
+            "📚 <strong>Better organization</strong> of papers",
+            "⚡ <strong>Fast retrieval</strong> of citations",
+            "🎨 <strong>Modern UI</strong> experience"
+        ],
+        techStack: ["TypeScript", "React", "Node.js", "Academic APIs"],
+        techDetails: "Built using a modern TypeScript stack for robust type checking and scalability. Integrates with academic databases for real-time metadata retrieval.",
+        links: {
+            github: "https://github.com/JackAmichai/Scholar2.6"
+        },
+        evidence: "GitHub Repository"
+    },
+    {
+        id: "sleepcall",
+        title: "SleepCall",
+        role: "Python Developer",
+        featured: false,
+        image: "images/hero-bg-3.jpg",
+        video: "videos/sleepcall_demo.mp4",
+        problem: "People often miss important mentions of their name during long calls or while multitasking.",
+        solution: "An intelligent audio monitoring tool that alerts you whenever your name is spoken in a call. Uses lightweight speech recognition to run locally without compromising privacy.",
+        metrics: [
+            "🔔 <strong>Real-time alerts</strong>",
+            "🔒 <strong>Privacy-focused</strong> local processing",
+            "⚡ <strong>Low latency</strong> detection"
+        ],
+        techStack: ["Python", "Speech Recognition", "Audio Processing"],
+        techDetails: "Utilizes Python's speech recognition libraries to monitor audio input streams in real-time, triggering system alerts upon keyword detection.",
+        links: {
+            github: "https://github.com/JackAmichai/SleepCall"
+        }
     },
     {
         id: "revenue-optimization",
@@ -38,24 +86,45 @@ const projectsData = [
         role: "Business Analyst & Product Strategist",
         featured: true,
         image: "images/hero-bg-2.jpg",
-        problem: "Multi-property hotel portfolio struggling with manual pricing decisions based on outdated competitor analysis. Revenue managers spending 10+ hours weekly on spreadsheets, missing dynamic market opportunities.",
-        solution: "Built demand forecasting models using 3+ years historical data (occupancy, ADR, RevPAR). Automated competitor pricing scraping with daily updates. Designed Power BI dashboards showing real-time pricing recommendations. Created scenario planning tools for event-driven demand spikes.",
+        video: "videos/revenue_demo.mp4",
+        problem: "Multi-property hotel portfolio struggling with manual pricing decisions based on outdated competitor analysis.",
+        solution: "Built demand forecasting models using 3+ years of historical data to automate pricing decisions. Dashboard provides real-time recommendations and competitor tracking.",
         approach: [
-            "Built <strong>demand forecasting models</strong> using 3+ years historical data (occupancy, ADR, RevPAR)",
+            "Built <strong>demand forecasting models</strong> using historical data",
             "Automated <strong>competitor pricing scraping</strong> with daily updates",
-            "Designed <strong>Power BI dashboards</strong> showing real-time pricing recommendations",
-            "Created <strong>scenario planning tools</strong> for event-driven demand spikes"
+            "Designed <strong>Power BI dashboards</strong> showing real-time pricing",
+            "Created <strong>scenario planning tools</strong> for demand spikes"
         ],
-        outcome: "Improved forecast accuracy, measurable revenue impact across portfolio, significant time saved on pricing analysis, weekly usage by leadership for rate decisions.",
+        outcome: "Improved forecast accuracy and measurable revenue impact across the portfolio.",
         metrics: [
             "📈 <strong>Improved accuracy</strong> in revenue forecasts",
-            "💰 <strong>Measurable revenue</strong> impact across portfolio",
+            "💰 <strong>Measurable revenue</strong> impact",
             "⏱️ <strong>60% time saved</strong> on pricing analysis",
-            "📊 <strong>Weekly usage</strong> by leadership for rate decisions"
+            "📊 <strong>Weekly usage</strong> by leadership"
         ],
         techStack: ["Excel", "Power BI", "SQL", "Python", "Revenue Analytics", "Forecasting"],
-        techDetails: "Built time-series forecasting models using historical booking patterns. Implemented web scraping automation for competitor rate monitoring. Created interactive Power BI dashboards with drill-down capabilities. Integrated multiple data sources (PMS, market data, events calendar) for holistic view.",
+        techDetails: "Built time-series forecasting models using historical booking patterns. Implemented web scraping automation for competitor rate monitoring.",
         evidence: "Client testimonial and dashboard screenshots available upon request | NDA-protected project"
+    },
+    {
+        id: "password-research",
+        title: "Password Security Research",
+        role: "Security Researcher",
+        featured: false,
+        image: "images/hero-bg-1.jpg",
+        video: "videos/security_demo.mp4",
+        problem: "Understanding common vulnerabilities in password management systems is critical for web security.",
+        solution: "A comprehensive research project analyzing password security protocols and common attack vectors. Demonstrates defense mechanisms against brute-force and dictionary attacks.",
+        metrics: [
+            "🔒 <strong>Vulnerability analysis</strong>",
+            "🛡️ <strong>Defense strategies</strong> implemented",
+            "🎓 <strong>Academic research</strong> grade"
+        ],
+        techStack: ["Python", "Cryptography", "Web Security", "Data Analysis"],
+        techDetails: "Analyzed password strength entropy and implemented secure hashing comparisons. Simulates attack scenarios to test resilience.",
+        links: {
+            github: "https://github.com/JackAmichai/password-research"
+        }
     },
     {
         id: "note2crm",
@@ -63,22 +132,16 @@ const projectsData = [
         role: "AI Product Developer",
         featured: false,
         image: "images/hero-bg-3.jpg",
-        problem: "Sales teams spend hours manually entering meeting notes into CRM systems, leading to incomplete records and lost follow-up opportunities.",
-        solution: "AI-powered meeting assistant that automatically captures, structures, and syncs meeting notes to CRM systems with intelligent field mapping.",
-        approach: [
-            "Integrated with meeting platforms for automatic transcription",
-            "Built NLP pipeline to extract key information (action items, decisions, contacts)",
-            "Designed smart CRM field mapping with confidence scoring",
-            "Created review workflow for human validation before sync"
-        ],
-        outcome: "80% reduction in manual data entry time, improved CRM data quality and completeness.",
+        video: "videos/note2crm_demo.mp4",
+        problem: "Sales teams spend hours manually entering meeting notes into CRM systems.",
+        solution: "AI-powered meeting assistant that automatically captures, structures, and syncs meeting notes to CRM systems. Uses NLP to extract action items and contact details.",
         metrics: [
             "⏱️ <strong>80% less</strong> manual entry time",
             "📝 <strong>Automated capture</strong> of meeting insights",
             "🎯 <strong>Smart field mapping</strong> to CRM"
         ],
         techStack: ["Python", "NLP", "Speech-to-Text", "CRM APIs", "Machine Learning"],
-        techDetails: "Implemented speech recognition using Whisper API. Built named entity recognition (NER) for contact extraction. Created fuzzy matching algorithm for CRM field mapping. Designed confidence scoring system for validation workflow.",
+        techDetails: "Implemented speech recognition using Whisper API. Built named entity recognition (NER) for contact extraction.",
         links: {
             github: "https://github.com/JackAmichai/Note2CRM"
         }
@@ -89,22 +152,16 @@ const projectsData = [
         role: "AI Product Developer",
         featured: false,
         image: "images/hero-bg-4.jpg",
-        problem: "Inventory managers struggle with unpredictable demand patterns, leading to frequent stockouts or overstock situations.",
-        solution: "Smart order management system using ML to predict demand patterns and optimize inventory levels automatically.",
-        approach: [
-            "Built demand forecasting models using historical sales data",
-            "Implemented automatic reorder point calculation",
-            "Created alerts for unusual demand patterns",
-            "Designed supplier integration for automated ordering"
-        ],
-        outcome: "45% reduction in stockouts while maintaining optimal inventory levels.",
+        video: "videos/orderflow_demo.mp4",
+        problem: "Inventory managers struggle with unpredictable demand patterns leading to stockouts.",
+        solution: "Smart order management system using ML to predict demand patterns and optimize inventory levels. Automatically calculates reorder points based on historical sales.",
         metrics: [
             "📉 <strong>45% fewer stockouts</strong>",
             "💰 <strong>Optimized inventory</strong> costs",
             "🤖 <strong>Automated ordering</strong> decisions"
         ],
         techStack: ["Python", "Scikit-learn", "Time Series Analysis", "SQL", "API Integration"],
-        techDetails: "Implemented ARIMA and Prophet models for time-series forecasting. Built ensemble approach combining multiple algorithms. Created dynamic reorder point calculation based on lead times and demand variability. Integrated with supplier APIs for automated purchase orders.",
+        techDetails: "Implemented ARIMA and Prophet models for time-series forecasting. Built ensemble approach combining multiple algorithms.",
         links: {
             github: "https://github.com/JackAmichai/OrderFlow-AI"
         }
@@ -115,22 +172,16 @@ const projectsData = [
         role: "Security Product Developer",
         featured: false,
         image: "images/hero-bg-1.jpg",
-        problem: "Small businesses lack affordable, easy-to-use web security tools to protect against common vulnerabilities.",
-        solution: "Web security platform that scans for vulnerabilities and provides actionable remediation guidance with OWASP compliance.",
-        approach: [
-            "Built automated vulnerability scanner for common web threats",
-            "Implemented OWASP Top 10 compliance checking",
-            "Created prioritized remediation roadmap",
-            "Designed non-technical explanations for business owners"
-        ],
-        outcome: "OWASP-compliant security scanning accessible to non-technical users.",
+        video: "videos/safyweb_demo.mp4",
+        problem: "Small businesses lack affordable, easy-to-use web security tools.",
+        solution: "Web security platform that scans for vulnerabilities and provides actionable remediation guidance. Automates checks for OWASP Top 10 threats.",
         metrics: [
             "🔒 <strong>OWASP compliant</strong> scanning",
             "🎯 <strong>Prioritized fixes</strong>",
             "📋 <strong>Clear guidance</strong> for non-technical users"
         ],
         techStack: ["Python", "Security Testing", "OWASP", "Web Scanning", "API Development"],
-        techDetails: "Implemented automated scanning for SQL injection, XSS, CSRF, and other OWASP Top 10 vulnerabilities. Built severity scoring based on CVSS. Created remediation templates with code examples. Designed REST API for integration with CI/CD pipelines.",
+        techDetails: "Implemented automated scanning for SQL injection, XSS, CSRF. Built severity scoring based on CVSS.",
         links: {
             github: "https://github.com/JackAmichai/SafyWeb"
         }
@@ -141,22 +192,16 @@ const projectsData = [
         role: "AI Product Developer",
         featured: false,
         image: "images/hero-bg-2.jpg",
-        problem: "Public transport users struggle with complex route planning, especially during service disruptions or schedule changes.",
-        solution: "AI-powered public transport assistant with intelligent route optimization and real-time disruption alerts.",
-        approach: [
-            "Integrated real-time public transit data feeds",
-            "Built route optimization algorithm considering multiple factors",
-            "Implemented disruption detection and alternative route suggestions",
-            "Designed conversational interface for natural queries"
-        ],
-        outcome: "Intelligent route planning with real-time optimization and disruption handling.",
+        video: "videos/artibus_demo.mp4",
+        problem: "Public transport users struggle with complex route planning during service disruptions.",
+        solution: "AI-powered public transport assistant with intelligent route optimization and real-time alerts. Helps users navigate disruptions with alternative route suggestions.",
         metrics: [
             "🚌 <strong>Real-time route</strong> optimization",
             "⚠️ <strong>Proactive alerts</strong> for disruptions",
             "🗺️ <strong>Multi-modal</strong> journey planning"
         ],
         techStack: ["Python", "Route Optimization", "Real-time APIs", "NLP", "Mobile Development"],
-        techDetails: "Integrated GTFS feeds for transit data. Implemented Dijkstra's algorithm with custom cost function (time, transfers, walking distance). Built WebSocket connection for real-time updates. Created NLP interface for natural language route queries.",
+        techDetails: "Integrated GTFS feeds for transit data. Implemented Dijkstra's algorithm with custom cost function.",
         links: {
             github: "https://github.com/JackAmichai/ArtiBus"
         }
@@ -167,22 +212,16 @@ const projectsData = [
         role: "ML Engineer",
         featured: false,
         image: "images/hero-bg-3.jpg",
-        problem: "Investors need reliable tools to analyze stock price trends and make data-driven decisions.",
-        solution: "Machine learning model achieving 85%+ accuracy using RandomForestRegressor with 15+ engineered features from historical market data.",
-        approach: [
-            "Engineered 15+ features from historical price and volume data",
-            "Built ensemble model using RandomForestRegressor",
-            "Implemented real-time data pipeline for predictions",
-            "Created backtesting framework for model validation"
-        ],
-        outcome: "85%+ accuracy in stock price prediction with real-time analysis capabilities.",
+        video: "videos/stock_demo.mp4",
+        problem: "Investors need reliable tools to analyze stock price trends.",
+        solution: "Machine learning model achieving 85%+ accuracy using RandomForestRegressor. Engineers 15+ features from historical market data for robust predictions.",
         metrics: [
             "🎯 <strong>85%+ accuracy</strong>",
             "📊 <strong>15+ features</strong> engineered",
             "⚡ <strong>Real-time pipeline</strong>"
         ],
         techStack: ["Python", "Scikit-learn", "Pandas", "Machine Learning", "Financial Data APIs"],
-        techDetails: "Implemented feature engineering including moving averages, RSI, MACD, Bollinger Bands. Used RandomForestRegressor with hyperparameter tuning via GridSearchCV. Built data pipeline with Alpha Vantage API. Created walk-forward validation for backtesting.",
+        techDetails: "Implemented feature engineering including moving averages, RSI, MACD. Used RandomForestRegressor with hyperparameter tuning.",
         links: {
             github: "https://github.com/JackAmichai/stock-predictor"
         }
@@ -193,48 +232,36 @@ const projectsData = [
         role: "ML Product Developer",
         featured: false,
         image: "images/hero-bg-4.jpg",
-        problem: "Online shoppers are overwhelmed by product choices, leading to decision paralysis and abandoned carts.",
-        solution: "Personalized product recommendation system increasing conversion rates by 25% through collaborative filtering and behavioral analysis.",
-        approach: [
-            "Built collaborative filtering engine using user behavior data",
-            "Implemented A/B testing framework for recommendation strategies",
-            "Created real-time personalization based on session behavior",
-            "Designed fallback strategies for cold-start problem"
-        ],
-        outcome: "25% increase in conversion rate with personalized product recommendations.",
+        video: "videos/ecommerce_demo.mp4",
+        problem: "Online shoppers are overwhelmed by product choices.",
+        solution: "Personalized product recommendation system increasing conversion rates by 25%. Utilizes collaborative filtering and behavioral analysis to suggest relevant items.",
         metrics: [
             "📈 <strong>25% conversion boost</strong>",
             "🎯 <strong>Personalized</strong> recommendations",
             "⚡ <strong>Real-time</strong> adaptation"
         ],
         techStack: ["Python", "Collaborative Filtering", "A/B Testing", "Redis", "Real-time Analytics"],
-        techDetails: "Implemented matrix factorization using Surprise library. Built hybrid approach combining collaborative and content-based filtering. Used Redis for real-time session data. Created multi-armed bandit for exploration/exploitation balance.",
+        techDetails: "Implemented matrix factorization using Surprise library. Built hybrid approach combining collaborative and content-based filtering.",
         links: {
             github: "https://github.com/JackAmichai/ecommerce-recommendations"
         }
     },
     {
         id: "sap-successfactors",
-        title: "SAP SuccessFactors Custom Extensions",
-        role: "Solution Architect & Implementation Lead",
+        title: "SAP SuccessFactors Extensions",
+        role: "Solution Architect",
         featured: false,
         image: "images/hero-bg-1.jpg",
-        problem: "Enterprise clients need custom HR workflows that standard SAP SuccessFactors doesn't provide out-of-the-box.",
-        solution: "Developed understanding of SAP BTP and SuccessFactors through hands-on learning and implementation exposure.",
-        approach: [
-            "Studied custom approval workflows using SAP BTP Cloud Foundry",
-            "Learned integration patterns connecting SuccessFactors to legacy systems",
-            "Explored automated data migration approaches",
-            "Reviewed governance and best practices documentation"
-        ],
-        outcome: "Gained practical knowledge of enterprise HR system implementations and SAP BTP architecture.",
+        video: "videos/sap_demo.mp4",
+        problem: "Enterprise clients need custom HR workflows outside standard capabilities.",
+        solution: "Custom SAP BTP extensions for SuccessFactors, implementing specialized approval workflows and data integration. Ensures seamless connectivity with legacy systems.",
         metrics: [
             "🏛️ <strong>Enterprise exposure</strong>",
             "📚 <strong>SAP BTP knowledge</strong>",
             "🔧 <strong>Custom extensions</strong> understanding"
         ],
         techStack: ["SAP BTP", "SAP SuccessFactors", "JavaScript", "OData", "Cloud Foundry", "Integration"],
-        techDetails: "Built custom SAP UI5 applications deployed on BTP. Implemented OData services for data access. Created integration flows using SAP Cloud Integration. Designed multi-tenant architecture for scalability. Established CI/CD pipelines for extension deployments.",
+        techDetails: "Built custom SAP UI5 applications deployed on BTP. Implemented OData services for data access.",
         evidence: "NDA-protected Fortune 500 implementations | Client references available"
     }
 ];
