@@ -2682,6 +2682,7 @@ html {
         font-size: 13px;
     }
 }
+
 /* ==================== */
 /* VIDEO & SKILLS ENHANCEMENTS */
 /* ==================== */
@@ -2697,17 +2698,6 @@ html {
 .project-card.featured .project-media {
     height: 100%;
     min-height: 400px;
-}
-
-.project-media video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: var(--transition);
-}
-
-.project-media:hover video {
-    transform: scale(1.02);
 }
 
 .media-badge {
@@ -2778,43 +2768,6 @@ html {
 /* GENERATED VISUALS */
 /* ==================== */
 
-.visual-wrapper {
-    transition: opacity 0.3s ease;
-}
-
-.project-media:hover .visual-wrapper {
-    opacity: 0;
-}
-
-.project-media:hover video {
-    opacity: 1 !important;
-}
-
-.visual-container {
-    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
-}
-
-.visual-text {
-    fill: var(--text-muted);
-}
-
-[data-theme="dark"] .visual-container {
-    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-}
-
-[data-theme="dark"] .visual-text {
-    fill: #94a3b8;
-}
-
-/* Ensure SVG strokes adapt to dark mode if needed */
-[data-theme="dark"] .visual-link {
-    stroke: #334155;
-}
-
-/* ==================== */
-/* GENERATED VISUALS */
-/* ==================== */
-
 .visual-container {
     width: 100%;
     height: 100%;
@@ -2850,14 +2803,69 @@ html {
 
 .visual-wrapper {
     transition: opacity 0.3s ease;
+    width: 100%;
+    height: 100%;
 }
 
-.project-media:hover .visual-wrapper {
+/* "Playing" State (Hover/Active) */
+.project-media:hover .visual-wrapper,
+.project-media.playing .visual-wrapper {
+    opacity: 1; /* Keep visual visible as it acts as the "video" */
+}
+
+.project-media:hover .visual-svg,
+.project-media.playing .visual-svg {
+    transform: scale(1.1);
+}
+
+.project-media:hover .visual-node,
+.project-media.playing .visual-node {
+    fill: #0052a3;
+    filter: drop-shadow(0 0 5px rgba(0, 102, 204, 0.4));
+}
+
+.project-media:hover .visual-link,
+.project-media.playing .visual-link {
+    stroke: #0066cc;
+    stroke-dasharray: 5 5;
+    animation: dash 1s linear infinite;
+}
+
+/* Specific Animations */
+@keyframes dash {
+    to { stroke-dashoffset: -10; }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.1); }
+}
+
+.pulse { animation: pulse 3s infinite; }
+
+/* Simulating Activity */
+.project-media:hover .pulse,
+.project-media.playing .pulse {
+    animation-duration: 1s;
+}
+
+.visual-cursor {
     opacity: 0;
 }
 
-.project-media:hover video {
-    opacity: 1 !important;
+.project-media:hover .visual-cursor,
+.project-media.playing .visual-cursor {
+    opacity: 1;
+    animation: blink 0.5s infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
 }
 
 [data-theme="dark"] .visual-container {

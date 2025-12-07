@@ -10,7 +10,7 @@ const projectsData = [
         role: "Product Lead & Technical Builder",
         featured: true,
         image: "images/hero-bg-1.jpg",
-        video: "videos/nvidia_demo.mp4",
+        // video: "videos/nvidia_demo.mp4", // Removed placeholder
         problem: "NVIDIA engineers and developers waste 2-3 hours daily searching across fragmented documentation for CUDA, Triton, TensorRT, and NeMo.",
         solution: "A retrieval-augmented generation (RAG) system with semantic search that synthesizes insights from multiple documentation sources. Features intelligent filtering and conversational UI for complex technical queries.",
         approach: [
@@ -37,9 +37,9 @@ const projectsData = [
         id: "scholar-2-6",
         title: "Scholar2.6",
         role: "Full Stack Developer",
-        featured: true, // Promoted to featured based on recency
+        featured: true,
         image: "images/hero-bg-2.jpg",
-        video: "videos/scholar_demo.mp4",
+        // video: "videos/scholar_demo.mp4", // Removed placeholder
         problem: "Academic researchers struggle to manage and organize vast amounts of literature efficiently.",
         solution: "A modern academic search and organization tool built with TypeScript. Streamlines the research process with intuitive library management and citation tools.",
         approach: [
@@ -66,7 +66,7 @@ const projectsData = [
         role: "Python Developer",
         featured: false,
         image: "images/hero-bg-3.jpg",
-        video: "videos/sleepcall_demo.mp4",
+        // video: "videos/sleepcall_demo.mp4", // Removed placeholder
         problem: "People often miss important mentions of their name during long calls or while multitasking.",
         solution: "An intelligent audio monitoring tool that alerts you whenever your name is spoken in a call. Uses lightweight speech recognition to run locally without compromising privacy.",
         metrics: [
@@ -86,7 +86,7 @@ const projectsData = [
         role: "Business Analyst & Product Strategist",
         featured: true,
         image: "images/hero-bg-2.jpg",
-        video: "videos/revenue_demo.mp4",
+        // video: "videos/revenue_demo.mp4", // Removed placeholder
         problem: "Multi-property hotel portfolio struggling with manual pricing decisions based on outdated competitor analysis.",
         solution: "Built demand forecasting models using 3+ years of historical data to automate pricing decisions. Dashboard provides real-time recommendations and competitor tracking.",
         approach: [
@@ -112,7 +112,7 @@ const projectsData = [
         role: "Security Researcher",
         featured: false,
         image: "images/hero-bg-1.jpg",
-        video: "videos/security_demo.mp4",
+        // video: "videos/security_demo.mp4", // Removed placeholder
         problem: "Understanding common vulnerabilities in password management systems is critical for web security.",
         solution: "A comprehensive research project analyzing password security protocols and common attack vectors. Demonstrates defense mechanisms against brute-force and dictionary attacks.",
         metrics: [
@@ -132,7 +132,7 @@ const projectsData = [
         role: "AI Product Developer",
         featured: false,
         image: "images/hero-bg-3.jpg",
-        video: "videos/note2crm_demo.mp4",
+        // video: "videos/note2crm_demo.mp4", // Removed placeholder
         problem: "Sales teams spend hours manually entering meeting notes into CRM systems.",
         solution: "AI-powered meeting assistant that automatically captures, structures, and syncs meeting notes to CRM systems. Uses NLP to extract action items and contact details.",
         metrics: [
@@ -152,7 +152,7 @@ const projectsData = [
         role: "AI Product Developer",
         featured: false,
         image: "images/hero-bg-4.jpg",
-        video: "videos/orderflow_demo.mp4",
+        // video: "videos/orderflow_demo.mp4", // Removed placeholder
         problem: "Inventory managers struggle with unpredictable demand patterns leading to stockouts.",
         solution: "Smart order management system using ML to predict demand patterns and optimize inventory levels. Automatically calculates reorder points based on historical sales.",
         metrics: [
@@ -172,7 +172,7 @@ const projectsData = [
         role: "Security Product Developer",
         featured: false,
         image: "images/hero-bg-1.jpg",
-        video: "videos/safyweb_demo.mp4",
+        // video: "videos/safyweb_demo.mp4", // Removed placeholder
         problem: "Small businesses lack affordable, easy-to-use web security tools.",
         solution: "Web security platform that scans for vulnerabilities and provides actionable remediation guidance. Automates checks for OWASP Top 10 threats.",
         metrics: [
@@ -192,7 +192,7 @@ const projectsData = [
         role: "AI Product Developer",
         featured: false,
         image: "images/hero-bg-2.jpg",
-        video: "videos/artibus_demo.mp4",
+        // video: "videos/artibus_demo.mp4", // Removed placeholder
         problem: "Public transport users struggle with complex route planning during service disruptions.",
         solution: "AI-powered public transport assistant with intelligent route optimization and real-time alerts. Helps users navigate disruptions with alternative route suggestions.",
         metrics: [
@@ -212,7 +212,7 @@ const projectsData = [
         role: "ML Engineer",
         featured: false,
         image: "images/hero-bg-3.jpg",
-        video: "videos/stock_demo.mp4",
+        // video: "videos/stock_demo.mp4", // Removed placeholder
         problem: "Investors need reliable tools to analyze stock price trends.",
         solution: "Machine learning model achieving 85%+ accuracy using RandomForestRegressor. Engineers 15+ features from historical market data for robust predictions.",
         metrics: [
@@ -232,7 +232,7 @@ const projectsData = [
         role: "ML Product Developer",
         featured: false,
         image: "images/hero-bg-4.jpg",
-        video: "videos/ecommerce_demo.mp4",
+        // video: "videos/ecommerce_demo.mp4", // Removed placeholder
         problem: "Online shoppers are overwhelmed by product choices.",
         solution: "Personalized product recommendation system increasing conversion rates by 25%. Utilizes collaborative filtering and behavioral analysis to suggest relevant items.",
         metrics: [
@@ -252,7 +252,7 @@ const projectsData = [
         role: "Solution Architect",
         featured: false,
         image: "images/hero-bg-1.jpg",
-        video: "videos/sap_demo.mp4",
+        // video: "videos/sap_demo.mp4", // Removed placeholder
         problem: "Enterprise clients need custom HR workflows outside standard capabilities.",
         solution: "Custom SAP BTP extensions for SuccessFactors, implementing specialized approval workflows and data integration. Ensures seamless connectivity with legacy systems.",
         metrics: [

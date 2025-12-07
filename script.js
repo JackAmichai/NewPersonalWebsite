@@ -618,32 +618,18 @@ function renderProject(project, view = 'business') {
     // Generate Custom Visual (SVG)
     const customVisual = getProjectVisual(project.id);
 
-    // Media logic: Prioritize Video (using generated visual as poster), fallback to Generated Visual
-    let mediaHtml = '';
+    // Media logic: Use "Code-Generated Video" (Animated SVG)
+    // Since external video files are not available, we use the generated visual
+    // and animate it on hover/click to simulate a "Live Preview".
 
-    // Check if we should use video (assuming videos exist or using logic to show them)
-    // For now, let's use the generated visual as the primary visual.
-    // If we have a video path, we can wrap it.
-
-    if (project.video) {
-        // Use generated visual as the background/poster, play video on hover
-        mediaHtml = `
-            <div class="project-media">
-                <div class="visual-wrapper" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index: 1;">
-                    ${customVisual}
-                </div>
-                <video src="${project.video}" muted loop playsinline onmouseover="this.play(); this.style.opacity=1; this.previousElementSibling.style.opacity=0;" onmouseout="this.pause(); this.style.opacity=0; this.previousElementSibling.style.opacity=1;" style="opacity: 0; z-index: 2; position: relative;">
-                </video>
-                <div class="media-badge">▶ Video Preview</div>
-            </div>
-        `;
-    } else {
-        mediaHtml = `
-            <div class="project-media">
+    let mediaHtml = `
+        <div class="project-media" onclick="this.classList.toggle('playing')">
+            <div class="visual-wrapper">
                 ${customVisual}
             </div>
-        `;
-    }
+            <div class="media-badge">▶ Code Preview</div>
+        </div>
+    `;
 
     // For featured projects, show full case study format
     if (project.featured) {
