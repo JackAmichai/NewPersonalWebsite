@@ -477,7 +477,7 @@ function trackCTAClick(ctaName) {
 trackPageView();
 
 // ========================================
-// 20. DYNAMIC PROJECTS RENDERING
+// 20. DYNAMIC PROJECTS RENDERING (ENHANCED)
 // ========================================
 function renderProject(project, view = 'business') {
     const isTechnical = view === 'technical';
@@ -492,18 +492,32 @@ function renderProject(project, view = 'business') {
         </div>
     ` : '';
     
-    // Image HTML
-    const imageHtml = project.image ? `
-        <div class="project-image">
-            <img src="${project.image}" alt="${project.title}" loading="lazy">
-        </div>
-    ` : '';
+    // Media logic: Prioritize Video, fallback to Image
+    let mediaHtml = '';
+    if (project.video) {
+        mediaHtml = `
+            <div class="project-media">
+                <video src="${project.video}" poster="${project.image || ''}" muted loop playsinline onmouseover="this.play()" onmouseout="this.pause()">
+                    <img src="${project.image}" alt="${project.title}">
+                </video>
+                <div class="media-badge">▶ Video Preview</div>
+            </div>
+        `;
+    } else if (project.image) {
+        mediaHtml = `
+            <div class="project-image">
+                <img src="${project.image}" alt="${project.title}" loading="lazy">
+            </div>
+        `;
+    }
 
     // For featured projects, show full case study format
     if (project.featured) {
+        // Use either full detailed text or new fields
+        // Assuming `projects-data.js` has approach/metrics/etc.
         return `
             <div class="project-card ${featuredClass}case-study" data-project-id="${project.id}">
-                ${imageHtml}
+                ${mediaHtml}
                 <div class="project-content">
                     <div class="project-header">
                         <h3>${project.title}</h3>
@@ -524,14 +538,14 @@ function renderProject(project, view = 'business') {
                     <div class="case-study-section">
                         <h4 class="case-label">⚙️ Approach</h4>
                         <ul class="case-list">
-                            ${project.approach.map(item => `<li>${item}</li>`).join('')}
+                            ${project.approach ? project.approach.map(item => `<li>${item}</li>`).join('') : '<li>Approach details available in full case study.</li>'}
                         </ul>
                     </div>
                     
                     <div class="case-study-section">
                         <h4 class="case-label">🎯 Outcome</h4>
                         <div class="project-highlights">
-                            ${project.metrics.map(metric => `<div class="highlight">${metric}</div>`).join('')}
+                            ${project.metrics ? project.metrics.map(metric => `<div class="highlight">${metric}</div>`).join('') : ''}
                         </div>
                     </div>
                     
@@ -539,13 +553,6 @@ function renderProject(project, view = 'business') {
                         <div class="case-study-section technical-details">
                             <h4 class="case-label">🔧 Technical Implementation</h4>
                             <p>${project.techDetails}</p>
-                        </div>
-                    ` : ''}
-                    
-                    ${project.evidence ? `
-                        <div class="case-study-section">
-                            <h4 class="case-label">📊 Evidence</h4>
-                            <p>${project.evidence}</p>
                         </div>
                     ` : ''}
                     
@@ -560,7 +567,7 @@ function renderProject(project, view = 'business') {
     // For non-featured projects, show compact format
     return `
         <div class="project-card" data-project-id="${project.id}">
-            ${imageHtml}
+            ${mediaHtml}
             <div class="project-content">
                 <div class="project-header">
                     <h3>${project.title}</h3>
@@ -568,13 +575,14 @@ function renderProject(project, view = 'business') {
                 </div>
                 <p class="project-description">${project.solution}</p>
                 <div class="project-highlights">
-                    ${project.metrics.map(metric => `<div class="highlight">${metric}</div>`).join('')}
+                    ${project.metrics ? project.metrics.slice(0, 2).map(metric => `<div class="highlight">${metric}</div>`).join('') : ''}
                 </div>
                 ${isTechnical && project.techDetails ? `
                     <p class="technical-details"><strong>Technical:</strong> ${project.techDetails}</p>
                 ` : ''}
                 <div class="tech-tags">
-                    ${project.techStack.map(tech => `<span>${tech}</span>`).join('')}
+                    ${project.techStack.slice(0, 4).map(tech => `<span>${tech}</span>`).join('')}
+                    ${project.techStack.length > 4 ? `<span>+${project.techStack.length - 4}</span>` : ''}
                 </div>
             </div>
         </div>
