@@ -843,6 +843,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initProjectToggle();
     initIconClouds();
     initTestimonialCarousel();
+    initSkillsAccordion();
 });
 
 // ========================================
@@ -1009,6 +1010,36 @@ function initTestimonialCarousel() {
     
     track.addEventListener('scroll', updateButtons);
     updateButtons();
+}
+
+// ========================================
+// 24. SKILLS ACCORDION
+// ========================================
+function initSkillsAccordion() {
+    const skillHeaders = document.querySelectorAll('.skill-header');
+    
+    skillHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+            const skillItem = header.closest('.skill-item');
+            const isActive = skillItem.classList.contains('active');
+            
+            // Close all other items (optional: remove this block for multi-open)
+            document.querySelectorAll('.skill-item.active').forEach(item => {
+                if (item !== skillItem) {
+                    item.classList.remove('active');
+                }
+            });
+            
+            // Toggle current item
+            skillItem.classList.toggle('active', !isActive);
+        });
+    });
+    
+    // Optionally open the first item by default
+    const firstItem = document.querySelector('.skill-item');
+    if (firstItem) {
+        firstItem.classList.add('active');
+    }
 }
 
 // ========================================
