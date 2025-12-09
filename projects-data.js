@@ -29,6 +29,8 @@ const projectsData = [
         links: {
             github: "https://github.com/JackAmichai/Nvidia-doc-agentic-ai"
         },
+        mediaType: "image",
+        mediaUrl: "https://opengraph.githubassets.com/1/JackAmichai/Nvidia-doc-agentic-ai",
         evidence: "GitHub Repository | User testing data available upon request"
     },
     {
@@ -53,6 +55,8 @@ const projectsData = [
         ],
         techStack: ["Excel", "Power BI", "SQL", "Python", "Revenue Analytics", "Forecasting"],
         techDetails: "Built time-series forecasting models using historical booking patterns. Implemented web scraping automation for competitor rate monitoring. Created interactive Power BI dashboards with drill-down capabilities. Integrated multiple data sources (PMS, market data, events calendar) for holistic view.",
+        mediaType: "image",
+        mediaUrl: "https://placehold.co/600x400/1e293b/4ade80?text=Revenue+Optimization+Dashboard",
         evidence: "Client testimonial and dashboard screenshots available upon request | NDA-protected project"
     },
     {
@@ -78,7 +82,9 @@ const projectsData = [
         techDetails: "Implemented speech recognition using Whisper API. Built named entity recognition (NER) for contact extraction. Created fuzzy matching algorithm for CRM field mapping. Designed confidence scoring system for validation workflow.",
         links: {
             github: "https://github.com/JackAmichai/Note2CRM"
-        }
+        },
+        mediaType: "image",
+        mediaUrl: "https://opengraph.githubassets.com/1/JackAmichai/Note2CRM"
     },
     {
         id: "orderflow-ai",
@@ -103,7 +109,9 @@ const projectsData = [
         techDetails: "Implemented ARIMA and Prophet models for time-series forecasting. Built ensemble approach combining multiple algorithms. Created dynamic reorder point calculation based on lead times and demand variability. Integrated with supplier APIs for automated purchase orders.",
         links: {
             github: "https://github.com/JackAmichai/OrderFlow-AI"
-        }
+        },
+        mediaType: "image",
+        mediaUrl: "https://opengraph.githubassets.com/1/JackAmichai/OrderFlow-AI"
     },
     {
         id: "safyweb",
@@ -128,7 +136,9 @@ const projectsData = [
         techDetails: "Implemented automated scanning for SQL injection, XSS, CSRF, and other OWASP Top 10 vulnerabilities. Built severity scoring based on CVSS. Created remediation templates with code examples. Designed REST API for integration with CI/CD pipelines.",
         links: {
             github: "https://github.com/JackAmichai/SafyWeb"
-        }
+        },
+        mediaType: "image",
+        mediaUrl: "https://opengraph.githubassets.com/1/JackAmichai/SafyWeb"
     },
     {
         id: "artibus",
@@ -153,7 +163,9 @@ const projectsData = [
         techDetails: "Integrated GTFS feeds for transit data. Implemented Dijkstra's algorithm with custom cost function (time, transfers, walking distance). Built WebSocket connection for real-time updates. Created NLP interface for natural language route queries.",
         links: {
             github: "https://github.com/JackAmichai/ArtiBus"
-        }
+        },
+        mediaType: "image",
+        mediaUrl: "https://opengraph.githubassets.com/1/JackAmichai/ArtiBus"
     },
     {
         id: "stock-predictor",
@@ -178,7 +190,9 @@ const projectsData = [
         techDetails: "Implemented feature engineering including moving averages, RSI, MACD, Bollinger Bands. Used RandomForestRegressor with hyperparameter tuning via GridSearchCV. Built data pipeline with Alpha Vantage API. Created walk-forward validation for backtesting.",
         links: {
             github: "https://github.com/JackAmichai/stock-predictor"
-        }
+        },
+        mediaType: "image",
+        mediaUrl: "https://opengraph.githubassets.com/1/JackAmichai/stock-predictor"
     },
     {
         id: "ecommerce-recommendation",
@@ -203,7 +217,9 @@ const projectsData = [
         techDetails: "Implemented matrix factorization using Surprise library. Built hybrid approach combining collaborative and content-based filtering. Used Redis for real-time session data. Created multi-armed bandit for exploration/exploitation balance.",
         links: {
             github: "https://github.com/JackAmichai/ecommerce-recommendations"
-        }
+        },
+        mediaType: "image",
+        mediaUrl: "https://opengraph.githubassets.com/1/JackAmichai/ecommerce-recommendations"
     },
     {
         id: "sap-successfactors",
@@ -226,6 +242,8 @@ const projectsData = [
         ],
         techStack: ["SAP BTP", "SAP SuccessFactors", "JavaScript", "OData", "Cloud Foundry", "Integration"],
         techDetails: "Built custom SAP UI5 applications deployed on BTP. Implemented OData services for data access. Created integration flows using SAP Cloud Integration. Designed multi-tenant architecture for scalability. Established CI/CD pipelines for extension deployments.",
+        mediaType: "image",
+        mediaUrl: "https://placehold.co/600x400/1e293b/4ade80?text=SAP+SuccessFactors+Extensions",
         evidence: "NDA-protected Fortune 500 implementations | Client references available"
     }
 ];

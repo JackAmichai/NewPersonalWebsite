@@ -2309,7 +2309,7 @@ html {
 .chatbot-bubble {
     position: fixed;
     bottom: 30px;
-    right: 30px;
+    left: 30px;
     width: 70px;
     height: 70px;
     border-radius: 50%;
@@ -2371,7 +2371,7 @@ html {
 .chatbot-window {
     position: fixed;
     bottom: 30px;
-    right: 30px;
+    left: 30px;
     width: 400px;
     max-width: calc(100vw - 40px);
     height: 600px;
@@ -2632,7 +2632,7 @@ html {
 @media (max-width: 768px) {
     .chatbot-window {
         bottom: 0;
-        right: 0;
+        left: 0;
         width: 100%;
         height: 100%;
         max-height: 100vh;
@@ -2641,7 +2641,7 @@ html {
     
     .chatbot-bubble {
         bottom: 20px;
-        right: 20px;
+        left: 20px;
         width: 60px;
         height: 60px;
     }
@@ -2675,3 +2675,140 @@ html {
         font-size: 13px;
     }
 }
+
+/* ==================== */
+/* BENTO GRID & FEATURES */
+/* ==================== */
+
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+    padding: 2rem 0;
+}
+
+.bento-card {
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: var(--transition);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.bento-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow);
+    border-color: var(--accent);
+}
+
+.project-media {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    background: var(--bg-tertiary);
+    border-bottom: 1px solid var(--border);
+}
+
+.project-media img,
+.project-media video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.bento-card:hover .project-media img {
+    transform: scale(1.05);
+}
+
+.project-content {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+}
+
+.project-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.project-links-mini {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.icon-link {
+    color: var(--text-muted);
+    transition: var(--transition);
+}
+
+.icon-link:hover {
+    color: var(--accent);
+}
+
+.project-role {
+    font-size: 0.875rem;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.project-description {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+    line-height: 1.6;
+}
+
+.tech-stack-mini {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: auto;
+}
+
+.tech-tag-mini {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.75rem;
+    background: var(--bg-secondary);
+    border-radius: 20px;
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+}
+
+/* Featured Card (Spans 2 columns if possible) */
+@media (min-width: 900px) {
+    .bento-card.featured {
+        grid-column: span 2;
+        flex-direction: row;
+    }
+    
+    .bento-card.featured .project-media {
+        width: 50%;
+        height: auto;
+        border-bottom: none;
+        border-right: 1px solid var(--border);
+    }
+    
+    .bento-card.featured .project-content {
+        width: 50%;
+    }
+}
+

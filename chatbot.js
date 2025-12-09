@@ -3,6 +3,20 @@
 // ========================================
 
 const jackKnowledgeBase = {
+    // Greetings & Small Talk
+    "hello|hi|hey|greetings|morning|afternoon|evening": {
+        answer: "Hello! 👋 I'm Cloud, Jack's AI assistant. How can I help you today? You can ask me about Jack's experience, projects, or how to contact him.",
+        keywords: ["hello", "hi", "greetings"]
+    },
+    "thanks|thank you|thx|appreciate": {
+        answer: "You're welcome! 😊 Let me know if you have any other questions about Jack's work.",
+        keywords: ["thanks", "thank you"]
+    },
+    "who are you|what are you|bot|ai": {
+        answer: "I'm Cloud ☁️, a custom-built AI assistant designed to help you navigate Jack's portfolio. I can answer questions about his background, skills, and projects!",
+        keywords: ["who are you", "bot", "AI"]
+    },
+
     // Career & Experience
     "army|military|idf|service|givati|2017|2018|2019|2020": {
         answer: "Great question! Jack served in the **Israel Defense Forces (IDF)** from **2017 to 2020** as a **Staff Sergeant**. He led team operations in the **Givati Brigade**, managing high-pressure operations, logistics, and training personnel. This 3-year experience taught him exceptional leadership, decision-making under pressure, and team management skills.",
@@ -216,15 +230,37 @@ class CloudChatbot {
 
     findAnswer(question) {
         const lowerQuestion = question.toLowerCase();
+        const tokens = lowerQuestion.split(/[\s,.?!]+/); // Simple tokenization
         
+        let bestMatch = null;
+        let maxScore = 0;
+
         // Check each knowledge base entry
         for (const [pattern, data] of Object.entries(jackKnowledgeBase)) {
             const keywords = pattern.split('|');
-            
-            // If question contains any keyword
-            if (keywords.some(keyword => lowerQuestion.includes(keyword))) {
-                return data.answer;
+            let score = 0;
+
+            // Calculate score based on keyword matches
+            keywords.forEach(keyword => {
+                if (lowerQuestion.includes(keyword)) {
+                    score += 2; // Exact phrase match bonus
+                }
+                tokens.forEach(token => {
+                    if (token === keyword) {
+                        score += 1; // Word match
+                    }
+                });
+            });
+
+            if (score > maxScore) {
+                maxScore = score;
+                bestMatch = data;
             }
+        }
+        
+        // Threshold for a "good" match
+        if (maxScore >= 2 && bestMatch) {
+            return bestMatch.answer;
         }
         
         // Default response if no match
