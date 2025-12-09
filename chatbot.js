@@ -58,6 +58,10 @@ const jackKnowledgeBase = {
         answer: "Jack has research experience at both **Technion** (2021-2023) and **Hebrew University** (2020-2021):\n\n**Technion (2021-2023):** Research Assistant & Team Coordinator\n🔬 Conducted cognitive psychology experiments\n📊 Analyzed data using SPSS and Python\n👥 Coordinated lab operations\n\n**Hebrew University (2020-2021):** Research Project Manager & Software Engineer\n💻 Developed software tools for research\n📅 Managed project timelines\n\nThis research background gives him a unique edge in understanding user behavior and designing data-driven solutions.",
         keywords: ["research", "neuroscience", "Technion", "Hebrew University", "cognitive"]
     },
+    "recommendation|reference|letter|vouch|verify|credentials": {
+        answer: "Jack has **verified recommendation letters** from multiple sources:\n\n🎓 **Academic References:**\n• Technion Research Supervisor (2021-2023)\n• Sasha - Technion Research Colleague\n\n💼 **Professional References:**\n• Yaron - Professional Supervisor\n• General Professional Reference\n\n📋 **Academic Credentials:**\n• Official curriculum verification document\n\nAll recommendation letters are available in the **References & Recommendations** section on the website. Check the 'References' tab in the navigation to view and download them!",
+        keywords: ["recommendation", "reference", "letter", "credentials", "vouch"]
+    },
     "hatrick|cyber|security|attack|defense|agent": {
         answer: "Jack built **Hatrick**, an AI Agent orchestration system that autonomously demonstrates cyber attacks and defense mechanisms. It simulates red-team/blue-team scenarios to test and improve security posture using multi-agent coordination and LLMs.",
         keywords: ["Hatrick", "cyber", "security", "AI agents"]
@@ -90,7 +94,8 @@ const sampleQuestions = [
     "Does Jack know Python?",
     "How can I contact Jack?",
     "What are Jack's main projects?",
-    "Is Jack looking for work?"
+    "Is Jack looking for work?",
+    "Does Jack have recommendations?"
 ];
 
 class CloudChatbot {

@@ -1505,6 +1505,165 @@ section {
 }
 
 /* ==================== */
+/* REFERENCES & RECOMMENDATIONS */
+/* ==================== */
+
+.recommendations {
+    background-color: var(--bg-primary);
+    padding: 80px 0;
+}
+
+.recommendations .section-subtitle {
+    text-align: center;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto 50px auto;
+}
+
+.recommendations-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.recommendation-card {
+    background-color: var(--white);
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    transition: var(--transition);
+}
+
+.recommendation-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-color: var(--accent);
+}
+
+.recommendation-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.recommendation-icon {
+    font-size: 32px;
+    line-height: 1;
+}
+
+.recommendation-source h3 {
+    color: var(--text-primary);
+    font-size: 18px;
+    margin-bottom: 4px;
+}
+
+.recommendation-org {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.recommendation-type {
+    display: inline-block;
+    padding: 4px 10px;
+    background-color: var(--accent-light);
+    color: var(--accent);
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.recommendation-context {
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.btn-recommendation {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background-color: var(--accent);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.btn-recommendation:hover {
+    background-color: var(--accent-hover);
+    transform: scale(1.02);
+}
+
+/* Credentials Section */
+.credentials-section {
+    margin-top: 40px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border);
+}
+
+.credentials-section .subsection-title {
+    text-align: center;
+    color: var(--text-primary);
+    font-size: 22px;
+    margin-bottom: 25px;
+}
+
+.credential-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background-color: var(--bg-secondary);
+    padding: 25px 30px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.credential-icon {
+    font-size: 40px;
+}
+
+.credential-info h4 {
+    color: var(--text-primary);
+    font-size: 16px;
+    margin-bottom: 6px;
+}
+
+.credential-info p {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.btn-credential {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background-color: var(--white);
+    color: var(--accent);
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    border: 1px solid var(--accent);
+    transition: var(--transition);
+}
+
+.btn-credential:hover {
+    background-color: var(--accent);
+    color: var(--white);
+}
+
+/* ==================== */
 /* DOWNLOADABLE ASSETS */
 /* ==================== */
 
@@ -1835,6 +1994,17 @@ html {
     .downloads-grid {
         grid-template-columns: 1fr;
         gap: 20px;
+    }
+
+    /* Recommendations Mobile */
+    .recommendations-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .credential-card {
+        flex-direction: column;
+        text-align: center;
     }
 
     .contact-form-wrapper {

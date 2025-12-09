@@ -73,6 +73,7 @@
                 <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#experience" class="nav-link">Experience</a></li>
                 <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#recommendations" class="nav-link">References</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
             <div class="nav-actions">
@@ -535,6 +536,104 @@
             
             <!-- Projects will be dynamically rendered here -->
             <div id="projectsContainer" class="bento-grid" data-current-view="business"></div>
+        </div>
+    </section>
+
+    <!-- References & Recommendations -->
+    <section id="recommendations" class="recommendations">
+        <div class="container">
+            <h2 class="section-title">📜 References & Recommendations</h2>
+            <p class="section-subtitle">Verified recommendation letters from academic supervisors and professional colleagues</p>
+            
+            <div class="recommendations-grid">
+                <!-- Technion Academic Recommendation -->
+                <div class="recommendation-card">
+                    <div class="recommendation-header">
+                        <div class="recommendation-icon">🎓</div>
+                        <div class="recommendation-source">
+                            <h3>Technion Research Supervisor</h3>
+                            <p class="recommendation-org">Technion - Israel Institute of Technology</p>
+                            <span class="recommendation-type">Academic Reference</span>
+                        </div>
+                    </div>
+                    <p class="recommendation-context">
+                        Recommendation from research work in cognitive psychology and neuroscience (2021-2023). 
+                        Supervised lab experiments, data analysis, and team coordination.
+                    </p>
+                    <a href="documents/Technion recommendation letter English.pdf" target="_blank" class="btn-recommendation" onclick="trackCTAClick('recommendation_technion')">
+                        📄 View Letter (English)
+                    </a>
+                </div>
+
+                <!-- Sasha Technion Recommendation -->
+                <div class="recommendation-card">
+                    <div class="recommendation-header">
+                        <div class="recommendation-icon">🔬</div>
+                        <div class="recommendation-source">
+                            <h3>Sasha - Research Colleague</h3>
+                            <p class="recommendation-org">Technion Neuroscience Lab</p>
+                            <span class="recommendation-type">Academic Reference</span>
+                        </div>
+                    </div>
+                    <p class="recommendation-context">
+                        Recommendation from a research colleague at Technion, highlighting collaboration on cognitive psychology experiments and research methodology.
+                    </p>
+                    <a href="documents/Recommendation Technion Sasha.pdf" target="_blank" class="btn-recommendation" onclick="trackCTAClick('recommendation_sasha')">
+                        📄 View Letter
+                    </a>
+                </div>
+
+                <!-- Jack General Recommendation -->
+                <div class="recommendation-card">
+                    <div class="recommendation-header">
+                        <div class="recommendation-icon">💼</div>
+                        <div class="recommendation-source">
+                            <h3>Professional Reference</h3>
+                            <p class="recommendation-org">Hospitality Consulting</p>
+                            <span class="recommendation-type">Professional Reference</span>
+                        </div>
+                    </div>
+                    <p class="recommendation-context">
+                        General professional recommendation highlighting business analysis skills, work ethic, and analytical capabilities.
+                    </p>
+                    <a href="documents/Recommendation letter jack.pdf" target="_blank" class="btn-recommendation" onclick="trackCTAClick('recommendation_professional')">
+                        📄 View Letter
+                    </a>
+                </div>
+
+                <!-- Yaron Recommendation -->
+                <div class="recommendation-card">
+                    <div class="recommendation-header">
+                        <div class="recommendation-icon">⭐</div>
+                        <div class="recommendation-source">
+                            <h3>Yaron - Supervisor</h3>
+                            <p class="recommendation-org">Professional Reference</p>
+                            <span class="recommendation-type">Professional Reference</span>
+                        </div>
+                    </div>
+                    <p class="recommendation-context">
+                        Recommendation from Yaron, highlighting professional contributions, leadership abilities, and technical skills.
+                    </p>
+                    <a href="documents/Yaron - recomendation Letter.pdf" target="_blank" class="btn-recommendation" onclick="trackCTAClick('recommendation_yaron')">
+                        📄 View Letter
+                    </a>
+                </div>
+            </div>
+
+            <!-- Academic Verification -->
+            <div class="credentials-section">
+                <h3 class="subsection-title">🎓 Academic Credentials</h3>
+                <div class="credential-card">
+                    <div class="credential-icon">📋</div>
+                    <div class="credential-info">
+                        <h4>Official Curriculum Verification</h4>
+                        <p>Official academic transcript and curriculum verification from university studies</p>
+                        <a href="documents/‎⁨אישור תוכנית לימודים כללי⁩.pdf" target="_blank" class="btn-credential" onclick="trackCTAClick('credential_academic')">
+                            📄 View Document (Hebrew)
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
