@@ -5,6 +5,64 @@
 
 const projectsData = [
     {
+        id: "hatrick",
+        title: "Hatrick: AI Cyber Defense",
+        role: "AI Security Architect",
+        featured: true,
+        image: "images/hero-bg-4.jpg", // Placeholder
+        video: "", // No video yet
+        problem: "Simulating complex cyber attacks and defense strategies requires extensive manual effort and expertise, making it hard to train for real-world scenarios.",
+        solution: "An AI Agent orchestration system that autonomously demonstrates cyber attacks and defense mechanisms. It simulates red-team/blue-team scenarios to test and improve security posture.",
+        approach: [
+            "Orchestrated multiple <strong>AI Agents</strong> to simulate attack vectors",
+            "Implemented <strong>automated defense protocols</strong> triggered by agent actions",
+            "Designed a <strong>real-time dashboard</strong> to visualize the attack/defense flow"
+        ],
+        outcome: "Demonstrated the capability of AI to autonomously handle complex security scenarios.",
+        metrics: [
+            "🛡️ <strong>Autonomous</strong> defense simulation",
+            "⚡ <strong>Real-time</strong> threat response",
+            "🤖 <strong>Multi-agent</strong> orchestration"
+        ],
+        techStack: ["Python", "AI Agents", "Cybersecurity", "LLMs", "Automation"],
+        techDetails: "Built using a multi-agent framework to coordinate attack and defense bots. utilized LLMs for decision making and strategy generation.",
+        links: {
+            github: "https://github.com/JackAmichai/Hatrick" // Assumed link
+        },
+        mediaType: "image",
+        mediaUrl: "https://placehold.co/600x400/1e293b/4ade80?text=Hatrick+AI+Agents",
+        evidence: "Project Documentation"
+    },
+    {
+        id: "leairn",
+        title: "LeAIrn: AI Education Platform",
+        role: "Product Lead",
+        featured: true,
+        image: "images/hero-bg-3.jpg", // Placeholder
+        video: "",
+        problem: "Traditional education platforms lack personalized, adaptive learning paths, leading to student disengagement and inefficient learning.",
+        solution: "An AI-powered learning platform that dynamically adapts content, pace, and style to the individual student's needs, creating a truly personalized education experience.",
+        approach: [
+            "Developed <strong>adaptive learning algorithms</strong> to tailor content",
+            "Integrated <strong>AI tutors</strong> for real-time assistance",
+            "Created <strong>progress tracking</strong> with predictive analytics"
+        ],
+        outcome: "Created a proof-of-concept for a highly personalized learning environment.",
+        metrics: [
+            "🎓 <strong>Personalized</strong> learning paths",
+            "📈 <strong>Adaptive</strong> difficulty adjustment",
+            "🧠 <strong>AI-driven</strong> content generation"
+        ],
+        techStack: ["AI", "EdTech", "React", "Python", "LLMs"],
+        techDetails: "Leverages LLMs to generate custom quizzes and explanations based on student performance data.",
+        links: {
+            github: "https://github.com/JackAmichai/LeAIrn" // Assumed link
+        },
+        mediaType: "image",
+        mediaUrl: "https://placehold.co/600x400/1e293b/4ade80?text=LeAIrn+Platform",
+        evidence: "Project Documentation"
+    },
+    {
         id: "nvidia-doc-nav",
         title: "NVIDIA Documentation Navigator",
         role: "Product Lead & Technical Builder",

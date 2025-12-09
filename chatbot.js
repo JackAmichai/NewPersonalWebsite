@@ -57,11 +57,26 @@ const jackKnowledgeBase = {
     "research|neuroscience|technion|university|lab": {
         answer: "Jack has research experience at both **Technion** (2021-2023) and **Hebrew University** (2020-2021):\n\n**Technion (2021-2023):** Research Assistant & Team Coordinator\n🔬 Conducted cognitive psychology experiments\n📊 Analyzed data using SPSS and Python\n👥 Coordinated lab operations\n\n**Hebrew University (2020-2021):** Research Project Manager & Software Engineer\n💻 Developed software tools for research\n📅 Managed project timelines\n\nThis research background gives him a unique edge in understanding user behavior and designing data-driven solutions.",
         keywords: ["research", "neuroscience", "Technion", "Hebrew University", "cognitive"]
+    },
+    "hatrick|cyber|security|attack|defense|agent": {
+        answer: "Jack built **Hatrick**, an AI Agent orchestration system that autonomously demonstrates cyber attacks and defense mechanisms. It simulates red-team/blue-team scenarios to test and improve security posture using multi-agent coordination and LLMs.",
+        keywords: ["Hatrick", "cyber", "security", "AI agents"]
+    },
+    "leairn|learn|education|study|school|teaching": {
+        answer: "Jack created **LeAIrn**, an AI-powered learning platform that dynamically adapts content, pace, and style to the individual student's needs. It features adaptive learning algorithms and AI tutors for a personalized education experience.",
+        keywords: ["LeAIrn", "education", "AI tutor", "adaptive learning"]
+    },
+    "inspiration|career|path|architect|future|vision": {
+        answer: "Jack is inspired by the intersection of **AI and Product Management**. His vision is to become a **Product Architect** who bridges the gap between technical innovation and user needs, building systems that are not only powerful but also intuitive and impactful.",
+        keywords: ["inspiration", "career path", "product architect", "vision"]
     }
 };
 
 // Sample questions to display
 const sampleQuestions = [
+    "Tell me about Hatrick",
+    "What is LeAIrn?",
+    "What is Jack's inspiration?",
     "Tell me about Scholar2.6",
     "What is SleepCall?",
     "Does Jack know Python?",
