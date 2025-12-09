@@ -703,31 +703,114 @@ function renderAllProjects(view = 'business') {
     const container = document.getElementById('projectsContainer');
     if (!container || typeof projectsData === 'undefined') return;
     
-    // Get featured projects (top 3) and other projects
-    const featuredProjects = projectsData.filter(p => p.featured).slice(0, 3);
-    const otherProjects = projectsData.filter(p => !featuredProjects.includes(p));
+    // Define the 3 hero projects by ID
+    const heroProjectIds = ['leairn', 'hatrick', 'scholar-2-6'];
+    const heroProjects = heroProjectIds.map(id => projectsData.find(p => p.id === id)).filter(Boolean);
     
-    // Icon types for featured projects
-    const iconTypes = ['security', 'ai', 'research'];
+    // All other projects go in the stacked cards
+    const stackedProjects = projectsData.filter(p => !heroProjectIds.includes(p.id));
+    
+    // Icon types for hero projects
+    const heroIcons = {
+        'leairn': { icon: '🎓', type: 'education', color: '#4ade80' },
+        'hatrick': { icon: '🛡️', type: 'security', color: '#ef4444' },
+        'scholar-2-6': { icon: '🔬', type: 'research', color: '#06b6d4' }
+    };
     
     // Build the HTML
     let html = `
         <div class="projects-showcase">
-            <!-- Featured Stack -->
-            <div class="featured-stack">
-                ${featuredProjects.map((project, i) => renderStackCard(project, iconTypes[i] || 'product')).join('')}
+            <!-- Hero Featured Projects - Each in their own box -->
+            <div class="hero-projects-grid">
+                ${heroProjects.map(project => renderHeroCard(project, heroIcons[project.id], view)).join('')}
             </div>
             
-            <!-- More Projects -->
+            <!-- Other Projects in Stacked Cards -->
             <h3 class="more-projects-title">More Projects</h3>
-            <div class="bento-grid">
-                ${otherProjects.map(project => renderProject(project, view)).join('')}
+            <div class="stacked-projects-container">
+                ${stackedProjects.map((project, index) => renderStackedCard(project, index)).join('')}
             </div>
         </div>
     `;
     
     container.innerHTML = html;
     container.setAttribute('data-current-view', view);
+}
+
+// Render hero featured card (LeAIrn, Hatrick, Scholar2.6)
+function renderHeroCard(project, iconConfig, view = 'business') {
+    const isTechnical = view === 'technical';
+    
+    const githubLink = project.links && project.links.github 
+        ? `<a href="${project.links.github}" target="_blank" class="hero-card-link" title="View Code" onclick="event.stopPropagation(); trackCTAClick('github_${project.id}')"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>` 
+        : '';
+    
+    const demoLink = project.links && project.links.demo
+        ? `<a href="${project.links.demo}" target="_blank" class="hero-card-link hero-card-demo" title="Live Demo" onclick="event.stopPropagation(); trackCTAClick('demo_${project.id}')"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/></svg> Demo</a>`
+        : '';
+
+    const clickUrl = project.links?.demo || project.links?.github || '#';
+
+    return `
+        <div class="hero-project-card" onclick="window.open('${clickUrl}', '_blank')" style="--hero-accent: ${iconConfig?.color || '#4ade80'}">
+            <div class="hero-card-icon" style="background: linear-gradient(135deg, ${iconConfig?.color || '#4ade80'}33, ${iconConfig?.color || '#4ade80'}11)">
+                <span>${iconConfig?.icon || '✨'}</span>
+            </div>
+            <div class="hero-card-content">
+                <div class="hero-card-header">
+                    <h3 class="hero-card-title">${project.title}</h3>
+                    <span class="hero-card-role">${project.role}</span>
+                </div>
+                <p class="hero-card-desc">${isTechnical && project.techDetails ? project.techDetails.substring(0, 150) : project.solution.substring(0, 150)}...</p>
+                <div class="hero-card-footer">
+                    <div class="hero-card-tags">
+                        ${project.techStack.slice(0, 3).map(tech => `<span class="hero-card-tag">${tech}</span>`).join('')}
+                    </div>
+                    <div class="hero-card-links">
+                        ${demoLink}
+                        ${githubLink}
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// Render stacked card (the overlapping card style from the image)
+function renderStackedCard(project, index) {
+    const githubLink = project.links && project.links.github 
+        ? `<a href="${project.links.github}" target="_blank" class="stacked-card-link" title="View Code" onclick="event.stopPropagation()"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>` 
+        : '';
+    
+    // Project type icons
+    const projectIcons = {
+        'nvidia-doc-nav': '📚',
+        'sleepcall': '🔔',
+        'revenue-optimization': '📊',
+        'password-research': '🔒',
+        'emotion-detection': '😊',
+        'ai-debate': '💬',
+        'cloud-portfolio': '☁️'
+    };
+    
+    const icon = projectIcons[project.id] || '🚀';
+    const clickUrl = project.links?.demo || project.links?.github || '#';
+
+    return `
+        <div class="stacked-card" style="--stack-index: ${index}" onclick="window.open('${clickUrl}', '_blank')">
+            <div class="stacked-card-icon">${icon}</div>
+            <div class="stacked-card-content">
+                <h4 class="stacked-card-title">${project.title}</h4>
+                <p class="stacked-card-desc">${project.solution.substring(0, 80)}...</p>
+                <div class="stacked-card-footer">
+                    <div class="stacked-card-tags">
+                        ${project.techStack.slice(0, 2).map(tech => `<span class="stacked-card-tag">${tech}</span>`).join('')}
+                    </div>
+                    ${githubLink}
+                </div>
+            </div>
+        </div>
+    `;
 }
 
 // ========================================
