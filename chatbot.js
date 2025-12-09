@@ -22,9 +22,9 @@ const jackKnowledgeBase = {
         answer: "Jack served in the **Israel Defense Forces (IDF)** as a **Staff Sergeant**. He led team operations, managed logistics, and trained personnel. This experience taught him leadership, decision-making under pressure, and team management skills that he applies to his product work today.",
         keywords: ["IDF", "military", "leadership", "Staff Sergeant"]
     },
-    "hospitality|consultant|consulting|current|work|job|adi|ohayon": {
-        answer: "Jack currently works at **Adi Ohayon Hospitality Consulting** as a **Business Analyst** specializing in revenue optimization. He started in **April 2025**, where he analyzes demand trends, builds forecasting models, creates executive dashboards, and collaborates with cross-functional teams to drive strategic decisions.",
-        keywords: ["Adi Ohayon", "hospitality", "consulting", "Business Analyst", "current role"]
+    "hospitality|consultant|consulting|current|work|job|adi|ohayon|deloitte": {
+        answer: "Jack currently works as a **Deloitte Consultant** placed at **Adi Ohayon Hospitality Consulting** as a **Business Analyst** specializing in revenue optimization. He started in **April 2025**, where he analyzes demand trends, builds forecasting models, creates executive dashboards, and collaborates with cross-functional teams to drive strategic decisions.",
+        keywords: ["Deloitte", "Adi Ohayon", "hospitality", "consulting", "Business Analyst", "current role"]
     },
     "education|university|degree|studied|psychology|computer science": {
         answer: "Jack holds a **Bachelor's degree in Psychology and Computer Science** from the **Open University of Israel**. He also has research experience at **Technion** (2021-2023) as a Research Assistant & Team Coordinator, and **Hebrew University** (2020-2021) as a Research Project Manager & Software Engineer, where he analyzed experimental data and managed research projects. This unique combination of psychology and tech helps him build data-driven solutions.",
