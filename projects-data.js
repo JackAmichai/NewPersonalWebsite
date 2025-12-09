@@ -124,7 +124,7 @@ const projectsData = [
         id: "sleepcall",
         title: "SleepCall",
         role: "Python Developer",
-        featured: false,
+        featured: true,
         image: "images/hero-bg-3.jpg",
         video: "videos/sleepcall_demo.mp4",
         problem: "People often miss important mentions of their name during long calls or while multitasking.",

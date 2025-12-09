@@ -66,6 +66,14 @@ const jackKnowledgeBase = {
         answer: "Jack created **LeAIrn**, an AI-powered learning platform that dynamically adapts content, pace, and style to the individual student's needs. It features adaptive learning algorithms and AI tutors for a personalized education experience.",
         keywords: ["LeAIrn", "education", "AI tutor", "adaptive learning"]
     },
+    "scholar|research|academic|citation|library|paper": {
+        answer: "Jack built **Scholar2.6**, a modern academic search and organization tool. It streamlines the research process with intuitive library management and citation tools, helping researchers manage vast amounts of literature efficiently.",
+        keywords: ["Scholar2.6", "research", "academic", "citation"]
+    },
+    "sleepcall|audio|alert|name|recognition|meeting": {
+        answer: "Jack developed **SleepCall**, an intelligent audio monitoring tool that alerts you whenever your name is spoken in a call. It uses local speech recognition to ensure privacy while preventing you from missing important mentions during long meetings.",
+        keywords: ["SleepCall", "audio", "alert", "speech recognition"]
+    },
     "inspiration|career|path|architect|future|vision": {
         answer: "Jack is inspired by the intersection of **AI and Product Management**. His vision is to become a **Product Architect** who bridges the gap between technical innovation and user needs, building systems that are not only powerful but also intuitive and impactful.",
         keywords: ["inspiration", "career path", "product architect", "vision"]
