@@ -842,6 +842,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderAllProjects('business');
     initProjectToggle();
     initIconClouds();
+    initTestimonialCarousel();
 });
 
 // ========================================
@@ -979,6 +980,35 @@ function createIconCloud(container) {
     }
     
     animate();
+}
+
+// ========================================
+// 23. TESTIMONIAL CAROUSEL
+// ========================================
+function initTestimonialCarousel() {
+    const track = document.getElementById('testimonialTrack');
+    const prevBtn = document.getElementById('carouselPrev');
+    const nextBtn = document.getElementById('carouselNext');
+    
+    if (!track || !prevBtn || !nextBtn) return;
+    
+    const cardWidth = 344; // 320px card + 24px gap
+    
+    const updateButtons = () => {
+        prevBtn.disabled = track.scrollLeft <= 10;
+        nextBtn.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 10;
+    };
+    
+    prevBtn.addEventListener('click', () => {
+        track.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+    });
+    
+    nextBtn.addEventListener('click', () => {
+        track.scrollBy({ left: cardWidth, behavior: 'smooth' });
+    });
+    
+    track.addEventListener('scroll', updateButtons);
+    updateButtons();
 }
 
 // ========================================
