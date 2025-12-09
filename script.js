@@ -4,15 +4,16 @@
 // ========================================
 
 // ========================================
-// 1. PAGE LOADER
+// 1. PAGE LOADER - Fast load using DOMContentLoaded
 // ========================================
-window.addEventListener('load', () => {
+document.addEventListener('DOMContentLoaded', () => {
     const loader = document.getElementById('pageLoader');
     if (loader) {
+        // Hide loader quickly once DOM is ready (don't wait for all images)
         setTimeout(() => {
             loader.classList.add('fade-out');
-            setTimeout(() => loader.style.display = 'none', 500);
-        }, 800);
+            setTimeout(() => loader.style.display = 'none', 300);
+        }, 200);
     }
 });
 
@@ -608,7 +609,6 @@ function renderProject(project, view = 'business') {
     const isTechnical = view === 'technical';
     const isFeatured = project.featured;
     
-<<<<<<< HEAD
     // Media handling
     let mediaHtml = '';
     if (project.mediaUrl) {
