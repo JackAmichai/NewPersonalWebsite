@@ -59,8 +59,8 @@ const jackKnowledgeBase = {
         keywords: ["research", "neuroscience", "Technion", "Hebrew University", "cognitive"]
     },
     "recommendation|reference|letter|vouch|verify|credentials": {
-        answer: "Jack has **verified recommendation letters** from multiple sources:\n\n🎓 **Academic References:**\n• Technion Research Supervisor (2021-2023)\n• Sasha - Technion Research Colleague\n\n💼 **Professional References:**\n• Yaron - Professional Supervisor\n• General Professional Reference\n\n📋 **Academic Credentials:**\n• Official curriculum verification document\n\nAll recommendation letters are available in the **References & Recommendations** section on the website. Check the 'References' tab in the navigation to view and download them!",
-        keywords: ["recommendation", "reference", "letter", "credentials", "vouch"]
+        answer: "Jack has **verified recommendation letters** from multiple sources:\n\n🎓 **Academic & Research:**\n• **Dr. Ben Engelhard** - Head of Engelhard Lab, Technion\n• Technion Research Supervisor (2021-2023)\n• Sasha - Technion Research Colleague\n\n💼 **Professional:**\n• Yaron - Professional Supervisor\n\nAll recommendation letters are available in the **References** section!",
+        keywords: ["recommendation", "reference", "letter", "credentials", "vouch", "engelhard"]
     },
     "hatrick|cyber|security|attack|defense|agent": {
         answer: "Jack built **Hatrick**, an AI Agent orchestration system that autonomously demonstrates cyber attacks and defense mechanisms. It simulates red-team/blue-team scenarios to test and improve security posture using multi-agent coordination and LLMs.",

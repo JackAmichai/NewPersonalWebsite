@@ -9,36 +9,37 @@ const projectsData = [
         title: "Hatrick: AI Cyber Defense",
         role: "AI Security Architect",
         featured: true,
-        image: "images/hero-bg-4.jpg", // Placeholder
-        video: "", // No video yet
+        image: "https://opengraph.githubassets.com/1/JackAmichai/Hatrick",
+        video: "",
         problem: "Simulating complex cyber attacks and defense strategies requires extensive manual effort and expertise, making it hard to train for real-world scenarios.",
-        solution: "An AI Agent orchestration system that autonomously demonstrates cyber attacks and defense mechanisms. It simulates red-team/blue-team scenarios to test and improve security posture.",
+        solution: "A real-time cybersecurity platform where autonomous AI agents (Red Team vs Blue Team) battle in simulated scenarios. Features 3D orbital mission selection, live code viewer, and 60+ enterprise features.",
         approach: [
-            "Orchestrated multiple <strong>AI Agents</strong> to simulate attack vectors",
-            "Implemented <strong>automated defense protocols</strong> triggered by agent actions",
-            "Designed a <strong>real-time dashboard</strong> to visualize the attack/defense flow"
+            "Orchestrated <strong>multi-agent voting system</strong> with confidence-weighted scoring",
+            "Implemented <strong>40+ MITRE ATT&CK</strong> tactics and techniques",
+            "Designed <strong>3D network topology</strong> with real-time attack visualization"
         ],
-        outcome: "Demonstrated the capability of AI to autonomously handle complex security scenarios.",
+        outcome: "Live demo at hatrick.vercel.app - demonstrates enterprise-grade cybersecurity simulation.",
         metrics: [
-            "🛡️ <strong>Autonomous</strong> defense simulation",
-            "⚡ <strong>Real-time</strong> threat response",
-            "🤖 <strong>Multi-agent</strong> orchestration"
+            "🛡️ <strong>60+ features</strong> including APT profiles",
+            "⚡ <strong>Sub-second</strong> Groq LPU inference",
+            "🤖 <strong>6 AI agents</strong> running simultaneously"
         ],
-        techStack: ["Python", "AI Agents", "Cybersecurity", "LLMs", "Automation"],
-        techDetails: "Built using a multi-agent framework to coordinate attack and defense bots. utilized LLMs for decision making and strategy generation.",
+        techStack: ["React", "TypeScript", "FastAPI", "LangChain", "Groq", "WebSockets"],
+        techDetails: "Frontend: Vite + React 18 + TypeScript + Framer Motion + Tailwind. Backend: FastAPI + WebSockets + LangGraph. AI: Groq (Llama-3, Mixtral) for sub-second responses.",
         links: {
-            github: "https://github.com/JackAmichai/Hatrick" // Assumed link
+            github: "https://github.com/JackAmichai/Hatrick",
+            demo: "https://hatrick.vercel.app"
         },
         mediaType: "image",
-        mediaUrl: "images/hero-bg-4.jpg",
-        evidence: "Project Documentation"
+        mediaUrl: "https://opengraph.githubassets.com/1/JackAmichai/Hatrick",
+        evidence: "Live Demo | GitHub Repository"
     },
     {
         id: "leairn",
         title: "LeAIrn: AI Education Platform",
         role: "Product Lead",
-        featured: true,
-        image: "images/hero-bg-3.jpg", // Placeholder
+        featured: false,
+        image: "https://placehold.co/600x400/1a1a2e/4ade80?text=LeAIrn+%F0%9F%8E%93",
         video: "",
         problem: "Traditional education platforms lack personalized, adaptive learning paths, leading to student disengagement and inefficient learning.",
         solution: "An AI-powered learning platform that dynamically adapts content, pace, and style to the individual student's needs, creating a truly personalized education experience.",
@@ -55,69 +56,71 @@ const projectsData = [
         ],
         techStack: ["AI", "EdTech", "React", "Python", "LLMs"],
         techDetails: "Leverages LLMs to generate custom quizzes and explanations based on student performance data.",
-        links: {
-            github: "https://github.com/JackAmichai/LeAIrn" // Assumed link
-        },
+        links: {},
         mediaType: "image",
-        mediaUrl: "images/hero-bg-3.jpg",
-        evidence: "Project Documentation"
+        mediaUrl: "https://placehold.co/600x400/1a1a2e/4ade80?text=LeAIrn+%F0%9F%8E%93",
+        evidence: "Internal Project"
     },
     {
         id: "nvidia-doc-nav",
         title: "NVIDIA Documentation Navigator",
         role: "Product Lead & Technical Builder",
         featured: true,
-        image: "images/hero-bg-1.jpg",
-        video: "videos/nvidia_demo.mp4",
-        problem: "NVIDIA engineers and developers waste 2-3 hours daily searching across fragmented documentation for CUDA, Triton, TensorRT, and NeMo.",
-        solution: "A retrieval-augmented generation (RAG) system with semantic search that synthesizes insights from multiple documentation sources. Features intelligent filtering and conversational UI for complex technical queries.",
+        image: "https://opengraph.githubassets.com/1/JackAmichai/Nvidia-doc-agentic-ai",
+        video: "",
+        problem: "NVIDIA documentation is fragmented across docs.nvidia.com, GitHub, forums - causing slow onboarding and version mismatch errors.",
+        solution: "AI-powered unified search agent using RAG to provide version-aware answers from CUDA, TensorRT, NeMo, Triton docs. Features code example generation and step-by-step debugging guides.",
         approach: [
-            "Built <strong>retrieval-augmented generation (RAG)</strong> system with vector database",
-            "Implemented <strong>cross-document reasoning</strong> to synthesize insights",
-            "Added intelligent filters for framework, API version, and code examples",
-            "Designed conversational UI for follow-up questions"
+            "Built <strong>unified RAG search</strong> across NVIDIA docs, GitHub, forums",
+            "Implemented <strong>version compatibility reasoner</strong> for CUDA/TensorRT combos",
+            "Created <strong>code example generator</strong> from public GitHub repos",
+            "Designed <strong>step-by-step debugger</strong> for MIG/K8s setup"
         ],
-        outcome: "Significantly faster documentation discovery with high relevance in user testing.",
+        outcome: "One-stop AI agent for all NVIDIA developer documentation needs.",
         metrics: [
             "⚡ <strong>60% faster</strong> documentation discovery",
-            "🎯 <strong>High relevance</strong> in user testing",
-            "🔗 <strong>Cross-framework</strong> insights",
-            "👥 <strong>Developer community</strong> beta tested"
+            "🎯 <strong>Version-aware</strong> compatibility answers",
+            "🔗 <strong>5 core features</strong> in MVP",
+            "📚 <strong>Multi-source</strong> RAG retrieval"
         ],
-        techStack: ["Python", "RAG", "Vector DB (Pinecone)", "LangChain", "OpenAI API", "NLP"],
-        techDetails: "Implemented semantic search using embeddings (OpenAI text-embedding-ada-002), stored in Pinecone vector database. Built retrieval pipeline with LangChain.",
+        techStack: ["Python", "FastAPI", "RAG", "Pinecone", "LangChain", "Next.js", "HuggingFace"],
+        techDetails: "Backend: FastAPI + LangChain + Pinecone vector DB. Frontend: Next.js + TypeScript. Embeddings: OpenAI text-embedding-ada-002. Retrieves from docs.nvidia.com, GitHub, forums.",
         links: {
             github: "https://github.com/JackAmichai/Nvidia-doc-agentic-ai"
         },
         mediaType: "image",
         mediaUrl: "https://opengraph.githubassets.com/1/JackAmichai/Nvidia-doc-agentic-ai",
-        evidence: "GitHub Repository | User testing data available upon request"
+        evidence: "GitHub Repository"
     },
     {
         id: "scholar-2-6",
-        title: "Scholar2.6",
+        title: "Scholar2.6: AI Research Navigator",
         role: "Full Stack Developer",
-        featured: true, // Promoted to featured based on recency
-        image: "images/hero-bg-2.jpg",
-        video: "videos/scholar_demo.mp4",
-        problem: "Academic researchers struggle to manage and organize vast amounts of literature efficiently.",
-        solution: "A modern academic search and organization tool built with TypeScript. Streamlines the research process with intuitive library management and citation tools.",
+        featured: true,
+        image: "https://opengraph.githubassets.com/1/JackAmichai/Scholar2.6",
+        video: "",
+        problem: "Academic researchers struggle to discover and organize relevant literature across fragmented sources.",
+        solution: "A Chrome Extension with AI-driven conversational interface and interactive knowledge graph for academic research discovery. Features iterative intent refinement and Semantic Scholar integration.",
         approach: [
-            "Designed a clean, focus-oriented user interface for research",
-            "Implemented efficient citation management algorithms",
-            "Built a responsive frontend using TypeScript for type safety"
+            "Built <strong>AI conversational loop</strong> for iterative query refinement",
+            "Created <strong>interactive knowledge graph</strong> with force-directed visualization",
+            "Integrated <strong>Semantic Scholar API</strong> with SPECTER2 embeddings",
+            "Implemented <strong>Shadow DOM isolation</strong> for any webpage overlay"
         ],
-        outcome: "Improved research workflow efficiency and citation accuracy.",
+        outcome: "Chrome extension that overlays any webpage with research discovery tools.",
         metrics: [
-            "📚 <strong>Better organization</strong> of papers",
-            "⚡ <strong>Fast retrieval</strong> of citations",
-            "🎨 <strong>Modern UI</strong> experience"
+            "🤖 <strong>AI-powered</strong> intent refinement",
+            "🌳 <strong>Interactive</strong> knowledge graph",
+            "🔬 <strong>Real paper data</strong> from Semantic Scholar",
+            "⚡ <strong>HMR</strong> development experience"
         ],
-        techStack: ["TypeScript", "React", "Node.js", "Academic APIs"],
-        techDetails: "Built using a modern TypeScript stack for robust type checking and scalability. Integrates with academic databases for real-time metadata retrieval.",
+        techStack: ["TypeScript", "React", "Vite", "Chrome Extension", "Semantic Scholar API", "OpenAI"],
+        techDetails: "Chrome Extension with Vite + CRXJS. AI: GPT-4 Turbo with function calling. Graph: Force-directed D3.js visualization. Papers sized by log(citations) with click-to-expand.",
         links: {
             github: "https://github.com/JackAmichai/Scholar2.6"
         },
+        mediaType: "image",
+        mediaUrl: "https://opengraph.githubassets.com/1/JackAmichai/Scholar2.6",
         evidence: "GitHub Repository"
     },
     {
@@ -125,28 +128,39 @@ const projectsData = [
         title: "SleepCall - Meeting Sentinel",
         role: "Python Developer",
         featured: true,
-        image: "images/hero-bg-3.jpg",
-        video: "videos/sleepcall_demo.mp4",
-        problem: "People often miss important mentions of their name during long calls or while multitasking.",
-        solution: "A real-time meeting assistant that listens to conversations, detects when your name is mentioned, and instantly alerts you with a concise AI-generated summary of the last 5 minutes.",
+        image: "https://opengraph.githubassets.com/1/JackAmichai/SleepCall",
+        video: "",
+        problem: "People miss important mentions of their name during long calls while multitasking.",
+        solution: "Real-time meeting assistant that detects your name (like 'Hey Siri') and instantly alerts you with an AI-generated 5-minute summary. Features exact + fuzzy matching and multi-channel alerts.",
+        approach: [
+            "Built <strong>real-time speech recognition</strong> with Azure Speech SDK",
+            "Implemented <strong>fuzzy name matching</strong> with RapidFuzz (88% threshold)",
+            "Created <strong>rolling 10-minute transcript buffer</strong>",
+            "Integrated <strong>Teams/Slack webhooks</strong> + desktop notifications"
+        ],
+        outcome: "Never miss when your name is mentioned - stay focused and ready to contribute.",
         metrics: [
             "🔔 <strong>Real-time</strong> name detection",
             "🧠 <strong>AI-powered</strong> 5-minute summaries",
-            "📢 <strong>Multi-channel</strong> alerts (Teams/Slack/Desktop)"
+            "📢 <strong>Multi-channel</strong> alerts (Teams/Slack/Desktop)",
+            "⏱️ <strong>90-second</strong> cooldown protection"
         ],
-        techStack: ["Python", "Azure Speech SDK", "Azure OpenAI", "RapidFuzz", "Teams/Slack Webhooks"],
-        techDetails: "Uses Azure Cognitive Services Speech SDK for real-time transcription, fuzzy matching for name detection, and Azure OpenAI for generating concise meeting summaries.",
+        techStack: ["Python", "Azure Speech SDK", "Azure OpenAI", "RapidFuzz", "Plyer"],
+        techDetails: "Architecture: Audio → Azure Speech SDK (STT) → Rolling Buffer → Name Detection (exact + fuzzy) → LLM Summary → Multi-channel Alert. Modular design with 6 Python modules.",
         links: {
             github: "https://github.com/JackAmichai/SleepCall"
-        }
+        },
+        mediaType: "image",
+        mediaUrl: "https://opengraph.githubassets.com/1/JackAmichai/SleepCall",
+        evidence: "GitHub Repository | MIT License"
     },
     {
         id: "revenue-optimization",
         title: "Revenue Optimization Platform",
         role: "Business Analyst & Product Strategist",
         featured: true,
-        image: "images/hero-bg-2.jpg",
-        video: "videos/revenue_demo.mp4",
+        image: "https://placehold.co/600x400/1e293b/60a5fa?text=Revenue+Analytics+%F0%9F%93%8A",
+        video: "",
         problem: "Multi-property hotel portfolio struggling with manual pricing decisions based on outdated competitor analysis.",
         solution: "Built demand forecasting models using 3+ years of historical data to automate pricing decisions. Dashboard provides real-time recommendations and competitor tracking.",
         approach: [
@@ -165,16 +179,16 @@ const projectsData = [
         techStack: ["Excel", "Power BI", "SQL", "Python", "Revenue Analytics", "Forecasting"],
         techDetails: "Built time-series forecasting models using historical booking patterns. Implemented web scraping automation for competitor rate monitoring. Created interactive Power BI dashboards with drill-down capabilities. Integrated multiple data sources (PMS, market data, events calendar) for holistic view.",
         mediaType: "image",
-        mediaUrl: "https://placehold.co/600x400/1e293b/4ade80?text=Revenue+Optimization+Dashboard",
-        evidence: "Client testimonial and dashboard screenshots available upon request | NDA-protected project"
+        mediaUrl: "https://placehold.co/600x400/1e293b/60a5fa?text=Revenue+Analytics+%F0%9F%93%8A",
+        evidence: "NDA-protected | Dashboard screenshots available upon request"
     },
     {
         id: "password-research",
         title: "Password Security Research",
         role: "Security Researcher",
         featured: false,
-        image: "images/hero-bg-1.jpg",
-        video: "videos/security_demo.mp4",
+        image: "https://opengraph.githubassets.com/1/JackAmichai/password-research",
+        video: "",
         problem: "Understanding common vulnerabilities in password management systems is critical for web security.",
         solution: "A comprehensive research project analyzing password security protocols and common attack vectors. Demonstrates defense mechanisms against brute-force and dictionary attacks.",
         metrics: [
@@ -186,15 +200,17 @@ const projectsData = [
         techDetails: "Analyzed password strength entropy and implemented secure hashing comparisons. Simulates attack scenarios to test resilience.",
         links: {
             github: "https://github.com/JackAmichai/password-research"
-        }
+        },
+        mediaType: "image",
+        mediaUrl: "https://opengraph.githubassets.com/1/JackAmichai/password-research"
     },
     {
         id: "note2crm",
         title: "Note2CRM",
         role: "AI Product Developer",
         featured: false,
-        image: "images/hero-bg-3.jpg",
-        video: "videos/note2crm_demo.mp4",
+        image: "https://opengraph.githubassets.com/1/JackAmichai/Note2CRM",
+        video: "",
         problem: "Sales teams spend hours manually entering meeting notes into CRM systems.",
         solution: "AI-powered meeting assistant that automatically captures, structures, and syncs meeting notes to CRM systems. Uses NLP to extract action items and contact details.",
         metrics: [
@@ -215,8 +231,8 @@ const projectsData = [
         title: "OrderFlow-AI",
         role: "AI Product Developer",
         featured: false,
-        image: "images/hero-bg-4.jpg",
-        video: "videos/orderflow_demo.mp4",
+        image: "https://opengraph.githubassets.com/1/JackAmichai/OrderFlow-AI",
+        video: "",
         problem: "Inventory managers struggle with unpredictable demand patterns leading to stockouts.",
         solution: "Smart order management system using ML to predict demand patterns and optimize inventory levels. Automatically calculates reorder points based on historical sales.",
         metrics: [
@@ -237,8 +253,8 @@ const projectsData = [
         title: "SafyWeb",
         role: "Security Product Developer",
         featured: false,
-        image: "images/hero-bg-1.jpg",
-        video: "videos/safyweb_demo.mp4",
+        image: "https://opengraph.githubassets.com/1/JackAmichai/SafyWeb",
+        video: "",
         problem: "Small businesses lack affordable, easy-to-use web security tools.",
         solution: "Web security platform that scans for vulnerabilities and provides actionable remediation guidance. Automates checks for OWASP Top 10 threats.",
         metrics: [
@@ -259,8 +275,8 @@ const projectsData = [
         title: "ArtiBus",
         role: "AI Product Developer",
         featured: false,
-        image: "images/hero-bg-2.jpg",
-        video: "videos/artibus_demo.mp4",
+        image: "https://opengraph.githubassets.com/1/JackAmichai/ArtiBus",
+        video: "",
         problem: "Public transport users struggle with complex route planning during service disruptions.",
         solution: "AI-powered public transport assistant with intelligent route optimization and real-time alerts. Helps users navigate disruptions with alternative route suggestions.",
         metrics: [
@@ -281,8 +297,8 @@ const projectsData = [
         title: "Stock Price Prediction Model",
         role: "ML Engineer",
         featured: false,
-        image: "images/hero-bg-3.jpg",
-        video: "videos/stock_demo.mp4",
+        image: "https://opengraph.githubassets.com/1/JackAmichai/stock-predictor",
+        video: "",
         problem: "Investors need reliable tools to analyze stock price trends.",
         solution: "Machine learning model achieving 85%+ accuracy using RandomForestRegressor. Engineers 15+ features from historical market data for robust predictions.",
         metrics: [
@@ -303,8 +319,8 @@ const projectsData = [
         title: "E-commerce Recommendation Engine",
         role: "ML Product Developer",
         featured: false,
-        image: "images/hero-bg-4.jpg",
-        video: "videos/ecommerce_demo.mp4",
+        image: "https://opengraph.githubassets.com/1/JackAmichai/ecommerce-recommendations",
+        video: "",
         problem: "Online shoppers are overwhelmed by product choices.",
         solution: "Personalized product recommendation system increasing conversion rates by 25%. Utilizes collaborative filtering and behavioral analysis to suggest relevant items.",
         metrics: [
@@ -325,8 +341,8 @@ const projectsData = [
         title: "SAP SuccessFactors Extensions",
         role: "Solution Architect",
         featured: false,
-        image: "images/hero-bg-1.jpg",
-        video: "videos/sap_demo.mp4",
+        image: "https://placehold.co/600x400/0a66c2/ffffff?text=SAP+BTP+Extensions",
+        video: "",
         problem: "Enterprise clients need custom HR workflows outside standard capabilities.",
         solution: "Custom SAP BTP extensions for SuccessFactors, implementing specialized approval workflows and data integration. Ensures seamless connectivity with legacy systems.",
         metrics: [
