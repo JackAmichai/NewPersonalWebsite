@@ -122,20 +122,20 @@ const projectsData = [
     },
     {
         id: "sleepcall",
-        title: "SleepCall",
+        title: "SleepCall - Meeting Sentinel",
         role: "Python Developer",
         featured: true,
         image: "images/hero-bg-3.jpg",
         video: "videos/sleepcall_demo.mp4",
         problem: "People often miss important mentions of their name during long calls or while multitasking.",
-        solution: "An intelligent audio monitoring tool that alerts you whenever your name is spoken in a call. Uses lightweight speech recognition to run locally without compromising privacy.",
+        solution: "A real-time meeting assistant that listens to conversations, detects when your name is mentioned, and instantly alerts you with a concise AI-generated summary of the last 5 minutes.",
         metrics: [
-            "🔔 <strong>Real-time alerts</strong>",
-            "🔒 <strong>Privacy-focused</strong> local processing",
-            "⚡ <strong>Low latency</strong> detection"
+            "🔔 <strong>Real-time</strong> name detection",
+            "🧠 <strong>AI-powered</strong> 5-minute summaries",
+            "📢 <strong>Multi-channel</strong> alerts (Teams/Slack/Desktop)"
         ],
-        techStack: ["Python", "Speech Recognition", "Audio Processing"],
-        techDetails: "Utilizes Python's speech recognition libraries to monitor audio input streams in real-time, triggering system alerts upon keyword detection.",
+        techStack: ["Python", "Azure Speech SDK", "Azure OpenAI", "RapidFuzz", "Teams/Slack Webhooks"],
+        techDetails: "Uses Azure Cognitive Services Speech SDK for real-time transcription, fuzzy matching for name detection, and Azure OpenAI for generating concise meeting summaries.",
         links: {
             github: "https://github.com/JackAmichai/SleepCall"
         }

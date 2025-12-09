@@ -18,9 +18,9 @@ const jackKnowledgeBase = {
     },
 
     // Career & Experience
-    "army|military|idf|service|givati|2017|2018|2019|2020": {
-        answer: "Great question! Jack served in the **Israel Defense Forces (IDF)** from **2017 to 2020** as a **Staff Sergeant**. He led team operations in the **Givati Brigade**, managing high-pressure operations, logistics, and training personnel. This 3-year experience taught him exceptional leadership, decision-making under pressure, and team management skills.",
-        keywords: ["IDF", "Givati", "military", "leadership", "2017-2020"]
+    "army|military|idf|service|givati": {
+        answer: "Jack served in the **Israel Defense Forces (IDF)** as a **Staff Sergeant**. He led team operations, managed logistics, and trained personnel. This experience taught him leadership, decision-making under pressure, and team management skills that he applies to his product work today.",
+        keywords: ["IDF", "military", "leadership", "Staff Sergeant"]
     },
     "hospitality|consultant|consulting|current|work|job|adi|ohayon": {
         answer: "Jack currently works at **Adi Ohayon Hospitality Consulting** as a **Business Analyst** specializing in revenue optimization. He started in **April 2025**, where he analyzes demand trends, builds forecasting models, creates executive dashboards, and collaborates with cross-functional teams to drive strategic decisions.",
