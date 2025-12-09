@@ -841,7 +841,145 @@ function initProjectToggle() {
 document.addEventListener('DOMContentLoaded', () => {
     renderAllProjects('business');
     initProjectToggle();
+    initIconClouds();
 });
+
+// ========================================
+// 22. INTERACTIVE ICON CLOUD (3D Rotating Sphere)
+// ========================================
+function initIconClouds() {
+    const clouds = document.querySelectorAll('.icon-cloud');
+    clouds.forEach(cloud => {
+        createIconCloud(cloud);
+    });
+}
+
+function createIconCloud(container) {
+    const icons = container.dataset.icons ? container.dataset.icons.split(',') : [
+        'typescript', 'javascript', 'react', 'python', 'nodejs',
+        'html5', 'css3', 'git', 'docker', 'postgresql'
+    ];
+    
+    const radius = parseInt(container.dataset.radius) || 150;
+    const items = [];
+    const total = icons.length;
+    
+    // Simple Icon CDN for tech logos
+    const iconUrls = {
+        'typescript': 'https://cdn.simpleicons.org/typescript/3178C6',
+        'javascript': 'https://cdn.simpleicons.org/javascript/F7DF1E',
+        'react': 'https://cdn.simpleicons.org/react/61DAFB',
+        'python': 'https://cdn.simpleicons.org/python/3776AB',
+        'nodejs': 'https://cdn.simpleicons.org/nodedotjs/339933',
+        'html5': 'https://cdn.simpleicons.org/html5/E34F26',
+        'css3': 'https://cdn.simpleicons.org/css3/1572B6',
+        'git': 'https://cdn.simpleicons.org/git/F05032',
+        'docker': 'https://cdn.simpleicons.org/docker/2496ED',
+        'postgresql': 'https://cdn.simpleicons.org/postgresql/4169E1',
+        'fastapi': 'https://cdn.simpleicons.org/fastapi/009688',
+        'langchain': 'https://cdn.simpleicons.org/langchain/1C3C3C',
+        'openai': 'https://cdn.simpleicons.org/openai/412991',
+        'nextjs': 'https://cdn.simpleicons.org/nextdotjs/000000',
+        'tailwindcss': 'https://cdn.simpleicons.org/tailwindcss/06B6D4',
+        'vercel': 'https://cdn.simpleicons.org/vercel/000000',
+        'github': 'https://cdn.simpleicons.org/github/181717',
+        'azure': 'https://cdn.simpleicons.org/microsoftazure/0078D4',
+        'aws': 'https://cdn.simpleicons.org/amazonaws/232F3E',
+        'firebase': 'https://cdn.simpleicons.org/firebase/FFCA28',
+        'mongodb': 'https://cdn.simpleicons.org/mongodb/47A248',
+        'redis': 'https://cdn.simpleicons.org/redis/DC382D',
+        'graphql': 'https://cdn.simpleicons.org/graphql/E10098',
+        'figma': 'https://cdn.simpleicons.org/figma/F24E1E',
+        'powerbi': 'https://cdn.simpleicons.org/powerbi/F2C811',
+        'excel': 'https://cdn.simpleicons.org/microsoftexcel/217346',
+        'jupyter': 'https://cdn.simpleicons.org/jupyter/F37626',
+        'pandas': 'https://cdn.simpleicons.org/pandas/150458',
+        'numpy': 'https://cdn.simpleicons.org/numpy/013243',
+        'tensorflow': 'https://cdn.simpleicons.org/tensorflow/FF6F00',
+        'pytorch': 'https://cdn.simpleicons.org/pytorch/EE4C2C',
+        'scikitlearn': 'https://cdn.simpleicons.org/scikitlearn/F7931E',
+        'vite': 'https://cdn.simpleicons.org/vite/646CFF',
+        'webpack': 'https://cdn.simpleicons.org/webpack/8DD6F9',
+        'sass': 'https://cdn.simpleicons.org/sass/CC6699',
+        'framer': 'https://cdn.simpleicons.org/framer/0055FF',
+        'chromeweb': 'https://cdn.simpleicons.org/googlechrome/4285F4',
+        'sap': 'https://cdn.simpleicons.org/sap/0FAAFF'
+    };
+    
+    // Create icon elements
+    icons.forEach((icon, i) => {
+        const phi = Math.acos(-1 + (2 * i) / total);
+        const theta = Math.sqrt(total * Math.PI) * phi;
+        
+        const item = document.createElement('div');
+        item.className = 'cloud-icon';
+        item.innerHTML = `<img src="${iconUrls[icon] || iconUrls['github']}" alt="${icon}" title="${icon}">`;
+        
+        item.userData = {
+            phi: phi,
+            theta: theta
+        };
+        
+        container.appendChild(item);
+        items.push(item);
+    });
+    
+    // Animation
+    let angleX = 0;
+    let angleY = 0;
+    let autoRotateX = 0.002;
+    let autoRotateY = 0.003;
+    let isHovered = false;
+    
+    container.addEventListener('mouseenter', () => isHovered = true);
+    container.addEventListener('mouseleave', () => isHovered = false);
+    
+    let mouseX = 0, mouseY = 0;
+    container.addEventListener('mousemove', (e) => {
+        const rect = container.getBoundingClientRect();
+        mouseX = (e.clientX - rect.left - rect.width / 2) / rect.width;
+        mouseY = (e.clientY - rect.top - rect.height / 2) / rect.height;
+    });
+    
+    function animate() {
+        if (isHovered) {
+            angleX += mouseY * 0.02;
+            angleY += mouseX * 0.02;
+        } else {
+            angleX += autoRotateX;
+            angleY += autoRotateY;
+        }
+        
+        items.forEach(item => {
+            const { phi, theta } = item.userData;
+            
+            // Spherical to Cartesian with rotation
+            let x = radius * Math.sin(phi) * Math.cos(theta + angleY);
+            let y = radius * Math.sin(phi) * Math.sin(theta + angleY);
+            let z = radius * Math.cos(phi);
+            
+            // Rotate around X axis
+            const cosX = Math.cos(angleX);
+            const sinX = Math.sin(angleX);
+            const newY = y * cosX - z * sinX;
+            const newZ = y * sinX + z * cosX;
+            y = newY;
+            z = newZ;
+            
+            // Project to 2D with perspective
+            const scale = (z + radius * 1.5) / (radius * 2);
+            const opacity = Math.max(0.3, Math.min(1, scale));
+            
+            item.style.transform = `translate3d(${x}px, ${y}px, ${z}px) scale(${scale})`;
+            item.style.opacity = opacity;
+            item.style.zIndex = Math.round(z + radius);
+        });
+        
+        requestAnimationFrame(animate);
+    }
+    
+    animate();
+}
 
 // ========================================
 // INITIALIZATION
