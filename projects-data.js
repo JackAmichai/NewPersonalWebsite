@@ -30,7 +30,7 @@ const projectsData = [
             github: "https://github.com/JackAmichai/Hatrick" // Assumed link
         },
         mediaType: "image",
-        mediaUrl: "https://placehold.co/600x400/1e293b/4ade80?text=Hatrick+AI+Agents",
+        mediaUrl: "images/hero-bg-4.jpg",
         evidence: "Project Documentation"
     },
     {
@@ -59,7 +59,7 @@ const projectsData = [
             github: "https://github.com/JackAmichai/LeAIrn" // Assumed link
         },
         mediaType: "image",
-        mediaUrl: "https://placehold.co/600x400/1e293b/4ade80?text=LeAIrn+Platform",
+        mediaUrl: "images/hero-bg-3.jpg",
         evidence: "Project Documentation"
     },
     {

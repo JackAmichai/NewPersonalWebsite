@@ -2878,3 +2878,16 @@ html {
 [data-theme="dark"] .visual-link {
     stroke: #334155;
 }
+
+/* Vision Quote Style */
+.vision-quote {
+    background-color: var(--bg-secondary);
+    border-left: 4px solid var(--accent);
+    padding: 20px;
+    margin: 30px 0;
+    border-radius: 0 8px 8px 0;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    box-shadow: var(--shadow);
+}
+

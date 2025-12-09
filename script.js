@@ -17,8 +17,9 @@ window.addEventListener('load', () => {
 });
 
 // ========================================
-// 2. HERO PHOTO ROTATION
+// 2. HERO PHOTO ROTATION (DISABLED)
 // ========================================
+/*
 (function() {
     const heroImage = document.querySelector('.hero-image');
     if (!heroImage) return;
@@ -49,6 +50,7 @@ window.addEventListener('load', () => {
     // Rotate every 6 seconds
     setInterval(rotatePhoto, 6000);
 })();
+*/
 
 // ========================================
 // 3. SMOOTH SCROLLING
