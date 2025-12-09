@@ -30,9 +30,9 @@ const jackKnowledgeBase = {
         answer: "Jack holds a **Bachelor's degree in Psychology and Computer Science** from the **Open University of Israel**. He also has research experience at **Technion** (2021-2023) as a Research Assistant & Team Coordinator, and **Hebrew University** (2020-2021) as a Research Project Manager & Software Engineer, where he analyzed experimental data and managed research projects. This unique combination of psychology and tech helps him build data-driven solutions.",
         keywords: ["education", "psychology", "computer science", "Technion", "research"]
     },
-    "projects|portfolio|built|nvidia|revenue|note2crm": {
-        answer: "Jack has built several AI and analytics projects! His featured work includes:\n\n🎯 **NVIDIA Documentation Navigator** - RAG system for faster documentation discovery\n💰 **Revenue Optimization Platform** - Forecasting models with measurable business impact\n🤖 **Note2CRM** - AI meeting assistant reducing manual entry by 80%\n📊 **OrderFlow-AI** - Smart inventory system reducing stockouts\n\nYou can see all 9 projects with code examples on this portfolio!",
-        keywords: ["projects", "NVIDIA", "revenue", "AI", "portfolio"]
+    "projects|portfolio|built|work|examples": {
+        answer: "Jack has built a diverse portfolio of AI and analytics projects. You can ask me about specific ones like **Scholar2.6**, **SleepCall**, or **NVIDIA Doc Navigator**. \n\nCheck out the Projects section for videos and details!",
+        keywords: ["projects", "portfolio"]
     },
     "skills|technologies|tech stack|programming|languages": {
         answer: "Jack's tech stack includes:\n\n**Languages:** Python, SQL, JavaScript, TypeScript, Java\n**AI/ML:** Scikit-learn, Pandas, LangChain, OpenAI API, Vector DBs\n**Enterprise:** SAP BTP, SAP SuccessFactors, Power BI, OData\n**Product Tools:** Jira, Figma, Git, Analytics\n\nHe specializes in building **RAG systems**, **ML pipelines**, and **enterprise integrations**.",
@@ -62,13 +62,11 @@ const jackKnowledgeBase = {
 
 // Sample questions to display
 const sampleQuestions = [
-    "What did Jack do during 2017-2022?",
-    "Where does Jack work now?",
-    "What are Jack's main projects?",
+    "Tell me about Scholar2.6",
+    "What is SleepCall?",
+    "Does Jack know Python?",
     "How can I contact Jack?",
-    "What technologies does Jack use?",
-    "Tell me about Jack's education",
-    "What impact has Jack delivered?",
+    "What are Jack's main projects?",
     "Is Jack looking for work?"
 ];
 
@@ -117,7 +115,7 @@ class CloudChatbot {
                 <input 
                     type="text" 
                     id="chatbot-input" 
-                    placeholder="Ask me about Jack's experience, projects, or how to contact him..."
+                    placeholder="Ask about projects, skills, or contact info..."
                     autocomplete="off"
                 >
                 <button id="chatbot-send">
@@ -168,7 +166,7 @@ class CloudChatbot {
     displayWelcomeMessage() {
         setTimeout(() => {
             this.addMessage(
-                "Hi! I'm Cloud ☁️, Jack's AI assistant! I can answer questions about his experience, projects, skills, and how to reach him. Try asking me something, or click a suggestion below!",
+                "Hi! I'm Cloud ☁️, Jack's AI assistant! I've been updated with his latest projects like **Scholar2.6** and **SleepCall**. Ask me anything!",
                 'bot'
             );
             this.displaySuggestions();
@@ -232,6 +230,20 @@ class CloudChatbot {
         const lowerQuestion = question.toLowerCase();
         const tokens = lowerQuestion.split(/[\s,.?!]+/); // Simple tokenization
         
+        // 1. Check Dynamic Project Data first (High Priority)
+        if (typeof projectsData !== 'undefined') {
+            // Find project where user question contains the ID OR any significant word from title
+            const project = projectsData.find(p => {
+                const titleWords = p.title.toLowerCase().split(' ').filter(w => w.length > 3);
+                return lowerQuestion.includes(p.id.toLowerCase()) ||
+                       titleWords.some(word => lowerQuestion.includes(word));
+            });
+
+            if (project) {
+                return `**${project.title}** is a project where Jack addressed: "${project.problem}".\n\n**Solution:** ${project.solution}\n\n**Tech Stack:** ${project.techStack.join(', ')}.`;
+            }
+        }
+
         let bestMatch = null;
         let maxScore = 0;
 
@@ -292,7 +304,7 @@ class CloudChatbot {
         return text
             .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
             .replace(/\n/g, '<br>')
-            .replace(/🎯|💰|🤖|📊|📧|💼|📅|🐙|📄|📚|📈|⏱️|🚀|⚡|🔬|📝|👥|🌍|🇮🇱|🇺🇸|🇫🇷/g, '<span class="emoji">$&</span>');
+            .replace(/🎯|💰|🤖|📊|📧|💼|📅|🐙|📄|📚|📈|⏱️|🚀|⚡|🔬|📝|👥|🌍|🇮🇱|🇺🇸|🇫🇷|🔔|🔒|🛡️|🎓/g, '<span class="emoji">$&</span>');
     }
 
     escapeHtml(text) {

@@ -477,12 +477,136 @@ function trackCTAClick(ctaName) {
 trackPageView();
 
 // ========================================
-// 20. DYNAMIC PROJECTS RENDERING
+// 20. DYNAMIC PROJECTS RENDERING (ENHANCED)
 // ========================================
+
+// Generate SVG Visuals for each project
+function getProjectVisual(projectId) {
+    const visuals = {
+        'nvidia-doc-nav': `
+            <svg class="visual-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="15" class="visual-node" fill-opacity="0.2"/>
+                <circle cx="50" cy="50" r="8" class="visual-node"/>
+                <circle cx="20" cy="80" r="6" class="visual-node" fill="#28a745"/>
+                <circle cx="80" cy="20" r="6" class="visual-node" fill="#17a2b8"/>
+                <circle cx="80" cy="80" r="6" class="visual-node" fill="#ffc107"/>
+                <line x1="50" y1="50" x2="20" y2="80" class="visual-link"/>
+                <line x1="50" y1="50" x2="80" y2="20" class="visual-link"/>
+                <line x1="50" y1="50" x2="80" y2="80" class="visual-link"/>
+                <text x="35" y="53" class="visual-text" fill="white">RAG</text>
+            </svg>
+        `,
+        'scholar-2-6': `
+            <svg class="visual-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="25" y="20" width="50" height="60" rx="4" fill="white" stroke="#0066cc" stroke-width="2"/>
+                <line x1="35" y1="35" x2="65" y2="35" stroke="#cbd5e1" stroke-width="2"/>
+                <line x1="35" y1="45" x2="65" y2="45" stroke="#cbd5e1" stroke-width="2"/>
+                <line x1="35" y1="55" x2="55" y2="55" stroke="#cbd5e1" stroke-width="2"/>
+                <circle cx="70" cy="70" r="12" fill="#0066cc" fill-opacity="0.9"/>
+                <path d="M66 70L69 73L74 67" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        `,
+        'sleepcall': `
+            <svg class="visual-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="30" y="30" width="40" height="40" rx="10" fill="#0066cc"/>
+                <path d="M40 50L45 40L50 60L55 45L60 50" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="pulse"/>
+                <circle cx="75" cy="25" r="8" fill="#dc3545" class="pulse"/>
+            </svg>
+        `,
+        'revenue-optimization': `
+            <svg class="visual-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="20" y="20" width="60" height="60" rx="2" fill="white" stroke="#e2e8f0" stroke-width="2"/>
+                <rect x="30" y="50" width="10" height="20" fill="#0066cc" fill-opacity="0.5"/>
+                <rect x="45" y="40" width="10" height="30" fill="#0066cc" fill-opacity="0.7"/>
+                <rect x="60" y="30" width="10" height="40" fill="#0066cc"/>
+                <path d="M25 70L75 70" stroke="#64748b" stroke-width="2"/>
+                <path d="M35 50L50 40L65 30" stroke="#28a745" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        `,
+        'password-research': `
+            <svg class="visual-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="35" y="45" width="30" height="25" rx="2" fill="#0066cc"/>
+                <path d="M35 45V35C35 27 41 27 50 27C59 27 65 27 65 35V45" stroke="#0066cc" stroke-width="4" stroke-linecap="round"/>
+                <circle cx="50" cy="57" r="3" fill="white"/>
+                <path d="M50 60V64" stroke="white" stroke-width="2"/>
+                <text x="25" y="90" class="visual-text">SHA-256</text>
+            </svg>
+        `,
+        'note2crm': `
+            <svg class="visual-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 30H50V60H20z" fill="white" stroke="#64748b" stroke-width="2"/>
+                <path d="M60 40H90V70H60z" fill="#0066cc" stroke="#0066cc" stroke-width="2"/>
+                <path d="M50 45L60 55" stroke="#28a745" stroke-width="2" stroke-dasharray="4 2"/>
+                <circle cx="35" cy="45" r="5" fill="#e2e8f0"/>
+                <rect x="65" y="50" width="20" height="2" fill="white"/>
+                <rect x="65" y="55" width="15" height="2" fill="white"/>
+            </svg>
+        `,
+        'orderflow-ai': `
+            <svg class="visual-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="30" stroke="#0066cc" stroke-width="2" stroke-dasharray="4 4" class="pulse"/>
+                <rect x="35" y="35" width="30" height="30" rx="4" fill="#0066cc"/>
+                <path d="M45 50L55 50M50 45L50 55" stroke="white" stroke-width="2"/>
+                <circle cx="20" cy="50" r="4" fill="#28a745"/>
+                <circle cx="80" cy="50" r="4" fill="#28a745"/>
+            </svg>
+        `,
+        'safyweb': `
+            <svg class="visual-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 20L80 30V50C80 70 50 85 50 85C50 85 20 70 20 50V30L50 20Z" fill="#0066cc" fill-opacity="0.1" stroke="#0066cc" stroke-width="2"/>
+                <path d="M40 50L50 60L65 40" stroke="#28a745" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        `,
+        'artibus': `
+            <svg class="visual-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="20" cy="80" r="5" fill="#0066cc"/>
+                <circle cx="80" cy="20" r="5" fill="#dc3545"/>
+                <path d="M20 80C40 80 40 50 50 50C60 50 60 20 80 20" stroke="#64748b" stroke-width="2" stroke-dasharray="4 4"/>
+                <circle cx="50" cy="50" r="8" fill="white" stroke="#0066cc" stroke-width="2"/>
+                <path d="M48 50L54 50M51 47L51 53" stroke="#0066cc" stroke-width="2"/>
+            </svg>
+        `,
+        'stock-predictor': `
+            <svg class="visual-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <line x1="10" y1="90" x2="90" y2="90" stroke="#64748b" stroke-width="2"/>
+                <line x1="10" y1="90" x2="10" y2="10" stroke="#64748b" stroke-width="2"/>
+                <path d="M10 80L30 60L50 70L70 40L90 20" stroke="#0066cc" stroke-width="2" fill="none"/>
+                <circle cx="90" cy="20" r="4" fill="#28a745" class="pulse"/>
+                <rect x="28" y="58" width="4" height="22" fill="#0066cc" fill-opacity="0.2"/>
+                <rect x="68" y="38" width="4" height="42" fill="#0066cc" fill-opacity="0.2"/>
+            </svg>
+        `,
+        'ecommerce-recommendation': `
+            <svg class="visual-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="30" y="40" width="40" height="30" fill="none" stroke="#0066cc" stroke-width="2"/>
+                <path d="M35 40V30C35 25 40 25 50 25C60 25 65 25 65 30V40" stroke="#0066cc" stroke-width="2"/>
+                <circle cx="50" cy="55" r="5" fill="#ffc107"/>
+                <line x1="55" y1="55" x2="75" y2="55" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="2 2"/>
+                <circle cx="80" cy="55" r="3" fill="#cbd5e1"/>
+            </svg>
+        `,
+        'sap-successfactors': `
+            <svg class="visual-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M30 60C30 60 20 60 20 40C20 25 35 20 40 25C45 15 65 15 70 30C80 30 85 45 80 55" stroke="#0066cc" stroke-width="2" fill="none"/>
+                <rect x="35" y="45" width="10" height="10" fill="#0066cc"/>
+                <rect x="55" y="45" width="10" height="10" fill="#0066cc"/>
+                <line x1="45" y1="50" x2="55" y2="50" stroke="#0066cc" stroke-width="2"/>
+            </svg>
+        `
+    };
+
+    return `
+        <div class="visual-container">
+            ${visuals[projectId] || visuals['nvidia-doc-nav']}
+        </div>
+    `;
+}
+
 function renderProject(project, view = 'business') {
     const isTechnical = view === 'technical';
     const isFeatured = project.featured;
     
+<<<<<<< HEAD
     // Media handling
     let mediaHtml = '';
     if (project.mediaUrl) {
