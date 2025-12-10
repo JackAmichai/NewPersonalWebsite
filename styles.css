@@ -1021,16 +1021,42 @@ section {
     font-weight: 700;
 }
 
+#tech-stack {
+    background-image: url('images/tech-stack-bg.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+    color: white;
+}
+
+#tech-stack::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.75); /* Dark overlay */
+    z-index: 1;
+}
+
+#tech-stack .container {
+    position: relative;
+    z-index: 2;
+}
+
 .tech-stack-section {
-    margin-top: 60px;
+    margin-top: 0;
 }
 
 .subsection-title {
     font-size: 24px;
     font-weight: 700;
-    color: var(--text-primary);
+    color: white; /* Changed for contrast */
     margin-bottom: 30px;
     text-align: center;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 
 .tech-stack-grid {
@@ -1042,10 +1068,11 @@ section {
 .tech-group h4 {
     font-size: 16px;
     font-weight: 600;
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.9); /* Changed for contrast */
     margin-bottom: 12px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
 }
 
 .tech-tags-compact {
@@ -1055,18 +1082,21 @@ section {
 }
 
 .tech-tags-compact span {
-    background: var(--bg-secondary);
-    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.15); /* Glassmorphism */
+    color: white;
     padding: 6px 12px;
     border-radius: 4px;
     font-size: 13px;
     font-weight: 500;
     transition: var(--transition);
+    border: 1px solid rgba(255,255,255,0.2);
+    backdrop-filter: blur(5px);
 }
 
 .tech-tags-compact span:hover {
     background: var(--accent);
     color: white;
+    border-color: var(--accent);
 }
 
 /* ==================== */
@@ -1485,64 +1515,6 @@ section {
     font-size: 14px;
     color: var(--text-secondary);
     font-weight: 500;
-}
-
-/* ==================== */
-/* PROOF BAR */
-/* ==================== */
-
-.proof-bar {
-    background-color: var(--bg-secondary);
-    padding: 40px 0;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-}
-
-.proof-content {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 30px;
-}
-
-.proof-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.proof-logo {
-    height: 30px;
-    width: auto;
-    filter: grayscale(100%);
-    opacity: 0.7;
-    transition: var(--transition);
-}
-
-.proof-item:hover .proof-logo {
-    filter: grayscale(0%);
-    opacity: 1;
-}
-
-.proof-icon {
-    font-size: 32px;
-}
-
-.proof-text {
-    display: flex;
-    flex-direction: column;
-}
-
-.proof-text strong {
-    color: var(--text-primary);
-    font-size: 16px;
-    font-weight: 700;
-}
-
-.proof-text span {
-    color: var(--text-muted);
-    font-size: 13px;
 }
 
 /* ==================== */
@@ -3580,7 +3552,7 @@ html {
 
 .bento-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); /* Increased from 320px */
     gap: 1.5rem;
     padding: 1rem 0;
 }
@@ -3605,7 +3577,7 @@ html {
 
 .project-media {
     width: 100%;
-    height: 200px;
+    height: 280px; /* Increased from 200px */
     overflow: hidden;
     position: relative;
     background: var(--bg-tertiary);

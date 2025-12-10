@@ -751,20 +751,43 @@ function renderHeroCard(project, iconConfig, view = 'business') {
 
     const clickUrl = project.links?.demo || project.links?.github || '#';
 
+    // Using the requested structure with utility classes mapped or inline styles if needed
+    // The prompt requested structure:
+    /*
+    <div class="project-card">
+        <h3 class="font-bold text-xl mb-2">[Project Title]</h3>
+
+        <p class="mb-2">
+            <strong>Problem:</strong> [Brief business challenge description]
+        </p>
+
+        <p class="mb-2">
+            <strong>Solution:</strong> [AI/analytics solution implemented]
+        </p>
+
+        <p>
+            <strong>Impact:</strong> [Measurable result with specific metrics]
+        </p>
+    </div>
+    */
+
     return `
-        <div class="hero-project-card" onclick="window.open('${clickUrl}', '_blank')" style="--hero-accent: ${iconConfig?.color || '#4ade80'}">
-            <div class="hero-card-icon" style="background: linear-gradient(135deg, ${iconConfig?.color || '#4ade80'}33, ${iconConfig?.color || '#4ade80'}11)">
-                <span>${iconConfig?.icon || '✨'}</span>
-            </div>
+        <div class="hero-project-card project-card" onclick="window.open('${clickUrl}', '_blank')" style="--hero-accent: ${iconConfig?.color || '#4ade80'}">
             <div class="hero-card-content">
-                <div class="hero-card-header">
-                    <h3 class="hero-card-title">${project.title}</h3>
-                </div>
-                <div class="hero-card-desc" style="font-size: 0.9rem; line-height: 1.5; color: var(--text-secondary);">
-                     <p style="margin-bottom: 4px;"><strong>Problem:</strong> ${project.problem ? project.problem.substring(0, 100) + "..." : ""}</p>
-                     <p style="margin-bottom: 4px;"><strong>Solution:</strong> ${project.solution.substring(0, 100)}...</p>
-                     <p><strong>Impact:</strong> ${project.outcome ? project.outcome.substring(0, 100) + "..." : ""}</p>
-                </div>
+                <h3 class="font-bold text-xl mb-2">${project.title}</h3>
+
+                <p class="mb-2">
+                    <strong>Problem:</strong> ${project.problem || "Business challenge description unavailable."}
+                </p>
+
+                <p class="mb-2">
+                    <strong>Solution:</strong> ${project.solution || "Solution description unavailable."}
+                </p>
+
+                <p>
+                    <strong>Impact:</strong> ${project.outcome || "Measurable result unavailable."}
+                </p>
+
                 <div class="hero-card-footer">
                     <div class="hero-card-tags">
                         ${project.techStack.slice(0, 3).map(tech => `<span class="hero-card-tag">${tech}</span>`).join('')}
@@ -800,11 +823,22 @@ function renderStackedCard(project, index) {
     const clickUrl = project.links?.demo || project.links?.github || '#';
 
     return `
-        <div class="stacked-card" style="--stack-index: ${index}" onclick="window.open('${clickUrl}', '_blank')">
-            <div class="stacked-card-icon">${icon}</div>
+        <div class="stacked-card project-card" style="--stack-index: ${index}" onclick="window.open('${clickUrl}', '_blank')">
             <div class="stacked-card-content">
-                <h4 class="stacked-card-title">${project.title}</h4>
-                <p class="stacked-card-desc">${project.solution.substring(0, 80)}...</p>
+                <h3 class="font-bold text-xl mb-2">${project.title}</h3>
+
+                <p class="mb-2">
+                    <strong>Problem:</strong> ${project.problem || "Business challenge description unavailable."}
+                </p>
+
+                <p class="mb-2">
+                    <strong>Solution:</strong> ${project.solution ? project.solution.substring(0, 100) + "..." : "Solution description unavailable."}
+                </p>
+
+                <p>
+                    <strong>Impact:</strong> ${project.outcome || "Measurable result unavailable."}
+                </p>
+
                 <div class="stacked-card-footer">
                     <div class="stacked-card-tags">
                         ${project.techStack.slice(0, 2).map(tech => `<span class="stacked-card-tag">${tech}</span>`).join('')}
