@@ -122,6 +122,50 @@ class CloudChatbot {
         `;
         document.body.appendChild(bubble);
 
+        // Chatbot popup notification
+        const popup = document.createElement('div');
+        popup.id = 'chatbot-popup';
+        popup.className = 'chatbot-popup';
+        popup.innerHTML = `
+            <div class="chatbot-popup-header">
+                <div class="chatbot-popup-avatar">☁️</div>
+                <h4 class="chatbot-popup-title">Hey! I'm Cloud</h4>
+                <button class="chatbot-popup-close" id="popup-close">✕</button>
+            </div>
+            <p class="chatbot-popup-message">
+                I'm Jack's AI assistant! I can answer questions about his experience, projects, or how to get in touch. Try me out!
+            </p>
+            <button class="chatbot-popup-cta" id="popup-cta">Ask Me Anything</button>
+        `;
+        document.body.appendChild(popup);
+
+        // Show popup after 2 seconds, hide after 10 seconds or when dismissed
+        setTimeout(() => {
+            popup.style.display = 'block';
+
+            // Auto-hide after 10 seconds
+            setTimeout(() => {
+                if (!popup.classList.contains('hidden')) {
+                    popup.classList.add('hidden');
+                    setTimeout(() => popup.style.display = 'none', 300);
+                }
+            }, 10000);
+        }, 2000);
+
+        // Popup close handler
+        document.getElementById('popup-close').addEventListener('click', () => {
+            popup.classList.add('hidden');
+            setTimeout(() => popup.style.display = 'none', 300);
+        });
+
+        // Popup CTA handler - open chatbot
+        document.getElementById('popup-cta').addEventListener('click', () => {
+            popup.classList.add('hidden');
+            setTimeout(() => popup.style.display = 'none', 300);
+            this.toggleChat();
+        });
+
+
         // Chatbot window
         const chatWindow = document.createElement('div');
         chatWindow.id = 'chatbot-window';
@@ -175,12 +219,12 @@ class CloudChatbot {
         this.isOpen = !this.isOpen;
         const chatWindow = document.getElementById('chatbot-window');
         const bubble = document.getElementById('chatbot-bubble');
-        
+
         if (this.isOpen) {
             chatWindow.classList.add('open');
             bubble.classList.add('hidden');
             document.getElementById('chatbot-input').focus();
-            
+
             // Track opening
             if (typeof trackCTAClick !== 'undefined') {
                 trackCTAClick('chatbot_opened');
@@ -203,11 +247,11 @@ class CloudChatbot {
 
     displaySuggestions() {
         const suggestionsContainer = document.getElementById('chatbot-suggestions');
-        
+
         // Show 3 random suggestions
         const randomSuggestions = this.getRandomItems(sampleQuestions, 3);
-        
-        suggestionsContainer.innerHTML = randomSuggestions.map(question => 
+
+        suggestionsContainer.innerHTML = randomSuggestions.map(question =>
             `<button class="suggestion-btn" data-question="${question}">${question}</button>`
         ).join('');
 
@@ -228,7 +272,7 @@ class CloudChatbot {
     handleSendMessage() {
         const input = document.getElementById('chatbot-input');
         const message = input.value.trim();
-        
+
         if (message) {
             this.handleUserMessage(message);
             input.value = '';
@@ -238,12 +282,12 @@ class CloudChatbot {
     handleUserMessage(message) {
         // Add user message to chat
         this.addMessage(message, 'user');
-        
+
         // Find matching answer
         setTimeout(() => {
             const answer = this.findAnswer(message);
             this.addMessage(answer, 'bot');
-            
+
             // Show new suggestions after answer
             setTimeout(() => this.displaySuggestions(), 500);
         }, 600);
@@ -257,14 +301,14 @@ class CloudChatbot {
     findAnswer(question) {
         const lowerQuestion = question.toLowerCase();
         const tokens = lowerQuestion.split(/[\s,.?!]+/); // Simple tokenization
-        
+
         // 1. Check Dynamic Project Data first (High Priority)
         if (typeof projectsData !== 'undefined') {
             // Find project where user question contains the ID OR any significant word from title
             const project = projectsData.find(p => {
                 const titleWords = p.title.toLowerCase().split(' ').filter(w => w.length > 3);
                 return lowerQuestion.includes(p.id.toLowerCase()) ||
-                       titleWords.some(word => lowerQuestion.includes(word));
+                    titleWords.some(word => lowerQuestion.includes(word));
             });
 
             if (project) {
@@ -297,12 +341,12 @@ class CloudChatbot {
                 bestMatch = data;
             }
         }
-        
+
         // Threshold for a "good" match
         if (maxScore >= 2 && bestMatch) {
             return bestMatch.answer;
         }
-        
+
         // Default response if no match
         return "That's a great question! I don't have specific information about that, but I recommend:\n\n📧 **Emailing Jack directly:** jackamichai@gmail.com\n💼 **Connecting on LinkedIn:** linkedin.com/in/jackamichai\n📅 **Scheduling a call:** calendly.com/jackamichai\n\nYou can also browse his portfolio sections above to learn more about his experience and projects!";
     }
@@ -311,7 +355,7 @@ class CloudChatbot {
         const messagesContainer = document.getElementById('chatbot-messages');
         const messageDiv = document.createElement('div');
         messageDiv.className = `chatbot-message ${sender}-message`;
-        
+
         if (sender === 'bot') {
             messageDiv.innerHTML = `
                 <img src="images/cloud-bot.jpg" alt="Cloud" class="message-avatar">
@@ -322,7 +366,7 @@ class CloudChatbot {
                 <div class="message-content">${this.escapeHtml(text)}</div>
             `;
         }
-        
+
         messagesContainer.appendChild(messageDiv);
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
     }
