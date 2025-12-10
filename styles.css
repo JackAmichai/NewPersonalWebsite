@@ -4082,14 +4082,14 @@ html {
 
 .bento-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
     gap: 1.5rem;
     padding: 1rem 0;
 }
 
 @media (max-width: 1024px) {
     .bento-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
     }
 }
 
@@ -4109,7 +4109,7 @@ html {
     display: flex;
     flex-direction: column;
     height: 100%;
-    aspect-ratio: 1 / 0.8;
+    aspect-ratio: 16 / 9;
 }
 
 .bento-card:hover {
