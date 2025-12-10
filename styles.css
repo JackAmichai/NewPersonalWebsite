@@ -4109,7 +4109,7 @@ html {
     display: flex;
     flex-direction: column;
     height: 100%;
-    aspect-ratio: 1 / 1.1;
+    aspect-ratio: 1 / 0.8;
 }
 
 .bento-card:hover {
