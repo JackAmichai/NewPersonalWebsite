@@ -1059,6 +1059,152 @@ function initSkillsAccordion() {
 // ========================================
 // INITIALIZATION
 // ========================================
+// ========================================
+// 25. INTERACTIVE CONTACT CARD
+// ========================================
+
+function initModernContact() {
+    const canvas = document.getElementById('particleCanvas');
+    const skillsOrbit = document.getElementById('skillsOrbit');
+
+    if (!canvas || !skillsOrbit) return;
+
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let mouseX = 0;
+    let mouseY = 0;
+
+    // Setup canvas
+    function resizeCanvas() {
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+    }
+
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    // Particle class
+    class Particle {
+        constructor() {
+            this.reset();
+            this.y = Math.random() * canvas.height;
+            this.alpha = Math.random() * 0.5 + 0.2;
+        }
+
+        reset() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.vx = (Math.random() - 0.5) * 0.5;
+            this.vy = (Math.random() - 0.5) * 0.5 - 0.1;
+            this.size = Math.random() * 2 + 1;
+            this.alpha = Math.random() * 0.5 + 0.2;
+        }
+
+        update() {
+            // Mouse attraction
+            const dx = mouseX - this.x;
+            const dy = mouseY - this.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < 100) {
+                const force = (100 - distance) / 100;
+                this.vx += (dx / distance) * force * 0.2;
+                this.vy += (dy / distance) * force * 0.2;
+            }
+
+            this.x += this.vx;
+            this.y += this.vy;
+
+            // Damping
+            this.vx *= 0.98;
+            this.vy *= 0.98;
+
+            // Bounds checking
+            if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+                this.reset();
+            }
+        }
+
+        draw() {
+            ctx.fillStyle = `rgba(100, 150, 255, ${this.alpha})`;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+
+    // Initialize particles
+    for (let i = 0; i < 80; i++) {
+        particles.push(new Particle());
+    }
+
+    // Animation loop
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        particles.forEach(particle => {
+            particle.update();
+            particle.draw();
+        });
+
+        requestAnimationFrame(animate);
+    }
+
+    // Mouse tracking
+    canvas.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        mouseX = e.clientX - rect.left;
+        mouseY = e.clientY - rect.top;
+    });
+
+    animate();
+
+    // Skill tag cursor animation
+    const skillTags = skillsOrbit.querySelectorAll('.skill-tag');
+    const cursorPointer = document.getElementById('cursor-pointer');
+
+    if (skillTags.length && cursorPointer) {
+        let currentIndex = 0;
+        const positions = [
+            { left: '200px', top: '60px' },
+            { left: '50px', top: '102px' },
+            { left: '224px', top: '170px' },
+            { left: '88px', top: '198px' }
+        ];
+
+        function animateCursor() {
+            // Remove highlight from all tags
+            skillTags.forEach(tag => tag.classList.remove('highlighted'));
+
+            // Add highlight to current tag
+            skillTags[currentIndex].classList.add('highlighted');
+
+            // Move cursor
+            cursorPointer.style.left = positions[currentIndex].left;
+            cursorPointer.style.top = positions[currentIndex].top;
+
+            // Next tag
+            currentIndex = (currentIndex + 1) % skillTags.length;
+
+            setTimeout(animateCursor, 2000);
+        }
+
+        // Start after a short delay
+        setTimeout(animateCursor, 500);
+    }
+}
+
+// Initialize on DOM load
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initModernContact);
+} else {
+    initModernContact();
+}
+
+// ========================================
+// INITIALIZATION
+// ========================================
 console.log('🚀 Portfolio loaded successfully!');
 console.log('💡 Keyboard shortcuts:');
 console.log('   Ctrl/Cmd + D: Toggle dark mode');
