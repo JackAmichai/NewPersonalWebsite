@@ -1488,64 +1488,6 @@ section {
 }
 
 /* ==================== */
-/* PROOF BAR */
-/* ==================== */
-
-.proof-bar {
-    background-color: var(--bg-secondary);
-    padding: 40px 0;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-}
-
-.proof-content {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 30px;
-}
-
-.proof-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.proof-logo {
-    height: 30px;
-    width: auto;
-    filter: grayscale(100%);
-    opacity: 0.7;
-    transition: var(--transition);
-}
-
-.proof-item:hover .proof-logo {
-    filter: grayscale(0%);
-    opacity: 1;
-}
-
-.proof-icon {
-    font-size: 32px;
-}
-
-.proof-text {
-    display: flex;
-    flex-direction: column;
-}
-
-.proof-text strong {
-    color: var(--text-primary);
-    font-size: 16px;
-    font-weight: 700;
-}
-
-.proof-text span {
-    color: var(--text-muted);
-    font-size: 13px;
-}
-
-/* ==================== */
 /* MY STORY SECTION */
 /* ==================== */
 
@@ -3928,3 +3870,33 @@ html {
     }
 }
 
+
+/* ==================== */
+/* UTILITIES (Added for Refactor) */
+/* ==================== */
+.text-center { text-align: center; }
+.max-w-3xl { max-width: 48rem; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
+.font-bold { font-weight: 700; }
+.mb-4 { margin-bottom: 1rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+.text-gray-600 { color: #4b5563; }
+.text-gray-700 { color: #374151; }
+.mb-8 { margin-bottom: 2rem; }
+.flex { display: flex; }
+.justify-center { justify-content: center; }
+.gap-4 { gap: 1rem; }
+.py-20 { padding-top: 5rem; padding-bottom: 5rem; }
+.bg-gray-50 { background-color: #f9fafb; }
+.text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+.mb-6 { margin-bottom: 1.5rem; }
+.font-medium { font-weight: 500; }
+.space-y-2 > :not([hidden]) ~ :not([hidden]) { --tw-space-y-reverse: 0; margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse))); margin-bottom: calc(0.5rem * var(--tw-space-y-reverse)); }
+.text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+
+/* Adapting utility classes to dark mode */
+[data-theme="dark"] .text-gray-600 { color: #9ca3af; }
+[data-theme="dark"] .text-gray-700 { color: #d1d5db; }
+[data-theme="dark"] .bg-gray-50 { background-color: var(--bg-secondary); }

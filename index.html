@@ -120,325 +120,73 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="container">
-            <div class="hero-grid">
-                <!-- Hero Photo: Professional outdoor portrait in business suit -->
-                <div class="hero-photo">
-                    <img src="images/me.jpeg" alt="Jack Amichai - AI Product Manager in professional business attire, outdoor portrait" class="hero-image" width="500" height="500">
-                    <div class="photo-badge">
-                        <span class="badge-icon">🚀</span>
-                        <span class="badge-text">Building AI Products</span>
-                    </div>
-                </div>
+    <section class="py-20">
+      <div class="max-w-3xl mx-auto text-center">
+        <h1 class="text-4xl font-bold mb-4">
+          I build AI-powered products that turn data into better decisions,
+          faster growth, and measurable business impact.
+        </h1>
 
-                <!-- Hero Content -->
-                <div class="hero-content">
-                    <p class="hero-greeting">Hi, I'm <strong>Jack Amichai</strong></p>
-                    <h1 class="hero-name">I Build AI Products That Drive Revenue & Transform Operations</h1>
-                    <h2 class="hero-title">Business Analyst & AI-minded Product Builder</h2>
-                    <p class="hero-description">
-                        I design data-driven solutions that connect business goals with measurable improvements in revenue, efficiency, and decision quality.
-                        I've built forecasting models that improved forecast accuracy, developed ML systems with high predictive performance, and created AI tools that significantly enhance productivity.
-                    </p>
+        <p class="text-lg text-gray-600 mb-8">
+          As a business analyst and AI-driven product builder, I bridge strategy,
+          data science, and execution to deliver forecasting tools, automation,
+          and intelligent analytics.
+        </p>
 
-                    <!-- Key Impact Badges -->
-                    <div class="impact-badges">
-                        <div class="badge badge-primary">
-                            <div class="badge-number">20%</div>
-                            <div class="badge-label">Revenue Boost</div>
-                        </div>
-                        <div class="badge badge-success">
-                            <div class="badge-number">85%+</div>
-                            <div class="badge-label">ML Accuracy</div>
-                        </div>
-                        <div class="badge badge-info">
-                            <div class="badge-number">3+</div>
-                            <div class="badge-label">Years Experience</div>
-                        </div>
-                    </div>
-
-                    <div class="hero-cta">
-                        <a href="resume.pdf" class="btn-cta btn-cta-primary" download onclick="trackCTAClick('resume_download')">
-                            <span class="cta-icon">📥</span>
-                            <span class="cta-text">Download Resume</span>
-                        </a>
-                        <a href="https://calendly.com/jackamichai" target="_blank" class="btn-cta btn-cta-primary" onclick="trackCTAClick('calendly_hero')">
-                            <span class="cta-icon">📅</span>
-                            <span class="cta-text">Schedule a Call</span>
-                        </a>
-                        <button class="btn-cta btn-cta-secondary" id="copyEmailBtn" data-email="jackamichai@gmail.com">
-                            <span class="cta-icon">✉️</span>
-                            <span class="cta-text">Copy Email</span>
-                        </button>
-                        <a href="#projects" class="btn-cta btn-cta-secondary">
-                            <span class="cta-text">View Case Studies</span>
-                            <span class="cta-arrow">→</span>
-                        </a>
-                    </div>
-
-                    <!-- Social Share Buttons -->
-                    <div class="social-share">
-                        <span class="share-label">Share Profile:</span>
-                        <button class="share-btn" onclick="shareOnLinkedIn()" title="Share on LinkedIn">
-                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                        </button>
-                        <button class="share-btn" onclick="shareOnTwitter()" title="Share on Twitter">
-                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
-                        </button>
-                        <button class="share-btn" onclick="copyProfileLink()" title="Copy profile link">
-                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
+        <div class="flex justify-center gap-4">
+          <a href="#projects" class="btn-primary">See My Work</a>
+          <a href="/JackAmichai_CV.pdf" class="btn-secondary">Download Resume</a>
         </div>
-    </section>
-
-    <!-- Proof Bar -->
-    <section class="proof-bar">
-        <div class="container">
-            <div class="proof-content">
-                <div class="proof-item">
-                    <div class="proof-icon">💼</div>
-                    <div class="proof-text">
-                        <strong>Deloitte Consultant</strong>
-                        <span>at Adi Ohayon Hospitality</span>
-                    </div>
-                </div>
-                <div class="proof-item">
-                    <div class="proof-icon">📊</div>
-                    <div class="proof-text">
-                        <strong>Revenue Optimization</strong>
-                        <span>Forecasting & Analytics</span>
-                    </div>
-                </div>
-                <div class="proof-item">
-                    <div class="proof-icon">🎓</div>
-                    <div class="proof-text">
-                        <strong>Technion Research</strong>
-                        <span>Neuroscience Lab</span>
-                    </div>
-                </div>
-                <div class="proof-item">
-                    <div class="proof-icon">🎓</div>
-                    <div class="proof-text">
-                        <strong>BA Psychology & CS</strong>
-                        <span>Open University</span>
-                    </div>
-                </div>
-                <div class="proof-item">
-                    <div class="proof-icon">💼</div>
-                    <div class="proof-text">
-                        <strong>IDF Leadership</strong>
-                        <span>Staff Sergeant</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Impact Dashboard Section -->
-    <section class="impact-dashboard">
-        <div class="container">
-            <h2 class="section-title">Impact by the Numbers</h2>
-            <p class="section-subtitle">Measurable results from data-driven projects and analytics solutions</p>
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-value">+20%</div>
-                    <div class="stat-label">Revenue Forecast Accuracy</div>
-                    <div class="stat-note">Multi-property hospitality portfolio</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value">60%</div>
-                    <div class="stat-label">Time Saved on Analysis</div>
-                    <div class="stat-note">Pricing optimization platform</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value">85%+</div>
-                    <div class="stat-label">ML Model Accuracy</div>
-                    <div class="stat-note">Stock prediction & forecasting</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value">9</div>
-                    <div class="stat-label">Portfolio Projects</div>
-                    <div class="stat-note">AI, ML, and analytics solutions</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value">60%</div>
-                    <div class="stat-label">Faster Documentation Discovery</div>
-                    <div class="stat-note">NVIDIA AI-powered search tool</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- My Story Section -->
-    <section id="story" class="my-story">
-        <div class="container">
-            <div class="story-grid">
-                <div class="story-content">
-                    <h2 class="section-title">My Story</h2>
-                    <div class="story-text">
-                        <p class="story-lead">
-                            From <strong>military leadership</strong> to <strong>neuroscience research</strong> to <strong>AI product management</strong> —
-                            my journey has been about understanding how people think and building technology that serves them.
-                        </p>
-                        <p>
-                            During my <strong>IDF service</strong>, I served as a <strong>Staff Sergeant</strong>, leading team operations through high-pressure situations
-                            and learning the value of clear communication and decisive action. That experience taught me:
-                            <em>great products come from great teams, and great teams need leaders who listen.</em>
-                        </p>
-                        <p>
-                            My fascination with the human mind led me to study <strong>Psychology and Computer Science</strong> at the Open University of Israel.
-                            I spent 2 years (2021-2023) researching cognitive neuroscience at <strong>Technion and Hebrew University</strong>,
-                            diving deep into how people process information and make decisions.
-                        </p>
-                        <p>
-                            Today, as a <strong>Deloitte Consultant</strong> placed at <strong>Adi Ohayon Hospitality Consulting</strong>, I combine all these experiences: the leadership discipline from the military,
-                            the scientific rigor from research, and the technical skills from CS. I build analytics solutions that
-                            deliver <strong>measurable revenue improvements</strong> and <strong>high-accuracy forecasts</strong> because they're designed
-                            around how real people actually use them.
-                        </p>
-
-                        <blockquote class="vision-quote">
-                            <strong>My Vision:</strong> To become a <strong>Product Architect</strong> who bridges the gap between technical innovation and user needs, building systems that are not only powerful but also intuitive and impactful.
-                        </blockquote>
-                    </div>
-                </div>
-                <div class="story-photos">
-                    <img src="images/me.jpeg" alt="Jack Amichai - Professional portrait showing leadership and expertise" class="story-photo" loading="lazy" width="400" height="500">
-                    <img src="images/me2.jpg" alt="Jack Amichai - AI Product Manager at work" class="story-photo" loading="lazy" width="400" height="500">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Featured Projects Preview Section -->
-    <section class="featured-preview">
-        <div class="container">
-            <h2 class="section-title">Featured Work</h2>
-            <p class="section-subtitle">Real projects with working code on GitHub</p>
-            <div class="featured-links">
-                <a href="https://github.com/JackAmichai/Nvidia-doc-agentic-ai" target="_blank" class="featured-link">
-                    <span class="featured-icon">🔍</span>
-                    <span class="featured-name">NVIDIA Doc Navigator</span>
-                    <span class="featured-desc">RAG-powered documentation search</span>
-                </a>
-                <a href="https://github.com/JackAmichai/Scholar2.6" target="_blank" class="featured-link">
-                    <span class="featured-icon">📚</span>
-                    <span class="featured-name">Scholar 2.6</span>
-                    <span class="featured-desc">AI Research Navigator Chrome Extension</span>
-                </a>
-                <a href="https://github.com/JackAmichai/SleepCall" target="_blank" class="featured-link">
-                    <span class="featured-icon">🎯</span>
-                    <span class="featured-name">SleepCall</span>
-                    <span class="featured-desc">Meeting name detection + AI summaries</span>
-                </a>
-            </div>
-        </div>
+      </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-intro">
-                <p>
-                    I'm a <strong>Business Analyst</strong> who builds data-driven solutions that connect psychology insights with technical implementation —
-                    turning complex problems into actionable analytics and forecasting models.
-                </p>
-                <p>
-                    I started as an <strong>IDF Staff Sergeant</strong> leading team operations, moved into <strong>cognitive neuroscience research</strong> at
-                    Technion and Hebrew University, and today I work as a <strong>Deloitte Consultant</strong> at Adi Ohayon Hospitality on revenue optimization and forecasting that
-                    drives strategic decision-making.
-                </p>
-                <p>
-                    My focus: turn messy real-world problems into AI products with measurable impact, from discovery and
-                    user research through architecture, implementation, and rollout.
-                </p>
-            </div>
+    <section id="about" class="py-20 bg-gray-50">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">About Me</h2>
 
-            <!-- Skills Accordion -->
-            <div class="skills-accordion" id="skillsAccordion">
-                <h3 class="subsection-title">Core Competencies</h3>
+        <p class="mb-4">
+          I began my journey as an IDF Staff Sergeant, where leading teams
+          taught me clarity, discipline, and responsibility under pressure.
+        </p>
 
-                <div class="accordion-item" data-accordion="product">
-                    <button class="accordion-header" aria-expanded="false">
-                        <div class="accordion-icon">🎯</div>
-                        <h4 class="accordion-title">Product & Domain</h4>
-                        <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="6 9 12 15 18 9"/>
-                        </svg>
-                    </button>
-                    <div class="accordion-content">
-                        <ul class="accordion-list">
-                            <li><span class="check-icon">✓</span> AI and data products for revenue and operations</li>
-                            <li><span class="check-icon">✓</span> Hypothesis-driven experimentation</li>
-                            <li><span class="check-icon">✓</span> Clear success metrics for every change</li>
-                            <li><span class="check-icon">✓</span> User research and stakeholder management</li>
-                        </ul>
-                    </div>
-                </div>
+        <p class="mb-4">
+          I later studied Psychology and Computer Science, researching cognitive
+          neuroscience to better understand how people think and make decisions.
+        </p>
 
-                <div class="accordion-item active" data-accordion="tech">
-                    <button class="accordion-header" aria-expanded="true">
-                        <div class="accordion-icon">🏗️</div>
-                        <h4 class="accordion-title">Architecture & Tech</h4>
-                        <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="6 9 12 15 18 9"/>
-                        </svg>
-                    </button>
-                    <div class="accordion-content">
-                        <ul class="accordion-list">
-                            <li><span class="check-icon">✓</span> RAG systems, ML pipelines, SAP BTP extensions</li>
-                            <li><span class="check-icon">✓</span> Cloud-native APIs and integrations</li>
-                            <li><span class="check-icon">✓</span> Python, SQL, JavaScript/TypeScript</li>
-                            <li><span class="check-icon">✓</span> Vector databases, LangChain, Scikit-learn</li>
-                        </ul>
-                    </div>
-                </div>
+        <p class="mb-4">
+          Today I combine leadership, scientific rigor, and technical expertise
+          to build AI-powered tools that solve real business challenges—from
+          forecasting models and risk scoring systems to intelligent automation
+          and data-driven decision dashboards.
+        </p>
 
-                <div class="accordion-item" data-accordion="delivery">
-                    <button class="accordion-header" aria-expanded="false">
-                        <div class="accordion-icon">🚀</div>
-                        <h4 class="accordion-title">Delivery & Process</h4>
-                        <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="6 9 12 15 18 9"/>
-                        </svg>
-                    </button>
-                    <div class="accordion-content">
-                        <ul class="accordion-list">
-                            <li><span class="check-icon">✓</span> From idea to shipped MVP in weeks</li>
-                            <li><span class="check-icon">✓</span> Iterative roadmaps, small releases</li>
-                            <li><span class="check-icon">✓</span> Obsessed with usage and adoption data</li>
-                            <li><span class="check-icon">✓</span> Agile, SAFe, and lean methodologies</li>
-                        </ul>
-                    </div>
-                </div>
+        <p class="font-medium">
+          My philosophy: build solutions rooted in human behavior and real-world
+          data—not tech for its own sake.
+        </p>
+      </div>
+    </section>
 
-                <div class="accordion-item" data-accordion="leadership">
-                    <button class="accordion-header" aria-expanded="false">
-                        <div class="accordion-icon">💬</div>
-                        <h4 class="accordion-title">Communication & Leadership</h4>
-                        <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="6 9 12 15 18 9"/>
-                        </svg>
-                    </button>
-                    <div class="accordion-content">
-                        <ul class="accordion-list">
-                            <li><span class="check-icon">✓</span> Translate between execs, HR, and engineers</li>
-                            <li><span class="check-icon">✓</span> IDF Staff Sergeant leadership experience</li>
-                            <li><span class="check-icon">✓</span> Run workshops, demos, and trainings</li>
-                            <li><span class="check-icon">✓</span> Hebrew (native), English (fluent), French (conversational)</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+    <!-- Core Competencies Section (Moved out of About for clarity as per prompt) -->
+    <section id="skills" class="py-20">
+      <div class="max-w-3xl mx-auto">
+        <h3 class="text-3xl font-bold mb-6">Core Competencies</h3>
+        <ul class="space-y-2 text-gray-700">
+          <li>• AI & data-driven product design (forecasting, scoring, automation)</li>
+          <li>• End-to-end product ownership: discovery → architecture → delivery</li>
+          <li>• Revenue & operations optimization through analytics</li>
+          <li>• Clear measurable success metrics and experimentation frameworks</li>
+          <li>• Strong stakeholder communication across business, data, and engineering</li>
+        </ul>
+      </div>
+    </section>
 
-            <!-- Tech Stack -->
-            <div class="tech-stack-section">
-                <h3 class="subsection-title">Tech Stack & Tools</h3>
+    <!-- Tech Stack -->
+    <section id="tech-stack" class="py-20">
+      <div class="container">
+                <h3 class="subsection-title text-center">Tech Stack & Tools</h3>
                 <div class="tech-stack-grid">
                     <div class="tech-group">
                         <h4>Languages</h4>
@@ -480,7 +228,6 @@
                     </div>
                 </div>
             </div>
-        </div>
     </section>
 
     <!-- Experience Section -->
