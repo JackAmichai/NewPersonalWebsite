@@ -4011,3 +4011,66 @@ html {
         grid-template-columns: 1fr;
     }
 }
+
+/* ==================== */
+/* ABOUT SECTION UPDATES */
+/* ==================== */
+
+.squiggly-title {
+    font-family: 'Caveat', cursive !important;
+    font-size: 3.5rem !important;
+    text-align: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    display: block !important;
+    margin-bottom: 2rem !important;
+    border: none !important;
+}
+
+.squiggly-title::before,
+.squiggly-title::after {
+    display: none !important;
+}
+
+.about-content-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    text-align: left;
+}
+
+.about-text {
+    flex: 1;
+}
+
+.video-placeholder {
+    flex: 0 0 300px;
+    height: 200px;
+    background-color: var(--bg-secondary);
+    border: 2px dashed var(--accent);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.video-placeholder:hover {
+    background-color: var(--accent-light);
+    transform: scale(1.02);
+}
+
+@media (max-width: 768px) {
+    .about-content-wrapper {
+        flex-direction: column;
+    }
+
+    .video-placeholder {
+        width: 100%;
+        flex: none;
+    }
+}
