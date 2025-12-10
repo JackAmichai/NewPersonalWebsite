@@ -707,20 +707,6 @@
                 </div>
             </div>
 
-            <!-- Academic Verification -->
-            <div class="credentials-section">
-                <h3 class="subsection-title">🎓 Academic Credentials</h3>
-                <div class="credential-card">
-                    <div class="credential-icon">📋</div>
-                    <div class="credential-info">
-                        <h4>Official Curriculum Verification</h4>
-                        <p>Official academic transcript and curriculum verification from university studies</p>
-                        <a href="documents/‎⁨אישור תוכנית לימודים כללי⁩.pdf" download class="btn-credential" onclick="trackCTAClick('credential_academic')">
-                            📄 Download Document (Hebrew)
-                        </a>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -728,24 +714,29 @@
     <section class="downloads">
         <div class="container">
             <h2 class="section-title">📥 Resources for Recruiters</h2>
-            <div class="downloads-grid">
-                <div class="download-card">
-                    <div class="download-icon">📄</div>
-                    <h3>Resume</h3>
-                    <p>Complete work history, skills, and education</p>
-                    <a href="resume.pdf" class="btn-download" download onclick="trackCTAClick('resume_download_section')">Download PDF</a>
+            <div class="resources-grid">
+                <!-- Resume Card -->
+                <div class="resource-card">
+                    <div class="resource-icon">📄</div>
+                    <div class="resource-info">
+                        <h4>Resume</h4>
+                        <p>Complete work history, skills, and education</p>
+                        <a href="resume.pdf" class="btn-resource" download onclick="trackCTAClick('resume_download_section')">
+                            Download PDF
+                        </a>
+                    </div>
                 </div>
-                <div class="download-card">
-                    <div class="download-icon">💼</div>
-                    <h3>LinkedIn Profile</h3>
-                    <p>Complete professional background & connections</p>
-                    <a href="Jack Amichai _ LinkedIn.pdf" class="btn-download" download onclick="trackCTAClick('linkedin_download')">Download PDF</a>
-                </div>
-                <div class="download-card">
-                    <div class="download-icon">📚</div>
-                    <h3>Project Documentation</h3>
-                    <p>Scholar2.6 & LeAIrn project details</p>
-                    <a href="JackAmichai_Scholar2.6_ New Google scholar.pdf" class="btn-download" download onclick="trackCTAClick('scholar_download')">Download PDF</a>
+
+                <!-- Academic Credentials Card -->
+                <div class="resource-card">
+                    <div class="resource-icon">📋</div>
+                    <div class="resource-info">
+                        <h4>Official Curriculum Verification</h4>
+                        <p>Official academic transcript and curriculum verification from university studies</p>
+                        <a href="documents/‎⁨אישור תוכנית לימודים כללי⁩.pdf" class="btn-resource" download onclick="trackCTAClick('credential_academic')">
+                            📄 Download Document (Hebrew)
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
