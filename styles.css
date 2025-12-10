@@ -932,10 +932,10 @@ section {
 /* Skills Accordion */
 .skills-accordion {
     max-width: 800px;
-    margin: 0 auto 60px;
+    margin: 0 auto 40px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 8px;
 }
 
 .skill-item {
@@ -961,7 +961,7 @@ section {
     display: flex;
     align-items: center;
     gap: 16px;
-    padding: 20px 24px;
+    padding: 14px 20px;
     background: transparent;
     border: none;
     cursor: pointer;
@@ -981,7 +981,7 @@ section {
 
 .skill-title {
     flex: 1;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
     color: var(--text-primary);
 }
@@ -1007,7 +1007,7 @@ section {
 
 .skill-item.active .skill-content {
     max-height: 500px;
-    padding: 0 24px 24px;
+    padding: 0 20px 16px;
 }
 
 .skill-list {
@@ -1016,16 +1016,16 @@ section {
     margin: 0;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 8px 24px;
+    gap: 6px 20px;
 }
 
 .skill-list li {
-    padding: 8px 0;
-    padding-left: 24px;
+    padding: 4px 0;
+    padding-left: 20px;
     position: relative;
     color: var(--text-secondary);
-    font-size: 15px;
-    line-height: 1.6;
+    font-size: 14px;
+    line-height: 1.5;
 }
 
 .skill-list li:before {
@@ -1041,10 +1041,10 @@ section {
 }
 
 .subsection-title {
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 700;
     color: var(--text-primary);
-    margin-bottom: 30px;
+    margin-bottom: 24px;
     text-align: center;
 }
 
