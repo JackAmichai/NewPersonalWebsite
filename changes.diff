@@ -1,87 +1,92 @@
 diff --git a/changes.diff b/changes.diff
-index e08e37c..e69de29 100644
+index 5b0eee7..e69de29 100644
 --- a/changes.diff
 +++ b/changes.diff
-@@ -1,82 +0,0 @@
--diff --git a/index.html b/index.html
--index 868b93b..5596cc3 100644
----- a/index.html
--+++ b/index.html
--@@ -114,7 +114,7 @@
--                 <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle dark/light mode">
--                     <span class="theme-icon">🌙</span>
--                 </button>
---                <a href="resume.pdf" class="btn-primary" download>Resume</a>
--+                <a href="/JackAmichai_CV.pdf" class="btn-primary" download>Resume</a>
--             </div>
--         </div>
--     </nav>
--@@ -135,7 +135,7 @@
--
--         <div class="flex justify-center gap-4">
--           <a href="#projects" class="btn-primary">See My Work</a>
---          <a href="resume.pdf" class="btn-secondary" download>Download Resume</a>
--+          <a href="/JackAmichai_CV.pdf" class="btn-secondary" download>Download Resume</a>
--         </div>
--       </div>
--     </section>
--@@ -417,7 +417,7 @@
--                     <div class="download-icon">📄</div>
--                     <h3>Resume</h3>
--                     <p>Complete work history, skills, and education</p>
---                    <a href="resume.pdf" class="btn-download" download onclick="trackCTAClick('resume_download_section')">Download PDF</a>
--+                    <a href="/JackAmichai_CV.pdf" class="btn-download" download onclick="trackCTAClick('resume_download_section')">Download PDF</a>
--                 </div>
--                 <div class="download-card">
--                     <div class="download-icon">💼</div>
--diff --git a/styles.css b/styles.css
--index b15b64b..3c92f1d 100644
----- a/styles.css
--+++ b/styles.css
--@@ -3982,3 +3982,46 @@ html {
-- [data-theme="dark"] .bg-white { background-color: var(--bg-primary); }
-- [data-theme="dark"] .border-gray-200 { border-color: var(--border); }
-- [data-theme="dark"] .text-gray-900 { color: var(--text-primary); }
--+
--+/* Added Buttons based on feedback */
--+.btn-primary {
--+    display: inline-flex;
--+    align-items: center;
--+    justify-content: center;
--+    padding: 12px 24px;
--+    background-color: var(--accent);
--+    color: white;
--+    border-radius: 8px;
--+    font-weight: 600;
--+    text-decoration: none;
--+    transition: all 0.2s ease;
--+    border: 2px solid var(--accent);
--+}
--+
--+.btn-primary:hover {
--+    background-color: var(--accent-hover);
--+    border-color: var(--accent-hover);
--+    transform: translateY(-2px);
--+    box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
--+}
--+
--+.btn-secondary {
--+    display: inline-flex;
--+    align-items: center;
--+    justify-content: center;
--+    padding: 12px 24px;
--+    background-color: transparent;
--+    color: var(--text-primary);
--+    border-radius: 8px;
--+    font-weight: 600;
--+    text-decoration: none;
--+    transition: all 0.2s ease;
--+    border: 2px solid var(--border);
--+}
--+
--+.btn-secondary:hover {
--+    border-color: var(--accent);
--+    color: var(--accent);
--+    background-color: var(--bg-secondary);
--+    transform: translateY(-2px);
--+}
+@@ -1,87 +0,0 @@
+-diff --git a/changes.diff b/changes.diff
+-index e08e37c..e69de29 100644
+---- a/changes.diff
+-+++ b/changes.diff
+-@@ -1,82 +0,0 @@
+--diff --git a/index.html b/index.html
+--index 868b93b..5596cc3 100644
+----- a/index.html
+--+++ b/index.html
+--@@ -114,7 +114,7 @@
+--                 <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle dark/light mode">
+--                     <span class="theme-icon">🌙</span>
+--                 </button>
+---                <a href="resume.pdf" class="btn-primary" download>Resume</a>
+--+                <a href="/JackAmichai_CV.pdf" class="btn-primary" download>Resume</a>
+--             </div>
+--         </div>
+--     </nav>
+--@@ -135,7 +135,7 @@
+--
+--         <div class="flex justify-center gap-4">
+--           <a href="#projects" class="btn-primary">See My Work</a>
+---          <a href="resume.pdf" class="btn-secondary" download>Download Resume</a>
+--+          <a href="/JackAmichai_CV.pdf" class="btn-secondary" download>Download Resume</a>
+--         </div>
+--       </div>
+--     </section>
+--@@ -417,7 +417,7 @@
+--                     <div class="download-icon">📄</div>
+--                     <h3>Resume</h3>
+--                     <p>Complete work history, skills, and education</p>
+---                    <a href="resume.pdf" class="btn-download" download onclick="trackCTAClick('resume_download_section')">Download PDF</a>
+--+                    <a href="/JackAmichai_CV.pdf" class="btn-download" download onclick="trackCTAClick('resume_download_section')">Download PDF</a>
+--                 </div>
+--                 <div class="download-card">
+--                     <div class="download-icon">💼</div>
+--diff --git a/styles.css b/styles.css
+--index b15b64b..3c92f1d 100644
+----- a/styles.css
+--+++ b/styles.css
+--@@ -3982,3 +3982,46 @@ html {
+-- [data-theme="dark"] .bg-white { background-color: var(--bg-primary); }
+-- [data-theme="dark"] .border-gray-200 { border-color: var(--border); }
+-- [data-theme="dark"] .text-gray-900 { color: var(--text-primary); }
+--+
+--+/* Added Buttons based on feedback */
+--+.btn-primary {
+--+    display: inline-flex;
+--+    align-items: center;
+--+    justify-content: center;
+--+    padding: 12px 24px;
+--+    background-color: var(--accent);
+--+    color: white;
+--+    border-radius: 8px;
+--+    font-weight: 600;
+--+    text-decoration: none;
+--+    transition: all 0.2s ease;
+--+    border: 2px solid var(--accent);
+--+}
+--+
+--+.btn-primary:hover {
+--+    background-color: var(--accent-hover);
+--+    border-color: var(--accent-hover);
+--+    transform: translateY(-2px);
+--+    box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
+--+}
+--+
+--+.btn-secondary {
+--+    display: inline-flex;
+--+    align-items: center;
+--+    justify-content: center;
+--+    padding: 12px 24px;
+--+    background-color: transparent;
+--+    color: var(--text-primary);
+--+    border-radius: 8px;
+--+    font-weight: 600;
+--+    text-decoration: none;
+--+    transition: all 0.2s ease;
+--+    border: 2px solid var(--border);
+--+}
+--+
+--+.btn-secondary:hover {
+--+    border-color: var(--accent);
+--+    color: var(--accent);
+--+    background-color: var(--bg-secondary);
+--+    transform: translateY(-2px);
+--+}
