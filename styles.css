@@ -5356,8 +5356,10 @@ html {
 /* ==================== */
 
 .resource-img {
-    width: 40px;
-    height: auto;
+    width: 40px !important;
+    max-width: 40px !important;
+    height: 40px !important;
     object-fit: contain;
     display: block;
+    flex-shrink: 0;
 }
