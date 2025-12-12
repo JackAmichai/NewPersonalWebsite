@@ -5350,3 +5350,14 @@ html {
 .hobbies-collage-img:hover {
     transform: scale(1.02);
 }
+
+/* ==================== */
+/* RESOURCE ICONS IMAGES */
+/* ==================== */
+
+.resource-img {
+    width: 40px;
+    height: auto;
+    object-fit: contain;
+    display: block;
+}
