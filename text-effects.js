@@ -14,41 +14,58 @@ class TextReveal {
     }
 
     init() {
-        const text = this.element.innerText;
-        this.element.innerHTML = '';
-        this.element.style.opacity = '1'; // Ensure container is visible
+        // Initial state
+        this.element.style.opacity = '0';
+        this.element.style.transform = 'translateY(20px)';
+        this.element.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
 
-        if (this.type === 'word') {
-            // Split by space but capture the space
-            const segments = text.split(/(\s+)/);
-            segments.forEach(segment => {
-                const span = document.createElement('span');
-                span.innerText = segment;
-                span.style.opacity = '0';
-                span.style.display = 'inline-block';
-                // Critical fix for spacing:
-                span.style.whiteSpace = 'pre';
+        // Check if we should split text (only if no nested HTML to be safe, or just specific types)
+        // For the blockquote with <strong>, we want to preserve HTML, so we use 'line' or block mode.
+        // If type is 'word' or 'char', we attempt split (WARNING: strips HTML tags like <strong>)
 
-                span.style.transform = 'translateY(10px)';
-                span.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                span.classList.add('reveal-item');
-                this.element.appendChild(span);
-            });
-        } else if (this.type === 'char') {
-            const chars = text.split('');
-            chars.forEach(char => {
-                const span = document.createElement('span');
-                span.innerText = char;
-                span.style.opacity = '0';
-                span.style.display = 'inline-block';
-                span.style.whiteSpace = 'pre'; // Fix for char spacing
+        // If the element has children elements (tags), fallback to block fade unless explicitly handled
+        const hasTags = this.element.children.length > 0;
 
-                span.style.transform = 'translateY(10px)';
-                span.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                span.classList.add('reveal-item');
-                this.element.appendChild(span);
-            });
+        if (!hasTags && (this.type === 'word' || this.type === 'char')) {
+            const text = this.element.innerText;
+            this.element.innerHTML = '';
+            this.element.style.opacity = '1'; // Container visible, children hidden
+            this.element.style.transform = 'none'; // reset container transform for split mode
+            this.element.style.transition = 'none';
+
+            if (this.type === 'word') {
+                // Split by space but capture the space
+                const segments = text.split(/(\s+)/);
+                segments.forEach(segment => {
+                    const span = document.createElement('span');
+                    span.innerText = segment;
+                    span.style.opacity = '0';
+                    span.style.display = 'inline-block';
+                    // Critical fix for spacing:
+                    span.style.whiteSpace = 'pre';
+
+                    span.style.transform = 'translateY(10px)';
+                    span.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    span.classList.add('reveal-item');
+                    this.element.appendChild(span);
+                });
+            } else if (this.type === 'char') {
+                const chars = text.split('');
+                chars.forEach(char => {
+                    const span = document.createElement('span');
+                    span.innerText = char;
+                    span.style.opacity = '0';
+                    span.style.display = 'inline-block';
+                    span.style.whiteSpace = 'pre'; // Fix for char spacing
+
+                    span.style.transform = 'translateY(10px)';
+                    span.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    span.classList.add('reveal-item');
+                    this.element.appendChild(span);
+                });
+            }
         }
+        // If 'line' or has HTML tags, we leave innerHTML alone and just fade the container (already set above)
 
         this.observe();
     }
@@ -68,12 +85,20 @@ class TextReveal {
 
     animate() {
         const items = this.element.querySelectorAll('.reveal-item');
-        items.forEach((item, index) => {
+        if (items.length > 0) {
+            items.forEach((item, index) => {
+                setTimeout(() => {
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0)';
+                }, this.delay * 1000 + (index * 30)); // Faster stagger
+            });
+        } else {
+            // Block fade
             setTimeout(() => {
-                item.style.opacity = '1';
-                item.style.transform = 'translateY(0)';
-            }, this.delay * 1000 + (index * 50)); // 50ms stagger
-        });
+                this.element.style.opacity = '1';
+                this.element.style.transform = 'translateY(0)';
+            }, this.delay * 1000);
+        }
     }
 }
 
