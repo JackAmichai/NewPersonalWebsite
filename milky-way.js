@@ -17,7 +17,7 @@ class MilkyWayExperience {
         this.particles = null;
         this.hands = null;
         this.webcam = null;
-        
+
         // Interaction state
         this.targetRotationX = 0;
         this.targetRotationY = 0;
@@ -33,7 +33,7 @@ class MilkyWayExperience {
         this.createGalaxy();
         this.initMediaPipe();
         this.animate();
-        
+
         window.addEventListener('resize', () => this.onWindowResize(), false);
     }
 
@@ -56,7 +56,7 @@ class MilkyWayExperience {
     createGalaxy() {
         const geometry = new THREE.BufferGeometry();
         const count = 50000;
-        
+
         const positions = new Float32Array(count * 3);
         const colors = new Float32Array(count * 3);
         const sizes = new Float32Array(count);
@@ -64,7 +64,7 @@ class MilkyWayExperience {
         const colorInside = new THREE.Color(0xff6030); // Orange/Red core
         const colorOutside = new THREE.Color(0x1b3984); // Blue arms
 
-        for(let i = 0; i < count; i++) {
+        for (let i = 0; i < count; i++) {
             const i3 = i * 3;
 
             // Radius
@@ -76,7 +76,7 @@ class MilkyWayExperience {
             const randomY = Math.pow(Math.random(), 3) * (Math.random() < 0.5 ? 1 : -1) * 50;
             const randomZ = Math.pow(Math.random(), 3) * (Math.random() < 0.5 ? 1 : -1) * 50;
 
-            positions[i3    ] = Math.cos(branchAngle + spinAngle) * radius + randomX;
+            positions[i3] = Math.cos(branchAngle + spinAngle) * radius + randomX;
             positions[i3 + 1] = randomY + (Math.random() - 0.5) * (radius * 0.2); // Flatten disk
             positions[i3 + 2] = Math.sin(branchAngle + spinAngle) * radius + randomZ;
 
@@ -84,7 +84,7 @@ class MilkyWayExperience {
             const mixedColor = colorInside.clone();
             mixedColor.lerp(colorOutside, radius / 800);
 
-            colors[i3    ] = mixedColor.r;
+            colors[i3] = mixedColor.r;
             colors[i3 + 1] = mixedColor.g;
             colors[i3 + 2] = mixedColor.b;
 
@@ -116,9 +116,11 @@ class MilkyWayExperience {
         videoElement.style.display = 'none';
         document.body.appendChild(videoElement);
 
-        this.hands = new Hands({locateFile: (file) => {
-            return `https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4/${file}`;
-        }});
+        this.hands = new Hands({
+            locateFile: (file) => {
+                return `https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4/${file}`;
+            }
+        });
 
         this.hands.setOptions({
             maxNumHands: 1,
@@ -137,26 +139,60 @@ class MilkyWayExperience {
 
     async startExperience() {
         const videoElement = document.getElementById('webcam-input');
+        const statusEl = document.getElementById('milky-way-status');
+        const btn = document.getElementById('start-milky-way-btn');
+        const overlay = document.querySelector('.milky-way-overlay');
+
         if (this.webcam) return; // Already started
 
         try {
+            if (statusEl) statusEl.innerText = "Requesting camera access... Please click 'Allow'.";
+
+            // Check explicit permissions if supported (optional but good practice)
+            // But main logic is try/catch on MediaPipe/GetUserMedia
+
             this.webcam = new Camera(videoElement, {
                 onFrame: async () => {
-                    await this.hands.send({image: videoElement});
+                    await this.hands.send({ image: videoElement });
                 },
                 width: 640,
                 height: 480
             });
+
             await this.webcam.start();
-            
-            // Show a status message or update UI
-            const statusEl = document.getElementById('milky-way-status');
-            if(statusEl) statusEl.innerText = "Control the galaxy with your hand!";
-            
+
+            // Success
+            if (statusEl) statusEl.innerText = "Camera Active! Move your hand to spin the galaxy.";
+            if (btn) btn.style.display = 'none'; // Hide button
+
+            // Optional: Fade out overlay partially so user sees galaxy clearly but knows it's working
+            if (overlay) {
+                overlay.style.pointerEvents = 'none';
+                // Move status text to corner or fade it out after a few seconds
+                setTimeout(() => {
+                    if (statusEl) statusEl.style.opacity = '0';
+                }, 5000);
+            }
+
         } catch (err) {
             console.error("Error starting webcam:", err);
-            const statusEl = document.getElementById('milky-way-status');
-            if(statusEl) statusEl.innerText = "Could not access webcam. Please allow permissions.";
+
+            let msg = "Could not access webcam.";
+            if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
+                msg = "Camera access denied. Please enable permissions in your browser settings (look for the camera icon in the address bar).";
+            } else if (err.name === 'NotFoundError') {
+                msg = "No camera found on this device.";
+            } else {
+                msg = `Camera error: ${err.message || err.name}`;
+            }
+
+            if (statusEl) {
+                statusEl.innerText = msg;
+                statusEl.style.color = '#ff6b6b'; // Red color for error
+                statusEl.style.backgroundColor = 'rgba(0,0,0,0.8)';
+            }
+            // Re-enable button to try again
+            if (btn) btn.style.display = 'block';
         }
     }
 
@@ -164,7 +200,7 @@ class MilkyWayExperience {
         if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
             this.isHandDetected = true;
             const landmarks = results.multiHandLandmarks[0];
-            
+
             // Use index finger tip (point 8) and wrist (point 0) to detect movement/rotation
             const x = landmarks[8].x; // 0 to 1
             const y = landmarks[8].y; // 0 to 1
@@ -174,7 +210,7 @@ class MilkyWayExperience {
             // Multiply to get rotation range (e.g., -PI to PI)
             this.targetRotationY = (x - 0.5) * 4; // Horizontal hand move -> Rotate around Y
             this.targetRotationX = (y - 0.5) * 4; // Vertical hand move -> Rotate around X
-            
+
             // Optional: Use pinch (distance between thumb tip 4 and index tip 8) for zoom?
             // For now, let's keep it simple: rotation.
         } else {
@@ -184,7 +220,7 @@ class MilkyWayExperience {
 
     onWindowResize() {
         if (!this.camera || !this.renderer) return;
-        
+
         this.camera.aspect = this.container.clientWidth / this.container.clientHeight;
         this.camera.updateProjectionMatrix();
         this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
@@ -199,7 +235,7 @@ class MilkyWayExperience {
             this.currentRotationY += (this.targetRotationY - this.currentRotationY) * 0.05;
         } else {
             // Auto idle rotation
-            this.currentRotationY += 0.001; 
+            this.currentRotationY += 0.001;
             // Return to flat X plane
             this.currentRotationX += (0.2 - this.currentRotationX) * 0.02; // Slight tilt
         }
@@ -218,10 +254,10 @@ class MilkyWayExperience {
 // Global initialization function to be called from HTML
 window.initMilkyWay = () => {
     const experience = new MilkyWayExperience('milky-way-container');
-    
+
     // Bind button
     const btn = document.getElementById('start-milky-way-btn');
-    if(btn) {
+    if (btn) {
         btn.addEventListener('click', () => {
             experience.startExperience();
             btn.style.display = 'none'; // Hide button after start

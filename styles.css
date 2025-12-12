@@ -4997,3 +4997,67 @@ html {
         font-size: 14px;
     }
 }
+
+/* ==================== */
+/* ADVANCED TEXT EFFECTS */
+/* ==================== */
+
+/* Text Shimmer Effect */
+.text-shimmer {
+    background: linear-gradient(
+        90deg,
+        #a1a1aa 0%,
+        #000 50%,
+        #a1a1aa 100%
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 2s linear infinite;
+    display: inline-block;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 100% 0;
+    }
+    100% {
+        background-position: -100% 0;
+    }
+}
+
+/* Magic Text Container Fixes */
+.magic-text {
+    position: relative;
+    display: inline-block; /* Wraps tightly around text */
+}
+
+/* Prevent layout shift when replacing text */
+.text-reveal {
+    min-height: 1.5em; 
+}
+
+/* ==================== */
+/* VIDEO FIXES & UPDATES */
+/* ==================== */
+
+.deep-fake-label {
+    text-align: center;
+    font-family: var(--font-mono); /* Use mono font for that 'tech' vibe */
+    font-size: 14px;
+    color: var(--text-muted); /* Or a specific color */
+    margin-bottom: 10px;
+    margin-top: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* Ensure video scales correctly */
+.creative-main-video {
+    width: 100%;
+    height: auto !important; /* Force auto height to respect aspect ratio */
+    display: block;
+    object-fit: contain; /* Or cover depending on pref, contain ensures no clipping */
+    background: #000; /* Black bars if needed */
+}
