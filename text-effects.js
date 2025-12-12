@@ -109,3 +109,30 @@ window.initTextEffects = () => {
 };
 
 window.addEventListener('load', window.initTextEffects);
+
+// Book List Toggle
+document.addEventListener('DOMContentLoaded', () => {
+    const toggleBtn = document.getElementById('toggle-books-btn');
+    const booksContainer = document.getElementById('books-list-container');
+    
+    if (toggleBtn && booksContainer) {
+        toggleBtn.addEventListener('click', () => {
+            const isVisible = booksContainer.classList.contains('visible');
+            
+            if (isVisible) {
+                booksContainer.classList.remove('visible');
+                setTimeout(() => {
+                    booksContainer.style.display = 'none';
+                }, 500); 
+                toggleBtn.textContent = "See Jack's Recommended List";
+            } else {
+                booksContainer.style.display = 'block';
+                // Small delay to allow display:block to render
+                requestAnimationFrame(() => {
+                    booksContainer.classList.add('visible');
+                });
+                toggleBtn.textContent = "Hide List";
+            }
+        });
+    }
+});
