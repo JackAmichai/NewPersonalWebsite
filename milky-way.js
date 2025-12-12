@@ -25,6 +25,14 @@ class MilkyWayExperience {
         this.currentRotationY = 0;
         this.isHandDetected = false;
 
+        // Mouse/Touch interaction state
+        this.isDragging = false;
+        this.previousMousePosition = { x: 0, y: 0 };
+        this.cameraDistance = 1000;
+
+        // Touch state for pinch-zoom
+        this.lastTouchDistance = 0;
+
         this.init();
     }
 
@@ -51,6 +59,10 @@ class MilkyWayExperience {
         this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
         this.renderer.setPixelRatio(window.devicePixelRatio);
         this.container.appendChild(this.renderer.domElement);
+
+        // Add mouse and touch controls
+        this.setupMouseControls();
+        this.setupTouchControls();
     }
 
     createGalaxy() {
@@ -109,11 +121,103 @@ class MilkyWayExperience {
         this.scene.add(this.particles);
     }
 
+    setupMouseControls() {
+        const canvas = this.renderer.domElement;
+
+        canvas.addEventListener('mousedown', (e) => {
+            this.isDragging = true;
+            this.previousMousePosition = { x: e.clientX, y: e.clientY };
+        });
+
+        canvas.addEventListener('mousemove', (e) => {
+            if (!this.isDragging) return;
+
+            const deltaX = e.clientX - this.previousMousePosition.x;
+            const deltaY = e.clientY - this.previousMousePosition.y;
+
+            this.targetRotationY += deltaX * 0.005;
+            this.targetRotationX += deltaY * 0.005;
+
+            this.previousMousePosition = { x: e.clientX, y: e.clientY };
+        });
+
+        canvas.addEventListener('mouseup', () => {
+            this.isDragging = false;
+        });
+
+        canvas.addEventListener('mouseleave', () => {
+            this.isDragging = false;
+        });
+
+        // Wheel zoom
+        canvas.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            this.cameraDistance += e.deltaY * 0.5;
+            this.cameraDistance = Math.max(300, Math.min(2000, this.cameraDistance));
+        });
+    }
+
+    setupTouchControls() {
+        const canvas = this.renderer.domElement;
+
+        canvas.addEventListener('touchstart', (e) => {
+            if (e.touches.length === 1) {
+                this.isDragging = true;
+                this.previousMousePosition = {
+                    x: e.touches[0].clientX,
+                    y: e.touches[0].clientY
+                };
+            } else if (e.touches.length === 2) {
+                // Pinch zoom
+                const dx = e.touches[0].clientX - e.touches[1].clientX;
+                const dy = e.touches[0].clientY - e.touches[1].clientY;
+                this.lastTouchDistance = Math.sqrt(dx * dx + dy * dy);
+            }
+        });
+
+        canvas.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+
+            if (e.touches.length === 1 && this.isDragging) {
+                const deltaX = e.touches[0].clientX - this.previousMousePosition.x;
+                const deltaY = e.touches[0].clientY - this.previousMousePosition.y;
+
+                this.targetRotationY += deltaX * 0.005;
+                this.targetRotationX += deltaY * 0.005;
+
+                this.previousMousePosition = {
+                    x: e.touches[0].clientX,
+                    y: e.touches[0].clientY
+                };
+            } else if (e.touches.length === 2) {
+                const dx = e.touches[0].clientX - e.touches[1].clientX;
+                const dy = e.touches[0].clientY - e.touches[1].clientY;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (this.lastTouchDistance > 0) {
+                    const delta = distance - this.lastTouchDistance;
+                    this.cameraDistance -= delta * 2;
+                    this.cameraDistance = Math.max(300, Math.min(2000, this.cameraDistance));
+                }
+
+                this.lastTouchDistance = distance;
+            }
+        });
+
+        canvas.addEventListener('touchend', () => {
+            this.isDragging = false;
+            this.lastTouchDistance = 0;
+        });
+    }
+
     initMediaPipe() {
-        // Create a video element for the webcam stream (hidden)
+        // Create a video element for the webcam stream
         const videoElement = document.createElement('video');
         videoElement.id = 'webcam-input';
-        videoElement.style.display = 'none';
+        videoElement.className = 'webcam-feed';
+        videoElement.style.display = 'none'; // Hidden initially
+        videoElement.autoplay = true;
+        videoElement.playsInline = true;
         document.body.appendChild(videoElement);
 
         this.hands = new Hands({
@@ -161,8 +265,10 @@ class MilkyWayExperience {
 
             await this.webcam.start();
 
-            // Success
-            if (statusEl) statusEl.innerText = "Camera Active! Move your hand to spin the galaxy.";
+            // Success - show camera feed
+            videoElement.style.display = 'block';
+
+            if (statusEl) statusEl.innerText = "✋ Camera Active! Move your hand to spin the galaxy. (Mouse/touch also works!)";
             if (btn) btn.style.display = 'none'; // Hide button
 
             // Optional: Fade out overlay partially so user sees galaxy clearly but knows it's working
@@ -182,11 +288,11 @@ class MilkyWayExperience {
 
             let msg = "Could not access webcam.";
             if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
-                msg = "🚫 Access denied. Please enable camera in URL bar 🔒 -> Site Settings, then click Retry.";
+                msg = "🚫 Camera denied. No worries! Use your mouse or touch to control the galaxy instead. (Enable camera in browser settings to try hand control)";
             } else if (err.name === 'NotFoundError') {
-                msg = "🚫 No camera found.";
+                msg = "📷 No camera found. Use your mouse or touch to explore the galaxy!";
             } else {
-                msg = `Camera error: ${err.message || err.name}`;
+                msg = `Camera error. Use mouse/touch controls to explore! (${err.message || err.name})`;
             }
 
             if (statusEl) {
@@ -252,6 +358,9 @@ class MilkyWayExperience {
             this.particles.rotation.x = this.currentRotationX;
             this.particles.rotation.y = this.currentRotationY;
         }
+
+        // Update camera position for zoom
+        this.camera.position.z = this.cameraDistance;
 
         if (this.renderer && this.scene && this.camera) {
             this.renderer.render(this.scene, this.camera);
