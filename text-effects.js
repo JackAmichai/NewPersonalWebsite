@@ -19,12 +19,16 @@ class TextReveal {
         this.element.style.opacity = '1'; // Ensure container is visible
 
         if (this.type === 'word') {
-            const words = text.split(/(\s+)/);
-            words.forEach(word => {
+            // Split by space but capture the space
+            const segments = text.split(/(\s+)/);
+            segments.forEach(segment => {
                 const span = document.createElement('span');
-                span.innerText = word;
+                span.innerText = segment;
                 span.style.opacity = '0';
                 span.style.display = 'inline-block';
+                // Critical fix for spacing:
+                span.style.whiteSpace = 'pre';
+
                 span.style.transform = 'translateY(10px)';
                 span.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
                 span.classList.add('reveal-item');
@@ -37,8 +41,7 @@ class TextReveal {
                 span.innerText = char;
                 span.style.opacity = '0';
                 span.style.display = 'inline-block';
-                // Preserve spaces
-                if (char === ' ') span.style.width = '0.3em';
+                span.style.whiteSpace = 'pre'; // Fix for char spacing
 
                 span.style.transform = 'translateY(10px)';
                 span.style.transition = 'opacity 0.5s ease, transform 0.5s ease';

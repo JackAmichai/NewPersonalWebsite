@@ -177,22 +177,30 @@ class MilkyWayExperience {
         } catch (err) {
             console.error("Error starting webcam:", err);
 
+            // Allow retry
+            this.webcam = null;
+
             let msg = "Could not access webcam.";
             if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
-                msg = "Camera access denied. Please enable permissions in your browser settings (look for the camera icon in the address bar).";
+                msg = "🚫 Access denied. Please enable camera in URL bar 🔒 -> Site Settings, then click Retry.";
             } else if (err.name === 'NotFoundError') {
-                msg = "No camera found on this device.";
+                msg = "🚫 No camera found.";
             } else {
                 msg = `Camera error: ${err.message || err.name}`;
             }
 
             if (statusEl) {
                 statusEl.innerText = msg;
-                statusEl.style.color = '#ff6b6b'; // Red color for error
-                statusEl.style.backgroundColor = 'rgba(0,0,0,0.8)';
+                statusEl.style.color = '#ff4444';
+                statusEl.style.backgroundColor = 'rgba(0,0,0,0.9)';
+                statusEl.style.padding = '10px';
+                statusEl.style.borderRadius = '8px';
             }
             // Re-enable button to try again
-            if (btn) btn.style.display = 'block';
+            if (btn) {
+                btn.style.display = 'block';
+                btn.innerText = "Retry Camera Access";
+            }
         }
     }
 

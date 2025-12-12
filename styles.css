@@ -5061,3 +5061,28 @@ html {
     object-fit: contain; /* Or cover depending on pref, contain ensures no clipping */
     background: #000; /* Black bars if needed */
 }
+
+/* ==================== */
+/* SPARKLES EFFECT */
+/* ==================== */
+
+.sparkles-text {
+    position: relative;
+    display: inline-block;
+    font-weight: bold;
+}
+
+@keyframes sparkle-anim {
+    0% {
+        opacity: 0;
+        transform: scale(0) rotate(0deg);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1) rotate(180deg);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0) rotate(360deg);
+    }
+}
