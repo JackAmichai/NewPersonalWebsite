@@ -555,6 +555,8 @@ section {
     position: relative;
     display: flex;
     align-items: center;
+    justify-content: flex-start;
+    text-align: left;
     width: 100%;
 }
 
@@ -856,7 +858,7 @@ section {
 
 .impact-dashboard .section-title {
     color: white;
-    text-align: center;
+    text-align: left;
     margin-bottom: 20px;
 }
 
@@ -4717,6 +4719,7 @@ html {
         width: 100%;
     }
 }
+
 /* ==================== */
 /* CREATIVE AI SECTION */
 /* ==================== */
@@ -4765,7 +4768,8 @@ html {
 }
 
 .universe-section .section-title::before {
-    background-color: #ff6030; /* Keep consistent with galaxy core */
+    background-color: #ff6030;
+    /* Keep consistent with galaxy core */
 }
 
 .universe-section .section-subtitle {
@@ -4800,12 +4804,14 @@ html {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    pointer-events: none; /* Let clicks pass through to canvas mostly */
+    pointer-events: none;
+    /* Let clicks pass through to canvas mostly */
     z-index: 10;
 }
 
 .milky-way-overlay button {
-    pointer-events: auto; /* Re-enable for button */
+    pointer-events: auto;
+    /* Re-enable for button */
 }
 
 .btn-glass {
@@ -4843,7 +4849,8 @@ html {
 
 /* Overwrite existing hero styles */
 .hero {
-    background: #f5f5f5; /* Light gray background like reference */
+    background: #f5f5f5;
+    /* Light gray background like reference */
     color: #333;
     position: relative;
     overflow: hidden;
@@ -4851,13 +4858,15 @@ html {
 }
 
 /* Ensure ::before/::after don't mess up the light theme */
-.hero::before, .hero::after {
-    display: none; 
+.hero::before,
+.hero::after {
+    display: none;
 }
 
 /* Layout: Flex/Grid - Photo Left, Text Right */
 .hero .container .hero-grid {
-    display: flex; /* Changed from grid to flex for easy centering */
+    display: flex;
+    /* Changed from grid to flex for easy centering */
     align-items: center;
     justify-content: center;
     gap: 80px;
@@ -4876,15 +4885,17 @@ html {
     border-radius: 50%;
     overflow: hidden;
     position: relative;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-    border: 5px solid white; /* Optional white rim */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    border: 5px solid white;
+    /* Optional white rim */
 }
 
 .hero-image-circle {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 20%; /* Adjust if head is cut off */
+    object-position: center 20%;
+    /* Adjust if head is cut off */
 }
 
 /* Minimalist Content */
@@ -4935,17 +4946,17 @@ html {
     justify-content: center;
     text-decoration: none;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    border: 2px solid rgba(0,0,0,0.1);
+    border: 2px solid rgba(0, 0, 0, 0.1);
     color: #111;
     font-weight: 700;
     font-size: 16px;
     text-align: center;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
 .btn-circle:hover {
     transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
     z-index: 2;
 }
 
@@ -4955,19 +4966,23 @@ html {
 
 /* Specific Colors from Reference */
 .btn-circle-resume {
-    background-color: #C1D94C; /* Lime/Light Green */
+    background-color: #C1D94C;
+    /* Lime/Light Green */
 }
 
 .btn-circle-research {
-    background-color: #F8A700; /* Orange/Gold */
+    background-color: #F8A700;
+    /* Orange/Gold */
 }
 
 .btn-circle-outreach {
-    background-color: #8AD2D8; /* Cyan/Teal */
+    background-color: #8AD2D8;
+    /* Cyan/Teal */
 }
 
 .btn-circle-personal {
-    background-color: #C0C0C0; /* Light Grey */
+    background-color: #C0C0C0;
+    /* Light Grey */
 }
 
 /* Responsive */
@@ -4990,7 +5005,7 @@ html {
     .hero-buttons-circle-row {
         justify-content: center;
     }
-    
+
     .btn-circle {
         width: 90px;
         height: 90px;
@@ -5004,12 +5019,10 @@ html {
 
 /* Text Shimmer Effect */
 .text-shimmer {
-    background: linear-gradient(
-        90deg,
-        #a1a1aa 0%,
-        #000 50%,
-        #a1a1aa 100%
-    );
+    background: linear-gradient(90deg,
+            #a1a1aa 0%,
+            #000 50%,
+            #a1a1aa 100%);
     background-size: 200% 100%;
     -webkit-background-clip: text;
     background-clip: text;
@@ -5022,6 +5035,7 @@ html {
     0% {
         background-position: 100% 0;
     }
+
     100% {
         background-position: -100% 0;
     }
@@ -5030,12 +5044,13 @@ html {
 /* Magic Text Container Fixes */
 .magic-text {
     position: relative;
-    display: inline-block; /* Wraps tightly around text */
+    display: inline-block;
+    /* Wraps tightly around text */
 }
 
 /* Prevent layout shift when replacing text */
 .text-reveal {
-    min-height: 1.5em; 
+    min-height: 1.5em;
 }
 
 /* ==================== */
@@ -5044,9 +5059,11 @@ html {
 
 .deep-fake-label {
     text-align: center;
-    font-family: var(--font-mono); /* Use mono font for that 'tech' vibe */
+    font-family: var(--font-mono);
+    /* Use mono font for that 'tech' vibe */
     font-size: 14px;
-    color: var(--text-muted); /* Or a specific color */
+    color: var(--text-muted);
+    /* Or a specific color */
     margin-bottom: 10px;
     margin-top: 20px;
     letter-spacing: 1px;
@@ -5056,10 +5073,13 @@ html {
 /* Ensure video scales correctly */
 .creative-main-video {
     width: 100%;
-    height: auto !important; /* Force auto height to respect aspect ratio */
+    height: auto !important;
+    /* Force auto height to respect aspect ratio */
     display: block;
-    object-fit: contain; /* Or cover depending on pref, contain ensures no clipping */
-    background: #000; /* Black bars if needed */
+    object-fit: contain;
+    /* Or cover depending on pref, contain ensures no clipping */
+    background: #000;
+    /* Black bars if needed */
 }
 
 /* ==================== */
@@ -5077,10 +5097,12 @@ html {
         opacity: 0;
         transform: scale(0) rotate(0deg);
     }
+
     50% {
         opacity: 1;
         transform: scale(1) rotate(180deg);
     }
+
     100% {
         opacity: 0;
         transform: scale(0) rotate(360deg);
@@ -5114,7 +5136,7 @@ html {
 
 .hobby-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     border-color: var(--accent);
 }
 
@@ -5181,7 +5203,7 @@ html {
 .book-item:hover {
     border-color: var(--accent);
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
 .book-num {
@@ -5254,12 +5276,17 @@ html {
     .hobbies-grid-box {
         grid-template-columns: repeat(2, 1fr);
     }
+
     .hobby-box-item:nth-child(3n) {
-        border-right: 1px solid var(--border); /* reset */
+        border-right: 1px solid var(--border);
+        /* reset */
     }
+
     .hobby-box-item:nth-child(2n) {
-        border-right: none; /* new edge */
+        border-right: none;
+        /* new edge */
     }
+
     /* Simple reset for bottom borders on mobile is tricky withnth-child, 
        so we might just let them touch or accept double borders. 
        Let's stick to simple grid gap logic if borders are messy, 
@@ -5271,7 +5298,8 @@ html {
 /* ==================== */
 
 .books-container-toggle {
-    display: none; /* Hidden by default */
+    display: none;
+    /* Hidden by default */
     margin-top: 30px;
 }
 
@@ -5292,7 +5320,7 @@ html {
     font-weight: 600;
     cursor: pointer;
     transition: transform 0.2s ease, background 0.2s ease;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .btn-toggle-books:hover {
@@ -5315,7 +5343,8 @@ html {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     z-index: 1000;
     object-fit: cover;
-    transform: scaleX(-1); /* Mirror the feed */
+    transform: scaleX(-1);
+    /* Mirror the feed */
 }
 
 @media (max-width: 768px) {
@@ -5392,7 +5421,7 @@ html {
     left: 0;
     right: 0;
     height: 60%;
-    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
     border-radius: 0 0 16px 16px;
 }
 
@@ -5416,6 +5445,7 @@ html {
         width: 150px;
         height: 180px;
     }
+
     .resource-label {
         font-size: 14px;
         padding: 15px;
