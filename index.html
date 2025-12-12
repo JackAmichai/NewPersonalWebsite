@@ -435,11 +435,14 @@
             </div>
         </div>
 
-        <!-- Scripts for Milky Way -->
-        <script type="module">
-            import './milky-way.js';
+        <!-- Load Milky Way Script -->
+        <script src="milky-way.js"></script>
+        <script>
+            // Initialize when page loads
             window.addEventListener('load', () => {
-                if (window.initMilkyWay) window.initMilkyWay();
+                if (window.initMilkyWay) {
+                    window.initMilkyWay();
+                }
             });
         </script>
     </section>

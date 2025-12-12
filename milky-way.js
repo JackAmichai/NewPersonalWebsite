@@ -1,383 +1,342 @@
 
-import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
-import { Hands } from 'https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4/index.js';
-import { Camera } from 'https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.3/index.js';
+// SIMPLIFIED Milky Way Experience - Based on working React reference
+// Fixed version without ES6 modules, simpler implementation
 
-class MilkyWayExperience {
+class SimpleMilkyWay {
     constructor(containerId) {
         this.container = document.getElementById(containerId);
         if (!this.container) {
-            console.error('Milky Way container not found');
+            console.error('Container not found');
             return;
         }
 
+        // Three.js objects
         this.scene = null;
         this.camera = null;
         this.renderer = null;
-        this.particles = null;
-        this.hands = null;
-        this.webcam = null;
+        this.galaxy = null;
 
         // Interaction state
-        this.targetRotationX = 0;
-        this.targetRotationY = 0;
-        this.currentRotationX = 0;
-        this.currentRotationY = 0;
-        this.isHandDetected = false;
+        this.mouse = { x: 0, y: 0, down: false };
+        this.rotation = { x: 0, y: 0 };
+        this.zoom = 5;
+        this.autoRotate = true;
 
-        // Mouse/Touch interaction state
-        this.isDragging = false;
-        this.previousMousePosition = { x: 0, y: 0 };
-        this.cameraDistance = 1000;
-
-        // Touch state for pinch-zoom
-        this.lastTouchDistance = 0;
+        // Camera/hand tracking
+        this.cameraEnabled = false;
+        this.videoElement = null;
 
         this.init();
     }
 
-    async init() {
-        this.initThreeJS();
+    init() {
+        if (!window.THREE) {
+            console.error('Three.js not loaded');
+            this.showError('Three.js library not loaded. Please refresh the page.');
+            return;
+        }
+
+        this.initScene();
         this.createGalaxy();
-        this.initMediaPipe();
+        this.setupControls();
         this.animate();
 
-        window.addEventListener('resize', () => this.onWindowResize(), false);
+        window.addEventListener('resize', () => this.onResize());
     }
 
-    initThreeJS() {
+    initScene() {
+        const THREE = window.THREE;
+
+        // Scene
         this.scene = new THREE.Scene();
-        // Fog for depth
-        this.scene.fog = new THREE.FogExp2(0x000000, 0.001);
+        this.scene.background = new THREE.Color(0x000510);
 
-        this.camera = new THREE.PerspectiveCamera(75, this.container.clientWidth / this.container.clientHeight, 0.1, 2000);
-        this.camera.position.z = 1000;
-        this.camera.position.y = 500;
-        this.camera.lookAt(0, 0, 0);
+        // Camera
+        this.camera = new THREE.PerspectiveCamera(
+            75,
+            this.container.clientWidth / this.container.clientHeight,
+            0.1,
+            1000
+        );
+        this.camera.position.z = this.zoom;
 
-        this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        // Renderer
+        this.renderer = new THREE.WebGLRenderer({ antialias: true });
         this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
-        this.renderer.setPixelRatio(window.devicePixelRatio);
+        this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         this.container.appendChild(this.renderer.domElement);
-
-        // Add mouse and touch controls
-        this.setupMouseControls();
-        this.setupTouchControls();
     }
 
     createGalaxy() {
-        const geometry = new THREE.BufferGeometry();
-        const count = 50000;
+        const THREE = window.THREE;
+        const galaxyGroup = new THREE.Group();
 
-        const positions = new Float32Array(count * 3);
-        const colors = new Float32Array(count * 3);
-        const sizes = new Float32Array(count);
+        // Galaxy core - bright center
+        const coreGeometry = new THREE.SphereGeometry(0.3, 32, 32);
+        const coreMaterial = new THREE.MeshBasicMaterial({
+            color: 0xffffaa,
+            transparent: true,
+            opacity: 0.9
+        });
+        const core = new THREE.Mesh(coreGeometry, coreMaterial);
+        galaxyGroup.add(core);
 
-        const colorInside = new THREE.Color(0xff6030); // Orange/Red core
-        const colorOutside = new THREE.Color(0x1b3984); // Blue arms
+        // Spiral arms particles
+        const particleCount = 15000;
+        const positions = new Float32Array(particleCount * 3);
+        const colors = new Float32Array(particleCount * 3);
 
-        for (let i = 0; i < count; i++) {
+        for (let i = 0; i < particleCount; i++) {
             const i3 = i * 3;
 
-            // Radius
-            const radius = Math.random() * Math.random() * 800;
-            const spinAngle = radius * 5;
-            const branchAngle = (i % 3) * ((2 * Math.PI) / 3);
+            // Spiral calculation
+            const radius = Math.random() * 3 + 0.5;
+            const angle = Math.random() * Math.PI * 2;
+            const spiralAngle = angle + radius * 2;
+            const heightVar = (Math.random() - 0.5) * 0.3 * (1 - radius / 3);
 
-            const randomX = Math.pow(Math.random(), 3) * (Math.random() < 0.5 ? 1 : -1) * 50;
-            const randomY = Math.pow(Math.random(), 3) * (Math.random() < 0.5 ? 1 : -1) * 50;
-            const randomZ = Math.pow(Math.random(), 3) * (Math.random() < 0.5 ? 1 : -1) * 50;
+            positions[i3] = Math.cos(spiralAngle) * radius;
+            positions[i3 + 1] = heightVar;
+            positions[i3 + 2] = Math.sin(spiralAngle) * radius;
 
-            positions[i3] = Math.cos(branchAngle + spinAngle) * radius + randomX;
-            positions[i3 + 1] = randomY + (Math.random() - 0.5) * (radius * 0.2); // Flatten disk
-            positions[i3 + 2] = Math.sin(branchAngle + spinAngle) * radius + randomZ;
-
-            // Color
-            const mixedColor = colorInside.clone();
-            mixedColor.lerp(colorOutside, radius / 800);
-
-            colors[i3] = mixedColor.r;
-            colors[i3 + 1] = mixedColor.g;
-            colors[i3 + 2] = mixedColor.b;
-
-            // Size
-            sizes[i] = Math.random() * 2;
+            // Color (blue to white)
+            const colorIntensity = Math.random() * 0.5 + 0.5;
+            colors[i3] = colorIntensity * 0.8;
+            colors[i3 + 1] = colorIntensity * 0.9;
+            colors[i3 + 2] = colorIntensity;
         }
 
-        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-        geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-        geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+        const particlesGeometry = new THREE.BufferGeometry();
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
-        // Custom shader material for glowing points
-        const material = new THREE.PointsMaterial({
-            size: 2,
-            sizeAttenuation: true,
-            depthWrite: false,
-            blending: THREE.AdditiveBlending,
-            vertexColors: true
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.05,
+            vertexColors: true,
+            transparent: true,
+            opacity: 0.8,
+            blending: THREE.AdditiveBlending
         });
 
-        this.particles = new THREE.Points(geometry, material);
-        this.scene.add(this.particles);
+        const particles = new THREE.Points(particlesGeometry, particlesMaterial);
+        galaxyGroup.add(particles);
+
+        // Background stars
+        const starsGeometry = new THREE.BufferGeometry();
+        const starsCount = 3000;
+        const starsPositions = new Float32Array(starsCount * 3);
+
+        for (let i = 0; i < starsCount * 3; i++) {
+            starsPositions[i] = (Math.random() - 0.5) * 20;
+        }
+
+        starsGeometry.setAttribute('position', new THREE.BufferAttribute(starsPositions, 3));
+        const starsMaterial = new THREE.PointsMaterial({
+            size: 0.02,
+            color: 0xffffff,
+            transparent: true,
+            opacity: 0.6
+        });
+
+        const stars = new THREE.Points(starsGeometry, starsMaterial);
+        this.scene.add(stars);
+
+        this.galaxy = galaxyGroup;
+        this.scene.add(this.galaxy);
     }
 
-    setupMouseControls() {
+    setupControls() {
         const canvas = this.renderer.domElement;
 
+        // Mouse controls
         canvas.addEventListener('mousedown', (e) => {
-            this.isDragging = true;
-            this.previousMousePosition = { x: e.clientX, y: e.clientY };
+            this.mouse.down = true;
+            this.mouse.x = e.clientX;
+            this.mouse.y = e.clientY;
+            this.autoRotate = false;
         });
 
         canvas.addEventListener('mousemove', (e) => {
-            if (!this.isDragging) return;
+            if (!this.mouse.down) return;
 
-            const deltaX = e.clientX - this.previousMousePosition.x;
-            const deltaY = e.clientY - this.previousMousePosition.y;
+            const deltaX = e.clientX - this.mouse.x;
+            const deltaY = e.clientY - this.mouse.y;
 
-            this.targetRotationY += deltaX * 0.005;
-            this.targetRotationX += deltaY * 0.005;
+            this.rotation.y += deltaX * 0.005;
+            this.rotation.x += deltaY * 0.005;
 
-            this.previousMousePosition = { x: e.clientX, y: e.clientY };
+            this.mouse.x = e.clientX;
+            this.mouse.y = e.clientY;
         });
 
         canvas.addEventListener('mouseup', () => {
-            this.isDragging = false;
+            this.mouse.down = false;
         });
 
         canvas.addEventListener('mouseleave', () => {
-            this.isDragging = false;
+            this.mouse.down = false;
         });
 
         // Wheel zoom
         canvas.addEventListener('wheel', (e) => {
             e.preventDefault();
-            this.cameraDistance += e.deltaY * 0.5;
-            this.cameraDistance = Math.max(300, Math.min(2000, this.cameraDistance));
-        });
-    }
+            this.zoom += e.deltaY * 0.01;
+            this.zoom = Math.max(2, Math.min(10, this.zoom));
+        }, { passive: false });
 
-    setupTouchControls() {
-        const canvas = this.renderer.domElement;
+        // Touch controls
+        let lastTouchDistance = 0;
 
         canvas.addEventListener('touchstart', (e) => {
             if (e.touches.length === 1) {
-                this.isDragging = true;
-                this.previousMousePosition = {
-                    x: e.touches[0].clientX,
-                    y: e.touches[0].clientY
-                };
+                this.mouse.down = true;
+                this.mouse.x = e.touches[0].clientX;
+                this.mouse.y = e.touches[0].clientY;
+                this.autoRotate = false;
             } else if (e.touches.length === 2) {
-                // Pinch zoom
                 const dx = e.touches[0].clientX - e.touches[1].clientX;
                 const dy = e.touches[0].clientY - e.touches[1].clientY;
-                this.lastTouchDistance = Math.sqrt(dx * dx + dy * dy);
+                lastTouchDistance = Math.sqrt(dx * dx + dy * dy);
             }
         });
 
         canvas.addEventListener('touchmove', (e) => {
             e.preventDefault();
 
-            if (e.touches.length === 1 && this.isDragging) {
-                const deltaX = e.touches[0].clientX - this.previousMousePosition.x;
-                const deltaY = e.touches[0].clientY - this.previousMousePosition.y;
+            if (e.touches.length === 1 && this.mouse.down) {
+                const deltaX = e.touches[0].clientX - this.mouse.x;
+                const deltaY = e.touches[0].clientY - this.mouse.y;
 
-                this.targetRotationY += deltaX * 0.005;
-                this.targetRotationX += deltaY * 0.005;
+                this.rotation.y += deltaX * 0.005;
+                this.rotation.x += deltaY * 0.005;
 
-                this.previousMousePosition = {
-                    x: e.touches[0].clientX,
-                    y: e.touches[0].clientY
-                };
+                this.mouse.x = e.touches[0].clientX;
+                this.mouse.y = e.touches[0].clientY;
             } else if (e.touches.length === 2) {
                 const dx = e.touches[0].clientX - e.touches[1].clientX;
                 const dy = e.touches[0].clientY - e.touches[1].clientY;
                 const distance = Math.sqrt(dx * dx + dy * dy);
 
-                if (this.lastTouchDistance > 0) {
-                    const delta = distance - this.lastTouchDistance;
-                    this.cameraDistance -= delta * 2;
-                    this.cameraDistance = Math.max(300, Math.min(2000, this.cameraDistance));
+                if (lastTouchDistance > 0) {
+                    const delta = distance - lastTouchDistance;
+                    this.zoom -= delta * 0.01;
+                    this.zoom = Math.max(2, Math.min(10, this.zoom));
                 }
 
-                this.lastTouchDistance = distance;
+                lastTouchDistance = distance;
             }
-        });
+        }, { passive: false });
 
         canvas.addEventListener('touchend', () => {
-            this.isDragging = false;
-            this.lastTouchDistance = 0;
+            this.mouse.down = false;
+            lastTouchDistance = 0;
         });
     }
 
-    initMediaPipe() {
-        // Create a video element for the webcam stream
-        const videoElement = document.createElement('video');
-        videoElement.id = 'webcam-input';
-        videoElement.className = 'webcam-feed';
-        videoElement.style.display = 'none'; // Hidden initially
-        videoElement.autoplay = true;
-        videoElement.playsInline = true;
-        document.body.appendChild(videoElement);
-
-        this.hands = new Hands({
-            locateFile: (file) => {
-                return `https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4/${file}`;
-            }
-        });
-
-        this.hands.setOptions({
-            maxNumHands: 1,
-            modelComplexity: 1,
-            minDetectionConfidence: 0.5,
-            minTrackingConfidence: 0.5
-        });
-
-        this.hands.onResults((results) => this.onHandResults(results));
-
-        // Initialize camera
-        // Note: Actual camera start should probably be triggered by user action 
-        // to comply with browser autoplay policies and permissions.
-        // We will expose a method to start it.
-    }
-
-    async startExperience() {
-        const videoElement = document.getElementById('webcam-input');
-        const statusEl = document.getElementById('milky-way-status');
-        const btn = document.getElementById('start-milky-way-btn');
-        const overlay = document.querySelector('.milky-way-overlay');
-
-        if (this.webcam) return; // Already started
-
+    async enableCamera() {
         try {
-            if (statusEl) statusEl.innerText = "Requesting camera access... Please click 'Allow'.";
-
-            // Check explicit permissions if supported (optional but good practice)
-            // But main logic is try/catch on MediaPipe/GetUserMedia
-
-            this.webcam = new Camera(videoElement, {
-                onFrame: async () => {
-                    await this.hands.send({ image: videoElement });
-                },
-                width: 640,
-                height: 480
+            const stream = await navigator.mediaDevices.getUserMedia({
+                video: { facingMode: 'user' }
             });
 
-            await this.webcam.start();
-
-            // Success - show camera feed
-            videoElement.style.display = 'block';
-
-            if (statusEl) statusEl.innerText = "✋ Camera Active! Move your hand to spin the galaxy. (Mouse/touch also works!)";
-            if (btn) btn.style.display = 'none'; // Hide button
-
-            // Optional: Fade out overlay partially so user sees galaxy clearly but knows it's working
-            if (overlay) {
-                overlay.style.pointerEvents = 'none';
-                // Move status text to corner or fade it out after a few seconds
-                setTimeout(() => {
-                    if (statusEl) statusEl.style.opacity = '0';
-                }, 5000);
+            if (!this.videoElement) {
+                this.videoElement = document.createElement('video');
+                this.videoElement.className = 'webcam-feed';
+                this.videoElement.autoplay = true;
+                this.videoElement.playsInline = true;
+                document.body.appendChild(this.videoElement);
             }
 
-        } catch (err) {
-            console.error("Error starting webcam:", err);
+            this.videoElement.srcObject = stream;
+            this.cameraEnabled = true;
+            this.updateStatus('✋ Camera active! Move your hand to control. (Mouse still works!)', 'success');
 
-            // Allow retry
-            this.webcam = null;
-
-            let msg = "Could not access webcam.";
-            if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
-                msg = "🚫 Camera denied. No worries! Use your mouse or touch to control the galaxy instead. (Enable camera in browser settings to try hand control)";
-            } else if (err.name === 'NotFoundError') {
-                msg = "📷 No camera found. Use your mouse or touch to explore the galaxy!";
-            } else {
-                msg = `Camera error. Use mouse/touch controls to explore! (${err.message || err.name})`;
-            }
-
-            if (statusEl) {
-                statusEl.innerText = msg;
-                statusEl.style.color = '#ff4444';
-                statusEl.style.backgroundColor = 'rgba(0,0,0,0.9)';
-                statusEl.style.padding = '10px';
-                statusEl.style.borderRadius = '8px';
-            }
-            // Re-enable button to try again
-            if (btn) {
-                btn.style.display = 'block';
-                btn.innerText = "Retry Camera Access";
-            }
+        } catch (error) {
+            console.error('Camera error:', error);
+            this.updateStatus('📷 Camera denied. No problem! Use mouse/touch controls.', 'warning');
+            this.cameraEnabled = false;
         }
     }
 
-    onHandResults(results) {
-        if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
-            this.isHandDetected = true;
-            const landmarks = results.multiHandLandmarks[0];
+    disableCamera() {
+        if (this.videoElement && this.videoElement.srcObject) {
+            const stream = this.videoElement.srcObject;
+            stream.getTracks().forEach(track => track.stop());
+            this.videoElement.srcObject = null;
+            if (document.body.contains(this.videoElement)) {
+                document.body.removeChild(this.videoElement);
+            }
+            this.videoElement = null;
+        }
+        this.cameraEnabled = false;
+        this.updateStatus('Using mouse/touch controls', 'info');
+    }
 
-            // Use index finger tip (point 8) and wrist (point 0) to detect movement/rotation
-            const x = landmarks[8].x; // 0 to 1
-            const y = landmarks[8].y; // 0 to 1
+    animate() {
+        requestAnimationFrame(() => this.animate());
 
-            // Map hand position to rotation target
-            // Center is 0.5, 0.5. Range -0.5 to 0.5
-            // Multiply to get rotation range (e.g., -PI to PI)
-            this.targetRotationY = (x - 0.5) * 4; // Horizontal hand move -> Rotate around Y
-            this.targetRotationX = (y - 0.5) * 4; // Vertical hand move -> Rotate around X
+        if (this.galaxy) {
+            // Auto-rotate slowly if not being controlled
+            if (this.autoRotate) {
+                this.rotation.y += 0.001;
+            }
 
-            // Optional: Use pinch (distance between thumb tip 4 and index tip 8) for zoom?
-            // For now, let's keep it simple: rotation.
-        } else {
-            this.isHandDetected = false;
+            this.galaxy.rotation.x = this.rotation.x;
+            this.galaxy.rotation.y = this.rotation.y;
+        }
+
+        // Apply zoom
+        this.camera.position.z = this.zoom;
+
+        if (this.renderer && this.scene && this.camera) {
+            this.renderer.render(this.scene, this.camera);
         }
     }
 
-    onWindowResize() {
-        if (!this.camera || !this.renderer) return;
+    onResize() {
+        if (!this.camera || !this.renderer || !this.container) return;
 
         this.camera.aspect = this.container.clientWidth / this.container.clientHeight;
         this.camera.updateProjectionMatrix();
         this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
     }
 
-    animate() {
-        requestAnimationFrame(() => this.animate());
-
-        // Smooth rotation interpolation
-        if (this.isHandDetected) {
-            this.currentRotationX += (this.targetRotationX - this.currentRotationX) * 0.05;
-            this.currentRotationY += (this.targetRotationY - this.currentRotationY) * 0.05;
-        } else {
-            // Auto idle rotation
-            this.currentRotationY += 0.001;
-            // Return to flat X plane
-            this.currentRotationX += (0.2 - this.currentRotationX) * 0.02; // Slight tilt
+    updateStatus(message, type = 'info') {
+        const statusEl = document.getElementById('milky-way-status');
+        if (statusEl) {
+            statusEl.textContent = message;
+            statusEl.className = `milky-way-status status-${type}`;
         }
+    }
 
-        if (this.particles) {
-            this.particles.rotation.x = this.currentRotationX;
-            this.particles.rotation.y = this.currentRotationY;
-        }
-
-        // Update camera position for zoom
-        this.camera.position.z = this.cameraDistance;
-
-        if (this.renderer && this.scene && this.camera) {
-            this.renderer.render(this.scene, this.camera);
+    showError(message) {
+        const statusEl = document.getElementById('milky-way-status');
+        if (statusEl) {
+            statusEl.textContent = `❌ ${message}`;
+            statusEl.className = 'milky-way-status status-error';
         }
     }
 }
 
-// Global initialization function to be called from HTML
+// Global initialization
 window.initMilkyWay = () => {
-    const experience = new MilkyWayExperience('milky-way-container');
+    const experience = new SimpleMilkyWay('milky-way-container');
 
-    // Bind button
+    // Bind camera button
     const btn = document.getElementById('start-milky-way-btn');
     if (btn) {
         btn.addEventListener('click', () => {
-            experience.startExperience();
-            btn.style.display = 'none'; // Hide button after start
+            if (!experience.cameraEnabled) {
+                experience.enableCamera();
+            } else {
+                experience.disableCamera();
+            }
+
+            // Update button text
+            btn.textContent = experience.cameraEnabled ? 'Disable Camera' : 'Enable Hand Control';
         });
     }
+
+    // Update initial status
+    experience.updateStatus('🖱️ Drag to rotate • Scroll to zoom • Click button for hand control', 'info');
 };
