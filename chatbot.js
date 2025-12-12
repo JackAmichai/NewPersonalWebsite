@@ -81,6 +81,10 @@ const jackKnowledgeBase = {
     "inspiration|career|path|architect|future|vision": {
         answer: "Jack is inspired by the intersection of **AI and Product Management**. His vision is to become a **Product Architect** who bridges the gap between technical innovation and user needs, building systems that are not only powerful but also intuitive and impactful.",
         keywords: ["inspiration", "career path", "product architect", "vision"]
+    },
+    "pawquest|paw|quest|dog|pet|social|app|community": {
+        answer: "Jack built **PawQuest**, a social platform for dog owners! 🐕 It helps pet owners find playmates for their dogs, organize local meetups, and build community. Features include dog profile matching (by breed, size, temperament), location-based discovery, event scheduling with RSVPs, and community forums. Check it out at paw-quest-f31de0c0.base44.app!",
+        keywords: ["PawQuest", "dog", "pet", "social app", "community"]
     }
 };
 
