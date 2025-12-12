@@ -5326,3 +5326,27 @@ html {
         right: 10px;
     }
 }
+
+/* ==================== */
+/* HOBBIES COLLAGE IMAGE */
+/* ==================== */
+
+.hobbies-image-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.hobbies-collage-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--border);
+    transition: transform 0.3s ease;
+}
+
+.hobbies-collage-img:hover {
+    transform: scale(1.02);
+}
