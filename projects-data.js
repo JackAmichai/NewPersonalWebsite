@@ -35,6 +35,38 @@ const projectsData = [
         evidence: "Live Demo | GitHub Repository"
     },
     {
+        id: "pawquest",
+        title: "PawQuest: Dog Social App",
+        role: "Full Stack Developer",
+        featured: true,
+        image: "https://paw-quest-f31de0c0.base44.app/Landing",
+        video: "video proj/Find Your Pack Today-VEED.mp4",
+        problem: "Dog owners struggle to find compatible playmates for their pets and organize social meetups in their local area.",
+        solution: "A social platform connecting dog owners to find playmates, organize meetups, and build thriving local pet communities. Features dog profiles, matching, event scheduling, and community forums.",
+        approach: [
+            "Built <strong>dog profile matching</strong> based on breed, size, and temperament",
+            "Implemented <strong>location-based discovery</strong> for local meetups",
+            "Created <strong>event scheduling</strong> with RSVP and reminders",
+            "Designed <strong>community forums</strong> for pet advice and tips"
+        ],
+        outcome: "Live app helping dog owners find the perfect playmates for their furry friends.",
+        metrics: [
+            "🐕 <strong>Dog profiles</strong> with matching",
+            "📍 <strong>Location-based</strong> discovery",
+            "📅 <strong>Event scheduling</strong> and RSVPs",
+            "💬 <strong>Community forums</strong>"
+        ],
+        techStack: ["React", "Node.js", "Base44", "Mobile-first", "Social Features"],
+        techDetails: "Built on Base44 platform with React frontend. Features real-time messaging, geolocation services, and profile matching algorithms.",
+        links: {
+            github: "https://github.com/base44dev/paw-quest-f31de0c0.git",
+            demo: "https://paw-quest-f31de0c0.base44.app/Landing"
+        },
+        mediaType: "video",
+        mediaUrl: "video proj/Find Your Pack Today-VEED.mp4",
+        evidence: "Live App | GitHub Repository"
+    },
+    {
         id: "leairn",
         title: "LeAIrn: AI Education Platform",
         role: "Product Lead",
