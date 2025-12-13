@@ -6771,3 +6771,112 @@ html {
     align-items: center;
     gap: 4px;
 }
+
+/* ==================== */
+/* TOGGLE CARDS (Featured Work) */
+/* ==================== */
+
+.view-toggle {
+    display: flex;
+    gap: 20px;
+    background: transparent; /* Override previous container style */
+    padding: 0;
+    border-radius: 0;
+}
+
+.toggle-card {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    width: 220px;
+    height: 140px;
+    border-radius: 16px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    padding: 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.toggle-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4); /* Dim unselected cards */
+    transition: background 0.3s ease;
+    z-index: 1;
+}
+
+.toggle-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.toggle-card:hover::before {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.toggle-card.active {
+    border-color: var(--accent);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 30px rgba(0, 102, 204, 0.3);
+}
+
+.toggle-card.active::before {
+    background: rgba(0, 0, 0, 0.1); /* Brighter when active */
+}
+
+/* Gradient overlay for text readability */
+.toggle-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    z-index: 2;
+    transition: height 0.3s ease;
+}
+
+.toggle-card:hover::after,
+.toggle-card.active::after {
+    height: 70%;
+}
+
+.toggle-card-label {
+    position: relative;
+    z-index: 3;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 15px;
+    text-align: center;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    width: 100%;
+}
+
+/* Mobile Responsive for Toggle Cards */
+@media (max-width: 600px) {
+    .view-toggle {
+        width: 100%;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .toggle-card {
+        flex: 1;
+        height: 100px;
+        width: auto;
+    }
+
+    .toggle-card-label {
+        font-size: 13px;
+        padding: 10px;
+    }
+}
