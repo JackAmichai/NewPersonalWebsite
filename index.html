@@ -256,61 +256,121 @@
     <section class="featured-preview">
         <div class="container">
             <h2 class="section-title sparkles-text" data-sparkles-count="8">Featured Work</h2>
-            <p class="section-subtitle">Real projects with working code on GitHub</p>
+            <p class="section-subtitle">Real projects with working code — click to try live demos</p>
 
-            <div class="featured-videos-grid">
-                <!-- Hatrick Project -->
-                <div class="featured-video-card">
-                    <div class="video-wrapper">
-                        <video controls muted loop playsinline>
-                            <source src="video proj/Project_Video_Generation_With_Music.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                    <div class="video-card-content">
-                        <h3>Hatrick: AI Agents Orchestration</h3>
-                        <p>Multi-agent system for cyber attack/defense simulation using LLM orchestration</p>
-                        <a href="https://github.com/JackAmichai/Hatrick" target="_blank" class="video-card-link">
-                            View on GitHub →
-                        </a>
+            <!-- Hatrick Project Group -->
+            <div class="project-group">
+                <div class="project-group-header">
+                    <h3 class="project-group-title">Hatrick: AI Cyber Defense</h3>
+                    <div class="project-group-links">
+                        <a href="https://hatrick.vercel.app" target="_blank" class="btn-demo">Live Demo</a>
+                        <a href="https://github.com/JackAmichai/Hatrick" target="_blank" class="btn-github">GitHub</a>
                     </div>
                 </div>
+                <p class="project-group-desc">Multi-agent system for cyber attack/defense simulation using LLM
+                    orchestration (LangChain/Groq). 6+ autonomous AI agents with sub-second inference.</p>
 
-                <!-- Scholar 2.6 Project -->
-                <div class="featured-video-card">
-                    <div class="video-wrapper">
+                <div class="project-content-grid">
+                    <!-- Videos -->
+                    <div class="videos-column">
+                        <div class="video-wrapper">
+                            <video controls muted loop playsinline>
+                                <source src="video proj/Project_Video_Generation_With_Music.mp4" type="video/mp4">
+                            </video>
+                            <span class="video-label">Demo Video 1</span>
+                        </div>
+                        <div class="video-wrapper">
+                            <video controls muted loop playsinline>
+                                <source src="video proj/Hatrick_Demo_2.mp4" type="video/mp4">
+                            </video>
+                            <span class="video-label">Demo Video 2</span>
+                        </div>
+                    </div>
+                    <!-- Live Demo Embed -->
+                    <div class="demo-column">
+                        <div class="live-demo-frame">
+                            <div class="frame-header">
+                                <span class="frame-dot red"></span>
+                                <span class="frame-dot yellow"></span>
+                                <span class="frame-dot green"></span>
+                                <span class="frame-url">hatrick.vercel.app</span>
+                            </div>
+                            <iframe src="https://hatrick.vercel.app" loading="lazy" title="Hatrick Live Demo"></iframe>
+                            <a href="https://hatrick.vercel.app" target="_blank" class="demo-overlay">
+                                <span>Open in New Tab</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PawQuest Project Group -->
+            <div class="project-group">
+                <div class="project-group-header">
+                    <h3 class="project-group-title">PawQuest: Dog Social App</h3>
+                    <div class="project-group-links">
+                        <a href="https://paw-quest-f31de0c0.base44.app/Landing" target="_blank" class="btn-demo">Live
+                            Demo</a>
+                        <a href="https://github.com/base44dev/paw-quest-f31de0c0" target="_blank"
+                            class="btn-github">GitHub</a>
+                    </div>
+                </div>
+                <p class="project-group-desc">Social platform for dog owners featuring real-time matching, location
+                    discovery, and event scheduling. Build local pet communities.</p>
+
+                <div class="project-content-grid">
+                    <!-- Videos -->
+                    <div class="videos-column">
+                        <div class="video-wrapper">
+                            <video controls muted loop playsinline>
+                                <source src="video proj/Find Your Pack Today-VEED.mp4" type="video/mp4">
+                            </video>
+                            <span class="video-label">Promo Video</span>
+                        </div>
+                        <div class="video-wrapper">
+                            <video controls muted loop playsinline>
+                                <source src="video proj/PawQuest_Demo_2.mp4" type="video/mp4">
+                            </video>
+                            <span class="video-label">App Walkthrough</span>
+                        </div>
+                    </div>
+                    <!-- Live Demo Embed -->
+                    <div class="demo-column">
+                        <div class="live-demo-frame">
+                            <div class="frame-header">
+                                <span class="frame-dot red"></span>
+                                <span class="frame-dot yellow"></span>
+                                <span class="frame-dot green"></span>
+                                <span class="frame-url">paw-quest.base44.app</span>
+                            </div>
+                            <iframe src="https://paw-quest-f31de0c0.base44.app/Landing" loading="lazy"
+                                title="PawQuest Live Demo"></iframe>
+                            <a href="https://paw-quest-f31de0c0.base44.app/Landing" target="_blank"
+                                class="demo-overlay">
+                                <span>Open in New Tab</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scholar 2.6 Project -->
+            <div class="project-group project-group-small">
+                <div class="project-group-header">
+                    <h3 class="project-group-title">Scholar 2.6: AI Research Navigator</h3>
+                    <div class="project-group-links">
+                        <a href="https://github.com/JackAmichai/Scholar2.6" target="_blank"
+                            class="btn-github">GitHub</a>
+                    </div>
+                </div>
+                <p class="project-group-desc">Chrome Extension with AI-driven interface for academic research. Knowledge
+                    graph visualization and citation management.</p>
+
+                <div class="single-video-wrapper">
+                    <div class="video-wrapper large">
                         <video controls muted loop playsinline>
                             <source src="video proj/Scholar_Improving_Google_Scholar.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
                         </video>
-                    </div>
-                    <div class="video-card-content">
-                        <h3>Scholar 2.6</h3>
-                        <p>AI Research Navigator Chrome Extension for academic research and citation management</p>
-                        <a href="https://github.com/JackAmichai/Scholar2.6" target="_blank" class="video-card-link">
-                            View on GitHub →
-                        </a>
-                    </div>
-                </div>
-
-                <!-- PawQuest Project -->
-                <div class="featured-video-card">
-                    <div class="video-wrapper">
-                        <video controls muted loop playsinline>
-                            <source src="video proj/Find Your Pack Today-VEED.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                    <div class="video-card-content">
-                        <h3>PawQuest: Dog Social App</h3>
-                        <p>Social platform for dog owners to find playmates, organize meetups, and build a local pet
-                            community</p>
-                        <div class="video-card-links">
-                            <a href="https://github.com/base44dev/paw-quest-f31de0c0.git" target="_blank"
-                                class="video-card-link">GitHub →</a>
-                            <a href="https://paw-quest-f31de0c0.base44.app/Landing" target="_blank"
-                                class="video-card-link">Live App →</a>
-                        </div>
                     </div>
                 </div>
             </div>

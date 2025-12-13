@@ -6413,3 +6413,246 @@ html {
 .cursor-ring {
     will-change: transform, opacity;
 }
+
+/* ==================== */
+/* PROJECT GROUPS & LIVE DEMOS */
+/* ==================== */
+
+.project-group {
+    background: var(--bg-secondary, #f8fafc);
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 40px;
+    border: 1px solid var(--border, #e2e8f0);
+}
+
+.project-group-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.project-group-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-primary, #1e293b);
+    margin: 0;
+}
+
+.project-group-links {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-demo {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-demo:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(34, 197, 94, 0.4);
+}
+
+.btn-github {
+    background: var(--text-primary, #1e293b);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-github:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+.project-group-desc {
+    color: var(--text-secondary, #64748b);
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.project-content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 30px;
+}
+
+.videos-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.videos-column .video-wrapper {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #000;
+}
+
+.videos-column .video-wrapper video {
+    width: 100%;
+    display: block;
+}
+
+.video-label {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+/* Live Demo Frame */
+.demo-column {
+    position: relative;
+}
+
+.live-demo-frame {
+    background: #1a1f2e;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+    height: 100%;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.frame-header {
+    background: #0d1117;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.frame-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.frame-dot.red { background: #ff5f57; }
+.frame-dot.yellow { background: #febc2e; }
+.frame-dot.green { background: #28c840; }
+
+.frame-url {
+    margin-left: 10px;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+    font-family: var(--font-mono);
+}
+
+.live-demo-frame iframe {
+    flex: 1;
+    width: 100%;
+    border: none;
+    background: white;
+}
+
+.demo-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    padding: 40px 20px 20px;
+    display: flex;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.live-demo-frame:hover .demo-overlay {
+    opacity: 1;
+}
+
+.demo-overlay span {
+    background: white;
+    color: #1e293b;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+/* Single video wrapper for Scholar */
+.single-video-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.video-wrapper.large {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.video-wrapper.large video {
+    width: 100%;
+    display: block;
+}
+
+.project-group-small {
+    padding: 30px;
+}
+
+/* Dark mode */
+[data-theme="dark"] .project-group {
+    background: #112240 !important;
+    border-color: #233554 !important;
+}
+
+[data-theme="dark"] .project-group-title {
+    color: #ccd6f6 !important;
+}
+
+[data-theme="dark"] .project-group-desc {
+    color: #8892b0 !important;
+}
+
+[data-theme="dark"] .btn-github {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Mobile responsive */
+@media (max-width: 900px) {
+    .project-content-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .live-demo-frame {
+        min-height: 350px;
+    }
+    
+    .project-group {
+        padding: 25px;
+    }
+    
+    .project-group-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
