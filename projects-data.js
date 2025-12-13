@@ -68,30 +68,34 @@ const projectsData = [
     },
     {
         id: "leairn",
-        title: "LeAIrn: AI Education Platform",
-        role: "Product Lead",
-        featured: false,
+        title: "LeAIrn: Teaching Safe AI",
+        role: "Product Lead & Developer",
+        featured: true,
         image: "https://placehold.co/600x400/1a1a2e/4ade80?text=LeAIrn+%F0%9F%8E%93",
         video: "",
-        problem: "Traditional education platforms lack personalized, adaptive learning paths, leading to student disengagement and inefficient learning.",
-        solution: "An AI-powered learning platform that dynamically adapts content, pace, and style to the individual student's needs, creating a truly personalized education experience.",
+        problem: "AI hallucinations (17-33% error rate) and bias perpetuate misinformation. Traditional education lacks AI literacy programs to address these critical issues.",
+        solution: "An AI-powered education platform teaching safe AI practices: identifying hallucinations, detecting bias, and responsible AI use. Personalized curriculum adapts to each learner's pace.",
         approach: [
-            "Developed <strong>adaptive learning algorithms</strong> to tailor content",
-            "Integrated <strong>AI tutors</strong> for real-time assistance",
-            "Created <strong>progress tracking</strong> with predictive analytics"
+            "Developed <strong>interactive modules</strong> on AI hallucinations and bias detection",
+            "Integrated <strong>adaptive learning algorithms</strong> to tailor content difficulty",
+            "Created <strong>hands-on exercises</strong> for verifying AI-generated content",
+            "Built <strong>AI tutors</strong> for real-time assistance"
         ],
-        outcome: "Created a proof-of-concept for a highly personalized learning environment.",
+        outcome: "Flagship project addressing the EU AI Act's mandate for AI literacy education.",
         metrics: [
-            "🎓 <strong>Personalized</strong> learning paths",
-            "📈 <strong>Adaptive</strong> difficulty adjustment",
-            "🧠 <strong>AI-driven</strong> content generation"
+            "🧠 <strong>Hallucination detection</strong> training",
+            "⚖️ <strong>Bias recognition</strong> modules",
+            "🛡️ <strong>Safe AI practices</strong> framework",
+            "📊 <strong>Adaptive learning</strong> paths"
         ],
-        techStack: ["AI", "EdTech", "React", "Python", "LLMs"],
-        techDetails: "Leverages LLMs to generate custom quizzes and explanations based on student performance data.",
-        links: {},
+        techStack: ["React", "TypeScript", "Next.js", "LLMs", "Python"],
+        techDetails: "Full-stack education platform with LLM-powered content generation, adaptive difficulty algorithms, and interactive exercises.",
+        links: {
+            github: "https://github.com/JackAmichai/LeAIrn"
+        },
         mediaType: "image",
         mediaUrl: "https://placehold.co/600x400/1a1a2e/4ade80?text=LeAIrn+%F0%9F%8E%93",
-        evidence: "Internal Project"
+        evidence: "GitHub Repository"
     },
     {
         id: "nvidia-doc-nav",

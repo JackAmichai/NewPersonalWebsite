@@ -326,36 +326,83 @@
         </div>
     </section>
 
-    <!-- Interactive Universe Section -->
-    <section id="universe" class="universe-section">
+    <!-- LeAIrn: AI Safety Education Flagship Project -->
+    <section id="leairn" class="leairn-showcase">
         <div class="container">
-            <h2 class="section-title sparkles-text" data-sparkles-count="8">Interactive Universe</h2>
-            <p class="section-subtitle">A WebGL experiment controlled by computer vision. Use your hand to spin the
-                galaxy.</p>
+            <div class="leairn-header">
+                <span class="leairn-badge">🚀 FLAGSHIP PROJECT</span>
+                <h2 class="section-title sparkles-text" data-sparkles-count="12">LeAIrn: Teaching Safe AI</h2>
+                <p class="section-subtitle">An AI-powered education platform addressing the critical need for AI
+                    literacy in the age of hallucinations, bias, and misinformation.</p>
+            </div>
 
-            <div id="milky-way-container" class="milky-way-container">
-                <div class="milky-way-overlay">
-                    <button id="start-milky-way-btn" class="btn-primary btn-glass">
-                        <span class="btn-icon">✨</span> Start Experience
-                    </button>
-                    <p id="milky-way-status" class="status-text">Camera access required for hand gestures</p>
+            <!-- Why It Matters - Stats -->
+            <div class="leairn-stats-grid">
+                <div class="leairn-stat-card">
+                    <span class="stat-icon">⚠️</span>
+                    <span class="stat-number">17-33%</span>
+                    <span class="stat-label">AI hallucination rate in legal research tools</span>
+                </div>
+                <div class="leairn-stat-card">
+                    <span class="stat-icon">🌍</span>
+                    <span class="stat-number">EU AI Act</span>
+                    <span class="stat-label">Mandates AI literacy as core objective</span>
+                </div>
+                <div class="leairn-stat-card">
+                    <span class="stat-icon">🎓</span>
+                    <span class="stat-number">Critical</span>
+                    <span class="stat-label">Need for AI safety education in schools</span>
+                </div>
+            </div>
+
+            <!-- Feature Slides -->
+            <div class="leairn-slides">
+                <div class="slide-card">
+                    <div class="slide-icon">🧠</div>
+                    <h3>AI Hallucinations</h3>
+                    <p>Learn to identify when AI presents incorrect information as fact. Critical thinking skills that
+                        prevent misinformation spread.</p>
+                </div>
+                <div class="slide-card">
+                    <div class="slide-icon">⚖️</div>
+                    <h3>Bias Detection</h3>
+                    <p>Understand algorithmic bias and how AI can perpetuate inequalities. Tools to recognize and
+                        challenge biased outputs.</p>
+                </div>
+                <div class="slide-card">
+                    <div class="slide-icon">🛡️</div>
+                    <h3>Safe AI Practices</h3>
+                    <p>Practical frameworks for responsible AI use. When to trust, verify, and question AI-generated
+                        content.</p>
+                </div>
+                <div class="slide-card">
+                    <div class="slide-icon">📊</div>
+                    <h3>Adaptive Learning</h3>
+                    <p>Personalized curriculum that adapts to each learner's pace. AI tutors providing real-time
+                        assistance.</p>
+                </div>
+            </div>
+
+            <!-- Tech Stack & CTA -->
+            <div class="leairn-footer">
+                <div class="leairn-tech">
+                    <span class="tech-badge">React</span>
+                    <span class="tech-badge">TypeScript</span>
+                    <span class="tech-badge">Next.js</span>
+                    <span class="tech-badge">LLMs</span>
+                    <span class="tech-badge">Python</span>
+                </div>
+                <div class="leairn-cta">
+                    <a href="https://github.com/JackAmichai/LeAIrn" target="_blank" class="btn-leairn">
+                        <span>View on GitHub</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                        </svg>
+                    </a>
                 </div>
             </div>
         </div>
-
-        <!-- Load Three.js from CDN -->
-        <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
-
-        <!-- Load Milky Way Script -->
-        <script src="milky-way.js"></script>
-        <script>
-            // Initialize when page loads
-            window.addEventListener('load', () => {
-                if (window.initMilkyWay) {
-                    window.initMilkyWay();
-                }
-            });
-        </script>
     </section>
 
     <!-- About Section -->
