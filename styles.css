@@ -5999,3 +5999,67 @@ html {
         border-radius: 20px;
     }
 }
+
+/* ==================== */
+/* CRITICAL DARK MODE FIXES */
+/* ==================== */
+
+/* Force dark backgrounds on light sections */
+[data-theme="dark"] .hero,
+[data-theme="dark"] .my-story,
+[data-theme="dark"] .about,
+[data-theme="dark"] .hobbies-section,
+[data-theme="dark"] .books-section,
+[data-theme="dark"] .experience,
+[data-theme="dark"] .recommendations,
+[data-theme="dark"] .resources-section,
+[data-theme="dark"] .footer,
+[data-theme="dark"] .contact,
+[data-theme="dark"] section {
+    background-color: #0a192f !important;
+}
+
+/* Dark mode text colors */
+[data-theme="dark"] .section-title,
+[data-theme="dark"] .section-subtitle,
+[data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3 {
+    color: #ccd6f6 !important;
+}
+
+[data-theme="dark"] p,
+[data-theme="dark"] .about-text p,
+[data-theme="dark"] .hero-description-minimal {
+    color: #8892b0 !important;
+}
+
+/* Hero specific */
+[data-theme="dark"] .hero-name-minimal {
+    color: #ccd6f6 !important;
+}
+
+[data-theme="dark"] .hero-subtitle-minimal {
+    color: #8892b0 !important;
+}
+
+/* Cards and containers */
+[data-theme="dark"] .hobby-card,
+[data-theme="dark"] .book-item,
+[data-theme="dark"] .timeline-content,
+[data-theme="dark"] .skill-item,
+[data-theme="dark"] .tech-group,
+[data-theme="dark"] .testimonial-card {
+    background-color: #112240 !important;
+    border-color: #233554 !important;
+}
+
+/* Nav */
+[data-theme="dark"] nav,
+[data-theme="dark"] .nav {
+    background-color: rgba(10, 25, 47, 0.95) !important;
+    border-bottom-color: #233554 !important;
+}
+
+/* Hobbies image container */
+[data-theme="dark"] .hobbies-image-container {
+    background: transparent !important;
+}
