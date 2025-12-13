@@ -5670,3 +5670,98 @@ html {
         font-size: 24px;
     }
 }
+
+/* ==================== */
+/* DARK MODE OVERRIDES */
+/* ==================== */
+
+/* Hero Section Dark Mode */
+[data-theme="dark"] .hero {
+    background: var(--bg-primary);
+}
+
+[data-theme="dark"] .hero-content-minimal {
+    color: var(--text-primary);
+}
+
+/* Hobbies Section Dark Mode */
+[data-theme="dark"] .hobbies-section {
+    background-color: var(--bg-primary);
+    border-bottom-color: var(--border);
+}
+
+[data-theme="dark"] .hobby-card {
+    background: var(--bg-secondary);
+    border-color: var(--border);
+}
+
+[data-theme="dark"] .hobby-info h3 {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .hobby-info p {
+    color: var(--text-secondary);
+}
+
+/* Books Section Dark Mode */
+[data-theme="dark"] .books-section {
+    background-color: var(--bg-primary);
+}
+
+[data-theme="dark"] .book-item {
+    background: var(--bg-secondary);
+    border-color: var(--border);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .book-num {
+    background: var(--accent);
+    color: white;
+}
+
+[data-theme="dark"] .btn-toggle-books {
+    background: var(--accent);
+    color: white;
+}
+
+/* Footer Dark Mode */
+[data-theme="dark"] .footer {
+    background-color: var(--bg-primary);
+    border-top-color: var(--border);
+}
+
+[data-theme="dark"] .footer p {
+    color: var(--text-secondary);
+}
+
+/* Nav/Header Dark Mode */
+[data-theme="dark"] .nav {
+    background: rgba(15, 23, 42, 0.95);
+    border-bottom-color: var(--border);
+}
+
+[data-theme="dark"] .nav-link {
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .nav-link:hover {
+    color: var(--text-primary);
+}
+
+/* Resource Cards Dark Mode */
+[data-theme="dark"] .resources-section {
+    background-color: var(--bg-primary);
+}
+
+[data-theme="dark"] .resource-card-new {
+    border-color: var(--border);
+}
+
+/* About Section Dark Mode */
+[data-theme="dark"] .about {
+    background-color: var(--bg-primary);
+}
+
+[data-theme="dark"] .about-text p {
+    color: var(--text-secondary);
+}
