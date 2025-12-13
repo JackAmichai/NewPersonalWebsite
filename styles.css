@@ -6063,3 +6063,189 @@ html {
 [data-theme="dark"] .hobbies-image-container {
     background: transparent !important;
 }
+
+/* ==================== */
+/* LEAIRN LIGHT MODE STYLES */
+/* ==================== */
+
+/* Override dark LeAIrn section in light mode */
+.leairn-showcase {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f8fafc 100%) !important;
+}
+
+.leairn-showcase .section-title {
+    color: #1e293b !important;
+}
+
+.leairn-showcase .section-subtitle {
+    color: #64748b !important;
+}
+
+.leairn-badge {
+    background: linear-gradient(135deg, #22c55e, #16a34a) !important;
+    color: white !important;
+}
+
+/* Light mode preview */
+.leairn-preview {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.1) !important;
+}
+
+.preview-browser {
+    background: #f1f5f9 !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+}
+
+.browser-url {
+    background: #e2e8f0 !important;
+    color: #64748b !important;
+}
+
+.preview-sidebar {
+    background: #f8fafc !important;
+    border-right: 1px solid #e2e8f0 !important;
+}
+
+.sidebar-item {
+    color: #64748b !important;
+}
+
+.sidebar-item:hover {
+    background: rgba(0, 0, 0, 0.04) !important;
+    color: #1e293b !important;
+}
+
+.sidebar-item.active {
+    background: rgba(34, 197, 94, 0.1) !important;
+    color: #16a34a !important;
+    border-left-color: #16a34a !important;
+}
+
+.preview-main {
+    background: #ffffff !important;
+}
+
+.preview-main h3 {
+    color: #1e293b !important;
+}
+
+.preview-progress {
+    background: #e2e8f0 !important;
+}
+
+.preview-stat {
+    color: #64748b !important;
+}
+
+.mini-card {
+    background: #f8fafc !important;
+    border-color: #e2e8f0 !important;
+}
+
+.mini-title {
+    color: #1e293b !important;
+}
+
+/* Topics slider light mode */
+.topics-label {
+    color: #64748b !important;
+}
+
+.topic-item {
+    color: #1e293b !important;
+}
+
+.topic-divider {
+    color: #22c55e !important;
+}
+
+/* Tech badges light mode */
+.tech-badge {
+    background: rgba(34, 197, 94, 0.1) !important;
+    color: #16a34a !important;
+    border-color: rgba(34, 197, 94, 0.3) !important;
+}
+
+/* Button light mode */
+.btn-leairn {
+    background: linear-gradient(135deg, #22c55e, #16a34a) !important;
+    color: white !important;
+}
+
+/* Dark mode overrides for LeAIrn */
+[data-theme="dark"] .leairn-showcase {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%) !important;
+}
+
+[data-theme="dark"] .leairn-showcase .section-title {
+    color: white !important;
+}
+
+[data-theme="dark"] .leairn-showcase .section-subtitle {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+[data-theme="dark"] .leairn-preview {
+    background: #1a1f2e !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-theme="dark"] .preview-browser {
+    background: #0d1117 !important;
+    border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+[data-theme="dark"] .browser-url {
+    background: rgba(255, 255, 255, 0.08) !important;
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+[data-theme="dark"] .preview-sidebar {
+    background: #141922 !important;
+    border-right-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+[data-theme="dark"] .sidebar-item {
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+[data-theme="dark"] .sidebar-item.active {
+    background: rgba(74, 222, 128, 0.1) !important;
+    color: #4ade80 !important;
+}
+
+[data-theme="dark"] .preview-main {
+    background: transparent !important;
+}
+
+[data-theme="dark"] .preview-main h3 {
+    color: white !important;
+}
+
+[data-theme="dark"] .preview-progress {
+    background: rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-theme="dark"] .mini-card {
+    background: rgba(255, 255, 255, 0.04) !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+[data-theme="dark"] .mini-title {
+    color: white !important;
+}
+
+[data-theme="dark"] .topics-label {
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+[data-theme="dark"] .topic-item {
+    color: white !important;
+}
+
+[data-theme="dark"] .tech-badge {
+    background: rgba(74, 222, 128, 0.15) !important;
+    color: #4ade80 !important;
+}
