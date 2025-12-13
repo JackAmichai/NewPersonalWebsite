@@ -68,7 +68,15 @@
 
 <body>
     <!-- Scroll Progress Bar -->
-    <div class="scroll-progress" id="scrollProgress"></div>
+    <div id="scroll-progress" class="scroll-progress"></div>
+
+    <!-- Page Loader / Skeleton -->
+    <div id="page-loader" class="page-loader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <span class="loader-text">Loading...</span>
+        </div>
+    </div>
 
     <!-- Navigation -->
     <nav class="navbar">
@@ -1179,6 +1187,7 @@
     <div class="toast" id="toast"></div>
 
     <script src="projects-data.js"></script>
+    <script src="ux-enhancements.js"></script>
     <script src="script.js"></script>
     <script src="sparkles.js"></script>
     <script src="text-effects.js"></script>
