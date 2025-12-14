@@ -378,23 +378,6 @@
         </div>
     </section>
 
-    <!-- Creative AI Section -->
-    <section id="creative-ai" class="creative-ai">
-        <div class="container">
-            <h2 class="section-title sparkles-text" data-sparkles-count="8">Creative AI Usage</h2>
-            <p class="section-subtitle">Exploring the boundaries of generative media and storytelling.</p>
-
-            <p class="deep-fake-label">Just fun deep fake</p>
-
-            <div class="creative-video-wrapper">
-                <video controls muted loop playsinline class="creative-main-video" preload="none">
-                    <source src="video%20proj/VID%20WEBSITE.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            </div>
-        </div>
-    </section>
-
     <!-- LeAIrn: AI Safety Education Flagship Project -->
     <section id="leairn" class="leairn-showcase">
         <div class="container">
@@ -1379,6 +1362,65 @@
 
     <!-- Toast Notification -->
     <div class="toast" id="toast"></div>
+
+    <!-- Welcome Tour Popup -->
+    <div class="tour-overlay" id="tourOverlay">
+        <div class="tour-popup">
+            <button class="tour-close" id="tourClose" aria-label="Close tour">&times;</button>
+            <div class="tour-content">
+                <div class="tour-header">
+                    <span class="tour-emoji">👋</span>
+                    <h2>Welcome to My Portfolio!</h2>
+                </div>
+                <p class="tour-intro">I'm Jack Amichai, a Business Analyst & AI Product Builder. Here's a quick guide to explore my work:</p>
+                <div class="tour-steps">
+                    <div class="tour-step">
+                        <span class="step-icon">🎯</span>
+                        <div class="step-content">
+                            <strong>About Me</strong>
+                            <span>Learn about my background in Psychology & Computer Science</span>
+                        </div>
+                    </div>
+                    <div class="tour-step">
+                        <span class="step-icon">💼</span>
+                        <div class="step-content">
+                            <strong>Experience</strong>
+                            <span>Deloitte consulting, SAP BTP, and research at Technion</span>
+                        </div>
+                    </div>
+                    <div class="tour-step">
+                        <span class="step-icon">🚀</span>
+                        <div class="step-content">
+                            <strong>Projects</strong>
+                            <span>AI-powered apps including LeAIrn, Hatrick, and Scholar 2.6</span>
+                        </div>
+                    </div>
+                    <div class="tour-step">
+                        <span class="step-icon">📄</span>
+                        <div class="step-content">
+                            <strong>Resources</strong>
+                            <span>Download my resume, case studies, and recommendations</span>
+                        </div>
+                    </div>
+                    <div class="tour-step">
+                        <span class="step-icon">💬</span>
+                        <div class="step-content">
+                            <strong>AI Chat</strong>
+                            <span>Ask my AI assistant anything about me (bottom right)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tour-actions">
+                    <button class="tour-btn tour-btn-secondary" id="tourSkip">Skip Tour</button>
+                    <button class="tour-btn tour-btn-primary" id="tourStart">Let's Go! 🚀</button>
+                </div>
+                <label class="tour-checkbox">
+                    <input type="checkbox" id="tourDontShow">
+                    <span>Don't show this again</span>
+                </label>
+            </div>
+        </div>
+    </div>
 
     <script src="projects-data.js"></script>
     <script src="ux-enhancements.js"></script>

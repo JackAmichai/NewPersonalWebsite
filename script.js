@@ -1209,3 +1209,96 @@ console.log('🚀 Portfolio loaded successfully!');
 console.log('💡 Keyboard shortcuts:');
 console.log('   Ctrl/Cmd + D: Toggle dark mode');
 console.log('   Escape: Close mobile menu');
+
+// ========================================
+// WELCOME TOUR POPUP
+// ========================================
+(function initWelcomeTour() {
+    const tourOverlay = document.getElementById('tourOverlay');
+    const tourClose = document.getElementById('tourClose');
+    const tourSkip = document.getElementById('tourSkip');
+    const tourStart = document.getElementById('tourStart');
+    const tourDontShow = document.getElementById('tourDontShow');
+
+    if (!tourOverlay) return;
+
+    // Check if user has dismissed the tour before
+    const tourDismissed = localStorage.getItem('portfolioTourDismissed');
+
+    if (!tourDismissed) {
+        // Show tour after a short delay for better UX
+        setTimeout(() => {
+            tourOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }, 800);
+    }
+
+    function closeTour() {
+        tourOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+
+        // Save preference if checkbox is checked
+        if (tourDontShow && tourDontShow.checked) {
+            localStorage.setItem('portfolioTourDismissed', 'true');
+        }
+    }
+
+    if (tourClose) tourClose.addEventListener('click', closeTour);
+    if (tourSkip) tourSkip.addEventListener('click', closeTour);
+    if (tourStart) {
+        tourStart.addEventListener('click', () => {
+            closeTour();
+            // Scroll to about section smoothly
+            const aboutSection = document.getElementById('about');
+            if (aboutSection) {
+                setTimeout(() => {
+                    aboutSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 300);
+            }
+        });
+    }
+
+    // Close on overlay click (outside popup)
+    tourOverlay.addEventListener('click', (e) => {
+        if (e.target === tourOverlay) closeTour();
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && tourOverlay.classList.contains('active')) {
+            closeTour();
+        }
+    });
+})();
+
+// ========================================
+// VIDEO AUTO-RESTART ON PAGE LOAD
+// ========================================
+(function initVideoAutoRestart() {
+    // Get all video elements
+    const videos = document.querySelectorAll('video');
+    
+    videos.forEach(video => {
+        // Reset video to beginning
+        video.currentTime = 0;
+        
+        // For videos in viewport, attempt to play (muted to comply with autoplay policies)
+        if (video.hasAttribute('muted') || video.muted) {
+            // Use Intersection Observer for efficient playback management
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        video.currentTime = 0;
+                        video.play().catch(() => {
+                            // Autoplay was prevented, user will need to interact
+                        });
+                    } else {
+                        video.pause();
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            observer.observe(video);
+        }
+    });
+})();

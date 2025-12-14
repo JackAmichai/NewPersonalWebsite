@@ -4724,33 +4724,6 @@ html {
 /* CREATIVE AI SECTION */
 /* ==================== */
 
-.creative-ai {
-    background-color: var(--bg-primary);
-}
-
-.creative-video-wrapper {
-    width: 100%;
-    max-width: 900px;
-    margin: 40px auto;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-    border: 1px solid var(--border);
-    transition: var(--transition);
-}
-
-.creative-video-wrapper:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
-    border-color: var(--accent);
-}
-
-.creative-main-video {
-    width: 100%;
-    display: block;
-    border-radius: 16px;
-}
-
 /* ==================== */
 /* INTERACTIVE UNIVERSE */
 /* ==================== */
@@ -5051,35 +5024,6 @@ html {
 /* Prevent layout shift when replacing text */
 .text-reveal {
     min-height: 1.5em;
-}
-
-/* ==================== */
-/* VIDEO FIXES & UPDATES */
-/* ==================== */
-
-.deep-fake-label {
-    text-align: center;
-    font-family: var(--font-mono);
-    /* Use mono font for that 'tech' vibe */
-    font-size: 14px;
-    color: var(--text-muted);
-    /* Or a specific color */
-    margin-bottom: 10px;
-    margin-top: 20px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
-
-/* Ensure video scales correctly */
-.creative-main-video {
-    width: 100%;
-    height: auto !important;
-    /* Force auto height to respect aspect ratio */
-    display: block;
-    object-fit: contain;
-    /* Or cover depending on pref, contain ensures no clipping */
-    background: #000;
-    /* Black bars if needed */
 }
 
 /* ==================== */
@@ -6878,5 +6822,256 @@ html {
     .toggle-card-label {
         font-size: 13px;
         padding: 10px;
+    }
+}
+
+/* ==================== */
+/* WELCOME TOUR POPUP */
+/* ==================== */
+.tour-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.tour-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.tour-popup {
+    background: var(--bg-primary);
+    border-radius: 24px;
+    width: 90%;
+    max-width: 520px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--border);
+    transform: scale(0.9) translateY(20px);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.tour-overlay.active .tour-popup {
+    transform: scale(1) translateY(0);
+}
+
+.tour-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    border: none;
+    background: var(--bg-secondary);
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    z-index: 10;
+}
+
+.tour-close:hover {
+    background: var(--accent);
+    color: white;
+    transform: rotate(90deg);
+}
+
+.tour-content {
+    padding: 40px 32px 32px;
+}
+
+.tour-header {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.tour-emoji {
+    font-size: 48px;
+    display: block;
+    margin-bottom: 12px;
+    animation: wave 1.5s ease-in-out infinite;
+}
+
+@keyframes wave {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(20deg); }
+    75% { transform: rotate(-20deg); }
+}
+
+.tour-header h2 {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.tour-intro {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 28px;
+}
+
+.tour-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 28px;
+}
+
+.tour-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 16px;
+    background: var(--bg-secondary);
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    transition: all 0.2s ease;
+}
+
+.tour-step:hover {
+    transform: translateX(6px);
+    border-color: var(--accent);
+    background: rgba(0, 102, 204, 0.05);
+}
+
+.step-icon {
+    font-size: 24px;
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 102, 204, 0.1);
+    border-radius: 10px;
+}
+
+.step-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.step-content strong {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.step-content span {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+.tour-actions {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.tour-btn {
+    flex: 1;
+    padding: 14px 24px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+}
+
+.tour-btn-primary {
+    background: linear-gradient(135deg, var(--accent), #0052a3);
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 102, 204, 0.3);
+}
+
+.tour-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 102, 204, 0.4);
+}
+
+.tour-btn-secondary {
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+}
+
+.tour-btn-secondary:hover {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+.tour-checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    cursor: pointer;
+}
+
+.tour-checkbox input {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    accent-color: var(--accent);
+}
+
+/* Mobile Tour Popup */
+@media (max-width: 600px) {
+    .tour-popup {
+        width: 95%;
+        max-height: 85vh;
+        border-radius: 20px;
+    }
+
+    .tour-content {
+        padding: 32px 20px 24px;
+    }
+
+    .tour-header h2 {
+        font-size: 22px;
+    }
+
+    .tour-emoji {
+        font-size: 40px;
+    }
+
+    .tour-step {
+        padding: 12px;
+    }
+
+    .step-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 20px;
+    }
+
+    .tour-actions {
+        flex-direction: column-reverse;
     }
 }
