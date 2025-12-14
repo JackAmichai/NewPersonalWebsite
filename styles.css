@@ -4903,59 +4903,57 @@ html {
     margin-bottom: 40px;
 }
 
-/* Circular Buttons Row */
-.hero-buttons-circle-row {
+/* Hero Image Cards (matching Resources style) */
+.hero-cards-row {
     display: flex;
     gap: 20px;
-    flex-wrap: wrap;
-}
-
-.btn-circle {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.hero-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    width: 140px;
+    height: 180px;
+    border-radius: 16px;
+    background-size: cover;
+    background-position: center;
     text-decoration: none;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    border: 2px solid rgba(0, 0, 0, 0.1);
-    color: #111;
-    font-weight: 700;
-    font-size: 16px;
-    text-align: center;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
 }
 
-.btn-circle:hover {
+.hero-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    border-radius: 0 0 16px 16px;
+}
+
+.hero-card:hover {
     transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-    z-index: 2;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
 }
 
-.btn-circle-text {
-    pointer-events: none;
-}
-
-/* Specific Colors from Reference */
-.btn-circle-resume {
-    background-color: #C1D94C;
-    /* Lime/Light Green */
-}
-
-.btn-circle-research {
-    background-color: #F8A700;
-    /* Orange/Gold */
-}
-
-.btn-circle-outreach {
-    background-color: #8AD2D8;
-    /* Cyan/Teal */
-}
-
-.btn-circle-personal {
-    background-color: #C0C0C0;
-    /* Light Grey */
+.hero-card-label {
+    position: relative;
+    z-index: 1;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 16px;
+    text-align: center;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 /* Responsive */
@@ -4975,14 +4973,34 @@ html {
         text-align: center;
     }
 
-    .hero-buttons-circle-row {
+    .hero-cards-row {
         justify-content: center;
     }
 
-    .btn-circle {
-        width: 90px;
-        height: 90px;
+    .hero-card {
+        width: 110px;
+        height: 140px;
+    }
+
+    .hero-card-label {
         font-size: 14px;
+        padding: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-cards-row {
+        gap: 12px;
+    }
+
+    .hero-card {
+        width: 90px;
+        height: 120px;
+    }
+
+    .hero-card-label {
+        font-size: 12px;
+        padding: 10px;
     }
 }
 
