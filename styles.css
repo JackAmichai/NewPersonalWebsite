@@ -7240,15 +7240,26 @@ html {
     color: var(--white);
 }
 
-.step-content h3 {
+.step-title {
     font-size: 1.2rem;
     margin-bottom: 10px;
     color: var(--text-primary);
 }
 
-.step-content p {
+.step-desc {
     font-size: 0.9rem;
     color: var(--text-secondary);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @media (max-width: 768px) {
