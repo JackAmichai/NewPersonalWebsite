@@ -7266,16 +7266,27 @@ html {
     align-items: center;
     justify-content: center;
     margin: 0 auto 20px;
-    font-size: 2rem;
     transition: var(--transition);
     box-shadow: var(--shadow);
+    overflow: hidden; /* Ensure image stays within circle */
+}
+
+.step-icon img {
+    width: 60%;
+    height: 60%;
+    object-fit: contain;
+    transition: var(--transition);
 }
 
 .process-step:hover .step-icon {
     transform: scale(1.1);
     background: var(--accent);
-    color: var(--white);
+    border-color: var(--accent);
 }
+
+/* .process-step:hover .step-icon img {
+    filter: brightness(0) invert(1); 
+} */
 
 .step-title {
     font-size: 1.2rem;
