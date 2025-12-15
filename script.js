@@ -1302,32 +1302,3 @@ console.log('   Escape: Close mobile menu');
         }
     });
 })();
-
-// ========================================
-// GITHUB ACTIVITY WIDGET
-// ========================================
-document.addEventListener('DOMContentLoaded', () => {
-    const activityText = document.getElementById('last-commit-text');
-    const username = 'JackAmichai';
-    
-    if (activityText) {
-        fetch(`https://api.github.com/users/${username}/events/public`)
-            .then(response => response.json())
-            .then(data => {
-                const pushEvent = data.find(event => event.type === 'PushEvent');
-                if (pushEvent) {
-                    const repoName = pushEvent.repo.name.split('/')[1];
-                    const commitMsg = pushEvent.payload.commits[0].message;
-                    // Truncate message if too long
-                    const shortMsg = commitMsg.length > 30 ? commitMsg.substring(0, 30) + '...' : commitMsg;
-                    activityText.innerHTML = `Pushed to <strong>${repoName}</strong>: "${shortMsg}"`;
-                } else {
-                    activityText.textContent = 'No recent public commits found.';
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching GitHub activity:', error);
-                activityText.textContent = 'System operational. GitHub sync pending.';
-            });
-    }
-});
