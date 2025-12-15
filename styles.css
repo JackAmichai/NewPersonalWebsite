@@ -7183,6 +7183,43 @@ html {
     background-color: var(--bg-secondary);
 }
 
+.process-header {
+    position: relative;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.process-header-image {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    max-height: 120px;
+    width: auto;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.process-header-image:hover {
+    transform: translateY(-50%) scale(1.05);
+}
+
+@media (max-width: 900px) {
+    .process-header-image {
+        position: relative;
+        right: auto;
+        top: auto;
+        transform: none;
+        margin: 20px auto 0;
+        display: block;
+    }
+    
+    .process-header-image:hover {
+        transform: scale(1.05);
+    }
+}
+
 .process-timeline {
     display: flex;
     justify-content: space-between;
