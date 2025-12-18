@@ -197,54 +197,6 @@ class CloudChatbot {
         }
     }
 
-    async handleUserMessage(message) {
-        // Add user message to chat
-        this.addMessage(message, 'user');
-
-        // Show typing indicator
-        const typingId = this.addTypingIndicator();
-
-        try {
-            // Use absolute URL to Vercel API (works from any host including GitHub Pages)
-            const apiUrl = window.location.hostname.includes('vercel.app') 
-                ? '/api/chat' 
-                : 'https://new-personal-website-topaz.vercel.app/api/chat';
-            
-            const response = await fetch(apiUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ message }),
-            });
-
-            const data = await response.json();
-            
-            // Remove typing indicator
-            this.removeMessage(typingId);
-
-            // Add bot response - the API returns answer even on errors
-            if (data.answer) {
-                this.addMessage(data.answer, 'bot');
-            } else {
-                this.addMessage("Sorry, I didn't get a proper response. Please try again.", 'bot');
-            }
-
-            // Show new suggestions after answer
-            setTimeout(() => this.displaySuggestions(), 500);
-
-        } catch (error) {
-            console.error('Chat Error:', error);
-            this.removeMessage(typingId);
-            this.addMessage("Sorry, I'm having trouble connecting to the server. Please try again later.", 'bot');
-        }
-
-        // Track question
-        if (typeof trackCTAClick !== 'undefined') {
-            trackCTAClick('chatbot_question_asked');
-        }
-    }
-
     addTypingIndicator() {
         const messagesContainer = document.getElementById('chatbot-messages');
         const messageDiv = document.createElement('div');
@@ -296,13 +248,148 @@ class CloudChatbot {
         return text
             .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
             .replace(/\n/g, '<br>')
-            .replace(/🎯|💰|🤖|📊|📧|💼|📅|🐙|📄|📚|📈|⏱️|🚀|⚡|🔬|📝|👥|🌍|🇮🇱|🇺🇸|🇫🇷|🔔|🔒|🛡️|🎓/g, '<span class="emoji">$&</span>');
+            .replace(/🎯|💰|🤖|📊|📧|💼|📅|🐙|📄|📚|📈|⏱️|🚀|⚡|🔬|📝|👥|🌍|🇮🇱|🇺🇸|🇫🇷|🔔|🔒|🛡️|🎓|✨|🎁/g, '<span class="emoji">$&</span>');
     }
 
     escapeHtml(text) {
         const div = document.createElement('div');
         div.textContent = text;
         return div.innerHTML;
+    }
+
+    // Resume Customizer Feature - generates tailored pitch based on role description
+    startResumeCustomizer() {
+        // Open chatbot if not already open
+        if (!this.isOpen) {
+            this.toggleChat();
+        }
+
+        // Clear previous messages
+        const messagesContainer = document.getElementById('chatbot-messages');
+        messagesContainer.innerHTML = '';
+
+        // Clear suggestions
+        const suggestionsContainer = document.getElementById('chatbot-suggestions');
+        suggestionsContainer.innerHTML = '';
+
+        // Send intro message
+        this.addMessage(
+            "✨ **Resume Customizer Mode** ✨\n\nTell me about the role you're hiring for! Include:\n• Job title & company type\n• Key responsibilities\n• Required skills\n• Team size/culture\n\nI'll generate a tailored pitch showing why Jack is the perfect fit!",
+            'bot'
+        );
+
+        // Add quick prompts for common roles
+        this.displayCustomizerSuggestions();
+
+        // Mark that we're in customizer mode
+        this.isCustomizerMode = true;
+    }
+
+    displayCustomizerSuggestions() {
+        const suggestionsContainer = document.getElementById('chatbot-suggestions');
+        const suggestions = [
+            "Business Analyst at a tech company",
+            "AI/ML Product Manager role",
+            "Data Analyst for consulting firm",
+            "Junior Consultant - strategy"
+        ];
+
+        suggestionsContainer.innerHTML = suggestions.map(s =>
+            `<button class="suggestion-btn customizer-suggestion" data-question="${s}">${s}</button>`
+        ).join('');
+
+        suggestionsContainer.querySelectorAll('.suggestion-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const question = e.target.dataset.question;
+                this.handleUserMessage(`Generate a tailored pitch for: ${question}`);
+            });
+        });
+    }
+
+    async handleUserMessage(message) {
+        // Add customizer context if in that mode
+        const isCustomizerRequest = this.isCustomizerMode || message.toLowerCase().includes('tailored pitch');
+        
+        // Add user message to chat
+        this.addMessage(message, 'user');
+
+        // Show typing indicator
+        const typingId = this.addTypingIndicator();
+
+        try {
+            // Use absolute URL to Vercel API (works from any host including GitHub Pages)
+            const apiUrl = window.location.hostname.includes('vercel.app') 
+                ? '/api/chat' 
+                : 'https://new-personal-website-topaz.vercel.app/api/chat';
+            
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ 
+                    message,
+                    isResumeCustomizer: isCustomizerRequest
+                }),
+            });
+
+            const data = await response.json();
+            
+            // Remove typing indicator
+            this.removeMessage(typingId);
+
+            // Add bot response - the API returns answer even on errors
+            if (data.answer) {
+                this.addMessage(data.answer, 'bot');
+            } else {
+                this.addMessage("Sorry, I didn't get a proper response. Please try again.", 'bot');
+            }
+
+            // Show appropriate suggestions based on mode
+            setTimeout(() => {
+                if (this.isCustomizerMode) {
+                    this.displayCustomizerFollowUp();
+                } else {
+                    this.displaySuggestions();
+                }
+            }, 500);
+
+        } catch (error) {
+            console.error('Chat Error:', error);
+            this.removeMessage(typingId);
+            this.addMessage("Sorry, I'm having trouble connecting to the server. Please try again later.", 'bot');
+        }
+
+        // Track question
+        if (typeof trackCTAClick !== 'undefined') {
+            trackCTAClick(isCustomizerRequest ? 'resume_customizer_used' : 'chatbot_question_asked');
+        }
+    }
+
+    displayCustomizerFollowUp() {
+        const suggestionsContainer = document.getElementById('chatbot-suggestions');
+        const suggestions = [
+            "More technical focus",
+            "More leadership examples",
+            "Add specific project details",
+            "Exit customizer mode"
+        ];
+
+        suggestionsContainer.innerHTML = suggestions.map(s =>
+            `<button class="suggestion-btn customizer-suggestion" data-question="${s}">${s}</button>`
+        ).join('');
+
+        suggestionsContainer.querySelectorAll('.suggestion-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const question = e.target.dataset.question;
+                if (question === "Exit customizer mode") {
+                    this.isCustomizerMode = false;
+                    this.displayWelcomeMessage();
+                } else {
+                    this.handleUserMessage(question);
+                }
+            });
+        });
     }
 }
 

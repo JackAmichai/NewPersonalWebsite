@@ -188,7 +188,63 @@ document.addEventListener('DOMContentLoaded', () => {
     initAccessibilityPanel();
     initKeyboardShortcuts();
     initProjectModals();
+    initInteractiveTimeline();  // NEW: Interactive timeline feature
 });
+
+// ========================================
+// INTERACTIVE TIMELINE
+// ========================================
+function initInteractiveTimeline() {
+    const timelineItems = document.querySelectorAll('.timeline-item[data-expandable]');
+    
+    timelineItems.forEach(item => {
+        const summary = item.querySelector('.timeline-summary');
+        if (!summary) return;
+        
+        // Click handler to toggle expansion
+        summary.addEventListener('click', (e) => {
+            // Don't toggle if clicking a link
+            if (e.target.tagName === 'A') return;
+            
+            // Close other expanded items (accordion behavior)
+            timelineItems.forEach(other => {
+                if (other !== item && other.classList.contains('is-expanded')) {
+                    other.classList.remove('is-expanded');
+                }
+            });
+            
+            // Toggle this item
+            item.classList.toggle('is-expanded');
+            
+            // Scroll into view if expanding
+            if (item.classList.contains('is-expanded')) {
+                setTimeout(() => {
+                    item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 100);
+            }
+        });
+        
+        // Keyboard accessibility
+        summary.setAttribute('tabindex', '0');
+        summary.setAttribute('role', 'button');
+        summary.setAttribute('aria-expanded', 'false');
+        
+        summary.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                summary.click();
+            }
+        });
+        
+        // Update aria-expanded when toggled
+        const observer = new MutationObserver(() => {
+            summary.setAttribute('aria-expanded', item.classList.contains('is-expanded'));
+        });
+        observer.observe(item, { attributes: true, attributeFilter: ['class'] });
+    });
+    
+    console.log('📅 Interactive Timeline initialized:', timelineItems.length, 'items');
+}
 
 // 1. Recruiter Mode
 function initRecruiterMode() {

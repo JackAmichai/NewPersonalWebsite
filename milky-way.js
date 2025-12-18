@@ -1,6 +1,51 @@
 
-// Milky Way Experience - Fixed version with proper camera angle and hand tracking
+// Skills Universe - Interactive 3D Skills Visualization
 // Uses Three.js for rendering and basic motion detection for hand control
+
+// Skill data with categories for color coding
+const skillsData = [
+    // Technical Skills (Blue)
+    { name: 'Python', category: 'technical', size: 1.2, description: 'Primary language for AI/ML and data analysis' },
+    { name: 'TypeScript', category: 'technical', size: 1.0, description: 'Full-stack web development' },
+    { name: 'JavaScript', category: 'technical', size: 1.0, description: 'Frontend and Node.js development' },
+    { name: 'React', category: 'technical', size: 1.1, description: 'Modern UI frameworks' },
+    { name: 'SQL', category: 'technical', size: 0.9, description: 'Database queries and analytics' },
+    { name: 'LangChain', category: 'technical', size: 1.0, description: 'AI agent orchestration' },
+    { name: 'OpenAI API', category: 'technical', size: 1.0, description: 'LLM integration' },
+    { name: 'FastAPI', category: 'technical', size: 0.8, description: 'Python backend services' },
+    { name: 'Node.js', category: 'technical', size: 0.9, description: 'Server-side JavaScript' },
+    { name: 'Git', category: 'technical', size: 0.7, description: 'Version control' },
+    { name: 'C++', category: 'technical', size: 0.8, description: 'Performance-critical applications' },
+    
+    // Business Skills (Pink)
+    { name: 'Business Analysis', category: 'business', size: 1.2, description: 'Requirements and process optimization' },
+    { name: 'Revenue Analytics', category: 'business', size: 1.1, description: 'Forecasting and pricing models' },
+    { name: 'Power BI', category: 'business', size: 1.0, description: 'Executive dashboards' },
+    { name: 'SAP BTP', category: 'business', size: 0.9, description: 'Enterprise cloud platform' },
+    { name: 'Agile/Scrum', category: 'business', size: 0.8, description: 'Project methodology' },
+    { name: 'Excel', category: 'business', size: 0.7, description: 'Data modeling and analysis' },
+    
+    // Research Skills (Green)
+    { name: 'Research Design', category: 'research', size: 1.0, description: 'Experimental methodology' },
+    { name: 'SPSS', category: 'research', size: 0.8, description: 'Statistical analysis' },
+    { name: 'Data Analysis', category: 'research', size: 1.1, description: 'Insights from complex datasets' },
+    { name: 'Psychology', category: 'research', size: 1.0, description: 'Human behavior and cognition' },
+    { name: 'Academic Writing', category: 'research', size: 0.7, description: 'Research communication' },
+    
+    // Leadership Skills (Yellow)
+    { name: 'Team Leadership', category: 'leadership', size: 1.1, description: 'IDF Staff Sergeant experience' },
+    { name: 'Project Management', category: 'leadership', size: 1.0, description: 'End-to-end delivery' },
+    { name: 'Stakeholder Management', category: 'leadership', size: 0.9, description: 'Cross-functional collaboration' },
+    { name: 'Mentoring', category: 'leadership', size: 0.8, description: 'Training team members' },
+];
+
+// Category colors
+const categoryColors = {
+    technical: 0x60a5fa,  // Blue
+    business: 0xf472b6,   // Pink
+    research: 0x34d399,   // Green
+    leadership: 0xfbbf24  // Yellow
+};
 
 class MilkyWayExperience {
     constructor(containerId) {
@@ -15,6 +60,10 @@ class MilkyWayExperience {
         this.camera = null;
         this.renderer = null;
         this.galaxy = null;
+        this.skillStars = [];  // Store skill star meshes for raycasting
+        this.raycaster = new THREE.Raycaster();
+        this.mouseVec = new THREE.Vector2();
+        this.hoveredSkill = null;
 
         // Interaction state
         this.mouse = { x: 0, y: 0, down: false };
@@ -41,7 +90,9 @@ class MilkyWayExperience {
 
         this.initScene();
         this.createGalaxy();
+        this.createSkillStars();  // Add skill stars
         this.setupControls();
+        this.setupSkillHover();   // Add hover detection
         this.animate();
 
         window.addEventListener('resize', () => this.onResize());
@@ -172,8 +223,114 @@ class MilkyWayExperience {
         this.scene.add(this.galaxy);
     }
 
+    createSkillStars() {
+        // Create larger, clickable stars for each skill
+        const skillGroup = new THREE.Group();
+        
+        skillsData.forEach((skill, index) => {
+            // Position skills in a spiral pattern within the galaxy
+            const angle = (index / skillsData.length) * Math.PI * 4;
+            const radius = 1 + (index / skillsData.length) * 2.5;
+            
+            const x = Math.cos(angle) * radius;
+            const z = Math.sin(angle) * radius;
+            const y = (Math.random() - 0.5) * 0.3;
+            
+            // Create skill star geometry
+            const geometry = new THREE.SphereGeometry(0.08 * skill.size, 16, 16);
+            const color = categoryColors[skill.category] || 0xffffff;
+            const material = new THREE.MeshBasicMaterial({
+                color: color,
+                transparent: true,
+                opacity: 0.9
+            });
+            
+            const star = new THREE.Mesh(geometry, material);
+            star.position.set(x, y, z);
+            star.userData = skill;  // Store skill data for hover
+            
+            // Add glow effect
+            const glowGeometry = new THREE.SphereGeometry(0.12 * skill.size, 16, 16);
+            const glowMaterial = new THREE.MeshBasicMaterial({
+                color: color,
+                transparent: true,
+                opacity: 0.3
+            });
+            const glow = new THREE.Mesh(glowGeometry, glowMaterial);
+            star.add(glow);
+            
+            this.skillStars.push(star);
+            skillGroup.add(star);
+        });
+        
+        this.skillGroup = skillGroup;
+        this.galaxy.add(skillGroup);
+    }
+
+    setupSkillHover() {
+        const canvas = this.renderer.domElement;
+        const tooltip = document.getElementById('skill-tooltip');
+        
+        canvas.addEventListener('mousemove', (e) => {
+            // Update mouse vector for raycasting
+            const rect = canvas.getBoundingClientRect();
+            this.mouseVec.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+            this.mouseVec.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+            
+            // Raycast to skill stars
+            this.raycaster.setFromCamera(this.mouseVec, this.camera);
+            const intersects = this.raycaster.intersectObjects(this.skillStars);
+            
+            if (intersects.length > 0) {
+                const skill = intersects[0].object.userData;
+                if (skill && skill.name) {
+                    this.hoveredSkill = skill;
+                    canvas.style.cursor = 'pointer';
+                    
+                    // Show tooltip
+                    if (tooltip) {
+                        tooltip.innerHTML = `
+                            <strong>${skill.name}</strong>
+                            <span class="skill-category">${skill.category}</span>
+                            <p>${skill.description}</p>
+                        `;
+                        tooltip.style.left = (e.clientX - rect.left + 15) + 'px';
+                        tooltip.style.top = (e.clientY - rect.top - 10) + 'px';
+                        tooltip.classList.add('visible');
+                    }
+                    
+                    // Highlight the star
+                    intersects[0].object.scale.setScalar(1.3);
+                }
+            } else {
+                if (this.hoveredSkill) {
+                    // Reset previous hover
+                    this.skillStars.forEach(star => star.scale.setScalar(1));
+                    this.hoveredSkill = null;
+                    canvas.style.cursor = 'grab';
+                    if (tooltip) tooltip.classList.remove('visible');
+                }
+            }
+        });
+        
+        canvas.addEventListener('mouseleave', () => {
+            this.skillStars.forEach(star => star.scale.setScalar(1));
+            this.hoveredSkill = null;
+            if (tooltip) tooltip.classList.remove('visible');
+        });
+        
+        // Click to show more info
+        canvas.addEventListener('click', (e) => {
+            if (this.hoveredSkill && !this.mouse.down) {
+                // Could expand to show project examples using this skill
+                console.log('Clicked skill:', this.hoveredSkill.name);
+            }
+        });
+    }
+
     setupControls() {
         const canvas = this.renderer.domElement;
+        canvas.style.cursor = 'grab';
 
         // Mouse controls
         canvas.addEventListener('mousedown', (e) => {
@@ -181,6 +338,7 @@ class MilkyWayExperience {
             this.mouse.x = e.clientX;
             this.mouse.y = e.clientY;
             this.autoRotate = false;
+            canvas.style.cursor = 'grabbing';
         });
 
         canvas.addEventListener('mousemove', (e) => {
@@ -201,6 +359,7 @@ class MilkyWayExperience {
 
         canvas.addEventListener('mouseup', () => {
             this.mouse.down = false;
+            canvas.style.cursor = 'grab';
         });
 
         canvas.addEventListener('mouseleave', () => {
