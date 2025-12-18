@@ -1417,6 +1417,35 @@ console.log('   Escape: Close mobile menu');
 })();
 
 // ========================================
+// EXPANDABLE PROCESS STEPS
+// ========================================
+(function initExpandableProcess() {
+    const processSteps = document.querySelectorAll('.expandable-process');
+    
+    processSteps.forEach(step => {
+        const btn = step.querySelector('.step-icon-btn');
+        if (!btn) return;
+        
+        btn.addEventListener('click', () => {
+            const isExpanded = step.classList.contains('expanded');
+            
+            // Close all other steps (accordion behavior)
+            processSteps.forEach(s => {
+                if (s !== step) {
+                    s.classList.remove('expanded');
+                    const sBtn = s.querySelector('.step-icon-btn');
+                    if (sBtn) sBtn.setAttribute('aria-expanded', 'false');
+                }
+            });
+            
+            // Toggle current step
+            step.classList.toggle('expanded');
+            btn.setAttribute('aria-expanded', !isExpanded);
+        });
+    });
+})();
+
+// ========================================
 // VIDEO AUTO-RESTART ON PAGE LOAD
 // ========================================
 (function initVideoAutoRestart() {
