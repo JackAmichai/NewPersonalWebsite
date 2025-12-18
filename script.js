@@ -1220,7 +1220,7 @@ console.log('   Ctrl/Cmd + D: Toggle dark mode');
 console.log('   Escape: Close mobile menu');
 
 // ========================================
-// WELCOME TOUR POPUP
+// WELCOME TOUR POPUP + GUIDED TOUR
 // ========================================
 (function initWelcomeTour() {
     const tourOverlay = document.getElementById('tourOverlay');
@@ -1231,11 +1231,23 @@ console.log('   Escape: Close mobile menu');
 
     if (!tourOverlay) return;
 
+    // Tour steps configuration
+    const tourSteps = [
+        { id: 'home', title: 'Welcome!', description: 'This is the home section. Scroll down or use navigation to explore.' },
+        { id: 'about', title: 'About Me', description: 'Learn about my background in Psychology & Computer Science.' },
+        { id: 'experience', title: 'Experience', description: 'Click on any role to expand and see detailed case studies!' },
+        { id: 'projects', title: 'Projects', description: 'Explore my AI-powered projects. Click any card for details.' },
+        { id: 'skills-universe', title: 'Skills Universe', description: 'Interactive 3D galaxy! Hover over stars to see my skills.' },
+        { id: 'contact', title: 'Get in Touch', description: 'Ready to connect? Send me a message or schedule a call!' }
+    ];
+    let currentStep = 0;
+    let tourHighlight = null;
+    let tourTooltip = null;
+
     // Check if user has dismissed the tour before
     const tourDismissed = localStorage.getItem('portfolioTourDismissed');
 
     if (!tourDismissed) {
-        // Show tour after a short delay for better UX
         setTimeout(() => {
             tourOverlay.classList.add('active');
             document.body.style.overflow = 'hidden';
@@ -1245,37 +1257,135 @@ console.log('   Escape: Close mobile menu');
     function closeTour() {
         tourOverlay.classList.remove('active');
         document.body.style.overflow = '';
-
-        // Save preference if checkbox is checked
+        endGuidedTour();
         if (tourDontShow && tourDontShow.checked) {
             localStorage.setItem('portfolioTourDismissed', 'true');
         }
     }
 
-    if (tourClose) tourClose.addEventListener('click', closeTour);
-    if (tourSkip) tourSkip.addEventListener('click', closeTour);
-    if (tourStart) {
-        tourStart.addEventListener('click', () => {
-            closeTour();
-            // Scroll to about section smoothly
-            const aboutSection = document.getElementById('about');
-            if (aboutSection) {
-                setTimeout(() => {
-                    aboutSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 300);
-            }
-        });
+    function createTourElements() {
+        // Create highlight overlay
+        tourHighlight = document.createElement('div');
+        tourHighlight.className = 'tour-highlight-overlay';
+        tourHighlight.innerHTML = '<div class="tour-highlight-box"></div>';
+        document.body.appendChild(tourHighlight);
+
+        // Create tooltip
+        tourTooltip = document.createElement('div');
+        tourTooltip.className = 'tour-tooltip';
+        tourTooltip.innerHTML = `
+            <div class="tour-tooltip-content">
+                <div class="tour-tooltip-header">
+                    <span class="tour-tooltip-step"></span>
+                    <h4 class="tour-tooltip-title"></h4>
+                </div>
+                <p class="tour-tooltip-desc"></p>
+                <div class="tour-tooltip-actions">
+                    <button class="tour-tooltip-btn tour-prev">← Previous</button>
+                    <button class="tour-tooltip-btn tour-next">Next →</button>
+                </div>
+                <button class="tour-tooltip-close">✕</button>
+            </div>
+        `;
+        document.body.appendChild(tourTooltip);
+
+        // Event listeners
+        tourTooltip.querySelector('.tour-prev').addEventListener('click', prevStep);
+        tourTooltip.querySelector('.tour-next').addEventListener('click', nextStep);
+        tourTooltip.querySelector('.tour-tooltip-close').addEventListener('click', endGuidedTour);
+        tourHighlight.addEventListener('click', nextStep);
     }
 
-    // Close on overlay click (outside popup)
+    function showStep(stepIndex) {
+        const step = tourSteps[stepIndex];
+        const element = document.getElementById(step.id);
+        if (!element) { nextStep(); return; }
+
+        // Scroll to element
+        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        setTimeout(() => {
+            const rect = element.getBoundingClientRect();
+            const highlightBox = tourHighlight.querySelector('.tour-highlight-box');
+            
+            // Position highlight
+            highlightBox.style.top = (rect.top + window.scrollY - 10) + 'px';
+            highlightBox.style.left = (rect.left - 10) + 'px';
+            highlightBox.style.width = (rect.width + 20) + 'px';
+            highlightBox.style.height = Math.min(rect.height + 20, window.innerHeight * 0.6) + 'px';
+
+            // Update tooltip content
+            tourTooltip.querySelector('.tour-tooltip-step').textContent = `Step ${stepIndex + 1} of ${tourSteps.length}`;
+            tourTooltip.querySelector('.tour-tooltip-title').textContent = step.title;
+            tourTooltip.querySelector('.tour-tooltip-desc').textContent = step.description;
+
+            // Position tooltip
+            const tooltipTop = rect.bottom + window.scrollY + 20;
+            tourTooltip.style.top = tooltipTop + 'px';
+            tourTooltip.style.left = Math.max(20, rect.left) + 'px';
+
+            // Update button states
+            tourTooltip.querySelector('.tour-prev').style.visibility = stepIndex === 0 ? 'hidden' : 'visible';
+            tourTooltip.querySelector('.tour-next').textContent = stepIndex === tourSteps.length - 1 ? 'Finish ✓' : 'Next →';
+
+            // Show elements
+            tourHighlight.classList.add('active');
+            tourTooltip.classList.add('active');
+        }, 400);
+    }
+
+    function nextStep() {
+        if (currentStep < tourSteps.length - 1) {
+            currentStep++;
+            showStep(currentStep);
+        } else {
+            endGuidedTour();
+        }
+    }
+
+    function prevStep() {
+        if (currentStep > 0) {
+            currentStep--;
+            showStep(currentStep);
+        }
+    }
+
+    function startGuidedTour() {
+        closeTour();
+        currentStep = 0;
+        createTourElements();
+        setTimeout(() => showStep(0), 400);
+    }
+
+    function endGuidedTour() {
+        if (tourHighlight) {
+            tourHighlight.classList.remove('active');
+            setTimeout(() => tourHighlight.remove(), 300);
+            tourHighlight = null;
+        }
+        if (tourTooltip) {
+            tourTooltip.classList.remove('active');
+            setTimeout(() => tourTooltip.remove(), 300);
+            tourTooltip = null;
+        }
+    }
+
+    if (tourClose) tourClose.addEventListener('click', closeTour);
+    if (tourSkip) tourSkip.addEventListener('click', closeTour);
+    if (tourStart) tourStart.addEventListener('click', startGuidedTour);
+
     tourOverlay.addEventListener('click', (e) => {
         if (e.target === tourOverlay) closeTour();
     });
 
-    // Close on Escape key
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && tourOverlay.classList.contains('active')) {
-            closeTour();
+        if (e.key === 'Escape') {
+            if (tourOverlay.classList.contains('active')) closeTour();
+            else if (tourHighlight?.classList.contains('active')) endGuidedTour();
+        }
+        if (tourHighlight?.classList.contains('active')) {
+            if (e.key === 'ArrowRight') nextStep();
+            if (e.key === 'ArrowLeft') prevStep();
         }
     });
 })();
