@@ -56,6 +56,11 @@ section {
     padding: 100px 0;
 }
 
+/* Utility Classes */
+.hidden {
+    display: none !important;
+}
+
 /* ==================== */
 /* NAVIGATION */
 /* ==================== */
@@ -7396,15 +7401,54 @@ input:checked + .slider:before {
 
 /* Recruiter Mode Active Styles */
 body.recruiter-mode .hero-description-minimal,
-body.recruiter-mode .story-text p:not(.story-lead),
-body.recruiter-mode .section--hobbies,
-body.recruiter-mode .sparkles-text {
-    opacity: 0.5;
+body.recruiter-mode .story-text p:not(.story-lead):not(:first-of-type),
+body.recruiter-mode .hobbies-section,
+body.recruiter-mode .books-section {
+    opacity: 0.35;
+    filter: blur(1px);
+    transition: opacity 0.3s ease, filter 0.3s ease;
 }
 
 body.recruiter-mode .why-hire-me-card {
-    display: block;
+    display: block !important;
     animation: fadeInUp 0.5s ease forwards;
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 20px rgba(0, 102, 204, 0.3);
+}
+
+/* Highlight important sections in recruiter mode */
+body.recruiter-mode .skills-section,
+body.recruiter-mode .experience-section,
+body.recruiter-mode .projects-section {
+    position: relative;
+}
+
+body.recruiter-mode .skills-section::before,
+body.recruiter-mode .experience-section::before,
+body.recruiter-mode .projects-section::before {
+    content: '⭐ Key Section';
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    background: var(--accent);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    z-index: 10;
+}
+
+body.recruiter-mode .timeline-item,
+body.recruiter-mode .project-card {
+    border-left: 3px solid var(--accent);
+    transition: border-color 0.3s ease;
+}
+
+/* Recruiter mode toggle visual feedback */
+body.recruiter-mode .recruiter-toggle-wrapper .recruiter-label {
+    color: var(--accent);
+    font-weight: 700;
 }
 
 /* Availability Badge */
@@ -7727,87 +7771,7 @@ kbd {
 }
 
 
-/* ==================== */
-/* NEW ENHANCEMENTS */
-/* ==================== */
-
-/* Recruiter Toggle */
-.recruiter-toggle-wrapper {
-    display: flex;
-    align-items: center;
-    margin-right: 15px;
-    gap: 8px;
-}
-
-.recruiter-label {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--text-secondary);
-}
-
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 40px;
-    height: 22px;
-}
-
-.switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    transition: .4s;
-}
-
-.slider:before {
-    position: absolute;
-    content: '';
-    height: 16px;
-    width: 16px;
-    left: 3px;
-    bottom: 3px;
-    background-color: white;
-    transition: .4s;
-}
-
-input:checked + .slider {
-    background-color: var(--accent);
-}
-
-input:checked + .slider:before {
-    transform: translateX(18px);
-}
-
-.slider.round {
-    border-radius: 34px;
-}
-
-.slider.round:before {
-    border-radius: 50%;
-}
-
-/* Recruiter Mode Active Styles */
-body.recruiter-mode .hero-description-minimal,
-body.recruiter-mode .story-text p:not(.story-lead),
-body.recruiter-mode .section--hobbies,
-body.recruiter-mode .sparkles-text {
-    opacity: 0.5;
-}
-
-body.recruiter-mode .why-hire-me-card {
-    display: block;
-    animation: fadeInUp 0.5s ease forwards;
-}
+/* Removed duplicate NEW ENHANCEMENTS block - using the one above */
 
 /* Availability Badge */
 .availability-badge {

@@ -196,27 +196,35 @@ function initRecruiterMode() {
     const body = document.body;
     const whyHireMeCard = document.getElementById('whyHireMeCard');
 
+    console.log('🎯 Recruiter Mode Init:', { toggle: !!toggle, whyHireMeCard: !!whyHireMeCard });
+
     if (toggle) {
         // Check if previously enabled
         if (localStorage.getItem('recruiterMode') === 'true') {
             toggle.checked = true;
             body.classList.add('recruiter-mode');
             if (whyHireMeCard) whyHireMeCard.classList.remove('hidden');
+            console.log('🎯 Recruiter Mode restored from localStorage: ON');
         }
 
         toggle.addEventListener('change', () => {
+            console.log('🎯 Recruiter Mode toggle changed:', toggle.checked);
             if (toggle.checked) {
                 body.classList.add('recruiter-mode');
                 if (whyHireMeCard) whyHireMeCard.classList.remove('hidden');
                 localStorage.setItem('recruiterMode', 'true');
                 showToast('Recruiter Mode: ON - Highlighting key info');
+                console.log('🎯 Recruiter Mode: ON - body classes:', body.classList.toString());
             } else {
                 body.classList.remove('recruiter-mode');
                 if (whyHireMeCard) whyHireMeCard.classList.add('hidden');
                 localStorage.setItem('recruiterMode', 'false');
                 showToast('Recruiter Mode: OFF');
+                console.log('🎯 Recruiter Mode: OFF - body classes:', body.classList.toString());
             }
         });
+    } else {
+        console.warn('🎯 Recruiter toggle not found!');
     }
 }
 
