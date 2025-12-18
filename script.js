@@ -776,6 +776,10 @@ function renderHeroCard(project, iconConfig, view = 'business') {
                         ${project.techStack.slice(0, 3).map(tech => `<span class="hero-card-tag">${tech}</span>`).join('')}
                     </div>
                     <div class="hero-card-links">
+                        <button class="hero-card-link view-project-details" data-id="${project.id}" onclick="event.stopPropagation()" title="View Case Study">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            Details
+                        </button>
                         ${demoLink}
                         ${githubLink}
                     </div>
@@ -820,7 +824,12 @@ function renderStackedCard(project, index, view = 'business') {
                     <div class="stacked-card-tags">
                         ${project.techStack.slice(0, 2).map(tech => `<span class="stacked-card-tag">${tech}</span>`).join('')}
                     </div>
-                    ${githubLink}
+                    <div class="stacked-card-actions" style="display: flex; gap: 8px;">
+                        <button class="stacked-card-link view-project-details" data-id="${project.id}" onclick="event.stopPropagation()" title="View Details" style="background: none; border: none; cursor: pointer; color: var(--text-secondary);">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                        </button>
+                        ${githubLink}
+                    </div>
                 </div>
             </div>
         </div>

@@ -7324,3 +7324,779 @@ html {
         max-width: 300px;
     }
 }
+
+/* ==================== */
+/* NEW ENHANCEMENTS */
+/* ==================== */
+
+/* Recruiter Toggle */
+.recruiter-toggle-wrapper {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+    gap: 8px;
+}
+
+.recruiter-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 22px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: '';
+    height: 16px;
+    width: 16px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: var(--accent);
+}
+
+input:checked + .slider:before {
+    transform: translateX(18px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/* Recruiter Mode Active Styles */
+body.recruiter-mode .hero-description-minimal,
+body.recruiter-mode .story-text p:not(.story-lead),
+body.recruiter-mode .section--hobbies,
+body.recruiter-mode .sparkles-text {
+    opacity: 0.5;
+}
+
+body.recruiter-mode .why-hire-me-card {
+    display: block;
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+/* Availability Badge */
+.availability-badge {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(0, 255, 0, 0.1);
+    color: #008000;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    border: 1px solid rgba(0, 255, 0, 0.2);
+}
+
+.pulse-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #00cc00;
+    border-radius: 50%;
+    margin-right: 8px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(0, 204, 0, 0.7); }
+    70% { box-shadow: 0 0 0 6px rgba(0, 204, 0, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(0, 204, 0, 0); }
+}
+
+/* Skill Search */
+.skill-search-container {
+    margin: 20px 0;
+    position: relative;
+}
+
+#skillSearch {
+    width: 100%;
+    max-width: 400px;
+    padding: 12px 20px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: var(--transition);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+#skillSearch:focus {
+    border-color: var(--accent);
+    outline: none;
+    box-shadow: 0 0 0 3px var(--accent-light);
+}
+
+.highlight-skill {
+    background-color: yellow;
+    color: black;
+    font-weight: bold;
+    padding: 2px 4px;
+    border-radius: 2px;
+}
+
+/* Why Hire Me Card */
+.why-hire-me-card {
+    background: var(--bg-secondary);
+    border-left: 4px solid var(--accent);
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+    box-shadow: var(--shadow);
+}
+
+.why-hire-me-card h3 {
+    margin-bottom: 10px;
+    color: var(--accent);
+}
+
+.why-hire-me-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.why-hire-me-card li {
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+/* Social Proof Strip */
+.social-proof-section {
+    padding: 40px 0;
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+}
+
+.social-proof-label {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.logo-strip {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    opacity: 0.6;
+}
+
+.proof-logo {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    filter: grayscale(100%);
+    transition: var(--transition);
+}
+
+.proof-logo:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+    color: var(--accent);
+}
+
+/* Accessibility Panel */
+.a11y-trigger {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: white;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 999;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.a11y-trigger:hover {
+    transform: scale(1.1);
+}
+
+.a11y-panel {
+    position: fixed;
+    bottom: 80px;
+    left: 20px;
+    background: var(--bg-primary);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    z-index: 1000;
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 200px;
+}
+
+.a11y-panel button {
+    padding: 8px;
+    border: 1px solid var(--border);
+    background: var(--bg-secondary);
+    cursor: pointer;
+    border-radius: 4px;
+    color: var(--text-primary);
+}
+
+.a11y-panel button:hover {
+    background: var(--accent-light);
+}
+
+/* High Contrast Mode */
+body.high-contrast {
+    --bg-primary: #000000 !important;
+    --bg-secondary: #111111 !important;
+    --text-primary: #ffffff !important;
+    --text-secondary: #ffff00 !important;
+    --accent: #00ffff !important;
+    --border: #ffffff !important;
+}
+
+/* Large Text Mode */
+body.large-text {
+    font-size: 20px;
+}
+
+/* Reduce Motion */
+body.reduce-motion * {
+    animation: none !important;
+    transition: none !important;
+}
+
+/* Modals */
+dialog {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    padding: 0;
+    max-width: 600px;
+    width: 90%;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+dialog::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    padding: 30px;
+    position: relative;
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--text-muted);
+}
+
+.modal-section {
+    margin-bottom: 20px;
+}
+
+.modal-section h3 {
+    font-size: 1rem;
+    color: var(--accent);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.kbd-modal {
+    padding: 20px;
+}
+
+.kbd-modal ul {
+    list-style: none;
+    margin: 15px 0;
+}
+
+.kbd-modal li {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+kbd {
+    background: var(--bg-tertiary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+}
+
+/* Print Styles */
+@media print {
+    nav, .chatbot-bubble, .a11y-trigger, .back-to-top, .tour-overlay, .skill-search-container, .theme-toggle, .recruiter-toggle-wrapper {
+        display: none !important;
+    }
+    
+    body {
+        font-family: Georgia, serif;
+        color: black;
+        background: white;
+        font-size: 12pt;
+    }
+
+    section {
+        padding: 20px 0;
+        page-break-inside: avoid;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    a[href^='http']::after {
+        content: ' (' attr(href) ')';
+        font-size: 0.8em;
+        color: #666;
+    }
+
+    .hero-content-minimal {
+        text-align: left;
+    }
+
+    .hero-name-minimal {
+        font-size: 24pt;
+        color: black;
+    }
+}
+
+
+/* ==================== */
+/* NEW ENHANCEMENTS */
+/* ==================== */
+
+/* Recruiter Toggle */
+.recruiter-toggle-wrapper {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+    gap: 8px;
+}
+
+.recruiter-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 22px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: '';
+    height: 16px;
+    width: 16px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: var(--accent);
+}
+
+input:checked + .slider:before {
+    transform: translateX(18px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/* Recruiter Mode Active Styles */
+body.recruiter-mode .hero-description-minimal,
+body.recruiter-mode .story-text p:not(.story-lead),
+body.recruiter-mode .section--hobbies,
+body.recruiter-mode .sparkles-text {
+    opacity: 0.5;
+}
+
+body.recruiter-mode .why-hire-me-card {
+    display: block;
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+/* Availability Badge */
+.availability-badge {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(0, 255, 0, 0.1);
+    color: #008000;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    border: 1px solid rgba(0, 255, 0, 0.2);
+}
+
+.pulse-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #00cc00;
+    border-radius: 50%;
+    margin-right: 8px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(0, 204, 0, 0.7); }
+    70% { box-shadow: 0 0 0 6px rgba(0, 204, 0, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(0, 204, 0, 0); }
+}
+
+/* Skill Search */
+.skill-search-container {
+    margin: 20px 0;
+    position: relative;
+}
+
+#skillSearch {
+    width: 100%;
+    max-width: 400px;
+    padding: 12px 20px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: var(--transition);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+#skillSearch:focus {
+    border-color: var(--accent);
+    outline: none;
+    box-shadow: 0 0 0 3px var(--accent-light);
+}
+
+.highlight-skill {
+    background-color: yellow;
+    color: black;
+    font-weight: bold;
+    padding: 2px 4px;
+    border-radius: 2px;
+}
+
+/* Why Hire Me Card */
+.why-hire-me-card {
+    background: var(--bg-secondary);
+    border-left: 4px solid var(--accent);
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+    box-shadow: var(--shadow);
+}
+
+.why-hire-me-card h3 {
+    margin-bottom: 10px;
+    color: var(--accent);
+}
+
+.why-hire-me-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.why-hire-me-card li {
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+/* Social Proof Strip */
+.social-proof-section {
+    padding: 40px 0;
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+}
+
+.social-proof-label {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.logo-strip {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    opacity: 0.6;
+}
+
+.proof-logo {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    filter: grayscale(100%);
+    transition: var(--transition);
+}
+
+.proof-logo:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+    color: var(--accent);
+}
+
+/* Accessibility Panel */
+.a11y-trigger {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: white;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 999;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.a11y-trigger:hover {
+    transform: scale(1.1);
+}
+
+.a11y-panel {
+    position: fixed;
+    bottom: 80px;
+    left: 20px;
+    background: var(--bg-primary);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    z-index: 1000;
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 200px;
+}
+
+.a11y-panel button {
+    padding: 8px;
+    border: 1px solid var(--border);
+    background: var(--bg-secondary);
+    cursor: pointer;
+    border-radius: 4px;
+    color: var(--text-primary);
+}
+
+.a11y-panel button:hover {
+    background: var(--accent-light);
+}
+
+/* High Contrast Mode */
+body.high-contrast {
+    --bg-primary: #000000 !important;
+    --bg-secondary: #111111 !important;
+    --text-primary: #ffffff !important;
+    --text-secondary: #ffff00 !important;
+    --accent: #00ffff !important;
+    --border: #ffffff !important;
+}
+
+/* Large Text Mode */
+body.large-text {
+    font-size: 20px;
+}
+
+/* Reduce Motion */
+body.reduce-motion * {
+    animation: none !important;
+    transition: none !important;
+}
+
+/* Modals */
+dialog {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    padding: 0;
+    max-width: 600px;
+    width: 90%;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+dialog::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    padding: 30px;
+    position: relative;
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--text-muted);
+}
+
+.modal-section {
+    margin-bottom: 20px;
+}
+
+.modal-section h3 {
+    font-size: 1rem;
+    color: var(--accent);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.kbd-modal {
+    padding: 20px;
+}
+
+.kbd-modal ul {
+    list-style: none;
+    margin: 15px 0;
+}
+
+.kbd-modal li {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+kbd {
+    background: var(--bg-tertiary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+}
+
+/* Print Styles */
+@media print {
+    nav, .chatbot-bubble, .a11y-trigger, .back-to-top, .tour-overlay, .skill-search-container, .theme-toggle, .recruiter-toggle-wrapper {
+        display: none !important;
+    }
+    
+    body {
+        font-family: Georgia, serif;
+        color: black;
+        background: white;
+        font-size: 12pt;
+    }
+
+    section {
+        padding: 20px 0;
+        page-break-inside: avoid;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    a[href^='http']::after {
+        content: ' (' attr(href) ')';
+        font-size: 0.8em;
+        color: #666;
+    }
+
+    .hero-content-minimal {
+        text-align: left;
+    }
+
+    .hero-name-minimal {
+        font-size: 24pt;
+        color: black;
+    }
+}
+

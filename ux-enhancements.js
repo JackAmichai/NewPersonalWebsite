@@ -177,3 +177,286 @@
     });
 
 })();
+
+// ========================================
+// UX ENHANCEMENTS (ADDED)
+// ========================================
+
+document.addEventListener('DOMContentLoaded', () => {
+    initRecruiterMode();
+    initSkillSearch();
+    initAccessibilityPanel();
+    initKeyboardShortcuts();
+    initProjectModals();
+});
+
+// 1. Recruiter Mode
+function initRecruiterMode() {
+    const toggle = document.getElementById('recruiterToggle');
+    const body = document.body;
+    const whyHireMeCard = document.getElementById('whyHireMeCard');
+
+    if (toggle) {
+        // Check if previously enabled
+        if (localStorage.getItem('recruiterMode') === 'true') {
+            toggle.checked = true;
+            body.classList.add('recruiter-mode');
+            if (whyHireMeCard) whyHireMeCard.classList.remove('hidden');
+        }
+
+        toggle.addEventListener('change', () => {
+            if (toggle.checked) {
+                body.classList.add('recruiter-mode');
+                if (whyHireMeCard) whyHireMeCard.classList.remove('hidden');
+                localStorage.setItem('recruiterMode', 'true');
+                showToast('Recruiter Mode: ON - Highlighting key info');
+            } else {
+                body.classList.remove('recruiter-mode');
+                if (whyHireMeCard) whyHireMeCard.classList.add('hidden');
+                localStorage.setItem('recruiterMode', 'false');
+                showToast('Recruiter Mode: OFF');
+            }
+        });
+    }
+}
+
+// 2. Skill Matcher Search
+function initSkillSearch() {
+    const searchInput = document.getElementById('skillSearch');
+    if (!searchInput) return;
+
+    searchInput.addEventListener('input', (e) => {
+        const term = e.target.value.toLowerCase();
+        if (term.length < 2) {
+            removeHighlights();
+            return;
+        }
+
+        // Debounce could be added here, but for simple text it's fine
+        highlightText(document.body, term);
+    });
+}
+
+function highlightText(element, term) {
+    removeHighlights();
+    
+    if (!term) return;
+
+    // Walk through text nodes
+    const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT, null, false);
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+
+    nodes.forEach(node => {
+        const parent = node.parentNode;
+        // Skip scripts, styles, and already highlighted elements
+        if (parent.tagName === 'SCRIPT' || 
+            parent.tagName === 'STYLE' || 
+            parent.classList.contains('highlight-skill') ||
+            parent.closest('.skill-search-wrapper')) return;
+
+        const text = node.nodeValue;
+        const index = text.toLowerCase().indexOf(term);
+
+        if (index >= 0) {
+            const span = document.createElement('span');
+            span.className = 'highlight-skill';
+            span.textContent = text.substr(index, term.length);
+            
+            const after = document.createTextNode(text.substr(index + term.length));
+            node.nodeValue = text.substr(0, index);
+            
+            parent.insertBefore(span, node.nextSibling);
+            parent.insertBefore(after, span.nextSibling);
+        }
+    });
+}
+
+function removeHighlights() {
+    document.querySelectorAll('.highlight-skill').forEach(span => {
+        const parent = span.parentNode;
+        parent.replaceChild(document.createTextNode(span.textContent), span);
+        parent.normalize();
+    });
+}
+
+// 3. Accessibility Panel
+function initAccessibilityPanel() {
+    const trigger = document.getElementById('a11yTrigger');
+    const panel = document.getElementById('a11yPanel');
+    const close = document.getElementById('a11yClose');
+    const body = document.body;
+
+    if (trigger && panel) {
+        trigger.addEventListener('click', () => {
+            panel.hidden = !panel.hidden;
+            trigger.setAttribute('aria-expanded', !panel.hidden);
+        });
+
+        if (close) {
+            close.addEventListener('click', () => {
+                panel.hidden = true;
+                trigger.setAttribute('aria-expanded', 'false');
+            });
+        }
+
+        // Contrast Toggle
+        const contrastBtn = document.getElementById('a11yContrast');
+        if (contrastBtn) {
+            contrastBtn.addEventListener('click', () => {
+                body.classList.toggle('high-contrast');
+                const isHigh = body.classList.contains('high-contrast');
+                contrastBtn.setAttribute('aria-pressed', isHigh);
+                showToast(isHigh ? 'High Contrast: ON' : 'High Contrast: OFF');
+            });
+        }
+
+        // Text Size Toggle
+        const textBtn = document.getElementById('a11yText');
+        if (textBtn) {
+            textBtn.addEventListener('click', () => {
+                body.classList.toggle('large-text');
+                const isLarge = body.classList.contains('large-text');
+                textBtn.setAttribute('aria-pressed', isLarge);
+                showToast(isLarge ? 'Large Text: ON' : 'Large Text: OFF');
+            });
+        }
+
+        // Motion Toggle
+        const motionBtn = document.getElementById('a11yMotion');
+        if (motionBtn) {
+            motionBtn.addEventListener('click', () => {
+                body.classList.toggle('reduce-motion');
+                const isReduced = body.classList.contains('reduce-motion');
+                motionBtn.setAttribute('aria-pressed', isReduced);
+                showToast(isReduced ? 'Reduced Motion: ON' : 'Reduced Motion: OFF');
+            });
+        }
+    }
+}
+
+// 4. Keyboard Shortcuts
+function initKeyboardShortcuts() {
+    const helpModal = document.getElementById('kbdHelp');
+    
+    document.addEventListener('keydown', (e) => {
+        // Ignore if typing in input
+        if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+
+        // ? to toggle help
+        if (e.key === '?') {
+            if (helpModal) {
+                if (helpModal.open) helpModal.close();
+                else helpModal.showModal();
+            }
+        }
+
+        // R for Recruiter Mode
+        if (e.key.toLowerCase() === 'r') {
+            const toggle = document.getElementById('recruiterToggle');
+            if (toggle) {
+                toggle.checked = !toggle.checked;
+                toggle.dispatchEvent(new Event('change'));
+            }
+        }
+
+        // / for Search
+        if (e.key === '/') {
+            e.preventDefault();
+            const search = document.getElementById('skillSearch');
+            if (search) search.focus();
+        }
+        
+        // Esc to close modals (built-in for dialog, but good to ensure)
+        if (e.key === 'Escape') {
+            const openModals = document.querySelectorAll('dialog[open]');
+            openModals.forEach(m => m.close());
+        }
+    });
+}
+
+// 5. Project Modals
+function initProjectModals() {
+    const modal = document.getElementById('projectModal');
+    const closeBtn = document.getElementById('modalClose');
+    
+    if (!modal) return;
+
+    // Close handlers
+    if (closeBtn) closeBtn.addEventListener('click', () => modal.close());
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) modal.close();
+    });
+
+    // Attach to project cards
+    // We look for any element with class 'view-project-btn' or similar
+    document.addEventListener('click', (e) => {
+        const btn = e.target.closest('.view-project-details');
+        if (btn) {
+            e.preventDefault();
+            const projectId = btn.dataset.id;
+            openProjectModal(projectId);
+        }
+    });
+}
+
+function openProjectModal(projectId) {
+    const modal = document.getElementById('projectModal');
+    
+    // Ensure projectsData exists
+    if (typeof projectsData === 'undefined') {
+        console.error('projectsData not loaded');
+        return;
+    }
+
+    const project = projectsData.find(p => p.id === projectId);
+    if (!project) return;
+
+    // Populate Modal
+    const titleEl = document.getElementById('modalTitle');
+    if (titleEl) titleEl.textContent = project.title;
+
+    const challengeEl = document.getElementById('modalChallenge');
+    if (challengeEl) challengeEl.textContent = project.challenge || project.description;
+
+    const solutionEl = document.getElementById('modalSolution');
+    if (solutionEl) solutionEl.textContent = project.solution || "Details coming soon...";
+
+    const impactEl = document.getElementById('modalImpact');
+    if (impactEl) impactEl.textContent = project.impact || "Impact details coming soon...";
+
+    const linkEl = document.getElementById('modalLink');
+    if (linkEl) {
+        linkEl.href = project.link || "#";
+        linkEl.style.display = project.link ? 'inline-flex' : 'none';
+    }
+    
+    const stackContainer = document.getElementById('modalStack');
+    if (stackContainer && project.techStack) {
+        stackContainer.innerHTML = project.techStack.map(tech => `<span class="tech-tag">${tech}</span>`).join('');
+    }
+
+    modal.showModal();
+}
+
+// Helper: Toast Notification
+function showToast(message) {
+    let toast = document.getElementById('toast');
+    // Create toast if it doesn't exist
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'toast';
+        toast.className = 'toast';
+        document.body.appendChild(toast);
+    }
+    
+    toast.textContent = message;
+    toast.classList.add('show');
+    
+    // Clear previous timeout if exists
+    if (toast.timeoutId) clearTimeout(toast.timeoutId);
+    
+    toast.timeoutId = setTimeout(() => {
+        toast.classList.remove('show');
+    }, 3000);
+}

@@ -48,6 +48,7 @@
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
     <meta name="theme-color" content="#0066cc">
+    <link rel="manifest" href="manifest.json">
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -61,7 +62,32 @@
         {"@type": "EducationalOrganization", "name": "Open University of Israel"},
         {"@type": "EducationalOrganization", "name": "Technion"}
       ],
-      "knowsAbout": ["Business Analysis", "Revenue Optimization", "Machine Learning", "Python", "Data Analysis"]
+      "knowsAbout": ["Business Analysis", "Revenue Optimization", "Machine Learning", "Python", "Data Analysis"],
+      "url": "https://new-personal-website-topaz.vercel.app/",
+      "sameAs": [
+        "https://linkedin.com/in/jackamichai",
+        "https://github.com/JackAmichai"
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "itemListElement": [
+        {
+          "@type": "SoftwareSourceCode",
+          "name": "Hatrick: AI Cyber Defense",
+          "programmingLanguage": "Python, TypeScript",
+          "codeRepository": "https://github.com/JackAmichai"
+        },
+        {
+          "@type": "SoftwareSourceCode",
+          "name": "NVIDIA Documentation Navigator",
+          "programmingLanguage": "Python, RAG",
+          "codeRepository": "https://github.com/JackAmichai/Nvidia-doc-agentic-ai"
+        }
+      ]
     }
     </script>
 </head>
@@ -134,6 +160,13 @@
                     </a></li>
             </ul>
             <div class="nav-actions">
+                <div class="recruiter-toggle-wrapper" title="Toggle Recruiter Mode">
+                    <label class="switch">
+                        <input type="checkbox" id="recruiterToggle">
+                        <span class="slider round"></span>
+                    </label>
+                    <span class="recruiter-label">Recruiter Mode</span>
+                </div>
                 <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"
                     title="Toggle dark/light mode">
                     <span class="theme-icon">🌙</span>
@@ -160,6 +193,12 @@
             <!-- Hero Content: Text on the Right -->
             <!-- Hero Content: Text on the Right -->
             <div class="hero-content-minimal">
+                <!-- Availability Badge -->
+                <div class="availability-badge">
+                    <span class="pulse-dot"></span>
+                    Available for Full-Time (Jan 2026) • 📍 Tel Aviv • 🌍 Open to Remote
+                </div>
+
                 <!-- Sparkles Text for Name -->
                 <h1 class="hero-name-minimal sparkles-text" data-sparkles-count="15">Jack Amichai</h1>
 
@@ -168,6 +207,11 @@
                     <span class="text-shimmer">A Bit About Me</span>
                 </h2>
 
+                <!-- Skill Matcher Search -->
+                <div class="skill-search-container">
+                    <input type="text" id="skillSearch" placeholder="🔍 Search skills (e.g., Python, SAP, RAG)..." aria-label="Search skills">
+                </div>
+
                 <p class="hero-description-minimal text-reveal" data-effect="word" data-delay="0.1">
                     I am a Business Analyst and AI Product Builder, bridging the gap between psychology, data, and
                     technology.
@@ -175,6 +219,16 @@
                     and decision quality.
                     My work spans from cognitive neuroscience research to optimizing enterprise operations at Deloitte.
                 </p>
+
+                <!-- Why Hire Me TL;DR Card (Hidden by default, shown in Recruiter Mode) -->
+                <div class="why-hire-me-card hidden" id="whyHireMeCard">
+                    <h3>🚀 Why Hire Me?</h3>
+                    <ul>
+                        <li><strong>Impact:</strong> Improved revenue forecast accuracy & saved 60% analysis time.</li>
+                        <li><strong>Hybrid:</strong> Psychology + CS background for human-centric AI products.</li>
+                        <li><strong>Builder:</strong> Deployed RAG systems & multi-agent simulations.</li>
+                    </ul>
+                </div>
 
                 <!-- Hero Image Cards Row -->
                 <div class="hero-cards-row">
@@ -206,6 +260,20 @@
         </div>
     </section>
 
+
+    <!-- Social Proof Section -->
+    <section class="social-proof-section">
+        <div class="container">
+            <p class="social-proof-label">Trusted by / Worked with:</p>
+            <div class="logo-strip">
+                <span class="proof-logo">Deloitte</span>
+                <span class="proof-logo">Technion</span>
+                <span class="proof-logo">Hebrew University</span>
+                <span class="proof-logo">Open University</span>
+                <span class="proof-logo">Adi Ohayon Consulting</span>
+            </div>
+        </div>
+    </section>
 
     <!-- My Story Section -->
     <section id="story" class="my-story">
@@ -1500,12 +1568,73 @@
         </div>
     </div>
 
+    <!-- Accessibility Control Panel -->
+    <div class="a11y-panel" id="a11yPanel" hidden>
+        <h3>Accessibility</h3>
+        <button id="a11yContrast">High Contrast</button>
+        <button id="a11yText">Large Text</button>
+        <button id="a11yMotion">Reduce Motion</button>
+        <button id="a11yClose">Close</button>
+    </div>
+    <button class="a11y-trigger" id="a11yTrigger" aria-label="Accessibility Settings">♿</button>
+
+    <!-- Keyboard Help Modal -->
+    <dialog id="kbdHelp" class="kbd-modal">
+        <h3>Keyboard Shortcuts</h3>
+        <ul>
+            <li><kbd>?</kbd> Toggle this help</li>
+            <li><kbd>R</kbd> Toggle Recruiter Mode</li>
+            <li><kbd>/</kbd> Focus Search</li>
+            <li><kbd>Esc</kbd> Close Modals</li>
+        </ul>
+        <button onclick="document.getElementById('kbdHelp').close()">Close</button>
+    </dialog>
+
+    <!-- Project Details Modal -->
+    <dialog id="projectModal" class="project-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">✕</button>
+            <h2 id="modalTitle">Project Title</h2>
+            <div class="modal-body">
+                <div class="modal-section">
+                    <h3>The Challenge</h3>
+                    <p id="modalChallenge">...</p>
+                </div>
+                <div class="modal-section">
+                    <h3>The Solution</h3>
+                    <p id="modalSolution">...</p>
+                </div>
+                <div class="modal-section">
+                    <h3>Tech Stack</h3>
+                    <div id="modalStack" class="tech-tags"></div>
+                </div>
+                <div class="modal-section">
+                    <h3>Impact</h3>
+                    <p id="modalImpact">...</p>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <a href="#" id="modalLink" target="_blank" class="btn primary-btn">View Code/Live</a>
+            </div>
+        </div>
+    </dialog>
+
     <script src="projects-data.js"></script>
     <script src="ux-enhancements.js"></script>
     <script src="script.js"></script>
     <script src="sparkles.js"></script>
     <script src="text-effects.js"></script>
     <script src="chatbot.js"></script>
+    <script>
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => console.log('SW registered'))
+                    .catch(err => console.log('SW failed', err));
+            });
+        }
+    </script>
 </body>
 
 </html>
