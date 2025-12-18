@@ -7570,6 +7570,10 @@ body.recruiter-mode .why-hire-me-card {
     width: 200px;
 }
 
+.a11y-panel[hidden] {
+    display: none !important;
+}
+
 .a11y-panel button {
     padding: 8px;
     border: 1px solid var(--border);

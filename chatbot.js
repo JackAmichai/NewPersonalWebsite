@@ -218,8 +218,12 @@ class CloudChatbot {
             // Remove typing indicator
             this.removeMessage(typingId);
 
-            // Add bot response
-            this.addMessage(data.answer, 'bot');
+            // Add bot response - the API returns answer even on errors
+            if (data.answer) {
+                this.addMessage(data.answer, 'bot');
+            } else {
+                this.addMessage("Sorry, I didn't get a proper response. Please try again.", 'bot');
+            }
 
             // Show new suggestions after answer
             setTimeout(() => this.displaySuggestions(), 500);

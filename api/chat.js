@@ -131,6 +131,9 @@ export default async function handler(req) {
     try {
         const { message } = await req.json();
 
+        console.log("API Key present:", !!OPENROUTER_API_KEY);
+        console.log("API Key prefix:", OPENROUTER_API_KEY ? OPENROUTER_API_KEY.substring(0, 10) + "..." : "N/A");
+        
         const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
             method: "POST",
             headers: {
@@ -140,7 +143,7 @@ export default async function handler(req) {
                 "X-Title": "Jack Amichai Portfolio",
             },
             body: JSON.stringify({
-                "model": "google/gemini-2.0-flash-exp:free",
+                "model": "google/gemini-2.0-flash-001",
                 "messages": [
                     {
                         "role": "system",
@@ -167,11 +170,33 @@ export default async function handler(req) {
             })
         });
 
-        const data = await response.json();
+        const responseText = await response.text();
+        console.log("OpenRouter Response Status:", response.status);
+        console.log("OpenRouter Response:", responseText.substring(0, 500));
+        
+        let data;
+        try {
+            data = JSON.parse(responseText);
+        } catch (parseError) {
+            console.error("Failed to parse response:", parseError);
+            return new Response(JSON.stringify({ answer: "Sorry, I received an unexpected response. Please try again!" }), {
+                status: 500,
+                headers: { 'Content-Type': 'application/json' }
+            });
+        }
         
         if (data.error) {
-             console.error("OpenRouter Error:", data.error);
+             console.error("OpenRouter Error:", JSON.stringify(data.error));
              return new Response(JSON.stringify({ answer: "Sorry, I'm having trouble connecting to my brain right now. Please try again later!" }), {
+                status: 500,
+                headers: { 'Content-Type': 'application/json' }
+            });
+        }
+
+        // Safely extract the answer with proper checks
+        if (!data.choices || !data.choices[0] || !data.choices[0].message) {
+            console.error("Unexpected response structure:", JSON.stringify(data));
+            return new Response(JSON.stringify({ answer: "I received an unexpected response format. Please try again!" }), {
                 status: 500,
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -185,7 +210,7 @@ export default async function handler(req) {
         });
 
     } catch (error) {
-        console.error("Server Error:", error);
+        console.error("Server Error:", error.message, error.stack);
         return new Response(JSON.stringify({ answer: "Sorry, something went wrong. Please try again." }), {
             status: 500,
             headers: { 'Content-Type': 'application/json' }
