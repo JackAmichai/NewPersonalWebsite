@@ -2,92 +2,6 @@
 // CLOUD CHATBOT - Jack's Personal Assistant
 // ========================================
 
-const jackKnowledgeBase = {
-    // Greetings & Small Talk
-    "hello|hi|hey|greetings|morning|afternoon|evening": {
-        answer: "Hello! 👋 I'm Cloud, Jack's AI assistant. How can I help you today? You can ask me about Jack's experience, projects, or how to contact him.",
-        keywords: ["hello", "hi", "greetings"]
-    },
-    "thanks|thank you|thx|appreciate": {
-        answer: "You're welcome! 😊 Let me know if you have any other questions about Jack's work.",
-        keywords: ["thanks", "thank you"]
-    },
-    "who are you|what are you|bot|ai": {
-        answer: "I'm Cloud ☁️, a custom-built AI assistant designed to help you navigate Jack's portfolio. I can answer questions about his background, skills, and projects!",
-        keywords: ["who are you", "bot", "AI"]
-    },
-
-    // Career & Experience
-    "army|military|idf|service|givati": {
-        answer: "Jack served in the **Israel Defense Forces (IDF)** as a **Staff Sergeant**. He led team operations, managed logistics, and trained personnel. This experience taught him leadership, decision-making under pressure, and team management skills that he applies to his product work today.",
-        keywords: ["IDF", "military", "leadership", "Staff Sergeant"]
-    },
-    "hospitality|consultant|consulting|current|work|job|adi|ohayon|deloitte": {
-        answer: "Jack currently works as a **Deloitte Consultant** placed at **Adi Ohayon Hospitality Consulting** as a **Business Analyst** specializing in revenue optimization. He started in **April 2025**, where he analyzes demand trends, builds forecasting models, creates executive dashboards, and collaborates with cross-functional teams to drive strategic decisions.",
-        keywords: ["Deloitte", "Adi Ohayon", "hospitality", "consulting", "Business Analyst", "current role"]
-    },
-    "education|university|degree|studied|psychology|computer science": {
-        answer: "Jack holds a **Bachelor's degree in Psychology and Computer Science** from the **Open University of Israel**. He also has research experience at **Technion** (2021-2023) as a Research Assistant & Team Coordinator, and **Hebrew University** (2020-2021) as a Research Project Manager & Software Engineer, where he analyzed experimental data and managed research projects. This unique combination of psychology and tech helps him build data-driven solutions.",
-        keywords: ["education", "psychology", "computer science", "Technion", "research"]
-    },
-    "projects|portfolio|built|work|examples": {
-        answer: "Jack has built a diverse portfolio of AI and analytics projects. You can ask me about specific ones like **Scholar2.6**, **SleepCall**, or **NVIDIA Doc Navigator**. \n\nCheck out the Projects section for videos and details!",
-        keywords: ["projects", "portfolio"]
-    },
-    "skills|technologies|tech stack|programming|languages": {
-        answer: "Jack's tech stack includes:\n\n**Languages:** Python, SQL, JavaScript, TypeScript, Java\n**AI/ML:** Scikit-learn, Pandas, LangChain, OpenAI API, Vector DBs\n**Enterprise:** SAP BTP, SAP SuccessFactors, Power BI, OData\n**Product Tools:** Jira, Figma, Git, Analytics\n\nHe specializes in building **RAG systems**, **ML pipelines**, and **enterprise integrations**.",
-        keywords: ["skills", "Python", "AI", "SAP", "tech stack"]
-    },
-    "contact|email|reach|linkedin|phone|schedule|call": {
-        answer: "You can reach Jack through:\n\n📧 **Email:** jackamichai@gmail.com\n💼 **LinkedIn:** linkedin.com/in/jackamichai\n📅 **Schedule a Call:** calendly.com/jackamichai\n🐙 **GitHub:** github.com/JackAmichai\n\nHe's actively seeking **Product Manager** and **Business Analyst** roles and would love to connect!",
-        keywords: ["contact", "email", "LinkedIn", "schedule"]
-    },
-    "resume|cv|download|hire|looking": {
-        answer: "Jack is actively seeking **Product Manager or Business Analyst roles**! You can download his materials:\n\n📄 **Resume** - Complete work history and skills\n📊 **One-Pager** - Quick overview with key metrics\n📚 **Case Studies** - Detailed project breakdowns\n\nAll downloads are available in the 'Resources for Recruiters' section below. He's looking for roles where he can leverage his AI expertise and consulting experience!",
-        keywords: ["resume", "hire", "looking for work", "download"]
-    },
-    "achievements|impact|results|metrics|numbers": {
-        answer: "Jack's measurable impact includes:\n\n📈 **Improved revenue forecast accuracy** (hospitality consulting)\n💰 **Measurable revenue impact** (pricing optimization)\n⏱️ **60% time saved** on pricing analysis\n🎯 **High-accuracy ML models** (stock prediction & forecasting)\n📚 **Research publications** (Technion & Hebrew University)\n⚡ **Faster documentation discovery** (NVIDIA RAG system)\n\nHe focuses on data-driven solutions with measurable business outcomes!",
-        keywords: ["achievements", "impact", "metrics", "results"]
-    },
-    "languages|speak|hebrew|english|french": {
-        answer: "Jack is multilingual! 🌍\n\n🇮🇱 **Hebrew** - Native speaker\n🇺🇸 **English** - Fluent (professional proficiency)\n🇫🇷 **French** - Conversational\n\nThis helps him work effectively with international teams and clients across different regions.",
-        keywords: ["languages", "Hebrew", "English", "French"]
-    },
-    "research|neuroscience|technion|university|lab": {
-        answer: "Jack has research experience at both **Technion** (2021-2023) and **Hebrew University** (2020-2021):\n\n**Technion (2021-2023):** Research Assistant & Team Coordinator\n🔬 Conducted cognitive psychology experiments\n📊 Analyzed data using SPSS and Python\n👥 Coordinated lab operations\n\n**Hebrew University (2020-2021):** Research Project Manager & Software Engineer\n💻 Developed software tools for research\n📅 Managed project timelines\n\nThis research background gives him a unique edge in understanding user behavior and designing data-driven solutions.",
-        keywords: ["research", "neuroscience", "Technion", "Hebrew University", "cognitive"]
-    },
-    "recommendation|reference|letter|vouch|verify|credentials": {
-        answer: "Jack has **verified recommendation letters** from multiple sources:\n\n🎓 **Academic & Research:**\n• **Dr. Ben Engelhard** - Head of Engelhard Lab, Technion\n• Technion Research Supervisor (2021-2023)\n• Sasha - Technion Research Colleague\n\n💼 **Professional:**\n• Yaron - Professional Supervisor\n\nAll recommendation letters are available in the **References** section!",
-        keywords: ["recommendation", "reference", "letter", "credentials", "vouch", "engelhard"]
-    },
-    "hatrick|cyber|security|attack|defense|agent": {
-        answer: "Jack built **Hatrick**, an AI Agent orchestration system that autonomously demonstrates cyber attacks and defense mechanisms. It simulates red-team/blue-team scenarios to test and improve security posture using multi-agent coordination and LLMs.",
-        keywords: ["Hatrick", "cyber", "security", "AI agents"]
-    },
-    "leairn|learn|education|study|school|teaching": {
-        answer: "Jack created **LeAIrn**, an AI-powered learning platform that dynamically adapts content, pace, and style to the individual student's needs. It features adaptive learning algorithms and AI tutors for a personalized education experience.",
-        keywords: ["LeAIrn", "education", "AI tutor", "adaptive learning"]
-    },
-    "scholar|research|academic|citation|library|paper": {
-        answer: "Jack built **Scholar2.6**, a modern academic search and organization tool. It streamlines the research process with intuitive library management and citation tools, helping researchers manage vast amounts of literature efficiently.",
-        keywords: ["Scholar2.6", "research", "academic", "citation"]
-    },
-    "sleepcall|audio|alert|name|recognition|meeting": {
-        answer: "Jack developed **SleepCall**, an intelligent audio monitoring tool that alerts you whenever your name is spoken in a call. It uses local speech recognition to ensure privacy while preventing you from missing important mentions during long meetings.",
-        keywords: ["SleepCall", "audio", "alert", "speech recognition"]
-    },
-    "inspiration|career|path|architect|future|vision": {
-        answer: "Jack is inspired by the intersection of **AI and Product Management**. His vision is to become a **Product Architect** who bridges the gap between technical innovation and user needs, building systems that are not only powerful but also intuitive and impactful.",
-        keywords: ["inspiration", "career path", "product architect", "vision"]
-    },
-    "pawquest|paw|quest|dog|pet|social|app|community": {
-        answer: "Jack built **PawQuest**, a social platform for dog owners! 🐕 It helps pet owners find playmates for their dogs, organize local meetups, and build community. Features include dog profile matching (by breed, size, temperament), location-based discovery, event scheduling with RSVPs, and community forums. Check it out at paw-quest-f31de0c0.base44.app!",
-        keywords: ["PawQuest", "dog", "pet", "social app", "community"]
-    }
-};
-
 // Sample questions to display
 const sampleQuestions = [
     "Tell me about Hatrick",
@@ -283,18 +197,38 @@ class CloudChatbot {
         }
     }
 
-    handleUserMessage(message) {
+    async handleUserMessage(message) {
         // Add user message to chat
         this.addMessage(message, 'user');
 
-        // Find matching answer
-        setTimeout(() => {
-            const answer = this.findAnswer(message);
-            this.addMessage(answer, 'bot');
+        // Show typing indicator
+        const typingId = this.addTypingIndicator();
+
+        try {
+            const response = await fetch('/api/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message }),
+            });
+
+            const data = await response.json();
+            
+            // Remove typing indicator
+            this.removeMessage(typingId);
+
+            // Add bot response
+            this.addMessage(data.answer, 'bot');
 
             // Show new suggestions after answer
             setTimeout(() => this.displaySuggestions(), 500);
-        }, 600);
+
+        } catch (error) {
+            console.error('Chat Error:', error);
+            this.removeMessage(typingId);
+            this.addMessage("Sorry, I'm having trouble connecting to the server. Please try again later.", 'bot');
+        }
 
         // Track question
         if (typeof trackCTAClick !== 'undefined') {
@@ -302,57 +236,30 @@ class CloudChatbot {
         }
     }
 
-    findAnswer(question) {
-        const lowerQuestion = question.toLowerCase();
-        const tokens = lowerQuestion.split(/[\s,.?!]+/); // Simple tokenization
+    addTypingIndicator() {
+        const messagesContainer = document.getElementById('chatbot-messages');
+        const messageDiv = document.createElement('div');
+        const id = 'typing-' + Date.now();
+        messageDiv.id = id;
+        messageDiv.className = 'chatbot-message bot-message typing-message';
+        messageDiv.innerHTML = `
+            <img src="images/cloud-bot.jpg" alt="Cloud" class="message-avatar">
+            <div class="message-content">
+                <div class="typing-dots">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        `;
+        messagesContainer.appendChild(messageDiv);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        return id;
+    }
 
-        // 1. Check Dynamic Project Data first (High Priority)
-        if (typeof projectsData !== 'undefined') {
-            // Find project where user question contains the ID OR any significant word from title
-            const project = projectsData.find(p => {
-                const titleWords = p.title.toLowerCase().split(' ').filter(w => w.length > 3);
-                return lowerQuestion.includes(p.id.toLowerCase()) ||
-                    titleWords.some(word => lowerQuestion.includes(word));
-            });
-
-            if (project) {
-                return `**${project.title}** is a project where Jack addressed: "${project.problem}".\n\n**Solution:** ${project.solution}\n\n**Tech Stack:** ${project.techStack.join(', ')}.`;
-            }
+    removeMessage(id) {
+        const message = document.getElementById(id);
+        if (message) {
+            message.remove();
         }
-
-        let bestMatch = null;
-        let maxScore = 0;
-
-        // Check each knowledge base entry
-        for (const [pattern, data] of Object.entries(jackKnowledgeBase)) {
-            const keywords = pattern.split('|');
-            let score = 0;
-
-            // Calculate score based on keyword matches
-            keywords.forEach(keyword => {
-                if (lowerQuestion.includes(keyword)) {
-                    score += 2; // Exact phrase match bonus
-                }
-                tokens.forEach(token => {
-                    if (token === keyword) {
-                        score += 1; // Word match
-                    }
-                });
-            });
-
-            if (score > maxScore) {
-                maxScore = score;
-                bestMatch = data;
-            }
-        }
-
-        // Threshold for a "good" match
-        if (maxScore >= 2 && bestMatch) {
-            return bestMatch.answer;
-        }
-
-        // Default response if no match
-        return "That's a great question! I don't have specific information about that, but I recommend:\n\n📧 **Emailing Jack directly:** jackamichai@gmail.com\n💼 **Connecting on LinkedIn:** linkedin.com/in/jackamichai\n📅 **Scheduling a call:** calendly.com/jackamichai\n\nYou can also browse his portfolio sections above to learn more about his experience and projects!";
     }
 
     addMessage(text, sender) {
