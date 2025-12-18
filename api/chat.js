@@ -164,9 +164,21 @@ function generateFallbackAnswer(message = '', includeNotice = true) {
     return `${notice}Jack Amichai is a business analyst and AI product builder who bridges psychology, data, and technology. He deploys multi-agent systems, enterprise AI solutions, and full-stack applications that improve decision-making and operations.`;
 }
 
+// CORS headers for cross-origin requests (e.g., from GitHub Pages)
+const corsHeaders = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+};
+
 export default async function handler(req) {
+    // Handle CORS preflight
+    if (req.method === 'OPTIONS') {
+        return new Response(null, { status: 204, headers: corsHeaders });
+    }
+
     if (req.method !== 'POST') {
-        return new Response('Method not allowed', { status: 405 });
+        return new Response('Method not allowed', { status: 405, headers: corsHeaders });
     }
 
     // Check if API key is configured
@@ -174,7 +186,7 @@ export default async function handler(req) {
         console.error("OPENROUTER_API_KEY not configured");
         return new Response(JSON.stringify({ answer: "I'm not fully configured yet. Please ask Jack to set up my brain! 🧠" }), {
             status: 500,
-            headers: { 'Content-Type': 'application/json' }
+            headers: { 'Content-Type': 'application/json', ...corsHeaders }
         });
     }
 
@@ -234,7 +246,7 @@ export default async function handler(req) {
             const fallback = generateFallbackAnswer(userMessage);
             return new Response(JSON.stringify({ answer: fallback }), {
                 status: 200,
-                headers: { 'Content-Type': 'application/json' }
+                headers: { 'Content-Type': 'application/json', ...corsHeaders }
             });
         }
 
@@ -246,7 +258,7 @@ export default async function handler(req) {
             const fallback = generateFallbackAnswer(userMessage);
             return new Response(JSON.stringify({ answer: fallback }), {
                 status: 200,
-                headers: { 'Content-Type': 'application/json' }
+                headers: { 'Content-Type': 'application/json', ...corsHeaders }
             });
         }
         
@@ -255,7 +267,7 @@ export default async function handler(req) {
              const fallback = generateFallbackAnswer(userMessage);
              return new Response(JSON.stringify({ answer: fallback }), {
                 status: 200,
-                headers: { 'Content-Type': 'application/json' }
+                headers: { 'Content-Type': 'application/json', ...corsHeaders }
             });
         }
 
@@ -265,7 +277,7 @@ export default async function handler(req) {
             const fallback = generateFallbackAnswer(userMessage);
             return new Response(JSON.stringify({ answer: fallback }), {
                 status: 200,
-                headers: { 'Content-Type': 'application/json' }
+                headers: { 'Content-Type': 'application/json', ...corsHeaders }
             });
         }
 
@@ -273,7 +285,7 @@ export default async function handler(req) {
 
         return new Response(JSON.stringify({ answer }), {
             status: 200,
-            headers: { 'Content-Type': 'application/json' }
+            headers: { 'Content-Type': 'application/json', ...corsHeaders }
         });
 
     } catch (error) {
@@ -281,7 +293,7 @@ export default async function handler(req) {
         const fallback = generateFallbackAnswer(userMessage, true);
         return new Response(JSON.stringify({ answer: fallback }), {
             status: 200,
-            headers: { 'Content-Type': 'application/json' }
+            headers: { 'Content-Type': 'application/json', ...corsHeaders }
         });
     }
 }

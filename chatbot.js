@@ -205,7 +205,12 @@ class CloudChatbot {
         const typingId = this.addTypingIndicator();
 
         try {
-            const response = await fetch('/api/chat', {
+            // Use absolute URL to Vercel API (works from any host including GitHub Pages)
+            const apiUrl = window.location.hostname.includes('vercel.app') 
+                ? '/api/chat' 
+                : 'https://new-personal-website-topaz.vercel.app/api/chat';
+            
+            const response = await fetch(apiUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
