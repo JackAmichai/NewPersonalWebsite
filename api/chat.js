@@ -111,9 +111,21 @@ Herzliya, Israel | +972 54-484-4125 | jackamichai@gmail.com
 - **German:** Conversational
 `;
 
+// Get API key from environment variable
+const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
+
 export default async function handler(req) {
     if (req.method !== 'POST') {
         return new Response('Method not allowed', { status: 405 });
+    }
+
+    // Check if API key is configured
+    if (!OPENROUTER_API_KEY) {
+        console.error("OPENROUTER_API_KEY not configured");
+        return new Response(JSON.stringify({ answer: "I'm not fully configured yet. Please ask Jack to set up my brain! 🧠" }), {
+            status: 500,
+            headers: { 'Content-Type': 'application/json' }
+        });
     }
 
     try {
@@ -122,10 +134,10 @@ export default async function handler(req) {
         const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
             method: "POST",
             headers: {
-                "Authorization": "Bearer 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",
+                "Authorization": `Bearer ${OPENROUTER_API_KEY}`,
                 "Content-Type": "application/json",
-                "HTTP-Referer": "https://jackamichai.com", // Optional, for including your app on openrouter.ai rankings.
-                "X-Title": "Jack Amichai Portfolio", // Optional. Shows in rankings on openrouter.ai.
+                "HTTP-Referer": "https://new-personal-website-topaz.vercel.app",
+                "X-Title": "Jack Amichai Portfolio",
             },
             body: JSON.stringify({
                 "model": "google/gemini-2.0-flash-exp:free",
