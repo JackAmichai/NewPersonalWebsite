@@ -286,53 +286,129 @@ function initAccessibilityPanel() {
     const panel = document.getElementById('a11yPanel');
     const close = document.getElementById('a11yClose');
     const body = document.body;
+    const storageKey = 'a11y-preferences';
 
-    if (trigger && panel) {
-        trigger.addEventListener('click', () => {
-            panel.hidden = !panel.hidden;
-            trigger.setAttribute('aria-expanded', !panel.hidden);
-        });
+    if (!trigger || !panel) return;
 
-        if (close) {
-            close.addEventListener('click', () => {
-                panel.hidden = true;
-                trigger.setAttribute('aria-expanded', 'false');
-            });
-        }
+    const defaultPrefs = {
+        contrast: false,
+        largeText: false,
+        reduceMotion: false,
+    };
 
-        // Contrast Toggle
-        const contrastBtn = document.getElementById('a11yContrast');
-        if (contrastBtn) {
-            contrastBtn.addEventListener('click', () => {
-                body.classList.toggle('high-contrast');
-                const isHigh = body.classList.contains('high-contrast');
-                contrastBtn.setAttribute('aria-pressed', isHigh);
-                showToast(isHigh ? 'High Contrast: ON' : 'High Contrast: OFF');
-            });
-        }
+    let preferences;
+    try {
+        preferences = JSON.parse(localStorage.getItem(storageKey)) || { ...defaultPrefs };
+    } catch (error) {
+        console.warn('Unable to read accessibility preferences, using defaults.', error);
+        preferences = { ...defaultPrefs };
+    }
 
-        // Text Size Toggle
-        const textBtn = document.getElementById('a11yText');
-        if (textBtn) {
-            textBtn.addEventListener('click', () => {
-                body.classList.toggle('large-text');
-                const isLarge = body.classList.contains('large-text');
-                textBtn.setAttribute('aria-pressed', isLarge);
-                showToast(isLarge ? 'Large Text: ON' : 'Large Text: OFF');
-            });
-        }
+    const toggleConfig = {
+        contrast: {
+            button: document.getElementById('a11yContrast'),
+            className: 'high-contrast',
+            onMessage: 'High Contrast: ON',
+            offMessage: 'High Contrast: OFF',
+        },
+        largeText: {
+            button: document.getElementById('a11yText'),
+            className: 'large-text',
+            onMessage: 'Large Text: ON',
+            offMessage: 'Large Text: OFF',
+        },
+        reduceMotion: {
+            button: document.getElementById('a11yMotion'),
+            className: 'reduce-motion',
+            onMessage: 'Reduced Motion: ON',
+            offMessage: 'Reduced Motion: OFF',
+        },
+    };
 
-        // Motion Toggle
-        const motionBtn = document.getElementById('a11yMotion');
-        if (motionBtn) {
-            motionBtn.addEventListener('click', () => {
-                body.classList.toggle('reduce-motion');
-                const isReduced = body.classList.contains('reduce-motion');
-                motionBtn.setAttribute('aria-pressed', isReduced);
-                showToast(isReduced ? 'Reduced Motion: ON' : 'Reduced Motion: OFF');
-            });
+    function savePreferences() {
+        try {
+            localStorage.setItem(storageKey, JSON.stringify(preferences));
+        } catch (error) {
+            console.warn('Unable to save accessibility preferences.', error);
         }
     }
+
+    function applyPreference(key, enabled) {
+        const config = toggleConfig[key];
+        if (!config) return;
+
+        body.classList.toggle(config.className, enabled);
+        if (config.button) {
+            config.button.setAttribute('aria-pressed', String(enabled));
+        }
+    }
+
+    function applyAllPreferences() {
+        Object.keys(defaultPrefs).forEach(key => {
+            applyPreference(key, Boolean(preferences[key]));
+        });
+    }
+
+    function openPanel() {
+        panel.hidden = false;
+        panel.classList.add('is-open');
+        panel.setAttribute('aria-hidden', 'false');
+        trigger.setAttribute('aria-expanded', 'true');
+        const firstButton = panel.querySelector('button');
+        if (firstButton) {
+            requestAnimationFrame(() => firstButton.focus());
+        }
+    }
+
+    function closePanel() {
+        panel.classList.remove('is-open');
+        panel.hidden = true;
+        panel.setAttribute('aria-hidden', 'true');
+        trigger.setAttribute('aria-expanded', 'false');
+    }
+
+    closePanel();
+    applyAllPreferences();
+
+    trigger.addEventListener('click', (event) => {
+        event.preventDefault();
+        if (panel.hidden) {
+            openPanel();
+        } else {
+            closePanel();
+        }
+    });
+
+    if (close) {
+        close.addEventListener('click', (event) => {
+            event.preventDefault();
+            closePanel();
+        });
+    }
+
+    document.addEventListener('click', (event) => {
+        if (!panel.hidden && !panel.contains(event.target) && event.target !== trigger && !trigger.contains(event.target)) {
+            closePanel();
+        }
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && !panel.hidden) {
+            closePanel();
+        }
+    });
+
+    Object.entries(toggleConfig).forEach(([key, config]) => {
+        if (!config.button) return;
+        config.button.setAttribute('aria-pressed', String(Boolean(preferences[key])));
+        config.button.addEventListener('click', () => {
+            const nextValue = !preferences[key];
+            preferences[key] = nextValue;
+            applyPreference(key, nextValue);
+            savePreferences();
+            showToast(nextValue ? config.onMessage : config.offMessage);
+        });
+    });
 }
 
 // 4. Keyboard Shortcuts

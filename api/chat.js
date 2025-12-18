@@ -113,6 +113,56 @@ Herzliya, Israel | +972 54-484-4125 | jackamichai@gmail.com
 
 // Get API key from environment variable
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
+const OPENROUTER_MODEL = process.env.OPENROUTER_MODEL || 'meta-llama/llama-3.1-8b-instruct';
+const OPENROUTER_SITE_URL = process.env.OPENROUTER_SITE_URL || 'https://new-personal-website-topaz.vercel.app';
+
+function generateFallbackAnswer(message = '', includeNotice = true) {
+    const query = message.toLowerCase();
+    const notice = includeNotice ? "I'm running in backup mode right now, so here's what I can share from Jack's profile:\n\n" : '';
+
+    const projectResponses = [
+        {
+            keywords: ['hatrick'],
+            answer: 'Hatrick is Jack\'s AI cyber-defense project where he orchestrated six autonomous agents using LangChain and Groq to simulate real-time attack and defense scenarios.'
+        },
+        {
+            keywords: ['leairn'],
+            answer: 'LeAIrn is Jack\'s venture into AI-powered education tools, combining engaging UX experiments with GenAI-driven micro-learning content.'
+        },
+        {
+            keywords: ['scholar'],
+            answer: 'Scholar 2.6 is a Chrome Extension Jack built to navigate academic research by pulling structured insights and visualizations from Semantic Scholar.'
+        },
+        {
+            keywords: ['sleepcall'],
+            answer: 'SleepCall is a Python-based assistant Jack created using Azure Speech SDK to monitor meetings in real time, catch missed cues, and generate AI summaries.'
+        }
+    ];
+
+    for (const project of projectResponses) {
+        if (project.keywords.some(keyword => query.includes(keyword))) {
+            return `${notice}${project.answer}`;
+        }
+    }
+
+    if (query.includes('contact') || query.includes('reach') || query.includes('email')) {
+        return `${notice}You can reach Jack at jackamichai@gmail.com, connect on LinkedIn at https://linkedin.com/in/jackamichai, or schedule time via https://calendly.com/jackamichai.`;
+    }
+
+    if (query.includes('skill') || query.includes('stack') || query.includes('tech')) {
+        return `${notice}Jack works with Python, TypeScript, JavaScript, SQL, Java, and C/C++. He builds full-stack web apps with React, Node.js, and Next.js, and ships AI agents with LangChain, vector DBs, and OpenAI-compatible APIs.`;
+    }
+
+    if (query.includes('experience') || query.includes('background') || query.includes('career') || query.includes('deloitte')) {
+        return `${notice}Jack is a Junior Consultant at Deloitte in Tel Aviv, helping clients ship enterprise AI products on SAP BTP. He also supports revenue analytics projects and previously led research initiatives at Technion and Hebrew University.`;
+    }
+
+    if (query.includes('education') || query.includes('study') || query.includes('university')) {
+        return `${notice}Jack earned a dual-major B.A. in Psychology & Computer Science from the Open University of Israel, blending human behavior insights with solid engineering foundations.`;
+    }
+
+    return `${notice}Jack Amichai is a business analyst and AI product builder who bridges psychology, data, and technology. He deploys multi-agent systems, enterprise AI solutions, and full-stack applications that improve decision-making and operations.`;
+}
 
 export default async function handler(req) {
     if (req.method !== 'POST') {
@@ -128,22 +178,27 @@ export default async function handler(req) {
         });
     }
 
-    try {
-        const { message } = await req.json();
+    let userMessage = '';
 
-        console.log("API Key present:", !!OPENROUTER_API_KEY);
-        console.log("API Key prefix:", OPENROUTER_API_KEY ? OPENROUTER_API_KEY.substring(0, 10) + "..." : "N/A");
-        
+    try {
+        const body = await req.json();
+        const message = typeof body?.message === 'string' ? body.message : '';
+        userMessage = message;
+
+        const originHeader = typeof req.headers?.get === 'function' ? (req.headers.get('origin') || req.headers.get('referer')) : null;
+        const refererHeader = originHeader || OPENROUTER_SITE_URL;
+
         const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${OPENROUTER_API_KEY}`,
                 "Content-Type": "application/json",
-                "HTTP-Referer": "https://new-personal-website-topaz.vercel.app",
+                "Accept": "application/json",
+                "HTTP-Referer": refererHeader,
                 "X-Title": "Jack Amichai Portfolio",
             },
             body: JSON.stringify({
-                "model": "google/gemini-2.0-flash-001",
+                "model": OPENROUTER_MODEL,
                 "messages": [
                     {
                         "role": "system",
@@ -173,22 +228,33 @@ export default async function handler(req) {
         const responseText = await response.text();
         console.log("OpenRouter Response Status:", response.status);
         console.log("OpenRouter Response:", responseText.substring(0, 500));
-        
+
+        if (!response.ok) {
+            console.error("OpenRouter request failed", response.status, responseText);
+            const fallback = generateFallbackAnswer(userMessage);
+            return new Response(JSON.stringify({ answer: fallback }), {
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
+        }
+
         let data;
         try {
             data = JSON.parse(responseText);
         } catch (parseError) {
             console.error("Failed to parse response:", parseError);
-            return new Response(JSON.stringify({ answer: "Sorry, I received an unexpected response. Please try again!" }), {
-                status: 500,
+            const fallback = generateFallbackAnswer(userMessage);
+            return new Response(JSON.stringify({ answer: fallback }), {
+                status: 200,
                 headers: { 'Content-Type': 'application/json' }
             });
         }
         
         if (data.error) {
              console.error("OpenRouter Error:", JSON.stringify(data.error));
-             return new Response(JSON.stringify({ answer: "Sorry, I'm having trouble connecting to my brain right now. Please try again later!" }), {
-                status: 500,
+             const fallback = generateFallbackAnswer(userMessage);
+             return new Response(JSON.stringify({ answer: fallback }), {
+                status: 200,
                 headers: { 'Content-Type': 'application/json' }
             });
         }
@@ -196,8 +262,9 @@ export default async function handler(req) {
         // Safely extract the answer with proper checks
         if (!data.choices || !data.choices[0] || !data.choices[0].message) {
             console.error("Unexpected response structure:", JSON.stringify(data));
-            return new Response(JSON.stringify({ answer: "I received an unexpected response format. Please try again!" }), {
-                status: 500,
+            const fallback = generateFallbackAnswer(userMessage);
+            return new Response(JSON.stringify({ answer: fallback }), {
+                status: 200,
                 headers: { 'Content-Type': 'application/json' }
             });
         }
@@ -211,8 +278,9 @@ export default async function handler(req) {
 
     } catch (error) {
         console.error("Server Error:", error.message, error.stack);
-        return new Response(JSON.stringify({ answer: "Sorry, something went wrong. Please try again." }), {
-            status: 500,
+        const fallback = generateFallbackAnswer(userMessage, true);
+        return new Response(JSON.stringify({ answer: fallback }), {
+            status: 200,
             headers: { 'Content-Type': 'application/json' }
         });
     }

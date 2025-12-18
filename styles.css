@@ -7568,10 +7568,20 @@ body.recruiter-mode .why-hire-me-card {
     flex-direction: column;
     gap: 10px;
     width: 200px;
+    opacity: 0;
+    transform: translateY(12px);
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .a11y-panel[hidden] {
     display: none !important;
+}
+
+.a11y-panel.is-open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
 }
 
 .a11y-panel button {
