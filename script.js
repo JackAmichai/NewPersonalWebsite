@@ -1233,15 +1233,15 @@ console.log('   Escape: Close mobile menu');
 
     // Tour steps configuration
     const tourSteps = [
-        { id: 'home', title: 'Welcome!', description: 'This is the home section. Scroll down or use navigation to explore.' },
-        { id: 'about', title: 'About Me', description: 'Learn about my background in Psychology & Computer Science.' },
-        { id: 'experience', title: 'Experience', description: 'Click on any role to expand and see detailed case studies!' },
-        { id: 'projects', title: 'Projects', description: 'Explore my AI-powered projects. Click any card for details.' },
-        { id: 'skills-universe', title: 'Skills Universe', description: 'Interactive 3D galaxy! Hover over stars to see my skills.' },
-        { id: 'contact', title: 'Get in Touch', description: 'Ready to connect? Send me a message or schedule a call!' }
+        { id: 'home', title: '👋 Welcome!', description: 'This is my portfolio homepage. Let me give you a quick tour!' },
+        { id: 'about', title: '🧠 About Me', description: 'Learn about my background in Psychology & Computer Science.' },
+        { id: 'experience', title: '💼 Experience', description: 'Click on any role to expand and see detailed case studies!' },
+        { id: 'projects', title: '🚀 Projects', description: 'Explore my AI-powered projects. Click any card for details.' },
+        { id: 'skills-universe', title: '🌌 Skills Universe', description: 'Interactive 3D galaxy! Drag to rotate, hover over stars to see my skills.' },
+        { id: 'contact', title: '📧 Get in Touch', description: 'Ready to connect? Send a message or schedule a call. Also try the AI chatbot!' }
     ];
     let currentStep = 0;
-    let tourHighlight = null;
+    let tourActive = false;
     let tourTooltip = null;
 
     // Check if user has dismissed the tour before
@@ -1263,88 +1263,88 @@ console.log('   Escape: Close mobile menu');
         }
     }
 
-    function createTourElements() {
-        // Create highlight overlay
-        tourHighlight = document.createElement('div');
-        tourHighlight.className = 'tour-highlight-overlay';
-        tourHighlight.innerHTML = '<div class="tour-highlight-box"></div>';
-        document.body.appendChild(tourHighlight);
-
-        // Create tooltip
+    function createTourTooltip() {
+        // Remove existing tooltip if any
+        if (tourTooltip) tourTooltip.remove();
+        
+        // Create overlay for dimming background
+        let overlay = document.getElementById('guidedTourOverlay');
+        if (!overlay) {
+            overlay = document.createElement('div');
+            overlay.id = 'guidedTourOverlay';
+            document.body.appendChild(overlay);
+        }
+        overlay.classList.add('active');
+        
         tourTooltip = document.createElement('div');
-        tourTooltip.className = 'tour-tooltip';
+        tourTooltip.id = 'guidedTourTooltip';
         tourTooltip.innerHTML = `
-            <div class="tour-tooltip-content">
-                <div class="tour-tooltip-header">
-                    <span class="tour-tooltip-step"></span>
-                    <h4 class="tour-tooltip-title"></h4>
+            <div class="gtt-content">
+                <button class="gtt-close">&times;</button>
+                <div class="gtt-header">
+                    <span class="gtt-step"></span>
+                    <h4 class="gtt-title"></h4>
                 </div>
-                <p class="tour-tooltip-desc"></p>
-                <div class="tour-tooltip-actions">
-                    <button class="tour-tooltip-btn tour-prev">← Previous</button>
-                    <button class="tour-tooltip-btn tour-next">Next →</button>
+                <p class="gtt-desc"></p>
+                <div class="gtt-actions">
+                    <button class="gtt-btn gtt-prev">← Back</button>
+                    <button class="gtt-btn gtt-next">Next →</button>
                 </div>
-                <button class="tour-tooltip-close">✕</button>
             </div>
         `;
         document.body.appendChild(tourTooltip);
 
         // Event listeners
-        tourTooltip.querySelector('.tour-prev').addEventListener('click', prevStep);
-        tourTooltip.querySelector('.tour-next').addEventListener('click', nextStep);
-        tourTooltip.querySelector('.tour-tooltip-close').addEventListener('click', endGuidedTour);
-        tourHighlight.addEventListener('click', nextStep);
+        tourTooltip.querySelector('.gtt-prev').addEventListener('click', prevStep);
+        tourTooltip.querySelector('.gtt-next').addEventListener('click', nextStep);
+        tourTooltip.querySelector('.gtt-close').addEventListener('click', endGuidedTour);
     }
 
     function showStep(stepIndex) {
         const step = tourSteps[stepIndex];
         const element = document.getElementById(step.id);
-        if (!element) { nextStep(); return; }
+        
+        if (!element) {
+            console.warn('Tour element not found:', step.id);
+            nextStep();
+            return;
+        }
 
-        // Scroll to element first
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Remove highlight from previous element
+        document.querySelectorAll('.tour-highlighted').forEach(el => {
+            el.classList.remove('tour-highlighted');
+        });
 
+        // Scroll to element
+        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        // Add highlight to current element
+        element.classList.add('tour-highlighted');
+
+        // Wait for scroll to complete
         setTimeout(() => {
-            // Get fresh rect after scroll
-            const rect = element.getBoundingClientRect();
-            const scrollY = window.scrollY || window.pageYOffset;
-            const highlightBox = tourHighlight.querySelector('.tour-highlight-box');
-            
-            // Calculate position (viewport-relative for fixed positioning)
-            const padding = 15;
-            const maxHeight = Math.min(rect.height + padding * 2, window.innerHeight * 0.7);
-            
-            highlightBox.style.top = Math.max(10, rect.top - padding) + 'px';
-            highlightBox.style.left = Math.max(10, rect.left - padding) + 'px';
-            highlightBox.style.width = Math.min(rect.width + padding * 2, window.innerWidth - 40) + 'px';
-            highlightBox.style.height = maxHeight + 'px';
-
             // Update tooltip content
-            tourTooltip.querySelector('.tour-tooltip-step').textContent = `Step ${stepIndex + 1} of ${tourSteps.length}`;
-            tourTooltip.querySelector('.tour-tooltip-title').textContent = step.title;
-            tourTooltip.querySelector('.tour-tooltip-desc').textContent = step.description;
-
-            // Position tooltip below highlight or at bottom of viewport if needed
-            const tooltipHeight = 180; // approximate
-            let tooltipTop = rect.top + maxHeight + 10;
-            
-            // If tooltip would go off screen, position it at a fixed spot
-            if (tooltipTop + tooltipHeight > window.innerHeight - 20) {
-                tooltipTop = window.innerHeight - tooltipHeight - 30;
-            }
-            
-            tourTooltip.style.position = 'fixed';
-            tourTooltip.style.top = tooltipTop + 'px';
-            tourTooltip.style.left = Math.max(20, Math.min(rect.left, window.innerWidth - 400)) + 'px';
+            tourTooltip.querySelector('.gtt-step').textContent = `Step ${stepIndex + 1} of ${tourSteps.length}`;
+            tourTooltip.querySelector('.gtt-title').textContent = step.title;
+            tourTooltip.querySelector('.gtt-desc').textContent = step.description;
 
             // Update button states
-            tourTooltip.querySelector('.tour-prev').style.visibility = stepIndex === 0 ? 'hidden' : 'visible';
-            tourTooltip.querySelector('.tour-next').textContent = stepIndex === tourSteps.length - 1 ? 'Finish ✓' : 'Next →';
+            const prevBtn = tourTooltip.querySelector('.gtt-prev');
+            const nextBtn = tourTooltip.querySelector('.gtt-next');
+            
+            prevBtn.style.display = stepIndex === 0 ? 'none' : 'inline-flex';
+            nextBtn.textContent = stepIndex === tourSteps.length - 1 ? 'Finish ✓' : 'Next →';
 
-            // Show elements
-            tourHighlight.classList.add('active');
+            // Show tooltip
             tourTooltip.classList.add('active');
-        }, 600); // Longer delay to ensure scroll completes
+        }, 500);
+    }
+
+    function goToStep(index) {
+        if (index >= 0 && index < tourSteps.length) {
+            currentStep = index;
+            showStep(currentStep);
+        }
     }
 
     function nextStep() {
@@ -1365,24 +1365,36 @@ console.log('   Escape: Close mobile menu');
 
     function startGuidedTour() {
         closeTour();
+        tourActive = true;
         currentStep = 0;
-        createTourElements();
-        setTimeout(() => showStep(0), 400);
+        createTourTooltip();
+        document.body.classList.add('tour-active');
+        setTimeout(() => showStep(0), 300);
     }
 
     function endGuidedTour() {
-        if (tourHighlight) {
-            tourHighlight.classList.remove('active');
-            setTimeout(() => tourHighlight.remove(), 300);
-            tourHighlight = null;
-        }
+        tourActive = false;
+        document.body.classList.remove('tour-active');
+        
+        // Hide overlay
+        const overlay = document.getElementById('guidedTourOverlay');
+        if (overlay) overlay.classList.remove('active');
+        
+        // Remove highlights
+        document.querySelectorAll('.tour-highlighted').forEach(el => {
+            el.classList.remove('tour-highlighted');
+        });
+        
         if (tourTooltip) {
             tourTooltip.classList.remove('active');
-            setTimeout(() => tourTooltip.remove(), 300);
-            tourTooltip = null;
+            setTimeout(() => {
+                if (tourTooltip) tourTooltip.remove();
+                tourTooltip = null;
+            }, 300);
         }
     }
 
+    // Event listeners for initial popup
     if (tourClose) tourClose.addEventListener('click', closeTour);
     if (tourSkip) tourSkip.addEventListener('click', closeTour);
     if (tourStart) tourStart.addEventListener('click', startGuidedTour);
@@ -1391,14 +1403,15 @@ console.log('   Escape: Close mobile menu');
         if (e.target === tourOverlay) closeTour();
     });
 
+    // Keyboard navigation
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             if (tourOverlay.classList.contains('active')) closeTour();
-            else if (tourHighlight?.classList.contains('active')) endGuidedTour();
+            else if (tourActive) endGuidedTour();
         }
-        if (tourHighlight?.classList.contains('active')) {
-            if (e.key === 'ArrowRight') nextStep();
-            if (e.key === 'ArrowLeft') prevStep();
+        if (tourActive) {
+            if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextStep(); }
+            if (e.key === 'ArrowLeft') { e.preventDefault(); prevStep(); }
         }
     });
 })();
