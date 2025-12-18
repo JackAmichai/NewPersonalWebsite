@@ -1301,28 +1301,41 @@ console.log('   Escape: Close mobile menu');
         const element = document.getElementById(step.id);
         if (!element) { nextStep(); return; }
 
-        // Scroll to element
-        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        // Scroll to element first
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
         setTimeout(() => {
+            // Get fresh rect after scroll
             const rect = element.getBoundingClientRect();
+            const scrollY = window.scrollY || window.pageYOffset;
             const highlightBox = tourHighlight.querySelector('.tour-highlight-box');
             
-            // Position highlight
-            highlightBox.style.top = (rect.top + window.scrollY - 10) + 'px';
-            highlightBox.style.left = (rect.left - 10) + 'px';
-            highlightBox.style.width = (rect.width + 20) + 'px';
-            highlightBox.style.height = Math.min(rect.height + 20, window.innerHeight * 0.6) + 'px';
+            // Calculate position (viewport-relative for fixed positioning)
+            const padding = 15;
+            const maxHeight = Math.min(rect.height + padding * 2, window.innerHeight * 0.7);
+            
+            highlightBox.style.top = Math.max(10, rect.top - padding) + 'px';
+            highlightBox.style.left = Math.max(10, rect.left - padding) + 'px';
+            highlightBox.style.width = Math.min(rect.width + padding * 2, window.innerWidth - 40) + 'px';
+            highlightBox.style.height = maxHeight + 'px';
 
             // Update tooltip content
             tourTooltip.querySelector('.tour-tooltip-step').textContent = `Step ${stepIndex + 1} of ${tourSteps.length}`;
             tourTooltip.querySelector('.tour-tooltip-title').textContent = step.title;
             tourTooltip.querySelector('.tour-tooltip-desc').textContent = step.description;
 
-            // Position tooltip
-            const tooltipTop = rect.bottom + window.scrollY + 20;
+            // Position tooltip below highlight or at bottom of viewport if needed
+            const tooltipHeight = 180; // approximate
+            let tooltipTop = rect.top + maxHeight + 10;
+            
+            // If tooltip would go off screen, position it at a fixed spot
+            if (tooltipTop + tooltipHeight > window.innerHeight - 20) {
+                tooltipTop = window.innerHeight - tooltipHeight - 30;
+            }
+            
+            tourTooltip.style.position = 'fixed';
             tourTooltip.style.top = tooltipTop + 'px';
-            tourTooltip.style.left = Math.max(20, rect.left) + 'px';
+            tourTooltip.style.left = Math.max(20, Math.min(rect.left, window.innerWidth - 400)) + 'px';
 
             // Update button states
             tourTooltip.querySelector('.tour-prev').style.visibility = stepIndex === 0 ? 'hidden' : 'visible';
@@ -1331,7 +1344,7 @@ console.log('   Escape: Close mobile menu');
             // Show elements
             tourHighlight.classList.add('active');
             tourTooltip.classList.add('active');
-        }, 400);
+        }, 600); // Longer delay to ensure scroll completes
     }
 
     function nextStep() {
