@@ -9294,3 +9294,28 @@ img, video, iframe, embed, object {
         padding: 16px 12px;
     }
 }
+/* ==================== */
+/* BUY ME A COFFEE BUTTON */
+/* ==================== */
+
+.btn-coffee {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #FFDD00;
+    color: #000000;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    transition: var(--transition);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn-coffee:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(255, 221, 0, 0.4);
+    background-color: #ffe600;
+}
