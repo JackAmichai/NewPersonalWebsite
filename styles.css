@@ -8516,3 +8516,781 @@ kbd {
     .gtt-desc {
     }
 }
+/* =====================================================
+   COMPREHENSIVE MOBILE RESPONSIVENESS FIX
+   ===================================================== */
+
+/* ==================== */
+/* 1. GLOBAL RESETS FOR MOBILE */
+/* ==================== */
+
+/* Prevent horizontal scroll */
+html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+}
+
+/* Fluid images and media */
+img, video, iframe, embed, object {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Focus visible for keyboard navigation */
+:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+}
+
+/* ==================== */
+/* 2. MOBILE NAVIGATION (≤768px) */
+/* ==================== */
+
+@media (max-width: 768px) {
+    /* Navbar container spacing */
+    .navbar .container {
+        padding: 12px 16px;
+        gap: 10px;
+    }
+
+    /* Logo sizing */
+    .logo {
+        font-size: 20px;
+        padding: 6px 12px;
+    }
+
+    /* Mobile menu toggle - ensure visible and accessible */
+    .mobile-menu-toggle {
+        display: flex;
+        width: 44px;
+        height: 44px;
+        align-items: center;
+        justify-content: center;
+        z-index: 1001;
+        touch-action: manipulation;
+    }
+
+    .mobile-menu-toggle span {
+        width: 22px;
+        height: 2px;
+    }
+
+    /* Nav actions - hide on mobile by default, show in mobile menu */
+    .nav-actions {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: var(--bg-secondary);
+        padding: 12px 16px;
+        justify-content: center;
+        gap: 12px;
+        border-top: 1px solid var(--border);
+        z-index: 999;
+        flex-wrap: wrap;
+    }
+
+    /* Hide recruiter toggle and resume card in mobile nav bar */
+    .nav-actions .recruiter-toggle-wrapper {
+        order: 1;
+    }
+
+    .nav-actions .nav-resume-card {
+        display: none;
+    }
+
+    .nav-actions .recruiter-label {
+        font-size: 12px;
+    }
+
+    /* Mobile menu styling */
+    .nav-menu {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        bottom: 60px;
+        width: 100%;
+        max-width: 100%;
+        background: var(--bg-secondary);
+        flex-direction: column;
+        padding: 20px;
+        border-radius: 0;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        z-index: 998;
+        height: auto;
+        gap: 8px;
+        align-items: stretch;
+        overflow-y: auto;
+        transform: translateY(-100%);
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .nav-menu:hover {
+        height: auto;
+    }
+
+    .nav-menu.active {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    .nav-menu li {
+        margin: 0;
+        width: 100%;
+    }
+
+    /* Mobile nav links - full width, touch-friendly */
+    .nav-link {
+        width: 100%;
+        height: 52px;
+        min-height: 44px;
+        border-radius: 12px;
+        flex-direction: row;
+        gap: 12px;
+        justify-content: flex-start;
+        padding: 0 16px;
+    }
+
+    .nav-link .nav-text {
+        position: static;
+        transform: none;
+        opacity: 1;
+        background: transparent;
+        border: none;
+        padding: 0;
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    .nav-link:hover,
+    .nav-link:focus {
+        width: 100%;
+        height: 52px;
+        margin-top: 0;
+    }
+
+    .nav-link:hover .nav-text {
+        bottom: auto;
+    }
+
+    /* Remove dock magnification on mobile */
+    .nav-menu li:has(+ li .nav-link:hover) .nav-link,
+    .nav-menu li:hover + li .nav-link {
+        width: 100%;
+        height: 52px;
+        margin-top: 0;
+    }
+}
+
+/* ==================== */
+/* 3. MOBILE HERO SECTION */
+/* ==================== */
+
+@media (max-width: 768px) {
+    .hero {
+        padding: 80px 0 40px;
+        min-height: auto;
+    }
+
+    .hero .container {
+        padding: 0 16px;
+    }
+
+    .hero .container .hero-grid {
+        flex-direction: column;
+        text-align: center;
+        gap: 24px;
+    }
+
+    .hero-photo-wrapper {
+        width: 180px;
+        height: 180px;
+        margin: 0 auto;
+    }
+
+    .hero-content-minimal {
+        text-align: center;
+        padding: 0 8px;
+    }
+
+    .hero-name-minimal {
+        font-size: 36px;
+        margin-bottom: 12px;
+    }
+
+    .hero-subtitle-minimal {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .hero-description-minimal {
+        font-size: 15px;
+        line-height: 1.5;
+        margin-bottom: 24px;
+    }
+
+    /* Availability badge */
+    .availability-badge {
+        font-size: 12px;
+        padding: 8px 12px;
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+    }
+
+    /* Hero cards responsive */
+    .hero-cards-row {
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+        padding: 0 8px;
+    }
+
+    .hero-card {
+        width: calc(50% - 10px);
+        max-width: 140px;
+        height: 120px;
+    }
+
+    .hero-card-label {
+        font-size: 13px;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-photo-wrapper {
+        width: 150px;
+        height: 150px;
+    }
+
+    .hero-name-minimal {
+        font-size: 28px;
+    }
+
+    .hero-subtitle-minimal {
+        font-size: 16px;
+    }
+
+    .hero-description-minimal {
+        font-size: 14px;
+    }
+
+    .hero-cards-row {
+        gap: 8px;
+    }
+
+    .hero-card {
+        width: calc(50% - 8px);
+        height: 100px;
+    }
+
+    .hero-card-label {
+        font-size: 12px;
+        padding: 8px;
+    }
+}
+
+/* ==================== */
+/* 4. MOBILE SECTIONS & GRIDS */
+/* ==================== */
+
+@media (max-width: 768px) {
+    /* Container padding */
+    .container {
+        padding: 0 16px;
+    }
+
+    section {
+        padding: 50px 0;
+    }
+
+    .section-title {
+        font-size: 24px;
+    }
+
+    .section-subtitle {
+        font-size: 14px;
+    }
+
+    /* Social proof section */
+    .social-proof-section {
+        padding: 20px 0;
+    }
+
+    .logo-strip {
+        flex-wrap: wrap;
+        gap: 12px;
+        justify-content: center;
+    }
+
+    .proof-logo {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+
+    /* Story section */
+    .story-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .story-photos {
+        display: none;
+    }
+
+    .story-text p {
+        font-size: 15px;
+    }
+
+    /* Process section */
+    .process-timeline {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .process-timeline::before {
+        display: none;
+    }
+
+    .process-connector {
+        display: none;
+    }
+
+    .process-step,
+    .expandable-process {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 0;
+    }
+
+    .expandable-process .step-icon-btn {
+        width: 100%;
+        max-width: 200px;
+        height: auto;
+        aspect-ratio: 3/2;
+    }
+
+    .step-title {
+        font-size: 16px;
+    }
+
+    /* Project content grid */
+    .project-content-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .project-group {
+        padding: 16px;
+    }
+
+    .project-group-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .project-group-title {
+        font-size: 20px;
+    }
+
+    .project-group-links {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .btn-demo, .btn-github {
+        flex: 1;
+        min-width: 100px;
+        text-align: center;
+        padding: 10px 16px;
+    }
+
+    .live-demo-frame {
+        min-height: 280px;
+    }
+
+    .live-demo-frame iframe {
+        min-height: 240px;
+    }
+
+    /* Video wrapper */
+    .video-wrapper {
+        width: 100%;
+    }
+
+    .video-wrapper video {
+        width: 100%;
+        height: auto;
+    }
+
+    /* Timeline */
+    .timeline {
+        padding-left: 20px;
+    }
+
+    .timeline::before {
+        left: 0;
+    }
+
+    .timeline-item {
+        padding-left: 20px;
+    }
+
+    .timeline-item::before {
+        left: -5px;
+        width: 10px;
+        height: 10px;
+    }
+
+    .timeline-content h3 {
+        font-size: 18px;
+    }
+
+    /* Why Hire Me card */
+    .why-hire-me-card {
+        padding: 16px;
+    }
+
+    .why-hire-me-card h3 {
+        font-size: 18px;
+    }
+
+    .resume-customizer-btn {
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+}
+
+/* ==================== */
+/* 5. MOBILE CHATBOT */
+/* ==================== */
+
+@media (max-width: 768px) {
+    .chatbot-bubble {
+        width: 56px;
+        height: 56px;
+        bottom: 80px;
+        left: 16px;
+    }
+
+    .chatbot-avatar {
+        width: 32px;
+        height: 32px;
+    }
+
+    .chatbot-window {
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        max-width: 100%;
+        height: calc(100vh - 60px);
+        max-height: calc(100vh - 60px);
+        border-radius: 20px 20px 0 0;
+    }
+
+    .chatbot-popup {
+        left: 16px;
+        right: 16px;
+        max-width: none;
+        bottom: 150px;
+    }
+
+    .chat-messages {
+        padding: 12px;
+    }
+
+    .chat-input-form {
+        padding: 12px;
+    }
+
+    .chat-input {
+        font-size: 16px; /* Prevent iOS zoom */
+    }
+}
+
+/* ==================== */
+/* 6. MOBILE CONTACT SECTION */
+/* ==================== */
+
+@media (max-width: 768px) {
+    .connect-card-wrapper {
+        padding: 0 8px;
+    }
+
+    .connect-card {
+        padding: 24px 16px;
+    }
+
+    .connect-inner {
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .skills-orbit {
+        width: 100%;
+        height: 200px;
+    }
+
+    .connect-text {
+        text-align: center;
+    }
+
+    .connect-title {
+        font-size: 24px;
+    }
+
+    .connect-subtitle {
+        font-size: 14px;
+    }
+
+    .connect-cta {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .connect-cta .btn-primary,
+    .connect-cta .btn-outline {
+        width: 100%;
+        min-height: 48px;
+    }
+
+    /* Contact icons */
+    .contact-icons {
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+    }
+
+    .contact-icon-link {
+        width: 44px;
+        height: 44px;
+    }
+
+    /* Resources grid */
+    .resources-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .resource-card-new {
+        height: 120px;
+    }
+}
+
+/* ==================== */
+/* 7. MOBILE RECOMMENDATIONS */
+/* ==================== */
+
+@media (max-width: 768px) {
+    .recommendations-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .rec-card {
+        padding: 20px;
+    }
+
+    .rec-author-info h4 {
+        font-size: 16px;
+    }
+
+    .rec-quote {
+        font-size: 14px;
+    }
+}
+
+/* ==================== */
+/* 8. MOBILE EXPERIENCE SECTION */
+/* ==================== */
+
+@media (max-width: 768px) {
+    .experience-header {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .experience-header h2 {
+        font-size: 24px;
+    }
+
+    .category-filters {
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+    }
+
+    .category-btn {
+        padding: 8px 16px;
+        font-size: 13px;
+        min-height: 40px;
+    }
+}
+
+/* ==================== */
+/* 9. MOBILE SKILLS UNIVERSE */
+/* ==================== */
+
+@media (max-width: 768px) {
+    .skills-universe-section {
+        padding: 40px 0;
+    }
+
+    #milkyWayContainer {
+        height: 300px;
+        min-height: 250px;
+    }
+
+    .skill-tooltip {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+}
+
+/* ==================== */
+/* 10. MOBILE FOOTER */
+/* ==================== */
+
+@media (max-width: 768px) {
+    .footer {
+        padding: 30px 16px 80px; /* Extra bottom padding for fixed nav actions */
+    }
+
+    .footer .container {
+        text-align: center;
+    }
+
+    .footer p {
+        font-size: 13px;
+    }
+}
+
+/* ==================== */
+/* 11. MOBILE ACCESSIBILITY */
+/* ==================== */
+
+@media (max-width: 768px) {
+    /* Ensure all interactive elements are touch-friendly */
+    button,
+    a,
+    input,
+    select,
+    textarea,
+    [role="button"] {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    /* Exception for inline links */
+    p a,
+    li a:not(.nav-link),
+    .story-text a {
+        min-height: auto;
+        min-width: auto;
+    }
+
+    /* Back to top button */
+    .back-to-top {
+        bottom: 80px;
+        right: 16px;
+        width: 48px;
+        height: 48px;
+    }
+
+    /* Accessibility panel */
+    .accessibility-panel {
+        right: 8px;
+        bottom: 130px;
+        width: calc(100vw - 16px);
+        max-width: 320px;
+    }
+
+    .accessibility-toggle {
+        right: 16px;
+        bottom: 80px;
+        width: 48px;
+        height: 48px;
+    }
+}
+
+/* ==================== */
+/* 12. MOBILE TOUR */
+/* ==================== */
+
+@media (max-width: 768px) {
+    .tour-overlay {
+        padding: 16px;
+    }
+
+    .tour-content {
+        padding: 24px 16px;
+        max-width: 100%;
+    }
+
+    .tour-title {
+        font-size: 20px;
+    }
+
+    .tour-desc {
+        font-size: 14px;
+    }
+
+    .tour-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .tour-actions button {
+        width: 100%;
+    }
+}
+
+/* ==================== */
+/* 13. VERY SMALL SCREENS (≤360px) */
+/* ==================== */
+
+@media (max-width: 360px) {
+    .container {
+        padding: 0 12px;
+    }
+
+    .hero-name-minimal {
+        font-size: 24px;
+    }
+
+    .hero-cards-row {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hero-card {
+        width: 100%;
+        max-width: 200px;
+        height: 100px;
+    }
+
+    .section-title {
+        font-size: 20px;
+    }
+
+    .nav-menu.active {
+        padding: 16px 12px;
+    }
+}
